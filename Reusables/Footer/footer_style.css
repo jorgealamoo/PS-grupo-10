@@ -1,14 +1,16 @@
 /* Establecer el fondo gris para el pie de página */
 #main_footer {
     background-color: #605959; /* Puedes ajustar el color gris según tus preferencias */
+    padding: 15px;
+    text-align: center;
 }
 
 /* Establecer el color blanco para los enlaces dentro del pie de página */
 #main_footer a {
-    color: #ffffff;
+    color: #F5E9E9;
     text-decoration: none;
-    margin-right: 100px;
-    /*font-family: ;*/
+    margin-right: 170px;
+    font-family: 'ABeeZee', sans-serif;
 
 }
 
