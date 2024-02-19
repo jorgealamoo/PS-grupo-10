@@ -1,0 +1,21 @@
+.center {
+    position: fixed;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.center div {
+    margin-bottom: 10px;
+}
+
+.small_inputs {
+    width: 200px;
+    height: 20px;
+}
+
+.big_inputs {
+    width: 412px;
+    height: 20px;
+}
+

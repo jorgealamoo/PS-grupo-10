@@ -1,0 +1,10 @@
+.rating_number {
+    font-size: 30px;
+    margin-left: 385px;
+    justify-content: space-around;
+}
+
+.description {
+    width: 450px;
+    text-align: justify;
+}
