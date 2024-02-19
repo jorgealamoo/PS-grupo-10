@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Login</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="container">
@@ -10,17 +11,23 @@
             <img src="../Images/aspa.png" alt="Logo">
         </div>
         <div class="right-side">
-            <div class="login-form">
-                <h1>Login</h1>
-                <form action="#" method="post" id="loginForm"> <!-- añadir funcionalidad a form -->
-                    <label for="user_name">User Name:</label>
-                    <input type="text" id="user_name" name="user_name" required>
+            <div class="login-form-container">
+                <div class="login-form">
+                    <h1>LOGIN</h1>
+                    <form action="#" method="post" id="loginForm"> <!-- añadir funcionalidad a form -->
+                        <div class="form-group">
+                            <label for="user_name">User Name:</label>
+                            <input type="text" id="user_name" name="user_name" required>
+                        </div>
 
-                    <label for="password">Password:</label>
-                    <input type="password" id="password" name="password" required>
+                        <div class="form-group">
+                            <label for="password">Password:</label>
+                            <input type="password" id="password" name="password" required>
+                        </div>
 
-                    <button type="button">Login</button>
-                </form>
+                        <button type="button">Login</button>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
