@@ -76,14 +76,15 @@ button {
     border-radius: 12px;
 }
 
-.dont-have-account-link,
-.forgot-password-link {
+.dont-have-account-link {
     margin-top: 10%;
+}
+.forgot-password-link {
+    margin-top: 3%;
 }
 
 .dont-have-account-link a,
 .forgot-password-link a {
-    display: inline-block;
     text-decoration: none;
     color: #696565;
     margin-right: 0;
@@ -95,3 +96,19 @@ button {
     text-decoration: underline;
 }
 
+.social-login-options {
+    margin-top: 5%;
+}
+
+.google-login a,
+.facebook-login a {
+    display: inline-block;
+    text-decoration: none;
+    color: #3D94FA;
+    background-color: #ffffff;
+    border: 1px solid #3D94FA;
+    padding: 8px 12px;
+    border-radius: 4px;
+    margin-right: 10px;
+    font-size: 14px;
+}
