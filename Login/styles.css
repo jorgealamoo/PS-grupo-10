@@ -76,14 +76,15 @@ button {
     border-radius: 12px;
 }
 
-.dont-have-account-link,
-.forgot-password-link {
+.dont-have-account-link {
     margin-top: 10%;
+}
+.forgot-password-link {
+    margin-top: 3%;
 }
 
 .dont-have-account-link a,
 .forgot-password-link a {
-    display: inline-block;
     text-decoration: none;
     color: #696565;
     margin-right: 0;
