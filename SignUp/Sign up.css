@@ -9,10 +9,11 @@ body {
     align-items: center;
 }
 
-.whiteSquare {
+.whiteRectangle {
     background-color: white;
-    padding: 70px;
-    border-radius: 10px;
+    width: 1200px;
+    height: 700px;
+    border-radius: 8%;
 }
 
 form {
@@ -21,37 +22,51 @@ form {
     align-items: center;
 }
 
+.center {
+    margin-top: 10%;
+    display: block;
+}
+
 .center div {
-    margin-bottom: 15px;
+    margin-bottom: 0; /* Eliminado el margen inferior */
 }
 
 .big_inputs, .small_inputs {
-    font-size: 24px;
+    font-size: 28px; /* Aumentado el tamaño de la fuente */
 }
 
 .small_inputs {
-    width: 238px;
-    height: 30px;
+    width: 450px; /* Ancho ajustado para que esté pegado a los márgenes */
+    height: 40px; /* Ajustado la altura para hacerlo más grande */
+    margin-bottom: 20px; /* Espacio entre inputs */
 }
 
 .big_inputs {
-    width: 480px;
-    height: 30px;
+    width: 912px; /* Ancho ajustado para que esté pegado a los márgenes y coincida con el ancho de los small_inputs */
+    height: 40px; /* Ajustado la altura para hacerlo más grande */
+    margin-bottom: 20px; /* Espacio entre inputs */
 }
 
 .SignUpButton {
-    font-size: 24px;
+    margin-top: 15px;
+    font-size: 28px; /* Aumentado el tamaño de la fuente */
     background-color: #0C6DFF;
     color: white;
-    padding: 10px 70px;
+    padding: 15px 100px; /* Ajustado el padding para hacer el botón más grande */
     border-radius: 10%;
 }
 
 .terms_checkbox {
     display: flex;
     align-items: center;
+    font-size: 28px; /* Aumentado el tamaño de la fuente */
 }
 
 .terms_text {
-    margin-right: 10px;
+    margin-right: 20px; /* Ajustado el margen derecho para dar más espacio entre el texto y el checkbox */
+}
+
+.AlreadyAcc {
+    margin-top: 15px;
+    font-size: 20px;
 }
