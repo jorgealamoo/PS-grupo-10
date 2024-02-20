@@ -100,9 +100,13 @@ button {
     margin-top: 5%;
 }
 
+.google-login,
+.facebook-login {
+    display: inline-block; /* Hace que los botones estén en línea */
+}
+
 .google-login a,
 .facebook-login a {
-    display: inline-block;
     text-decoration: none;
     color: #3D94FA;
     background-color: #ffffff;
@@ -111,4 +115,10 @@ button {
     border-radius: 4px;
     margin-right: 10px;
     font-size: 14px;
+}
+
+.google-login a:hover,
+.facebook-login a:hover {
+    background-color: #3D94FA;
+    color: #ffffff;
 }
