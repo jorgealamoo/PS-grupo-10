@@ -7,27 +7,39 @@
 </head>
 
 <body>
+<div class="whiteSquare">
+    <div class="center">
+        <form>
+            <div>
+                <label for="firstName"></label><input type="text" id="firstName" name="firstName" placeholder="First name" required class="small_inputs">
+                <label for="lastName"></label><input type="text" id="lastName" name="lastName" placeholder="Last name" class="small_inputs">
+            </div>
 
-<div class="center">
-    <div>
-        <label for="firstName"></label><input type="text" id="firstName" name="firstName" placeholder="First name" required class="small_inputs">
-        <label for="lastName"></label><input type="text" id="lastName" name="lastName" placeholder="Last name" class="small_inputs">
-    </div>
+            <div>
+                <label for="email"></label><input type="email" id="email" name="email" placeholder="Email" required class="big_inputs">
+            </div>
 
-    <div>
-        <label for="email"></label><input type="email" id="email" name="email" placeholder="Email" required class="big_inputs">
-    </div>
+            <div>
+                <label for="username"></label><input type="text" id="username" name="username" placeholder="Username" required class="big_inputs">
+            </div>
 
-    <div>
-        <label for="username"></label><input type="text" id="username" name="username" placeholder="Username" required class="big_inputs">
-    </div>
+            <div>
+                <label for="password"></label><input type="password" id="password" name="password" placeholder="Password" required class="big_inputs">
+            </div>
 
-    <div>
-        <label for="password"></label><input type="password" id="password" name="password" placeholder="Password" required class="big_inputs">
-    </div>
+            <div>
+                <label for="confirmPassword"></label><input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm Password" required class="big_inputs">
+            </div>
 
-    <div>
-        <label for="confirmPassword"></label><input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm Password" required class="big_inputs">
+            <div class="checkbox-container">
+                <input type="checkbox" id="agreeTerms" name="agreeTerms">
+                <label class="checkbox-label" for="agreeTerms">I accept the Terms of Use & Privacy Policy</label>
+            </div>
+
+            <div>
+                <button class="SignUpButton" type="submit">Sign Up</button>
+            </div>
+        </form>
     </div>
 </div>
 </body>
