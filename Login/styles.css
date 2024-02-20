@@ -7,8 +7,8 @@ body {
 
 .container {
     display: flex;
-    height: 100vh;
-    padding: 90px;
+    height: 90%;
+    padding: 10%;
 }
 
 
@@ -17,6 +17,22 @@ body {
     flex: 1;
     box-sizing: border-box;
     background-color: #ffffff;
+}
+
+.left-side {
+    position: relative;
+    overflow: hidden;
+    border-radius: 10% 0 0 10%;
+}
+
+.left-side img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.right-side {
+    border-radius: 0 10% 10% 0;
 }
 
 .login-form-container {
@@ -57,4 +73,25 @@ button {
     color: #ffffff;
     border: none;
     cursor: pointer;
+    border-radius: 12px;
 }
+
+.dont-have-account-link,
+.forgot-password-link {
+    margin-top: 10%;
+}
+
+.dont-have-account-link a,
+.forgot-password-link a {
+    display: inline-block;
+    text-decoration: none;
+    color: #696565;
+    margin-right: 0;
+    font-size: 12px;
+}
+
+.dont-have-account-link a:hover,
+.forgot-password-link a:hover {
+    text-decoration: underline;
+}
+
