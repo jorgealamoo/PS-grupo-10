@@ -1,0 +1,28 @@
+/* css/nav_bar_style.css */
+
+/* Estilos para la barra de navegación */
+#nav-bar {
+    background-color: #d6d6d6;
+    align-items: center;
+}
+
+#nav-bar ul {
+    margin: 0;
+    padding: 10px;
+}
+
+#nav-bar ul li {
+    display: inline;
+    margin-right: 10px;
+}
+
+#nav-bar ul li a {
+    color: #000000;
+    text-decoration: none;
+    padding: 10px;
+}
+
+#nav-bar ul li a:hover {
+    background-color: #a7a8b2;
+    border-radius: 5px;
+}
