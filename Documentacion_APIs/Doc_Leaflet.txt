@@ -1,0 +1,61 @@
+Leaflet es una biblioteca de JavaScript para crear mapas interactivos. A diferencia de Firebase, que es un conjunto de servicios en la nube, Leaflet se centra en proporcionar herramientas para la visualización de mapas. Aquí tienes una descripción general de lo que podría incluir la documentación de la API de Leaflet:
+
+Documentación de la API de Leaflet
+Introducción
+Leaflet es una biblioteca de JavaScript para la creación de mapas interactivos en aplicaciones web. Es liviana, fácil de usar y extensible. Esta documentación describe los principales componentes y funcionalidades de la API de Leaflet.
+
+Inicialización
+1. Crear un Mapa
+javascript
+Copy code
+// Inicializar un mapa en un contenedor HTML específico
+var mymap = L.map('mapid').setView([51.505, -0.09], 13);
+2. Capas Base y Capas de Overlay
+javascript
+Copy code
+// Añadir una capa base de mapa
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '© OpenStreetMap contributors'
+}).addTo(mymap);
+
+// Añadir una capa de marcadores
+var marker = L.marker([51.5, -0.09]).addTo(mymap);
+Interactividad
+1. Eventos del Mapa
+javascript
+Copy code
+// Manejar clics en el mapa
+mymap.on('click', function(e) {
+    alert("Coordenadas: " + e.latlng);
+});
+2. Marcadores Popups
+javascript
+Copy code
+// Añadir un marcador con un popup
+var marker = L.marker([51.5, -0.09]).addTo(mymap)
+    .bindPopup("¡Hola! Soy un marcador.").openPopup();
+Funcionalidades Avanzadas
+1. Agrupación de Marcadores
+javascript
+Copy code
+// Agrupar marcadores cercanos
+var markers = L.markerClusterGroup();
+markers.addLayer(L.marker([51.5, -0.09]));
+markers.addLayer(L.marker([51.49, -0.1]));
+mymap.addLayer(markers);
+2. Control de Capas
+javascript
+Copy code
+// Añadir un control de capas al mapa
+var baseLayers = {
+    "Mapa Base": L.tileLayer('...'),
+    "Mapa Satelital": L.tileLayer('...', { attribution: '© Mapbox' })
+};
+
+var overlays = {
+    "Marcadores": L.marker([51.5, -0.09])
+};
+
+L.control.layers(baseLayers, overlays).addTo(mymap);
+Recursos Adicionales
+Documentación Oficial: Leaflet API Reference
