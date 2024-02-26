@@ -7,8 +7,8 @@ body {
 
 .container {
     display: flex;
-    height: 90%;
-    padding: 10%;
+    height: 90vh;
+    padding: 10vh;
 }
 
 
