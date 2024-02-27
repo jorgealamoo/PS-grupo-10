@@ -4,15 +4,18 @@
     <meta charset="UTF-8">
     <script src='/JavaScript/templateLoader.js'></script>
     <title>Add Publication</title>
+    <link href="styles.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap">
 </head>
 <body>
 <header></header>
 <nav></nav>
 <main>
     <div class="add_publication_container">
-        <div class="add_images_section">
-            <label for="imageUpload">Add Images:</label>
-            <input type="file" id="imageUpload" name="imageUpload" multiple>
+        <div for="imageUpload" class="add_images_section">
+            <input type="file" id="imageUpload" name="imageUpload" multiple accept="image/*">
+            <div class="add_images_symbol">+</div>
+            <p>ADD IMAGES</p>
         </div>
 
         <div class="publication_name_section">
