@@ -1,0 +1,38 @@
+/* Estilo del contenedor */
+.image-carousel-container {
+    width: auto; /* ajusta el ancho */
+    height: 50vh; /*Utiliza el 50% de la pantalla visible como alto*/
+    overflow: hidden; /* Oculta el contenido que excede el ancho */
+    position: relative; /* Permite posicionar los botones sobre el contenedor */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Estilo de las imágenes */
+.image-carousel-container img {
+    display: block; /* Asegura que las imágenes se muestren una debajo de la otra */
+    width: auto; /* Utiliza todo el ancho del contenedor */
+    height: 100%; /* Permite que la altura se ajuste automáticamente */
+}
+
+/* Estilo de los botones */
+.carousel-button {
+    position: absolute; /* Posiciona los botones sobre el contenedor */
+    top: 50%; /* Los coloca en la mitad verticalmente */
+    transform: translateY(-50%); /* Los centra verticalmente */
+    background: rgba(0, 0, 0, 0.5); /* Color de fondo transparente */
+    color: white; /* Color del texto */
+    padding: 10px; /* Espaciado interno */
+    cursor: pointer; /* Cambia el cursor al pasar por encima */
+}
+
+/* Estilo del botón de dirección izquierda */
+.carousel-button.left {
+    left: 0; /* Alinea a la izquierda */
+}
+
+/* Estilo del botón de dirección derecha */
+.carousel-button.right {
+    right: 0; /* Alinea a la derecha */
+}
