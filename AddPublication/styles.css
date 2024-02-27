@@ -1,12 +1,15 @@
 main {
     background-color: #CCCCCC;
+    padding: 20px;
 }
+
+/* ------ ADD IMAGES ------ */
 
 .add_images_section {
     background-color: #D9D9D9;
     text-align: center;
-    width: 120px;
-    height: 120px;
+    width: 130px;
+    height: 130px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -14,7 +17,6 @@ main {
     border-radius: 8px;
     cursor: pointer;
     padding: 15px;
-    margin-left: 20px;
     margin-bottom: 20px;
     border: 2px dashed #000000;
     position: relative;
@@ -33,14 +35,23 @@ main {
 }
 
 .add_images_section p {
-    font-weight: 600;
+    font-weight: bold;
     font-family: 'Inter', sans-serif; /* Aplica la fuente Inter */
 }
 
 .add_images_symbol {
-    font-weight: 600;
+    font-weight: bold;
     font-family: 'Inter', sans-serif; /* Aplica la fuente Inter */
     font-size: 24px;
 }
 
 
+/* ------ PUBLICATION NAME ------ */
+
+.publication_name_section input {
+    width: 140px;
+    margin-bottom: 20px;
+    padding: 10px;
+    border-radius: 8px;
+    background-color: #e0e0e0;
+}
