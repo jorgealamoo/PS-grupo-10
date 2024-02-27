@@ -1,11 +1,27 @@
 .User {
-    margin-top: 10px;
     height: 200px;
     background-color: gray;
-    align-content: center;
+    position: relative;
+    display: flex;
+    align-items: center; /* Centra verticalmente los elementos en el contenedor */
 }
 
 .User img {
-    width: 5%;
-    height: 30%;
+    margin-left: 20px;
+    width: 100px;
+    height: 100px;
+}
+
+.User span {
+    margin-left: 10px;
+    font-size: 30px;
+}
+
+.User a {
+    position: absolute;
+    color: black;
+    margin-left: 130px;
+    text-decoration: none;
+    font-size: 30px;
+    top: 80%;
 }
