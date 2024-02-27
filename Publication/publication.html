@@ -5,6 +5,7 @@
     <link rel="stylesheet" href="styles.css">
     <script src='/JavaScript/templateLoader.js'></script>
     <script src='/JavaScript/carrusel.js'></script>
+    <script src='/JavaScript/UploadComments.js'></script>
     <title>Publication</title>
 
 </head>
@@ -22,7 +23,7 @@
             <div class="carousel-button right" onclick="moveCarousel(1)">❯</div>
         </div>
     <div id="information">
-        <h2 id = 'name' >Lorem Ipsum Estrellas</h2>
+        <h1 id = 'name' >Lorem Ipsum Estrellas</h1>
         <div id="content-container">
             <p id = 'description'>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum
@@ -30,6 +31,18 @@
             <object id="no_final_image" data = "../Images/aspa.png"></object>
         </div>
     </div>
+
+    <div class="Header-Comments">
+        <h2>Comentarios</h2>
+        <!-- Botón para agregar comentario -->
+        <button id="mostrar-formulario">Añadir comentario</button>
+    </div>
+    <div id="comentarios">
+        <!-- Carga dinamica de comentarios -->
+        <script>load('comentarios')</script>
+    </div>
+
+
     <footer></footer>
 <script>
     initCarousel('.image-carousel-container img');
