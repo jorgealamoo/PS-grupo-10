@@ -6,8 +6,8 @@
     <title>Add Publication</title>
 </head>
 <body>
-<div id="header"></div>
-<div id="nav"></div>
+<header></header>
+<nav></nav>
 <main>
     <div class="add_publication_container">
         <div class="add_images_section">
@@ -33,13 +33,17 @@
             <button id="currentLocationBtn">Current Location</button>
         </div>
 
+        <div class="map_image">
+            <img src="/Images/aspa.png" alt="Map Image">
+        </div>
+
     </div>
 </main>
-<div id="footer"></div>
+<footer></footer>
 <script>
-    cargarTemplate('/Reusables/Header/header.html', '#header');
-    cargarTemplate('/Reusables/Nav/nav.html', '#nav');
-    cargarTemplate('/Reusables/Footer/footer.html', '#footer')
+    cargarTemplate('/Reusables/Header/header.html', 'header');
+    cargarTemplate('/Reusables/Nav/nav.html', 'nav');
+    cargarTemplate('/Reusables/Footer/footer.html', 'footer')
 </script>
 </body>
 </html>
