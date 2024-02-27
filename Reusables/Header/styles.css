@@ -1,29 +1,11 @@
-header {
+#header {
     background-color: #d8d8d8;
     display: flex;
-    justify-content: space-between;
     align-items: center;
-}
-nav{
-    background-color: #d8d8d8;
-}
-nav ul {
-    list-style: none;
-    padding:0;
     margin: 0;
 }
 
-nav li {
-    display: inline;
-    margin: 5px;
-}
-
-nav a{
-    color: #000000;
-    text-decoration: none;
-}
-
-button {
+#header button {
     background-color: #ff0000;
     color: #fff;
     border: none;
@@ -33,15 +15,18 @@ button {
     border-radius: 10px;
 }
 
-button:hover {
+#header button:hover {
     background-color: #cc0000;
 }
 
-img {
+#header img {
     max-height: 50px;
-    margin: 10px;
+    margin-left: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
 }
 
-#ProfileImage{
+#header #ProfileImage{
     border-radius: 50%;
+    margin-right: 10px;
 }
