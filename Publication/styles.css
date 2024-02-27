@@ -36,3 +36,27 @@
 .carousel-button.right {
     right: 0; /* Alinea a la derecha */
 }
+
+#information {
+    text-align: center; /* Centra los elementos de texto */
+}
+
+#name {
+    margin-top: 20px; /* Espacio en la parte superior */
+}
+
+#content-container {
+    display: flex; /* Utiliza flexbox para mostrar elementos en línea */
+    justify-content: center; /* Centra los elementos horizontalmente */
+}
+
+#description {
+    width: 50vh; /* Ancho del párrafo */
+    margin-right: 20px; /* Margen derecho para separar del elemento adyacente */
+    text-align: justify;
+}
+
+#no_final_image {
+    width: 25vh; /* Ancho de la imagen */
+    height: auto;
+}

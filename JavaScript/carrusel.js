@@ -1,7 +1,7 @@
 let slideIndex = 1;
 
-function showSlides(n,ContenId) {
-    const slides = document.querySelectorAll(ContenId);
+function showSlides(n,componentID) {
+    const slides = document.querySelectorAll(componentID);
     if (n > slides.length) {
         slideIndex = 1;
     }
@@ -18,6 +18,6 @@ function moveCarousel(n) {
     showSlides(slideIndex += n);
 }
 
-function initCarousel(ContenId) {
-    showSlides(slideIndex);
+function initCarousel(componentID) {
+    showSlides(slideIndex,componentID);
 }

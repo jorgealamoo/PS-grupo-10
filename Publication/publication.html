@@ -11,23 +11,31 @@
 <body>
     <header></header>
     <nav></nav>
-    <div class="image-carousel-container">
-        <!-- Imágenes -->
-        <img src="/Images/aspa.png" alt="Imagen 1">
-        <img src="/Images/img.png" alt="Imagen 2">
-        <!-- Añade más imágenes según sea necesario -->
+
+        <div class="image-carousel-container">
+            <!-- Imágenes -->
+            <img src="/Images/aspa.png" alt="Imagen 1">
+            <img src="/Images/img.png" alt="Imagen 2">
+            <!-- Añade más imágenes según sea necesario -->
+            <!-- Botones de navegación -->
+            <div class="carousel-button left" onclick="moveCarousel(-1)">❮</div>
+            <div class="carousel-button right" onclick="moveCarousel(1)">❯</div>
+        </div>
+    <div id="information">
+        <h2 id = 'name' >Lorem Ipsum Estrellas</h2>
+        <div id="content-container">
+            <p id = 'description'>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum
+            </p>
+            <object id="no_final_image" data = "../Images/aspa.png"></object>
+        </div>
     </div>
-
-    <!-- Botones de navegación -->
-    <div class="carousel-button left" onclick="moveCarousel(-1)">❮</div>
-    <div class="carousel-button right" onclick="moveCarousel(1)">❯</div>
-
     <footer></footer>
-</body>
 <script>
+    initCarousel('.image-carousel-container img');
     cargarTemplate('/Reusables/Header/header.html', 'header');
     cargarTemplate('/Reusables/Nav/nav.html', 'nav');
-    cargarTemplate('/Reusables/Footer/footer.html', 'footer')
-    initCarousel('.image-carousel-container img');
+    cargarTemplate('/Reusables/Footer/footer.html', 'footer');
 </script>
+</body>
 </html>
