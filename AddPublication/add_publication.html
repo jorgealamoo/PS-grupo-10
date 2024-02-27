@@ -8,7 +8,31 @@
 <div id="header"></div>
 <div id="nav"></div>
 <main>
+    <div class="add_publication_container">
+        <div class="add_images_section">
+            <label for="imageUpload">Add Images:</label>
+            <input type="file" id="imageUpload" name="imageUpload" multiple>
+        </div>
 
+        <div class="publication_name_section">
+            <label for="publicationName">Publication Name:</label>
+            <input type="text" id="publicationName" name="publicationName">
+        </div>
+
+        <div class="description_section">
+            <label for="description">Description:</label>
+            <textarea id="description" name="description"></textarea>
+        </div>
+
+        <div class="select_location_text">
+            <p>Select Location:</p>
+        </div>
+
+        <div class="current_location_button">
+            <button id="currentLocationBtn">Current Location</button>
+        </div>
+
+    </div>
 </main>
 <div id="footer"></div>
 <script src='/JavaScript/templateLoader.js'></script>
