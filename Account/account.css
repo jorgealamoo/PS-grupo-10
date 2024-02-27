@@ -1,0 +1,11 @@
+.User {
+    margin-top: 10px;
+    height: 200px;
+    background-color: gray;
+    align-content: center;
+}
+
+.User img {
+    width: 5%;
+    height: 30%;
+}

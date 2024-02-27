@@ -1,0 +1,26 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Saved</title>
+    <link rel="stylesheet" href="/Saved/Saved.css">
+</head>
+<body>
+
+<div id="headerContainer"></div>
+<div id="nav"></div>
+<div class="contImagen" id="imagenContainer"></div>
+<div></div>
+
+<script src='/JavaScript/templateLoader.js'></script>
+<script src='/JavaScript/imagenLoader.js'></script>
+<script>
+    cargarTemplate('/Reusables/Header/header.html', '#headerContainer');
+    cargarTemplate('/Reusables/Nav/nav.html', '#nav');
+    cargarImagenes();
+    cargarTemplate('/Reusables/Footer/footer.html', '#footerContainer');
+</script>
+</body>
+</html>
