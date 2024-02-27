@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src='/JavaScript/templateLoader.js'></script>
+    <title>Map</title>
+    <link href="style.css" rel="stylesheet">
+</head>
+<body>
+    <div id="top">
+        <div id="header"></div>
+        <div id="nav"></div>
+    </div>
+    <div>
+        <input type="text" id="bar_search" placeholder="Buscar...">
+        <button id="filters_button">Filtros</button>
+        <object id="no_final_image" data = "../Images/aspa.png"></object>
+    </div>
+    <footer></footer>
+    <script>
+        cargarTemplate('/Reusables/header/header.html', '#header');
+        cargarTemplate('/Reusables/Nav/nav.html', '#nav');
+        cargarTemplate('/Reusables/Footer/footer.html', 'footer')
+    </script>
+</body>
+</html>
