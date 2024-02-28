@@ -1,5 +1,10 @@
-/* Estilo del contenedor */
+body{
+    margin: 0;
+}
+
+/* Estilo del carrusel */
 .image-carousel-container {
+    margin-top: 10px;
     width: auto; /* ajusta el ancho */
     height: 50vh; /*Utiliza el 50% de la pantalla visible como alto*/
     overflow: hidden; /* Oculta el contenido que excede el ancho */
@@ -36,3 +41,104 @@
 .carousel-button.right {
     right: 0; /* Alinea a la derecha */
 }
+
+#information {
+    text-align: center; /* Centra los elementos de texto */
+}
+
+#name {
+    margin-top: 20px; /* Espacio en la parte superior */
+}
+
+#content-container {
+    display: flex; /* Utiliza flexbox para mostrar elementos en línea */
+    justify-content: center; /* Centra los elementos horizontalmente */
+    align-items: flex-start;
+}
+
+#description {
+   /* width: 50vh; /* Ancho del párrafo */
+    margin-right: 20px; /* Margen derecho para separar del elemento adyacente */
+    text-align: justify;
+    flex: 1;
+}
+
+#no_final_image {
+    width: 25vh; /* Ancho de la imagen */
+    height: auto;
+}
+
+.Header-Comments{
+    display: flex;
+    justify-content: space-between;
+}
+.Header-Comments h2{
+    margin: 10px;
+
+}
+
+.Header-Comments #mostrar-formulario{
+    margin: 10px;
+    width: auto;
+    height: auto;
+}
+/* Estilos para los comentarios */
+.comentario {
+    margin-bottom: 20px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+.nombre {
+    font-weight: bold;
+}
+.mensaje {
+    margin-top: 5px;
+}
+
+
+.comentario {
+    margin-bottom: 20px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.header-comment{
+    display: flex;
+    align-items: center;
+}
+
+.imagen-comentario {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    top: 5px;
+    left: 5px;
+}
+
+.nombre {
+    font-weight: bold;
+    margin-left: 10px;
+    margin-bottom: 5px;
+}
+
+
+.valoracion {
+    padding: 0 10px ;
+    font-style: italic;
+    margin-left: 10px;
+    margin-bottom: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+
+.mensaje {
+    margin-left: 60px; /* Ajustar según el tamaño de la imagen */
+}
+
+.reporte {
+    margin:10px;
+}
+
