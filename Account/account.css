@@ -3,7 +3,7 @@
     background-color: gray;
     position: relative;
     display: flex;
-    align-items: center; /* Centra verticalmente los elementos en el contenedor */
+    align-items: center;
 }
 
 .User img {
@@ -25,3 +25,15 @@
     font-size: 30px;
     top: 35%;
 }
+.contImagen {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    column-gap: 7px;
+    row-gap: 60px;
+    margin: 10px 5px;
+}
+
+#footerContainer {
+    margin-top: 26vh;
+}
+
