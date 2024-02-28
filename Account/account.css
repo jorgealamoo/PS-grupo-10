@@ -18,10 +18,10 @@
 }
 
 .User a {
-    position: absolute;
+    position: relative;
     color: black;
-    margin-left: 130px;
+    margin-left:70px;
     text-decoration: none;
     font-size: 30px;
-    top: 80%;
+    top: 35%;
 }
