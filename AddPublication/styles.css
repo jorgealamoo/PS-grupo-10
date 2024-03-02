@@ -83,10 +83,54 @@ main {
     font-size: 16px;
 }
 
-/* ------ SELECT LOCATION ------ */
+/* ------ ALIGNING ------ */
+
+.add_publication_left_side,
+.add_publication_right_side {
+    display: inline-block;
+    vertical-align: top;
+    box-sizing: border-box;
+    margin-left: 70px;
+}
+
+.select_location_text,
+.current_location_button {
+    display: inline-block;
+}
+
+/* ------ SELECT LOCATION TEXT ------ */
 
 .select_location_text {
-    display: flex;
-    align-items: center;
+    font-weight: bold;
+    font-family: 'Inter', sans-serif;
+    font-size: 18px;
 }
+
+/* ------ SELECT LOCATION TEXT ------ */
+
+.current_location_button {
+    margin-left: 180%;
+}
+
+.current_location_button button {
+    width: 240px;
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    background-color: #e0e0e0;
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.current_location_button button:hover {background-color: #BFBFBF}
+
+
+
+
+
+
+
+
+
 
