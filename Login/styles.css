@@ -77,6 +77,10 @@ button {
     border-radius: 12px;
 }
 
+button:hover {
+    background-color: #58a9fa;
+}
+
 .dont-have-account-link {
     margin-top: 10%;
 }
