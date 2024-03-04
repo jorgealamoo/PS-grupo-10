@@ -4,3 +4,34 @@ main {
 }
 
 /* ------ ALIGNING ------ */
+
+.edit_profile_container {
+    text-align: center;
+}
+
+.profile_change_image,
+.name_username_email {
+    display: inline-block;
+    vertical-align: top;
+    box-sizing: border-box;
+}
+
+.profile_change_image {
+    margin-right: 80px;
+}
+
+.profile_change_image img {
+    width: 120px;
+}
+
+.save_button,
+.exit_button {
+    display: inline-block;
+    vertical-align: top;
+    box-sizing: border-box;
+}
+
+.save_and_exit_buttons {
+    margin-top: 30px;
+}
+
