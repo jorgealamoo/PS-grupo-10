@@ -20,10 +20,6 @@ main {
     margin-right: 80px;
 }
 
-.profile_change_image img {
-    width: 120px;
-}
-
 .save_button,
 .exit_button {
     display: inline-block;
@@ -35,3 +31,48 @@ main {
     margin-top: 30px;
 }
 
+/* ------ CHANGE IMAGE ------ */
+
+.profile_change_image {
+    cursor: pointer;
+}
+
+.profile_change_image img {
+    width: 160px;
+    border-radius: 50%;
+}
+
+.profile_change_image p {
+    font-family: 'Inter', sans-serif;
+    font-weight: bold;
+}
+
+/* ------ CHANGE NAME, USERNAME & EMAIL ------ */
+
+.profile_name p,
+.profile_username p,
+.profile_email p {
+    font-family: 'Inter', sans-serif;
+    font-weight: bold;
+    text-align: left;
+}
+
+.profile_name input,
+.profile_username input,
+.profile_email input {
+    width: 240px;
+    padding: 10px;
+    border-radius: 8px;
+    background-color: white;
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.profile_name input::placeholder,
+.profile_username input::placeholder,
+.profile_email input::placeholder {
+    font-weight: bold;
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+}
