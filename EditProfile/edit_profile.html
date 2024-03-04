@@ -4,18 +4,53 @@
     <meta charset="UTF-8">
     <script src='/JavaScript/templateLoader.js'></script>
     <title>Edit Profile</title>
+    <link href="styles.css" rel="stylesheet">
 </head>
 <body>
 <header></header>
 <nav></nav>
 <main>
+    <div class="edit_profile_container">
 
+        <div class="profile_change_image">
+            <img src="../../Images/aspa.png" id="ProfileImage">
+            <p>Change Photo</p>
+        </div>
+
+        <div class="name_username_email">
+            <div class="profile_name">
+                <p>Name:</p>
+                <input type="text" id="name" name="name" placeholder="Name">
+            </div>
+
+            <div class="profile_username">
+                <p>Username</p>
+                <input type="text" id="username" name="username" placeholder="Username">
+            </div>
+
+            <div class="profile_email">
+                <p>Email:</p>
+                <input type="email" id="email" name="email" placeholder="Email">
+            </div>
+        </div>
+
+        <div class="save_and_exit_buttons">
+            <div class="save_button">
+                <button id="saveBtn" onclick="location.href='../Account/account.html';">Save</button>
+            </div>
+
+            <div class="exit_button">
+                <button id="exitBtn" onclick="location.href='../Account/account.html';">Exit</button>
+            </div>
+        </div>
+
+    </div>
 </main>
 <footer></footer>
 <script>
-    cargarTemplate('/Reusables/Header/header.html', 'header');
-    cargarTemplate('/Reusables/Nav/nav.html', 'nav');
-    cargarTemplate('/Reusables/Footer/footer.html', 'footer')
+    cargarTemplate('/Header/header.html', 'header');
+    cargarTemplate('/Nav/nav.html', 'nav');
+    cargarTemplate('/Footer/footer.html', 'footer')
 </script>
 </body>
 </html>
