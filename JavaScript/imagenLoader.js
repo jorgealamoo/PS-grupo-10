@@ -4,12 +4,19 @@ function agregarImagen(contenedor, imagenPath, texto) {
 
     let imagen = document.createElement('img');
     imagen.src = imagenPath;
-
     imagen.style.width = '450px';
-    imagen.style.height = '450px';  // Ajusta la altura de forma proporcional
+    imagen.style.height = '450px';
+    imagen.style.cursor = 'pointer';
+
+    imagen.addEventListener('click', function() {
+        window.location.href = '../Publication/publication.html';
+    });
 
     nuevoElemento.appendChild(imagen);
-    nuevoElemento.innerHTML += texto;
+
+    let textoElemento = document.createElement('div');
+    textoElemento.innerHTML = texto;
+    nuevoElemento.appendChild(textoElemento);
 
     contenedor.appendChild(nuevoElemento);
 }
@@ -26,3 +33,6 @@ function cargarImagenes() {
         agregarImagen(contenedorImagenes, item.imagenPath, item.texto);
     });
 }
+
+// Llama a la función cargarImagenes al cargar la página
+document.addEventListener('DOMContentLoaded', cargarImagenes);

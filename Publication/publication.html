@@ -17,7 +17,6 @@
             <!-- Imágenes -->
             <img src="/Images/aspa.png" alt="Imagen 1">
             <img src="/Images/img.png" alt="Imagen 2">
-            <!-- Añade más imágenes según sea necesario -->
             <!-- Botones de navegación -->
             <div class="carousel-button left" onclick="moveCarousel(-1)">❮</div>
             <div class="carousel-button right" onclick="moveCarousel(1)">❯</div>
@@ -46,9 +45,9 @@
     <footer></footer>
 <script>
     initCarousel('.image-carousel-container img');
-    cargarTemplate('/Reusables/Header/header.html', 'header');
-    cargarTemplate('/Reusables/Nav/nav.html', 'nav');
-    cargarTemplate('/Reusables/Footer/footer.html', 'footer');
+    cargarTemplate('/Header/header.html', 'header');
+    cargarTemplate('/Nav/nav.html', 'nav');
+    cargarTemplate('/Footer/footer.html', 'footer');
 </script>
 </body>
 </html>
