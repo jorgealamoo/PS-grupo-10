@@ -3,6 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <script src='/JavaScript/templateLoader.js'></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <script src="/JavaScript/loadMap.js"></script>
     <title>Map</title>
     <link href="style.css" rel="stylesheet">
 </head>
@@ -11,11 +14,16 @@
         <header></header>
         <nav></nav>
     </div>
-    <div>
+    <div id="searchAndFilter">
         <input type="text" id="bar_search" placeholder="Buscar...">
-        <button id="filters_button">Filtros</button>
-        <object id="no_final_image" data = "../Images/aspa.png"></object>
+        <select id="filterSelect">
+            <option value="">...</option>
+            <option value="example1">Restaurantes</option>
+            <option value="example2">Parques</option>
+            <option value="example3">Museos</option>
+        </select>
     </div>
+    <div id="map"></div>
     <footer></footer>
     <script>
         cargarTemplate('/Reusables/header/header.html', 'header');
