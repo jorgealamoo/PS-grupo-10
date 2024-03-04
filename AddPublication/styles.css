@@ -111,7 +111,7 @@ main {
     margin-right: 70%;
 }
 
-/* ------ SELECT LOCATION TEXT ------ */
+/* ------ SELECT LOCATION BUTTON ------ */
 
 .current_location_button button {
     width: 240px;
@@ -129,16 +129,17 @@ main {
 
 /* ------ MAP ------ */
 
-.map_image {
+#map {
     width: 100%;
+    height: 260px;
     overflow: hidden; /* Evita que la imagen sobresalga del contenedor */
 }
 
-.map_image img {
+/*.map img {
     width: 100%;
     height: 260px;
     object-fit: cover;
-}
+}*/
 
 /* ------ BOTTOM ALIGNING ------ */
 

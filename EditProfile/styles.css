@@ -76,3 +76,22 @@ main {
     font-family: 'Inter', sans-serif;
     font-size: 16px;
 }
+
+/* ------ SAVE & EXIT BUTTONS ------ */
+
+.save_button button,
+.exit_button button {
+    width: 90px;
+    padding: 10px;
+    border-radius: 8px;
+    background-color: #e0e0e0;
+    font-weight: bold;
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.save_button button:hover,
+.exit_button button:hover {
+    background-color: #BFBFBF
+}
