@@ -10,12 +10,19 @@
 <div id="headerContainer"></div>
 <div class="User">
     <img src="/Images/aspa.png" alt="">
+    <span><b>Lorem ipsum</b></span>
+    <a href="../Saved/Saved.html">SAVED</a>
+    <a href="../AddPublication/add_publication.html">CREATE</a>
+    <a href="../Saved/Saved.html">EDIT</a>
 </div>
+<div class="contImagen" id="imagenContainer"></div>
 
 <script src='/JavaScript/templateLoader.js'></script>
+<script src='/JavaScript/imagenLoader.js'></script>
 <script>
     cargarTemplate('/Reusables/Header/header.html', '#headerContainer');
     cargarTemplate('/Reusables/Nav/nav.html', '#nav');
+    cargarImagenes();
 </script>
 
 </body>
