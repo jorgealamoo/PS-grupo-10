@@ -33,6 +33,3 @@ function cargarImagenes() {
         agregarImagen(contenedorImagenes, item.imagenPath, item.texto);
     });
 }
-
-// Llama a la función cargarImagenes al cargar la página
-document.addEventListener('DOMContentLoaded', cargarImagenes);

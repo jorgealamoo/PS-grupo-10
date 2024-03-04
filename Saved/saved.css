@@ -1,3 +1,7 @@
+main {
+    min-height: 80vh;
+}
+
 .contImagen {
     display: grid;
     grid-template-columns: repeat(4, 1fr);

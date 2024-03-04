@@ -1,6 +1,10 @@
-main {
+body {
     background-color: #CCCCCC;
+}
+
+main {
     padding: 70px;
+    min-height: 80vh;
 }
 
 /* ------ ALIGNING ------ */

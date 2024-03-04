@@ -1,4 +1,5 @@
 main {
+    min-height: 80vh;
     background-color: #CCCCCC;
     padding: 70px;
 }
