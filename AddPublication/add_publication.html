@@ -12,15 +12,32 @@
 <nav></nav>
 <main>
     <div class="add_publication_container">
-        <div for="imageUpload" class="add_images_section">
-            <input type="file" id="imageUpload" name="imageUpload" multiple accept="image/*">
-            <div class="add_images_symbol">+</div>
-            <p>ADD IMAGES</p>
+
+        <div class="add_publication_left_side">
+            <div for="imageUpload" class="add_images_section">
+                <input type="file" id="imageUpload" name="imageUpload" multiple accept="image/*">
+                <div class="add_images_symbol">+</div>
+                <p>ADD IMAGES</p>
+            </div>
+
+            <div class="publication_name_section">
+                <label for="publicationName"></label>
+                <input type="text" id="publicationName" name="publicationName" placeholder="Publication name">
+            </div>
         </div>
 
-        <div class="publication_name_section">
-            <label for="publicationName"></label>
-            <input type="text" id="publicationName" name="publicationName" placeholder="Publication name">
+        <div class="add_publication_right_side">
+            <div class="select_location_text">
+                <p>Select Location:</p>
+            </div>
+
+            <div class="current_location_button">
+                <button id="currentLocationBtn">Current Location</button>
+            </div>
+
+            <div class="map_image">
+                <img src="/Images/aspa.png" alt="Map Image">
+            </div>
         </div>
 
         <div class="description_section">
@@ -28,25 +45,16 @@
             <textarea id="description" name="description" placeholder="Description"></textarea>
         </div>
 
-        <div class="select_location_text">
-            <p>Select Location:</p>
+        <div class="save_and_exit_buttons">
+            <div class="save_button">
+                <button id="saveBtn" onclick="location.href='../Account/account.html';">Save</button>
+            </div>
+
+            <div class="exit_button">
+                <button id="exitBtn" onclick="location.href='../Account/account.html';">Exit</button>
+            </div>
         </div>
 
-        <div class="current_location_button">
-            <button id="currentLocationBtn">Current Location</button>
-        </div>
-
-        <div class="map_image">
-            <img src="/Images/aspa.png" alt="Map Image">
-        </div>
-
-        <div class="save_button">
-            <button id="saveBtn">Save</button>
-        </div>
-
-        <div class="exit_button">
-            <button id="exitBtn">Exit</button>
-        </div>
 
     </div>
 </main>
