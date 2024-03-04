@@ -19,7 +19,7 @@ function cargarImagenes() {
     const imagenesYTextos = [
         { imagenPath: '/Images/aspa.png', texto: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed'},
         { imagenPath: '/Images/aspa2.png', texto: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed' },
-        { imagenPath: '/Images/img.png', texto: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed' },
+        { imagenPath: '/Images/aspa3.png', texto: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed' },
     ];
 
     imagenesYTextos.forEach(item => {
