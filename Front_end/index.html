@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <title>Login</title>
-    <link rel="stylesheet" href="Login_index/styles.css">
+    <link rel="stylesheet" href="/Login/styles.css">
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 </head>
 <body>
     <div class="container">
         <div class="left-side">
-            <img src="Images/aspa.png" alt="Logo">
+            <img src="../Images/aspa.png" alt="Logo">
         </div>
         <div class="right-side">
             <div class="login-form-container">
@@ -26,10 +26,10 @@
                             <input type="password" id="password" name="password" required>
                         </div>
 
-                        <button type="button" onclick="location.href='MapPage/map.html';">Login</button>
+                        <button type="button" onclick="fetchData()">Login</button>
 
                         <div class="dont-have-account-link">
-                            <a href="SignUp/Sign%20up.html">Don't have any account?</a>
+                            <a href="../SignUp/Sign%20up.html">Don't have any account?</a>
                         </div>
 
                         <div class="forgot-password-link">
@@ -50,5 +50,6 @@
             </div>
         </div>
     </div>
+    <script  src="/Prueba_carga_dinamica/test_login.js"></script>
 </body>
 </html>
