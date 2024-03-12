@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="styles.css">
-    <script src='/Front_end/JavaScript/templateLoader.js'></script>
-    <script src='/Front_end/JavaScript/carrusel.js'></script>
-    <script src='/Front_end/JavaScript/UploadComments.js'></script>
+    <script src='../JavaScript/templateLoader.js'></script>
+    <script src='../JavaScript/carrusel.js'></script>
+    <script src='../JavaScript/UploadComments.js'></script>
     <title>Publication</title>
 
 </head>
@@ -14,10 +14,8 @@
     <nav></nav>
 <main>
         <div class="image-carousel-container">
-            <!-- Imágenes -->
-            <img src="/Front_end/Images/aspa.png" alt="Imagen 1">
-            <img src="/Front_end/Images/img.png" alt="Imagen 2">
-            <!-- Botones de navegación -->
+            <img src="../Images/aspa.png" alt="Imagen 1">
+            <img src="../Images/img.png" alt="Imagen 2">
             <div class="carousel-button left" onclick="moveCarousel(-1)">❮</div>
             <div class="carousel-button right" onclick="moveCarousel(1)">❯</div>
         </div>
@@ -33,11 +31,9 @@
 
     <div class="Header-Comments">
         <h2>Comentarios</h2>
-        <!-- Botón para agregar comentario -->
         <button id="mostrar-formulario">Añadir comentario</button>
     </div>
     <div id="comentarios">
-        <!-- Carga dinamica de comentarios -->
         <script>load('comentarios')</script>
     </div>
 </main>
@@ -45,9 +41,9 @@
     <footer></footer>
 <script>
     initCarousel('.image-carousel-container img');
-    cargarTemplate('/Front_end/Header/header.html', 'header');
-    cargarTemplate('/Front_end/Nav/nav.html', 'nav');
-    cargarTemplate('/Front_end/Footer/footer.html', 'footer');
+    cargarTemplate('../Header/header.html', 'header');
+    cargarTemplate('../Nav/nav.html', 'nav');
+    cargarTemplate('../Footer/footer.html', 'footer');
 </script>
 </body>
 </html>
