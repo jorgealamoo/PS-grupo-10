@@ -24,9 +24,9 @@ function agregarImagen(contenedor, imagenPath, texto) {
 function cargarImagenes() {
     const contenedorImagenes = document.getElementById('imagenContainer');
     const imagenesYTextos = [
-        { imagenPath: '/Images/aspa.png', texto: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed'},
-        { imagenPath: '/Images/aspa2.png', texto: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed' },
-        { imagenPath: '/Images/aspa3.png', texto: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed' },
+        { imagenPath: '/Front_end/Images/aspa.png', texto: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed'},
+        { imagenPath: '/Front_end/Images/aspa2.png', texto: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed' },
+        { imagenPath: '/Front_end/Images/aspa3.png', texto: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed' },
     ];
 
     imagenesYTextos.forEach(item => {
