@@ -26,7 +26,7 @@
                             <input type="password" id="password" name="password" required>
                         </div>
 
-                        <button type="button" onclick="fetchData()">Login</button>
+                        <button type="button" onclick="location.href='../MapPage/map.html';">Login</button>
 
                         <div class="dont-have-account-link">
                             <a href="../SignUp/Sign%20up.html">Don't have any account?</a>
@@ -39,7 +39,7 @@
                         <div class="social-login-options">
                             <p>Or sign in with:</p>
                             <div class="google-login">
-                                <a href="#">Google</a>
+                                <a id="googleLogin" href="#">Google</a>
                             </div>
                             <div class="facebook-login">
                                 <a href="#">Facebook</a>
@@ -50,6 +50,25 @@
             </div>
         </div>
     </div>
-    <script  src="/Prueba_carga_dinamica/test_login.js"></script>
+    <script src="/dist/bundle.js"></script>
+    <script>
+        import {signInWithGoogle} from "/src/auth.js";
+
+        // Manejador de eventos para el botón de iniciar sesión con Google
+        document.getElementById('googleLogin').addEventListener('click', function() {
+            // Llamar a la función para iniciar sesión con Google al hacer clic en el botón
+            signInWithGoogle()
+                .then(user => {
+                    // Si la autenticación es exitosa, aquí puedes realizar otras acciones, como redirigir a otra página
+                    console.log('El usuario ha iniciado sesión correctamente:', user);
+                    alert('Inicio de sesión exitoso con Google');
+                })
+                .catch(error => {
+                    // Manejar errores de autenticación
+                    console.error('Error al iniciar sesión con Google:', error);
+                    alert('Error al iniciar sesión con Google: ' + error.message);
+                });
+        });
+    </script>
 </body>
 </html>
