@@ -1,5 +1,6 @@
+
 function initializeMap() {
-    var map = L.map('map').setView([51.5, -0.09], 13);
+    var map = L.map('map').setView([28.072876, -15.451502], 17);
 
     // Tile type: openstreetmap normal
     var openstreetmap = L.tileLayer(
@@ -33,11 +34,7 @@ function initializeMap() {
     // Añadir capa por defecto
     openstreetmapHot.addTo(map);
 
-    // Añadir marcador
-    var marker = L.marker([51.5, -0.09]).addTo(map);
 }
-
-
 // Llamada a la función de inicialización cuando se cargue la página
 document.addEventListener('DOMContentLoaded', initializeMap);
 
