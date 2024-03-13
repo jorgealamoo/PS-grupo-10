@@ -12,3 +12,19 @@ document.getElementById('googleLogin').addEventListener('click', async function(
         alert('Error al iniciar sesión con Google: ' + error.message);
     }
 });
+
+import {logInUserPassword} from "./authUserPassword.js";
+
+document.getElementById('LogIn').addEventListener('click',async function() {
+    try {
+        const email = document.getElementById('user_name').value;
+        const password = document.getElementById('password').value;
+
+        const user = await logInUserPassword(email,password);
+        console.log('El usuario ha iniciado sesión correctamente con su email:', user);
+        alert('Inicio de sesión exitoso con email');
+    } catch (error) {
+        console.error('Error al iniciar sesión con email:', error);
+        alert('Error al iniciar sesión con email: ' + error.message);
+    }
+});
