@@ -25,14 +25,17 @@
 
             <div class="publication_name_section">
                 <label for="publicationName"></label>
-                <input type="text" id="publicationName" name="publicationName" placeholder="Publication name">
+                <input type="text" id="publicationName" placeholder="Publication name" value="">
+                <span id="icono-advertencia-name">&#9888;</span>
+
             </div>
         </div>
 
         <div class="add_publication_right_side">
             <div class="select_location_text">
-                <p>Select Location:</p>
+                <p id="map_Select_Location">Select Location:</p>
             </div>
+            <span id="icono-advertencia_ubi">&#9888;</span>
 
             <!---div class="current_location_button">
                 <button id="currentLocationBtn">Current Location</button>
@@ -42,13 +45,14 @@
         </div>
 
         <div class="description_section">
+            <span id="icono-advertencia_description">&#9888;</span>
             <label for="description"></label>
             <textarea id="description" name="description" placeholder="Description"></textarea>
         </div>
 
         <div class="save_and_exit_buttons">
             <div class="save_button">
-                <button id="saveBtn" ;">Save</button>
+                <button id="saveBtn">Save</button>
             </div>
 
             <div class="exit_button">

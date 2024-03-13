@@ -3,7 +3,7 @@ var comment = document.getElementById('description');
 var image   = {};
 var comment_list = {};
 var label={};
-var name =document.getElementById('publicationName');
+var titel = document.getElementById('publicationName');
 var user_id="";
 var valoracion = 0;
 function initializeMap() {
@@ -50,7 +50,7 @@ function initializeMap() {
         // Agregar el nuevo marcador
         marker = L.marker(e.latlng).addTo(map);
         Pointermap.latitude = e.latlng.lat;
-        Pointermap.longitude =e.latlng.lng;
+        Pointermap.longitude = e.latlng.lng;
     }
     map.on('click', addMark);
 }
@@ -63,7 +63,7 @@ const datos = {
     lista_comentarios: comment_list,
     lista_etiquetas: label,
     lista_imagenes: image,
-    nombre: name,
+    nombre: titel,
     ubicacion: Pointermap,
     user_id:0,
     valoracion:valoracion,
@@ -82,10 +82,8 @@ let opciones = {
 
 // Realizar la solicitud fetch
 async function addDocument() {
-
-    console.log(Pointermap)
-    datos.descripcion = comment.value;
-    datos.nombre = name.value;
+    datos.descripcion = comment.value.trim();
+    datos.nombre = titel.value.trim();
     opciones = {
         method: 'POST', // Método HTTP POST para agregar datos
         headers: {
@@ -106,11 +104,41 @@ async function addDocument() {
             }
         ).catch(error => {
             console.error('Error al agregar datos:', error);
-        });;
+        });
     datos.publicacion_id = id;
 
 }
+function checkVariables() {
+    result = true;
+    if(Object.keys(Pointermap).length === 0){
+        mapDiv = document.getElementById('icono-advertencia_ubi');
+        mapDiv.style.display = "inline-block";
+        setTimeout(()=>{
+            mapDiv.style.display = "none";
+        },2000);
+        result = false;
+    }if (comment.value === ""){
+        commentDiv = document.getElementById('icono-advertencia_description');
+        commentDiv.style.display = "inline";
+        setTimeout(()=>{
+            commentDiv.style.display = "none";
+        },2000);
+        result = false;
+    }if (titel.value === "") {
+        nameDiv = document.getElementById('icono-advertencia-name');
+        nameDiv.style.display = "inline";
+        setTimeout(() => {
+            nameDiv.style.display = "none";
+        }, 2000);
+        result = false;
+    }
 
+    return result;
+}
 document.getElementById('saveBtn').addEventListener('click', function() {
-    addDocument();
+
+
+    if(!checkVariables()){
+       // alert('Debes rellenar todos los campos antes de crear la publicación');
+    }else {addDocument();}
 });

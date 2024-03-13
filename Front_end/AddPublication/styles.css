@@ -26,7 +26,28 @@ body {
     border: 2px dashed #000000;
     position: relative;
 }
+#icono-advertencia_ubi {
+    color: red; /* Color rojo para indicar la advertencia */
+    margin-left: 5px; /* Espaciado entre el campo de formulario y el icono */
+    font-size: 40px;
+    position: absolute;
+    display: none; /* Ocultar el icono inicialmente */
+}
 
+#icono-advertencia_description {
+    color: red; /* Color rojo para indicar la advertencia */
+    font-size: 40px;
+    display: none; /* Ocultar el icono inicialmente */
+    position: absolute;
+    margin: 10px;
+}
+#icono-advertencia-name {
+    color: red; /* Color rojo para indicar la advertencia */
+    font-size: 40px;
+    display: none; /* Ocultar el icono inicialmente */
+    position: absolute;
+    margin-bottom: 5px;
+}
 .add_images_section:hover {background-color: #BFBFBF}
 
 .add_images_section input {
