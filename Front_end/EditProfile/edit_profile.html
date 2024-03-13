@@ -14,7 +14,8 @@
 <main>
     <div class="edit_profile_container">
 
-        <div class="profile_change_image">
+        <div for="profile_change_image" class="profile_change_image">
+            <input type="file" id="ProfileImageUpload" name="ProfileImageUpload" multiple accept="image/*">
             <img src="../Images/usuario_generico.png" id="ProfileImage" alt="">
             <p>Change Photo</p>
         </div>
@@ -30,19 +31,28 @@
                 <label for="username"></label><input type="text" id="username" name="username" placeholder="Username">
             </div>
 
-            <div class="profile_email">
-                <p>Email:</p>
-                <label for="email"></label><input type="email" id="email" name="email" placeholder="Email">
+            <div class="change_password">
+                <button id="changePasswordBtn" onclick="toggleChangePassword()">Change Password</button>
+            </div>
+        </div>
+
+        <div id="changePasswordContainer" class="change_password_container">
+            <p>New Password:</p>
+            <input type="password" id="newPassword" name="newPassword" placeholder="New Password">
+            <p>Repeat Password:</p>
+            <input type="password" id="repeatPassword" name="repeatPassword" placeholder="Repeat Password">
+            <div class="confirm_new_password_button">
+                <button id="confirmNewPasswordBtn" onclick="toggleChangePassword()">Confirm new password</button>
             </div>
         </div>
 
         <div class="save_and_exit_buttons">
-            <div class="save_button">
-                <button id="saveBtn" onclick="location.href='../Account/account.html';">Save</button>
-            </div>
-
             <div class="exit_button">
                 <button id="exitBtn" onclick="location.href='../Account/account.html';">Exit</button>
+            </div>
+
+            <div class="save_button">
+                <button id="saveBtn" onclick="location.href='../Account/account.html';">Save</button>
             </div>
         </div>
 
@@ -53,6 +63,13 @@
     cargarTemplate('../Header/header.html', 'header');
     cargarTemplate('../Nav/nav.html', 'nav');
     cargarTemplate('../Footer/footer.html', 'footer')
+
+    // Función para mostrar/ocultar el contenedor de cambio de contraseña
+    function toggleChangePassword() {
+        var container = document.getElementById('changePasswordContainer');
+        container.classList.toggle('active');
+    }
+
 </script>
 </body>
 </html>
