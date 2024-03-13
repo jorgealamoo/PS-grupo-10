@@ -136,6 +136,7 @@
 
                 const responseData = await response.json();
                 console.log('Response:', responseData);
+                location.reload(); // Recargar la página
             } catch (error) {
                 console.error('Error updating document:', error.message);
             }
