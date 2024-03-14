@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <script src='../JavaScript/templateLoader.js'></script>
     <script src="../JavaScript/changeImage.js"></script>
+    <script src="../JavaScript/changePasswordFunctions.js"></script>
     <title>Edit Profile</title>
     <link href="../EditProfile/styles.css" rel="stylesheet">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap">
@@ -36,15 +37,17 @@
             </div>
         </div>
 
-        <div id="changePasswordContainer" class="change_password_container">
+        <form id="changePasswordContainer" class="change_password_container" onsubmit="validateOfChangePassword(); return false;">
             <p>New Password:</p>
-            <input type="password" id="newPassword" name="newPassword" placeholder="New Password">
+            <input type="password" id="newPassword" name="newPassword" placeholder="New Password" required>
             <p>Repeat Password:</p>
-            <input type="password" id="repeatPassword" name="repeatPassword" placeholder="Repeat Password">
+            <input type="password" id="repeatPassword" name="repeatPassword" placeholder="Repeat Password" required>
+            <div id="passwordError"></div>
             <div class="confirm_new_password_button">
-                <button id="confirmNewPasswordBtn" onclick="toggleChangePassword()">Confirm new password</button>
+                <button id="cancelNewPasswordBtn" type="button" onclick="toggleChangePassword()">Cancel</button>
+                <button id="confirmNewPasswordBtn" type="submit">Confirm new password</button>
             </div>
-        </div>
+        </form>
 
         <div class="save_and_exit_buttons">
             <div class="exit_button">
@@ -62,14 +65,7 @@
 <script>
     cargarTemplate('../Header/header.html', 'header');
     cargarTemplate('../Nav/nav.html', 'nav');
-    cargarTemplate('../Footer/footer.html', 'footer')
-
-    // Función para mostrar/ocultar el contenedor de cambio de contraseña
-    function toggleChangePassword() {
-        var container = document.getElementById('changePasswordContainer');
-        container.classList.toggle('active');
-    }
-
+    cargarTemplate('../Footer/footer.html', 'footer');
 </script>
 </body>
 </html>

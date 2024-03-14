@@ -151,7 +151,7 @@ main {
     left: 50%; /* Centra horizontalmente */
     transform: translate(-50%, -50%);
     background-color: white;
-    padding: 65px;
+    padding: 70px;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     z-index: 999; /* Asegura que el contenedor esté encima de otros elementos */
@@ -161,6 +161,8 @@ main {
     display: block;
 }
 
+/* - INPUTS - */
+
 .change_password_container p {
     margin-bottom: 10px;
     font-family: 'Inter', sans-serif;
@@ -169,7 +171,7 @@ main {
 }
 
 .change_password_container input {
-    width: 240px;
+    width: 260px;
     padding: 10px;
     border-radius: 8px;
     background-color: white;
@@ -184,11 +186,30 @@ main {
     font-size: 16px;
 }
 
-.change_password_container button {
+/* - BUTTONS - */
+
+#cancelNewPasswordBtn {
+    width: 80px;
+    padding: 8px;
+    border-radius: 8px;
+    background-color: white;
+    color: #FF9800;
+    font-weight: bold;
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+#cancelNewPasswordBtn:hover {
+    background-color: #fcc6a6;
+}
+
+#confirmNewPasswordBtn {
     width: 200px;
     padding: 8px;
     border-radius: 8px;
-    background-color: #0C6DFF;
+    background-color: #FF9800;
     color: white;
     font-weight: bold;
     font-family: 'Inter', sans-serif;
@@ -197,6 +218,14 @@ main {
     margin-top: 20px;
 }
 
-.change_password_container button:hover {
-    background-color: #58a9fa;
+#confirmNewPasswordBtn:hover {
+    background-color: #ffac33;
+}
+
+/* - VALIDATION - */
+
+#passwordError {
+    color: red;
+    margin-top: 16px;
+    font-size: 20px;
 }
