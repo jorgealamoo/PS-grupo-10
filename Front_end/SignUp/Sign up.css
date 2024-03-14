@@ -97,3 +97,9 @@ form {
 .AlreadyAcc a:hover {
     text-decoration: underline;
 }
+
+#passwordError {
+    color: red;
+    margin-bottom: 16px;
+    font-size: 20px;
+}
