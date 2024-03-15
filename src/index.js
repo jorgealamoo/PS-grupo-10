@@ -2,39 +2,40 @@
 
 import { signInWithGoogle } from './auth.js';
 
-export async function  logGoogle() {
-    signInWithGoogle()
-        .then(user => {
-            // Si la autenticación es exitosa, aquí puedes realizar otras acciones, como redirigir a otra página
-            console.log('El usuario ha iniciado sesión correctamente:', user);
-            alert('Inicio de sesión exitoso con Google');
-        })
-        .catch(error => {
-            // Manejar errores de autenticación
-            console.error('Error al iniciar sesión con Google:', error);
-            alert('Error al iniciar sesión con Google: ' + error.message);
-        });
-}
+document.getElementById('googleLogin').addEventListener('click', async function() {
+    try {
+        const user = await signInWithGoogle();
+        console.log('El usuario ha iniciado sesión correctamente:', user);
+        alert('Inicio de sesión exitoso con Google');
+    } catch (error) {
+        console.error('Error al iniciar sesión con Google:', error);
+        alert('Error al iniciar sesión con Google: ' + error.message);
+    }
+});
 
 import {logInUserPassword} from "./authUserPassword.js";
 
-export async function logUserContraseña() {
-
+document.getElementById('LogIn').addEventListener('click', async function() {
+    try {
         const email = document.getElementById('user_name').value;
         const password = document.getElementById('password').value;
 
         logInUserPassword(email,password)
             .then(user =>{
                 console.log('El usuario ha iniciado sesión correctamente con su email:', user);
-                alert('Inicio de sesión exitoso con email');
+                location.href='/PS-grupo-10/Front_end/MapPage/map.html';
             }).catch (error=>{
             console.error('Error al iniciar sesión con email:', error);
             alert('Error al iniciar sesión con email: ' + error.message);
         });
+    } catch (error) {
+        console.error('Error al iniciar sesión con Google:', error);
+        alert('Error al iniciar sesión con Google: ' + error.message);
     }
+});
 
-import {SignUp} from "./signUp.js";
-export async function crearUsuario() {
+//import {SignUp} from "./signUp.js";
+/*export async function crearUsuario() {
     const emailNuevo = document.getElementById('email').value;
     const passwordNuevo = document.getElementById('password').value;
 
@@ -47,4 +48,4 @@ export async function crearUsuario() {
         alert('Error al crear la cuenta: ' + error.message);
 
     });
-}
+}*/
