@@ -8,7 +8,7 @@ body {
 
 .container {
     display: flex;
-    height: 90%;
+    height: 80%;
     padding: 10vh;
 }
 
@@ -28,7 +28,7 @@ body {
 
 .left-side img {
     width: 100%;
-    height: auto;
+    height: 100%;
     display: block;
 }
 
