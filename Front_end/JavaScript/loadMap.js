@@ -1,4 +1,3 @@
-
 function initializeMap() {
     var map = L.map('map').setView([28.072876, -15.451502], 17);
 
@@ -34,7 +33,9 @@ function initializeMap() {
     // Añadir capa por defecto
     openstreetmapHot.addTo(map);
 
+    return map;
 }
-// Llamada a la función de inicialización cuando se cargue la página
-document.addEventListener('DOMContentLoaded', initializeMap);
+
+// Exportar la función initializeMap
+export { initializeMap };
 
