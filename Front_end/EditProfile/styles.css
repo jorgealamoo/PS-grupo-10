@@ -1,5 +1,6 @@
 body {
-    background-color: #CCCCCC;
+    background-color: rgb(255, 255, 255);
+    margin: 0;
 }
 
 main {
@@ -22,6 +23,17 @@ main {
 
 .profile_change_image {
     margin-right: 80px;
+    position: relative;
+}
+
+.profile_change_image input {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0; /* Hace el input transparente */
+    cursor: pointer;
 }
 
 .save_button,
@@ -51,19 +63,17 @@ main {
     font-weight: bold;
 }
 
-/* ------ CHANGE NAME, USERNAME & EMAIL ------ */
+/* ------ CHANGE NAME & USERNAME ------ */
 
 .profile_name p,
-.profile_username p,
-.profile_email p {
+.profile_username p {
     font-family: 'Inter', sans-serif;
     font-weight: bold;
     text-align: left;
 }
 
 .profile_name input,
-.profile_username input,
-.profile_email input {
+.profile_username input {
     width: 240px;
     padding: 10px;
     border-radius: 8px;
@@ -74,21 +84,34 @@ main {
 }
 
 .profile_name input::placeholder,
-.profile_username input::placeholder,
-.profile_email input::placeholder {
+.profile_username input::placeholder {
     font-weight: bold;
     font-family: 'Inter', sans-serif;
     font-size: 16px;
 }
 
+
+
 /* ------ SAVE & EXIT BUTTONS ------ */
 
-.save_button button,
+.save_button button {
+    width: 90px;
+    padding: 10px;
+    border-radius: 8px;
+    background-color: #0C6DFF;
+    color: white;
+    font-weight: bold;
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    cursor: pointer;
+}
+
 .exit_button button {
     width: 90px;
     padding: 10px;
     border-radius: 8px;
-    background-color: #e0e0e0;
+    background-color: white;
+    color: #0C6DFF;
     font-weight: bold;
     font-family: 'Inter', sans-serif;
     font-size: 16px;
@@ -97,5 +120,112 @@ main {
 
 .save_button button:hover,
 .exit_button button:hover {
-    background-color: #BFBFBF
+    background-color: #58a9fa;
+}
+
+/* ------ CHANGE PASSWORD BUTTON ------ */
+
+.change_password button {
+    width: 180px;
+    padding: 10px;
+    border-radius: 8px;
+    background-color: #FF9800;
+    color: white;
+    font-weight: bold;
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+.change_password button:hover {
+    background-color: #ffac33;
+}
+
+/* ------ CHANGE PASSWORD CONTAINER ------ */
+
+.change_password_container {
+    display: none;
+    position: absolute;
+    top: 50%; /* Centra verticalmente */
+    left: 50%; /* Centra horizontalmente */
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 70px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    z-index: 999; /* Asegura que el contenedor esté encima de otros elementos */
+}
+
+.change_password_container.active {
+    display: block;
+}
+
+/* - INPUTS - */
+
+.change_password_container p {
+    margin-bottom: 10px;
+    font-family: 'Inter', sans-serif;
+    font-weight: bold;
+    text-align: left;
+}
+
+.change_password_container input {
+    width: 260px;
+    padding: 10px;
+    border-radius: 8px;
+    background-color: white;
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.change_password_container input::placeholder {
+    font-weight: bold;
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+}
+
+/* - BUTTONS - */
+
+#cancelNewPasswordBtn {
+    width: 80px;
+    padding: 8px;
+    border-radius: 8px;
+    background-color: white;
+    color: #FF9800;
+    font-weight: bold;
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+#cancelNewPasswordBtn:hover {
+    background-color: #fcc6a6;
+}
+
+#confirmNewPasswordBtn {
+    width: 200px;
+    padding: 8px;
+    border-radius: 8px;
+    background-color: #FF9800;
+    color: white;
+    font-weight: bold;
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+#confirmNewPasswordBtn:hover {
+    background-color: #ffac33;
+}
+
+/* - VALIDATION - */
+
+#passwordError {
+    color: red;
+    margin-top: 16px;
+    font-size: 20px;
 }
