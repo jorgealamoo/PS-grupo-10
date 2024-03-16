@@ -15,3 +15,6 @@ npm install firebase-admin
 ```
 npm start
 ```
+
+
+## Los datos de Configuración NO están en el repositorio. Obtenerlos de Firebase
