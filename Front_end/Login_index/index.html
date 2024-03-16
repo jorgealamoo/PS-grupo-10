@@ -42,7 +42,7 @@
                             <a id="googleLogin" href="#">Google</a>
                         </div>
                         <div class="facebook-login">
-                            <a href="#">Facebook</a>
+                            <a id="facebookLogin" href="#">Facebook</a>
                         </div>
                     </div>
                 </form>
@@ -52,10 +52,12 @@
 </div>
 <script src="/dist/bundle.js"></script>
 <script type="module">
-    import {signInWithGoogle} from "../../src/auth.js";
+    import {signInWithGoogle, signInWithFacebook} from "../../src/auth.js";
     import {logInUserPassword} from "../../src/authUserPassword.js";
 
     document.getElementById('googleLogin').addEventListener('click', function() {});
+
+    document.getElementById('facebookLogin').addEventListener('click', function() {});
 
     document.getElementById('LogIn').addEventListener('click', function() {});
 
