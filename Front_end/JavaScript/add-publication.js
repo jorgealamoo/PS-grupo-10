@@ -1,7 +1,7 @@
 import {uploadAllImagesToAPI} from './UploadImages.js';
 import {initializeMap} from './loadMap.js';
 
-localStorage.setItem('userId', 'EjemploIdUser'); //para poder hacer pruebas
+localStorage.setItem('userId', '0zbkPGwrhlfAjIcQ3odeqSte5jD3'); //para poder hacer pruebas
 
 var Pointermap = {};
 var comment = document.getElementById('description');
@@ -70,6 +70,65 @@ function loaderImage(event) {
 }
 
 
+function takeUserPublicationList(userID) {
+    return fetch('http://localhost:3000/api/getDocument/usuario/'+userID+'')
+        .then(response => {
+            // Verificar si la respuesta es exitosa (código de estado 200)
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            // Parsear la respuesta como JSON
+            return response.json();
+        })
+        .then(data => {
+            // Verificar si el campo lista_publicaciones está presente en el documento
+            if (data.hasOwnProperty('lista_publicaciones')) {
+                const listaPublicaciones = data.lista_publicaciones;
+                return listaPublicaciones;
+            } else {
+                console.error('El campo lista_publicaciones no está presente en el documento');
+                return null; // Devolver null en caso de que el campo no esté presente
+            }
+        })
+        .catch(error => {
+            // Manejar cualquier error que ocurra durante la solicitud
+            console.error('There was a problem with the fetch operation:', error);
+            throw error; // Propagar el error para que pueda ser manejado externamente
+        });
+}
+
+
+async function addPublicationToUser(id,userID) {
+    let publicationList = await takeUserPublicationList(userID);
+    if (publicationList.length === 0) {
+        publicationList = [id];
+    }else {
+        publicationList.push(id);
+    }
+    const newJson = {
+        lista_publicaciones: publicationList
+    }
+    try {
+        const response = await fetch('http://localhost:3000/api/changeDoc/usuario/'+userID+'', {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(newJson)
+        });
+
+        if (!response.ok) {
+            throw new Error('Error al añadir a la lista del documento');
+        }
+
+        const data = await response.json();
+        console.log(data); // Puedes hacer algo con la respuesta aquí si es necesario
+        return data;
+    } catch (error) {
+        console.error('Error al añadir a la lista del documento:', error);
+        throw error;
+    }
+}
 
 async function addDocument() {
     datos.descripcion = comment.value.trim();
@@ -97,7 +156,7 @@ async function addDocument() {
         ).catch(error => {
             console.error('Error al agregar datos:', error);
         });
-    datos.publicacion_id = id;
+   addPublicationToUser(id,user_id);
 }
 
 function checkVariables() {
@@ -123,6 +182,6 @@ document.getElementById('saveBtn').addEventListener('click', async function () {
         alert('Debes rellenar todos los campos antes de crear la publicación');
     } else {
         await addDocument();
-        //window.location.href = "../Account/account.html";
+        window.location.href = "../Account/account.html";
     }
 });
