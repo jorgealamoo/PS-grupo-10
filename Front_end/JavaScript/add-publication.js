@@ -91,38 +91,27 @@ function takeUserPublicationList(userID) {
             }
         })
         .catch(error => {
-            // Manejar cualquier error que ocurra durante la solicitud
             console.error('There was a problem with the fetch operation:', error);
-            throw error; // Propagar el error para que pueda ser manejado externamente
+            throw error;
         });
 }
 
 
-async function addPublicationToUser(id,userID) {
-    let publicationList = await takeUserPublicationList(userID);
-    if (publicationList.length === 0) {
-        publicationList = [id];
-    }else {
-        publicationList.push(id);
-    }
-    const newJson = {
-        lista_publicaciones: publicationList
-    }
+async function modifyDoc(collection,document,data) {
     try {
-        const response = await fetch('http://localhost:3000/api/changeDoc/usuario/'+userID+'', {
+        const response = await fetch(`http://localhost:3000/api/changeDoc/`+collection+'/'+document+'', {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(newJson)
+            body: JSON.stringify(data)
         });
 
         if (!response.ok) {
-            throw new Error('Error al añadir a la lista del documento');
+            throw new Error('Error al añadir el documento');
         }
-
-        const data = await response.json();
-        console.log(data); // Puedes hacer algo con la respuesta aquí si es necesario
+        const responseDoc = await response.json();
+        console.log(data);
         return data;
     } catch (error) {
         console.error('Error al añadir a la lista del documento:', error);
@@ -156,7 +145,17 @@ async function addDocument() {
         ).catch(error => {
             console.error('Error al agregar datos:', error);
         });
-   addPublicationToUser(id,user_id);
+   modifyDoc("publicacion",id,{publication_id:id});
+   let publicationList = await takeUserPublicationList(user_id);
+   if (publicationList.length === 0) {
+       publicationList = [id];
+   }else {
+       publicationList.push(id);
+   }
+   const newJson = {
+       lista_publicaciones: publicationList
+   }
+   modifyDoc("usuario",user_id,newJson);
 }
 
 function checkVariables() {
