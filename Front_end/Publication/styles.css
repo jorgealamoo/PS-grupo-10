@@ -25,7 +25,8 @@ body{
 
 /* Estilo de las imágenes */
 .image-carousel-container img {
-    display: block; /* Asegura que las imágenes se muestren una debajo de la otra */
+    display: none; /* Oculta las imágenes inicialmente */
+    /*display: block; /* Asegura que las imágenes se muestren una debajo de la otra */
     width: auto; /* Utiliza todo el ancho del contenedor */
     height: 100%; /* Permite que la altura se ajuste automáticamente */
 }
