@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <script src='../JavaScript/templateLoader.js'></script>
     <script src="../JavaScript/changeImage.js"></script>
+    <script src="../JavaScript/changePasswordFunctions.js"></script>
+    <script src="./main.js"></script>
+    <script src="/dist/bundle.js"></script>
     <title>Edit Profile</title>
     <link href="../EditProfile/styles.css" rel="stylesheet">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap">
@@ -14,7 +17,8 @@
 <main>
     <div class="edit_profile_container">
 
-        <div class="profile_change_image">
+        <div for="profile_change_image" class="profile_change_image">
+            <input type="file" id="ProfileImageUpload" name="ProfileImageUpload" multiple accept="image/*">
             <img src="../Images/usuario_generico.png" id="ProfileImage" alt="">
             <p>Change Photo</p>
         </div>
@@ -22,27 +26,38 @@
         <div class="name_username_email">
             <div class="profile_name">
                 <p>Name:</p>
-                <label for="name"></label><input type="text" id="name" name="name" placeholder="Name">
+                <label for="name"></label><input type="text" id="name" placeholder="Name">
             </div>
 
             <div class="profile_username">
                 <p>Username</p>
-                <label for="username"></label><input type="text" id="username" name="username" placeholder="Username">
+                <label for="username"></label><input type="text" id="username" placeholder="Username">
             </div>
 
-            <div class="profile_email">
-                <p>Email:</p>
-                <label for="email"></label><input type="email" id="email" name="email" placeholder="Email">
+            <div class="change_password">
+                <button id="changePasswordBtn" onclick="toggleChangePassword()">Change Password</button>
             </div>
         </div>
 
-        <div class="save_and_exit_buttons">
-            <div class="save_button">
-                <button id="saveBtn" onclick="location.href='../Account/account.html';">Save</button>
+        <form id="changePasswordContainer" class="change_password_container" >
+            <p>New Password:</p>
+            <input type="password" id="newPassword" placeholder="New Password" required>
+            <p>Repeat Password:</p>
+            <input type="password" id="repeatPassword" placeholder="Repeat Password" required>
+            <div id="passwordError"></div>
+            <div class="confirm_new_password_button">
+                <button id="cancelNewPasswordBtn" onclick="toggleChangePassword()" type="button">Cancel</button>
+                <button id="confirmNewPasswordBtn" onclick="validateOfChangePassword()" type="button">Confirm new password</button>
             </div>
+        </form>
 
+        <div class="save_and_exit_buttons">
             <div class="exit_button">
                 <button id="exitBtn" onclick="location.href='../Account/account.html';">Exit</button>
+            </div>
+
+            <div class="save_button">
+                <button id="saveBtn">Save</button>
             </div>
         </div>
 
@@ -52,7 +67,7 @@
 <script>
     cargarTemplate('../Header/header.html', 'header');
     cargarTemplate('../Nav/nav.html', 'nav');
-    cargarTemplate('../Footer/footer.html', 'footer')
+    cargarTemplate('../Footer/footer.html', 'footer');
 </script>
 </body>
 </html>

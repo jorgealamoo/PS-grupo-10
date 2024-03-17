@@ -1,13 +1,15 @@
 body {
     margin: 0;
     padding: 0;
-    background-image: url("../Images/aspa.png");
+    background-image: url("../Images/sign_up.jpg");
     background-size: cover;
     background-position: center center;
     height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
+    font-family: Arial, sans-serif;
+    color: #696565;
 }
 
 
@@ -15,7 +17,7 @@ body {
     background-color: white;
     width: 1200px;
     height: 700px;
-    border-radius: 8%;
+    border-radius: 65px;
 }
 
 form {
@@ -25,7 +27,7 @@ form {
 }
 
 .center {
-    margin-top: 10%;
+    margin-top: 8%;
     display: block;
 }
 
@@ -35,10 +37,12 @@ form {
 
 .big_inputs, .small_inputs {
     font-size: 28px;
+    border-radius: 8px;
+    padding: 5px;
 }
 
 .small_inputs {
-    width: 450px;
+    width: 446px;
     height: 40px;
     margin-bottom: 20px;
 }
@@ -58,6 +62,11 @@ form {
     border-radius: 12px;
 }
 
+.SignUpButton:hover {
+    background-color: #58a9fa;
+    cursor: pointer;
+}
+
 .terms_checkbox {
     display: flex;
     align-items: center;
@@ -68,7 +77,29 @@ form {
     margin-right: 20px;
 }
 
+.checkbox-label a {
+    text-decoration: none;
+    color: #696565;
+}
+
 .AlreadyAcc {
     margin-top: 15px;
+    font-size: 20px;
+    color: #696565;
+}
+
+.AlreadyAcc a {
+    text-decoration: none;
+    color: #696565;
+}
+
+.checkbox-label a:hover,
+.AlreadyAcc a:hover {
+    text-decoration: underline;
+}
+
+#passwordError {
+    color: red;
+    margin-bottom: 16px;
     font-size: 20px;
 }

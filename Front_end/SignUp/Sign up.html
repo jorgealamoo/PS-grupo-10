@@ -9,7 +9,7 @@
 <body>
 <div class="whiteRectangle">
     <div class="center">
-        <form>
+        <form id="mainForm" onsubmit="validatePassword(); return false" method="post">
             <div>
                 <label for="firstName"></label><input type="text" id="firstName" name="firstName" placeholder="First name" required class="small_inputs">
                 <label for="lastName"></label><input type="text" id="lastName" name="lastName" placeholder="Last name" class="small_inputs">
@@ -30,6 +30,7 @@
             <div>
                 <label for="confirmPassword"></label><input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm Password" required class="big_inputs">
             </div>
+            <div id="passwordError"></div>
 
             <div class="checkbox-container">
                 <input type="checkbox" id="agreeTerms" name="agreeTerms">
@@ -37,15 +38,61 @@
             </div>
 
             <div>
-                <button class="SignUpButton" type="submit" onclick="location.href='../Login_index/index.html';">Sign Up</button>
+                <button class="SignUpButton" type="submit" id="SignUpButton">Sign Up</button>
             </div>
 
             <div class="AlreadyAcc">
-                 Already have an account? <a href="../Login_index/index.html"> Login here </a>
+                Already have an account? <a href="../Login_index/index.html"> Login here </a>
             </div>
 
         </form>
+
     </div>
 </div>
+<script src="../JavaScript/passwordValidation.js"></script>
+<script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
+    import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js";
+
+    // Your web app's Firebase configuration
+    const firebaseConfig = {
+        apiKey: "AIzaSyBbGLFzzUj5y8F927mW6JcrObKnF9bynAY",
+        authDomain: "proyecto-ps-22ec6.firebaseapp.com",
+        projectId: "proyecto-ps-22ec6",
+        storageBucket: "proyecto-ps-22ec6.appspot.com",
+        messagingSenderId: "611131563975",
+        appId: "1:611131563975:web:f5663ec606ee9eecf003e2",
+        measurementId: "G-BJ8S3HC2XC"
+    };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+
+    const auth = getAuth(app);
+
+    let email = document.getElementById('email');
+    let password = document.getElementById('password');
+    let firstname = document.getElementById('firstName');
+    let lastname = document.getElementById('lastName');
+    let username = document.getElementById('username')
+
+    let RegisterUser = evt => {
+        evt.preventDefault();
+
+        createUserWithEmailAndPassword(auth, email.value, password.value)
+            .then((credentials)=>{
+                console.log(credentials);
+            })
+            .catch((error)=> {
+                alert(error.message);
+                console.log(error.code);
+            })
+    }
+
+    mainForm.addEventListener('submit', RegisterUser);
+
+</script>
+
+
 </body>
 </html>

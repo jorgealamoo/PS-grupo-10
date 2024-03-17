@@ -7,9 +7,13 @@ body{
     margin: 0;
 }
 
+.image {
+    list-style-type: none;
+}
+
 /* Estilo del carrusel */
 .image-carousel-container {
-    margin-top: 10px;
+    margin-top: 30px;
     width: auto; /* ajusta el ancho */
     height: 50vh; /*Utiliza el 50% de la pantalla visible como alto*/
     overflow: hidden; /* Oculta el contenido que excede el ancho */
@@ -21,7 +25,8 @@ body{
 
 /* Estilo de las imágenes */
 .image-carousel-container img {
-    display: block; /* Asegura que las imágenes se muestren una debajo de la otra */
+    display: none; /* Oculta las imágenes inicialmente */
+    /*display: block; /* Asegura que las imágenes se muestren una debajo de la otra */
     width: auto; /* Utiliza todo el ancho del contenedor */
     height: 100%; /* Permite que la altura se ajuste automáticamente */
 }
@@ -73,20 +78,52 @@ body{
     height: auto;
 }
 
-.Header-Comments{
+.add-Comments{
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
+    margin-left: 20px;
 }
-.Header-Comments h2{
+.add-Comments h2{
     margin: 10px;
-
 }
 
-.Header-Comments #mostrar-formulario{
-    margin: 10px;
-    width: auto;
-    height: auto;
+textarea {
+    resize: vertical; /* Permite la expansión vertical */
+    max-width: 100%; /* Evita la expansión horizontal */
+    height: 50px !important; /* Establece la altura inicial del textarea */
 }
+
+
+
+#mostrar-formulario {
+    float: right; /* Mueve el botón a la derecha */
+    margin-right: 100px; /* Agrega un margen derecho para separarlo del borde */
+}
+
+#listaComentarios {
+    margin-top: 50px;
+}
+#listaComentarios li {
+    /* Estilos para cada elemento <li> */
+    list-style-type: none;
+    position: relative; /* Establecemos una posición relativa */
+    padding-right: 30px; /* Añadimos un espacio a la derecha del <li> para el emoji */
+    margin: 0 30px 10px -20px;
+    padding: 10px; /* Espacio interno dentro de cada comentario */
+    background-color: #f9f9f9; /* Color de fondo del comentario */
+    border: 1px solid #ccc; /* Borde del comentario */
+    border-radius: 5px; /* Borde redondeado del comentario */
+}
+
+.reporte {
+    position: absolute; /* Posiciona el emoji de reportar de manera absoluta */
+    right: 10px; /* Lo posiciona a 10px del borde derecho del <li> */
+    transform: translateY(-50%); /* Centra verticalmente el emoji */
+    font-size: 25px; /* Tamaño del emoji */
+    cursor: pointer;
+}
+
+
 /* Estilos para los comentarios */
 .comentario {
     margin-bottom: 20px;
@@ -147,3 +184,37 @@ body{
     margin:10px;
 }
 
+/* ------ MAP ------ */
+
+#map {
+    width: 40%;
+    height: 260px;
+    overflow: hidden; /* Evita que la imagen sobresalga del contenedor */
+    margin-bottom: 10px;
+}
+
+/*.map img {
+    width: 100%;
+    height: 260px;
+    object-fit: cover;
+}*/
+
+/* ------ DESCRIPTION ------ */
+
+.description_section textarea {
+    width: 90vw;
+    height: 200px;
+    margin-bottom: 20px;
+    padding: 10px;
+    padding-right: 0;
+    border-radius: 8px;
+    background-color: #e0e0e0;
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+}
+
+.description_section textarea::placeholder {
+    font-weight: bold;
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+}

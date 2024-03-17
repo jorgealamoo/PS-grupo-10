@@ -3,32 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <script src='/Front_end/JavaScript/templateLoader.js'></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
-    <script src="/Front_end/JavaScript/loadMap.js"></script>
+    <script type="module" src="/Front_end/JavaScript/loadMap.js"></script>
+    <script type="module" src= "/Front_end/JavaScript/ShowLocation.js"></script>
     <title>Map</title>
     <link href="style.css" rel="stylesheet">
 </head>
 <body>
-    <div id="top">
-        <header></header>
-        <nav></nav>
-    </div>
-    <div id="searchAndFilter">
-        <label for="bar_search"></label><input type="text" id="bar_search" placeholder="Buscar...">
-        <label for="filterSelect"></label><select id="filterSelect">
-            <option value="">...</option>
-            <option value="example1">Restaurantes</option>
-            <option value="example2">Parques</option>
-            <option value="example3">Museos</option>
-        </select>
-    </div>
-    <div id="map"></div>
-    <footer></footer>
-    <script>
-        cargarTemplate('../header/header.html', 'header');
-        cargarTemplate('../Nav/nav.html', 'nav');
-        cargarTemplate('../Footer/footer.html', 'footer')
-    </script>
+<div id="top">
+    <header></header>
+    <nav></nav>
+</div>
+<!---div id="searchAndFilter">
+    <label for="bar_search"></label><input type="text" id="bar_search" placeholder="Buscar...">
+    <label for="filterSelect"></label><select id="filterSelect">
+        <option value="">...</option>
+        <option value="example1">Restaurantes</option>
+        <option value="example2">Parques</option>
+        <option value="example3">Museos</option>
+    </select>
+</div--->
+<div id="map"></div>
+<footer></footer>
+<script>
+    cargarTemplate('/Front_end/header/header.html', 'header');
+    cargarTemplate('/Front_end/Nav/nav.html', 'nav');
+    cargarTemplate('/Front_end/Footer/footer.html', 'footer')
+</script>
+<script type="module">
+</script>
 </body>
 </html>

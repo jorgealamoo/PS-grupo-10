@@ -2,9 +2,13 @@ main {
     min-height: 80vh;
 }
 
+body {
+    margin: 0;
+}
+
 .User {
     height: 200px;
-    background-color: gray;
+    background-color: rgba(167, 225, 225, 0.37);
     position: relative;
     display: flex;
     align-items: center;
@@ -17,18 +21,24 @@ main {
 }
 
 .User span {
+    color: #061b4b;
     margin-left: 10px;
     font-size: 30px;
 }
 
 .User a {
     position: relative;
-    color: black;
+    color: #061b4b;
     margin-left:70px;
     text-decoration: none;
     font-size: 30px;
     top: 35%;
 }
+
+.User a:hover {
+    color: #18449b;
+}
+
 .contImagen {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
