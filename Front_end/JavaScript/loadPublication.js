@@ -3,25 +3,26 @@ import {initializeMap} from './loadMap.js';
 document.addEventListener('DOMContentLoaded', async function () {
 
 
-
     localStorage.setItem('publicationID', 'iWXO0uDHygJx4vz0vGKq'); //para poder hacer pruebas
     console.log(localStorage.getItem("publicationID"))
 
     var dataJSON = null
 
-    const map = initializeMap();
-    function addPingToMap() {
-        var marker = null;
-        function addMark(e) {
-            if (marker) {
-                map.removeLayer(marker);
-            }
-            marker = L.marker(e.latlng).addTo(map);
-            Pointermap.latitude = e.latlng.lat;
-            Pointermap.longitude = e.latlng.lng;
-        }
-        map.on('click', addMark);
+    function initializeMap(latitude, longitude) {
+        // Crea el mapa y configura la vista inicial utilizando las coordenadas proporcionadas
+        var map = L.map('map').setView([latitude, longitude], 13);
+
+        // Añade una capa de mapa base (puedes elegir entre diferentes proveedores, como OpenStreetMap, Mapbox, etc.)
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+
+        // Añade un marcador en la posición especificada
+        var marker = L.marker([latitude, longitude]).addTo(map);
+
+        // Retorna el objeto de mapa
+        return map;
     }
+
+
 
     async function fetchDocument() {
         try {
@@ -61,9 +62,13 @@ document.addEventListener('DOMContentLoaded', async function () {
             document.getElementById('name-publication').textContent = documentData['nombre'];
             document.getElementById('description').textContent = documentData['descripcion'];
 
-            const longitud = documentData['ubicacion'][0];
-            const latitud = documentData['ubicacion'][1];
-            console.log(documentData['ubicacion'][1]);
+            const location = documentData['ubicacion'];
+            const latitude = location.latitude;
+            const longitude = location.longitude;
+
+            // Llama a la función initializeMap con las coordenadas específicas
+            const map = initializeMap(latitude, longitude);
+
 
             const listaComentarios = document.getElementById('listaComentarios');
 
