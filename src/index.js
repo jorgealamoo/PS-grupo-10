@@ -29,6 +29,11 @@ document.getElementById('LogIn').addEventListener('click', async function() {
         const email = document.getElementById('user_name').value;
         const password = document.getElementById('password').value;
 
+        if (email == "" && password == "") {
+            return
+        }
+
+
         logInUserPassword(email,password)
             .then(user =>{
                 console.log('El usuario ha iniciado sesión correctamente con su email:', user);

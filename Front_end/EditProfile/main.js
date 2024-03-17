@@ -91,7 +91,7 @@ document.addEventListener('DOMContentLoaded', async function() {
             const responseData = await response.json();
             console.log('Response:', responseData);
             console.log("SUCCESS");
-            location.reload(); // Recargar la página
+            location.href = "../Account/account.html"; // Recargar la página
         } catch (error) {
             console.error('Error updating document:', error.message);
         }
