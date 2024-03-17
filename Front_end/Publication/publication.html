@@ -15,17 +15,16 @@
 
 </head>
 <body>
-    <header></header>
-    <nav></nav>
+<header></header>
+<nav></nav>
 <main>
-        <div class="image-carousel-container">
-            <!-- Imágenes -->
-            <img src="/Front_end/Images/aspa.png" alt="Imagen 1">
-            <img src="/Front_end/Images/img.png" alt="Imagen 2">
-            <!-- Botones de navegación -->
-            <div class="carousel-button left" onclick="moveCarousel(-1)">❮</div>
-            <div class="carousel-button right" onclick="moveCarousel(1)">❯</div>
-        </div>
+    <div class="image-carousel-container">
+        <img>
+        <ul id="listaImagenes"></ul>
+        <!-- Botones de navegación -->
+        <div class="carousel-button left" onclick="moveCarousel(-1)">❮</div>
+        <div class="carousel-button right" onclick="moveCarousel(1)">❯</div>
+    </div>
     <div id="information">
         <h1 id = 'name-publication'></h1>
         <div id="content-container">
@@ -34,22 +33,24 @@
         </div>
     </div>
 
-    <div class="Header-Comments">
+    <div class="add-Comments">
         <h2>Comentarios</h2>
         <!-- Botón para agregar comentario -->
-        <button id="mostrar-formulario">Añadir comentario</button>
+        <div class="description_section">
+            <textarea id="Comment" name="Comment" placeholder="Comment"></textarea>
+        </div>
     </div>
-    <ul>
-        <div id="listaComentarios"></div>
-    </ul>
+    <button id="mostrar-formulario">Añadir comentario</button>
+    <ul id="listaComentarios"></ul>
+
 </main>
 
-    <footer></footer>
+<footer></footer>
 <script>
     initCarousel('.image-carousel-container img');
     cargarTemplate('/Front_end/Header/header.html', 'header');
     cargarTemplate('/Front_end/Nav/nav.html', 'nav');
-    cargarTemplate('/Front_end/Footer/footer.html', 'footer');
+    cargarTemplate('/Front_end/Footer/footer.html', 'footer')
 </script>
 </body>
 </html>
