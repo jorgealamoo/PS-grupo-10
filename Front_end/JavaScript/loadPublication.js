@@ -40,9 +40,9 @@ document.addEventListener('DOMContentLoaded', async function () {
         }
     }
 
-    async function fetchImage(documentData) {
+    async function fetchImage(imageurl) {
         try {
-            const response = await fetch('http://localhost:3000/api/getImage/' + documentData['lista_imagenes']);
+            const response = await fetch('http://localhost:3000/api/getImage/' + imageurl);
             if (!response.ok) {
                 throw new Error('Failed to fetch image');
             }
@@ -81,11 +81,43 @@ document.addEventListener('DOMContentLoaded', async function () {
                     // Asignamos el contenido del comentario al elemento de lista
                     nuevoComentario.textContent = documentData["lista_comentarios"][key];
 
+                    // Creamos un elemento span para el emoji de reportar
+                    const reporteEmoji = document.createElement('span');
+                    reporteEmoji.textContent = "🚨"; // Emoji de reportar
+                    reporteEmoji.className = 'reporte'; // Aplicamos una clase para estilos opcionales
+
+                    // Añadimos el emoji de reportar al comentario
+                    nuevoComentario.appendChild(reporteEmoji);
+
                     // Añadimos el elemento de lista al contenedor de la lista de comentarios en el HTML
                     listaComentarios.appendChild(nuevoComentario);
                 }
             }
 
+            const listaImagenes = document.getElementById('listaImagenes');
+
+            // Recorremos el mapa de imágenes
+            for (const key in documentData["lista_imagenes"]) {
+                if (Object.hasOwnProperty.call(documentData["lista_imagenes"], key)) {
+                    // Creamos un nuevo elemento de lista (<li>) para cada imagen
+                    const nuevaImagenLi = document.createElement('li');
+
+                    // Creamos un nuevo elemento de imagen (<img>) para la imagen
+                    const nuevaImagen = document.createElement('img');
+
+                    // Obtenemos la URL de la imagen correspondiente
+                    const imageUrl = await fetchImage(documentData["lista_imagenes"][key]);
+
+                    // Establecemos la URL de la imagen como el atributo src del elemento de imagen
+                    nuevaImagen.src = imageUrl;
+
+                    // Agregamos el elemento de imagen al elemento de lista
+                    nuevaImagenLi.appendChild(nuevaImagen);
+
+                    // Agregamos el elemento de lista al contenedor de imágenes en el HTML
+                    listaImagenes.appendChild(nuevaImagenLi);
+                }
+            }
         }
     }
 
