@@ -1,7 +1,7 @@
 import {uploadAllImagesToAPI} from './UploadImages.js';
 import {initializeMap} from './loadMap.js';
 
-localStorage.setItem('userId', '0zbkPGwrhlfAjIcQ3odeqSte5jD3'); //para poder hacer pruebas
+//localStorage.setItem('userId', '0zbkPGwrhlfAjIcQ3odeqSte5jD3'); //para poder hacer pruebas
 
 var Pointermap = {};
 var comment = document.getElementById('description');
@@ -111,7 +111,7 @@ async function modifyDoc(collection,document,data) {
             throw new Error('Error al añadir el documento');
         }
         const responseDoc = await response.json();
-        console.log(data);
+        //console.log(data);
         return data;
     } catch (error) {
         console.error('Error al añadir a la lista del documento:', error);
@@ -122,7 +122,7 @@ async function modifyDoc(collection,document,data) {
 async function addDocument() {
     datos.descripcion = comment.value.trim();
     datos.nombre = titel.value.trim();
-    console.log(images);
+    //console.log(images);
     datos.lista_imagenes = await uploadAllImagesToAPI(images);
     let opciones = {
         method: 'POST',
