@@ -1,58 +1,118 @@
+body{
+    margin:0;
+}
 main {
     min-height: 80vh;
     background-color: #CCCCCC;
     padding: 70px;
 }
 
+.top_side{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
 /* ------ ADD IMAGES ------ */
-
 .add_images_section {
-    background-color: #D9D9D9;
-    text-align: center;
-    width: 230px;
+    position: relative;
+    width: 100%;
     height: 230px;
     display: flex;
     flex-direction: column;
+    text-align: center;
     justify-content: center;
     align-items: center;
+    /*padding: 15px;*/
     border-radius: 8px;
+    border: 2px dashed;
+    border-color: black;
     cursor: pointer;
-    padding: 15px;
-    margin-bottom: 20px;
-    border: 2px dashed #000000;
-    position: relative;
+    overflow: hidden;
 }
 
-.add_images_section:hover {background-color: #BFBFBF}
+#imageUpload {
+    display: none;
+}
+#imageUpload {
+    display: none;
+}
 
-.add_images_section input {
+.add_images_symbol {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    opacity: 0; /* Hace el input transparente */
-    cursor: pointer;
+    font-size: 60px;
+    color: #000;
+    text-align: center;
+    line-height: 200px;
+    background-color: rgba(217, 217, 217, 1);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.add_images_symbol::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(217, 217, 217, 1);    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    z-index: -1; /* Coloca el fondo detrás del símbolo "+" */
 }
 
-.add_images_section p {
-    font-weight: bold;
-    font-family: 'Inter', sans-serif; /* Aplica la fuente Inter */
+.add_images_symbol:hover {
+    background-color: #C0C0C0;
 }
-
 .add_images_symbol {
     font-weight: bold;
-    font-family: 'Inter', sans-serif; /* Aplica la fuente Inter */
+    font-family: 'Inter', sans-serif;
     font-size: 24px;
 }
+.add_images_text {
+    position: absolute;
+    margin: 10px;
+    width: 100%;
+    text-align: center;
+    color: #000;
+    font-weight: bold;
+    font-family: 'Inter', sans-serif;
+}
 
+
+#icono-advertencia_ubi {
+    color: red; /* Color rojo para indicar la advertencia */
+    margin-left: 5px; /* Espaciado entre el campo de formulario y el icono */
+    font-size: 40px;
+    position: absolute;
+    display: none; /* Ocultar el icono inicialmente */
+}
+
+#icono-advertencia_description {
+    color: red; /* Color rojo para indicar la advertencia */
+    font-size: 40px;
+    display: none; /* Ocultar el icono inicialmente */
+    position: absolute;
+    margin: 10px;
+}
+#icono-advertencia-name {
+    color: red; /* Color rojo para indicar la advertencia */
+    font-size: 40px;
+    display: none; /* Ocultar el icono inicialmente */
+    position: absolute;
+    margin-bottom: 5px;
+}
 
 /* ------ PUBLICATION NAME ------ */
 
 .publication_name_section input {
-    width: 240px;
-    margin-bottom: 20px;
-    padding: 10px;
+    margin-top: 10px;
+    width: 100%;
     border-radius: 8px;
     background-color: #e0e0e0;
     font-family: 'Inter', sans-serif;
@@ -68,10 +128,11 @@ main {
 /* ------ DESCRIPTION ------ */
 
 .description_section textarea {
-    width: 1300px;
+    width: 90vw;
     height: 200px;
     margin-bottom: 20px;
     padding: 10px;
+    padding-right: 0;
     border-radius: 8px;
     background-color: #e0e0e0;
     font-family: 'Inter', sans-serif;
@@ -134,6 +195,7 @@ main {
     width: 100%;
     height: 260px;
     overflow: hidden; /* Evita que la imagen sobresalga del contenedor */
+    margin-bottom: 10px;
 }
 
 /*.map img {
@@ -147,7 +209,7 @@ main {
 .description_section,
 .save_and_exit_buttons {
     display: inline-block;
-    vertical-align: top;
+    vertical-align: center;
     box-sizing: border-box;
 }
 
