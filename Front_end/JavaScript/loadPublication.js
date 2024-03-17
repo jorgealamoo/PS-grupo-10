@@ -2,10 +2,6 @@ import {initializeMap} from './loadMap.js';
 
 document.addEventListener('DOMContentLoaded', async function () {
 
-
-    localStorage.setItem('publicationID', 'iWXO0uDHygJx4vz0vGKq'); //para poder hacer pruebas
-    console.log(localStorage.getItem("publicationID"))
-
     var dataJSON = null
 
     function initializeMap(latitude, longitude) {
@@ -26,7 +22,7 @@ document.addEventListener('DOMContentLoaded', async function () {
 
     async function fetchDocument() {
         try {
-            const publicationID = localStorage.getItem('publicationID');
+            const publicationID = localStorage.getItem('currentPublication');
             const response = await fetch('http://localhost:3000/api/getDocument/publicacion/' + publicationID);
             if (!response.ok) {
                 throw new Error('Failed to fetch document');
@@ -53,6 +49,8 @@ document.addEventListener('DOMContentLoaded', async function () {
             return null;
         }
     }
+
+
 
     async function displayDocumentData() {
         const documentData = await fetchDocument();
