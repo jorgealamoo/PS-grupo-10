@@ -3,12 +3,12 @@ body {
     padding: 0;
     height: 100vh;
     font-family: Arial, sans-serif;
-    background-color: #CCCCCC;
+    background-color: #a7e1e1;
 }
 
 .container {
     display: flex;
-    height: 90%;
+    height: 80%;
     padding: 10vh;
 }
 
@@ -28,7 +28,7 @@ body {
 
 .left-side img {
     width: 100%;
-    height: auto;
+    height: 100%;
     display: block;
 }
 

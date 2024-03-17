@@ -9,7 +9,7 @@
 <body>
 <div class="whiteRectangle">
     <div class="center">
-        <form id="mainForm">
+        <form id="mainForm" onsubmit="validatePassword(); return false" method="post">
             <div>
                 <label for="firstName"></label><input type="text" id="firstName" name="firstName" placeholder="First name" required class="small_inputs">
                 <label for="lastName"></label><input type="text" id="lastName" name="lastName" placeholder="Last name" class="small_inputs">
@@ -30,6 +30,7 @@
             <div>
                 <label for="confirmPassword"></label><input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm Password" required class="big_inputs">
             </div>
+            <div id="passwordError"></div>
 
             <div class="checkbox-container">
                 <input type="checkbox" id="agreeTerms" name="agreeTerms">
@@ -40,11 +41,15 @@
                 <button class="SignUpButton" type="submit" id="SignUpButton">Sign Up</button>
             </div>
 
+            <div class="AlreadyAcc">
+                Already have an account? <a href="../Login_index/index.html"> Login here </a>
+            </div>
 
         </form>
 
     </div>
 </div>
+<script src="../JavaScript/passwordValidation.js"></script>
 <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
     import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js";
