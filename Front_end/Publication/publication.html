@@ -3,9 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="styles.css">
-    <script src='../JavaScript/templateLoader.js'></script>
-    <script src='../JavaScript/carrusel.js'></script>
-    <script src='../JavaScript/UploadComments.js'></script>
+    <script src='/Front_end/JavaScript/templateLoader.js'></script>
+    <script src='/Front_end/JavaScript/carrusel.js'></script>
+    <script src='/Front_end/JavaScript/UploadComments.js'></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <script type="module" src="/Front_end/JavaScript/loadMap.js" ></script>
+    <script type="module" src= "/Front_end/JavaScript/loadPublication.js"></script>
     <title>Publication</title>
 
 </head>
@@ -14,26 +19,28 @@
     <nav></nav>
 <main>
         <div class="image-carousel-container">
-            <img src="../Images/aspa.png" alt="Imagen 1">
-            <img src="../Images/img.png" alt="Imagen 2">
+            <!-- Imágenes -->
+            <img src="/Front_end/Images/aspa.png" alt="Imagen 1">
+            <img src="/Front_end/Images/img.png" alt="Imagen 2">
+            <!-- Botones de navegación -->
             <div class="carousel-button left" onclick="moveCarousel(-1)">❮</div>
             <div class="carousel-button right" onclick="moveCarousel(1)">❯</div>
         </div>
     <div id="information">
-        <h1 id = 'name' >Lorem Ipsum Estrellas</h1>
+        <h1 id = 'name-publication'></h1>
         <div id="content-container">
-            <p id = 'description'>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum
-            </p>
-            <object id="no_final_image" data = "../Images/aspa.png"></object>
+            <p id = 'description'></p>
+            <div id="map"></div>
         </div>
     </div>
 
     <div class="Header-Comments">
         <h2>Comentarios</h2>
+        <!-- Botón para agregar comentario -->
         <button id="mostrar-formulario">Añadir comentario</button>
     </div>
     <div id="comentarios">
+        <!-- Carga dinamica de comentarios -->
         <script>load('comentarios')</script>
     </div>
 </main>
@@ -41,9 +48,9 @@
     <footer></footer>
 <script>
     initCarousel('.image-carousel-container img');
-    cargarTemplate('../Header/header.html', 'header');
-    cargarTemplate('../Nav/nav.html', 'nav');
-    cargarTemplate('../Footer/footer.html', 'footer');
+    cargarTemplate('/Front_end/Header/header.html', 'header');
+    cargarTemplate('/Front_end/Nav/nav.html', 'nav');
+    cargarTemplate('/Front_end/Footer/footer.html', 'footer');
 </script>
 </body>
 </html>
