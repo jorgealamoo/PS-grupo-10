@@ -37,8 +37,8 @@ async function validateOfChangePassword() {
 
                 const data = await response.json();
                 if (response.ok) {
-                    alert(data.message);
                     toggleChangePassword();
+                    alert(data.message);
                 } else {
                     document.getElementById('message').textContent = data.error.message;
                     alert('Error al cambiar contraseña: ' + data.error.message);
