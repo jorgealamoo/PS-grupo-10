@@ -6,6 +6,11 @@
     <script src='/Front_end/JavaScript/templateLoader.js'></script>
     <script src='/Front_end/JavaScript/carrusel.js'></script>
     <script src='/Front_end/JavaScript/UploadComments.js'></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <script type="module" src="/Front_end/JavaScript/loadMap.js" ></script>
+    <script type="module" src= "/Front_end/JavaScript/loadPublication.js"></script>
     <title>Publication</title>
 
 </head>
@@ -22,12 +27,10 @@
             <div class="carousel-button right" onclick="moveCarousel(1)">❯</div>
         </div>
     <div id="information">
-        <h1 id = 'name' >Lorem Ipsum Estrellas</h1>
+        <h1 id = 'name-publication'></h1>
         <div id="content-container">
-            <p id = 'description'>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum
-            </p>
-            <object id="no_final_image" data = "../Images/aspa.png"></object>
+            <p id = 'description'></p>
+            <div id="map"></div>
         </div>
     </div>
 
