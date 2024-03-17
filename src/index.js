@@ -9,7 +9,6 @@ document.getElementById('googleLogin').addEventListener('click', async function(
         location.href='/PS-grupo-10/Front_end/MapPage/map.html';
     } catch (error) {
         console.error('Error al iniciar sesión con Google:', error);
-        alert('Error al iniciar sesión con Google: ' + error.message);
     }
 });
 
@@ -20,7 +19,6 @@ document.getElementById('facebookLogin').addEventListener('click', async functio
         location.href='/PS-grupo-10/Front_end/MapPage/map.html';
     } catch (error) {
         console.error('Error al iniciar sesión con Google:', error);
-        alert('Error al iniciar sesión con Google: ' + error.message);
     }
 });
 
