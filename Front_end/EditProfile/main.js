@@ -53,10 +53,13 @@ document.addEventListener('DOMContentLoaded', async function() {
             const profileImages = document.querySelectorAll('#ProfileImage');
 
             // Iterate over each element
-            profileImages.forEach(imgElement => {
-                // Set the src attribute to the fetched image URL
-                imgElement.src = imageUrl;
-            });
+            if (profileImages.length > 0) {
+                // Get the last ProfileImage element from the NodeList
+                const lastProfileImage = profileImages[profileImages.length - 1];
+
+                // Set the src attribute of the last ProfileImage element to the fetched image URL
+                lastProfileImage.src = imageUrl;
+            }
         }
     }
 
