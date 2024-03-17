@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Login</title>
-    <link rel="stylesheet" href="./styles.css">
+    <link rel="stylesheet" href="/Front_end/Login_index/styles.css">
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 </head>
 <body>
@@ -26,7 +26,7 @@
                         <input type="password" id="password" name="password" required>
                     </div>
 
-                    <button type="button" id="LogIn">Login</button>
+                    <button id="Login">Login</button>
 
                     <div class="dont-have-account-link">
                         <a href="../SignUp/Sign%20up.html">Don't have any account?</a>
@@ -39,10 +39,10 @@
                     <div class="social-login-options">
                         <p>Or sign in with:</p>
                         <div class="google-login">
-                            <a id="googleLogin" href="#">Google</a>
+                            <a href="#">Google</a>
                         </div>
                         <div class="facebook-login">
-                            <a id="facebookLogin" href="#">Facebook</a>
+                            <a href="#">Facebook</a>
                         </div>
                     </div>
                 </form>
@@ -52,15 +52,25 @@
 </div>
 <script src="/dist/bundle.js"></script>
 <script type="module">
-    import {signInWithGoogle, signInWithFacebook} from "../../src/auth.js";
-    import {logInUserPassword} from "../../src/authUserPassword.js";
+    import {signInWithGoogle} from "../../src/firebaseAuthentication.js";
+    import {logInUserPassword} from "/src/firebaseAuthenticationUserPassword.js";
 
-    document.getElementById('googleLogin').addEventListener('click', function() {});
 
-    document.getElementById('facebookLogin').addEventListener('click', function() {});
 
-    document.getElementById('LogIn').addEventListener('click', function() {});
-
+    document.getElementById('Login').addEventListener('click', function (){
+        const email = document.getElementById('user_name').value;
+        const password = document.getElementById('password').value;
+        console.log('HOLA')
+        logInUserPassword(email,password)
+            .then(user => {
+                console.log('El usuario ha iniciado sesión con éxito', user)
+                alert('Inicio de sesion exitoso');
+            })
+            .catch(error => {
+                console.error('El usuario ha iniciado sesión con éxito', error)
+                alert('Inicio de sesion exitoso');
+            });
+    });
 
 </script>
 </body>
