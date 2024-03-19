@@ -68,6 +68,7 @@ body{
 
 #description {
    /* width: 50vh; /* Ancho del párrafo */
+    margin-left: 20px;
     margin-right: 20px; /* Margen derecho para separar del elemento adyacente */
     text-align: justify;
     flex: 1;
