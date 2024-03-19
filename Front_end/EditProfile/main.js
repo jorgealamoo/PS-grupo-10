@@ -1,3 +1,7 @@
+// Call checkAuth function when the dashboard page is loaded
+document.addEventListener('DOMContentLoaded', checkAuth);
+
+
 
 document.addEventListener('DOMContentLoaded', async function() {
     const updateButton = document.getElementById('saveBtn');
