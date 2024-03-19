@@ -9,23 +9,22 @@
 <body>
 
 <header></header>
-<nav></nav>
 <main>
-    <div class="User">
-        <img src="../Images/usuario_generico.png" alt="">
-        <span><b>Lorem ipsum</b></span>
+    <div class="User" id="User">
+    </div>
+    <div class="Options">
         <a href="../Saved/saved.html">SAVED</a>
         <a href="../AddPublication/add_publication.html">CREATE</a>
         <a href="../EditProfile/edit_profile.html">EDIT PROFILE</a>
     </div>
-    <div class="contImagen" id="imagenContainer"></div>
+    <div class="contImagen" id="imagenContainer">
+
+    </div>
 </main>
 <footer></footer>
 <script src='/Front_end/JavaScript/templateLoader.js'></script>
-<script src='/Front_end/JavaScript/imagenLoader.js'></script>
 <script>
     cargarTemplate('../Header/header.html', 'header');
-    cargarTemplate('../Nav/nav.html', 'nav');
     cargarTemplate('../Footer/footer.html', 'footer');
 </script>
 
