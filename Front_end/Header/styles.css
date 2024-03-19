@@ -1,7 +1,8 @@
 #header {
-    background-color: #a7e1e1;
+    background: linear-gradient(180deg, #a7e1e1 10%, #d3f6f6 50%, #a7e1e1 90%);
     display: flex;
     align-items: center;
+    justify-content: center;
     margin: 0;
 }
 
@@ -32,4 +33,31 @@
     border-radius: 50%;
     margin-right: 10px;
 
+}
+
+/* ------ NAV ------ */
+
+nav{
+    margin-top: 0;
+    text-align: center;
+}
+nav ul {
+    list-style: none;
+    padding:0;
+    margin: 0;
+}
+
+nav li {
+    display: inline;
+    margin: 15px;
+}
+
+nav a{
+    color: #061b4b;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+nav a:hover {
+    color: #18449b;
 }
