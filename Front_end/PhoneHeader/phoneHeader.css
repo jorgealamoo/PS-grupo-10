@@ -1,0 +1,17 @@
+#phoneHeader {
+    background: linear-gradient(180deg, #a7e1e1 10%, #d3f6f6 50%, #a7e1e1 90%);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0;
+    height: auto;
+    vertical-align: center;
+}
+
+#phoneHeader img {
+    width: 12%;
+    height: auto;
+    padding: 10px 3.5%;
+    cursor: pointer;
+}
+

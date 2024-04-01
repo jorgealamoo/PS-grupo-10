@@ -13,8 +13,8 @@
 </head>
 <body>
 <div id="top">
-    <header></header>
-    <nav></nav>
+    <header id="phoneHeader"></header>
+    <header id="desktopHeader"></header>
 </div>
 <!---div id="searchAndFilter">
     <label for="bar_search"></label><input type="text" id="bar_search" placeholder="Buscar...">
@@ -28,8 +28,8 @@
 <div id="map"></div>
 <footer></footer>
 <script>
-    cargarTemplate('/Front_end/header/header.html', 'header');
-    cargarTemplate('/Front_end/Nav/nav.html', 'nav');
+    cargarTemplate('../PhoneHeader/phoneHeader.html', '#phoneHeader');
+    cargarTemplate('/Front_end/header/header.html', '#desktopHeader');
     cargarTemplate('/Front_end/Footer/footer.html', 'footer');
     userID();
 </script>
