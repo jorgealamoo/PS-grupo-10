@@ -48,6 +48,32 @@ document.getElementById('LogIn').addEventListener('click', async function() {
     }
 });
 
+document.getElementById('password').addEventListener('keypress', async function(event) {
+    if (event.key === 'Enter') {
+        try {
+            const email = document.getElementById('user_name').value;
+            const password = document.getElementById('password').value;
+
+            if (email == "" && password == "") {
+                return;
+            }
+
+            logInUserPassword(email, password)
+                .then(user =>{
+                    console.log('El usuario ha iniciado sesión correctamente con su email:', user);
+                    location.href='/PS-grupo-10/Front_end/MapPage/map.html';
+                }).catch (error=>{
+                console.error('Error al iniciar sesión con email:', error);
+                alert('Error al iniciar sesión con email: ' + error.message);
+            });
+        } catch (error) {
+            console.error('Error al iniciar sesión con Google:', error);
+            alert('Error al iniciar sesión con Google: ' + error.message);
+        }
+    }
+});
+
+
 //import {SignUp} from "./signUp.js";
 /*export async function crearUsuario() {
     const emailNuevo = document.getElementById('email').value;
