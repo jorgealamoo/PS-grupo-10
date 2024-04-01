@@ -18,7 +18,7 @@ app.use(express.json());
 
 // Initialize Firebase app
 const firebaseConfig = {
-    //..................
+    //API CONFIG
 };
 const firebaseApp = initializeApp(firebaseConfig);
 const db = getFirestore(firebaseApp);
@@ -315,6 +315,32 @@ app.post('/api/changePassword', express.json(), async (req, res) => {
         // If signup fails, provide an appropriate error response
         res.status(400).json({ error: error });
     }
+});
+
+
+
+
+
+// --------------------------- Check AUTH ---------------------------
+// API endpoint to check if a user ID exists in Firebase Authentication
+app.get('/api/checkAuth/:userID', (req, res) => {
+    const requestedUserID = req.params.userID;
+
+    admin.auth().getUser(requestedUserID)
+        .then(userRecord => {
+            // User exists
+            res.status(200).json({ exists: true, userRecord: userRecord.toJSON() });
+        })
+        .catch(error => {
+            if (error.code === 'auth/user-not-found') {
+                // User does not exist
+                res.status(404).json({ exists: false, error: 'User not found' });
+            } else {
+                // Other errors
+                console.error('Error fetching user data:', error);
+                res.status(500).json({ error: 'Internal server error' });
+            }
+        });
 });
 
 
