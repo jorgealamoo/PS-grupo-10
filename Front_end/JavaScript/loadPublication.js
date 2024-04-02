@@ -65,30 +65,6 @@ async function displayDocumentData() {
         const map = initializeMap(latitude, longitude);
 
 
-        const listaComentarios = document.getElementById('listaComentarios');
-
-        // Recorremos el mapa de comentarios
-        for (const key in documentData["lista_comentarios"]) {
-            if (Object.hasOwnProperty.call(documentData["lista_comentarios"], key)) {
-                // Creamos un nuevo elemento de lista (<li>) para cada comentario
-                const nuevoComentario = document.createElement('li');
-
-                // Asignamos el contenido del comentario al elemento de lista
-                nuevoComentario.textContent = documentData["lista_comentarios"][key];
-
-                // Creamos un elemento span para el emoji de reportar
-                const reporteEmoji = document.createElement('span');
-                reporteEmoji.textContent = "🚨"; // Emoji de reportar
-                reporteEmoji.className = 'reporte'; // Aplicamos una clase para estilos opcionales
-
-                // Añadimos el emoji de reportar al comentario
-                nuevoComentario.appendChild(reporteEmoji);
-
-                // Añadimos el elemento de lista al contenedor de la lista de comentarios en el HTML
-                listaComentarios.appendChild(nuevoComentario);
-            }
-        }
-
         const listaImagenes = document.getElementById('ImageCarrusel');
 
         // Recorremos el mapa de imágenes

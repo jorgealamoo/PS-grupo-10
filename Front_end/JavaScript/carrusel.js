@@ -23,6 +23,3 @@ function initCarousel(componentID) {
     componentId = componentID;
     showSlides(slideIndex);
 }
-
-
-
