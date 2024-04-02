@@ -1,20 +1,19 @@
-main {
-    min-height: 80vh;
-}
-
 body {
     margin: 0;
 }
 
-.contImagen {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    column-gap: 7px;
-    row-gap: 60px;
-    margin: 10px 5px;
+main {
+    min-height: 80vh;
 }
 
-.contImagen img {
+.contImagen {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    grid-gap: 2em;
+    margin: 0.5em;
+}
+
+.contImagen > div {
     width: 100%;
     height: 100%;
 }
@@ -23,3 +22,36 @@ body {
     margin-top: 26vh;
 }
 
+/* ------ RESPONSIVE HEADERS ------ */
+
+/* Ocultar los headers por defecto */
+header#phoneHeader {
+    display: none;
+}
+
+header#desktopHeader {
+    display: none;
+}
+
+/* Mostrar el header correspondiente según el tamaño de la ventana */
+@media screen and (max-width: 720px) {
+    header#desktopHeader {
+        display: none;
+    }
+    header#phoneHeader {
+        display: block;
+    }
+
+    .contImagen {
+        margin-left: 4em;
+    }
+}
+
+@media screen and (min-width: 721px) {
+    header#phoneHeader {
+        display: none;
+    }
+    header#desktopHeader {
+        display: block;
+    }
+}

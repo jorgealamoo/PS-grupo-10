@@ -206,12 +206,6 @@ main {
     margin-bottom: 10px;
 }
 
-/*.map img {
-    width: 100%;
-    height: 260px;
-    object-fit: cover;
-}*/
-
 /* ------ BOTTOM ALIGNING ------ */
 
 .description_section,
@@ -264,6 +258,76 @@ main {
     background-color: #BFBFBF;
 }
 
+/* ------ RESPONSIVE HEADERS ------ */
+
+/* Ocultar los headers por defecto */
+header#phoneHeader {
+    display: none;
+}
+
+header#desktopHeader {
+    display: none;
+}
+
+/* Mostrar el header correspondiente según el tamaño de la ventana */
+@media screen and (max-width: 720px) {
+    header#desktopHeader {
+        display: none;
+    }
+    header#phoneHeader {
+        display: block;
+    }
+}
+
+@media screen and (min-width: 721px) {
+    header#phoneHeader {
+        display: none;
+    }
+    header#desktopHeader {
+        display: block;
+    }
+}
+
+/* ------ RESPONSIVE BUTTONS ------ */
+
+@media screen and (max-width: 780px) {
+    .description_section,
+    .save_and_exit_buttons {
+        display: block;
+        width: 100%;
+        align-content: center;
+    }
+
+    .save_and_exit_buttons {
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+        width: 100%;
+        margin-left: 0;
+    }
+
+    .save_button button,
+    .exit_button button {
+        width: 15vh;
+        height: 10vh;
+    }
+
+    .exit_button button {
+        margin-right: 20px;
+    }
+}
+
+/* ------ RESPONSIVE ALIGNING ------ */
+
+@media screen and (max-width: 1500px) {
+    main {
+        text-align: center;
+    }
+    .add_publication_right_side {
+        width: 100%;
+        margin-left: 0;
+    }
+}
 
 
 

@@ -103,3 +103,51 @@ form {
     margin-bottom: 16px;
     font-size: 20px;
 }
+
+.error {
+    border: 2px solid red;
+}
+
+@media only screen and (max-width: 924px) {
+    body {
+        background-image: none;
+    }
+
+    .whiteRectangle {
+        margin-left: 2em;
+        background-color: white;
+        width: 100%;
+        height: 100%;
+        border-radius: 0;
+    }
+
+    .checkbox-container {
+        display: flex;
+    }
+
+    #agreeTerms {
+        width: 3vh;
+    }
+
+    .checkbox-label {
+        font-size: 14px;
+    }
+
+    .email {
+        padding-bottom: 2em;
+    }
+
+    .whiteRectangle * {
+        width: 95%;
+    }
+
+    .SignUpButton {
+        font-size: 21px;
+    }
+
+    .AlreadyAcc {
+        font-size: 17px;
+    }
+
+}
+

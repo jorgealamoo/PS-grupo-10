@@ -13,8 +13,8 @@
     <script type="module" src="/Front_end/JavaScript/UploadImages.js"></script>
 </head>
 <body>
-<header></header>
-<nav></nav>
+<header id="phoneHeader"></header>
+<header id="desktopHeader"></header>
 <main>
     <div class="add_publication_container">
         <div class="top_side">
@@ -66,8 +66,8 @@
 </main>
 <footer></footer>
 <script>
-    cargarTemplate('/Front_end/Header/header.html', 'header');
-    cargarTemplate('/Front_end/Nav/nav.html', 'nav');
+    cargarTemplate('../Header/header.html', '#desktopHeader');
+    cargarTemplate('../PhoneHeader/phoneHeader.html', '#phoneHeader');
     cargarTemplate('/Front_end/Footer/footer.html', 'footer')
 </script>
 

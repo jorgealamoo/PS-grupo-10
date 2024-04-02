@@ -2,7 +2,7 @@ import {initializeMap} from './loadMap.js';
 const map = initializeMap();
 
 async function loadAllPublication() {
-    const  response = await fetch('http://localhost:3000/api/fetchData/publicacion')
+    const  response = await fetch('http://localhost:3000/api/fetchData/publicacion/')
         .then(response =>{
             if(!response.ok){
                 throw new Error('Network response was not ok');
