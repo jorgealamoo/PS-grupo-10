@@ -49,6 +49,56 @@ async function fetchImage(imageurl) {
 }
 
 
+async function loadComment(comment_list) {
+    for ( comment of comment_list){
+        const response = await fetch('http://localhost:3000/api/getDocument/comentario/' + comment)
+            .then(response =>{
+                if (!response.ok){
+                    throw new Error("Can not load comment");
+                }
+                return response.json();
+            });
+        const user = await fetch('http://localhost:3000/api/getDocument/usuario/' + response.user_id)
+            .then(async response => {
+                if (!response.ok) {
+                    throw new Error("Fail to fetch document");
+                }
+                return await response.json()
+            });
+        var userName = user.nombre;
+        var photoUser =  await fetchImage(user.photoPerfil);
+        var text = response.contenido;
+        createComment(userName,photoUser,text);
+
+    }
+}
+function createComment(userName, photoUser, text) {
+    var comentariosDiv = document.getElementById('coments');
+    var comentarioHTML = `
+                <div class="comentario">
+                    <div class="header-comment">
+                        <img src="${photoUser}" class="imagen-comentario"> 
+                        <h3 class="nombre">${userName}</h3>
+                    </div>
+                    <div class="mensaje">${text}</div>
+                </div>
+            `;
+    comentariosDiv.innerHTML += comentarioHTML;
+}
+
+async function showCreatorData(user_id) {
+    const user = await fetch('http://localhost:3000/api/getDocument/usuario/' + user_id)
+        .then(async response => {
+            if (!response.ok) {
+                throw new Error("Fail to fetch document");
+            }
+            return await response.json()
+        });
+    var userName = user.nombre;
+    var photoUser = await fetchImage(user.photoPerfil);
+    document.getElementById("username").textContent = userName;
+    document.getElementById("photoUser").src = photoUser;
+}
 
 async function displayDocumentData() {
     const documentData = await fetchDocument();
@@ -56,38 +106,20 @@ async function displayDocumentData() {
         // Update the name element's text content
         document.getElementById('name').textContent = documentData['nombre'];
         document.getElementById('description').textContent = documentData['descripcion'];
-
+        await showCreatorData(documentData['user_id']);
         const location = documentData['ubicacion'];
         const latitude = location.latitude;
         const longitude = location.longitude;
-
-        // Llama a la función initializeMap con las coordenadas específicas
         const map = initializeMap(latitude, longitude);
-
-
         const listaImagenes = document.getElementById('ImageCarrusel');
-
-        // Recorremos el mapa de imágenes
         for (const key in documentData["lista_imagenes"]) {
             if (Object.hasOwnProperty.call(documentData["lista_imagenes"], key)) {
-                // Creamos un nuevo elemento de lista (<li>) para cada imagen
-                //const divImage = document.getElementById('pepejuan');
-
-                // Creamos un nuevo elemento de imagen (<img>) para la imagen
                 const nuevaImagen = document.createElement('img');
-
-                // Obtenemos la URL de la imagen correspondiente
                 const imageUrl = await fetchImage(documentData["lista_imagenes"][key]);
-
-                // Establecemos la URL de la imagen como el atributo src del elemento de imagen
                 nuevaImagen.src = imageUrl;
-                // Agregamos el elemento de imagen al elemento de lista
-                //divImage.appendChild(nuevaImagen);
-
-                // Agregamos el elemento de lista al contenedor de imágenes en el HTML
                 listaImagenes.appendChild(nuevaImagen);
-
             }
         }
+        loadComment(documentData["lista_comentarios"])
     }
 }
