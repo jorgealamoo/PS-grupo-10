@@ -15,46 +15,53 @@
 
 </head>
 <body>
-<header></header>
-<nav></nav>
+<header id="phoneHeader"></header>
+<header id="desktopHeader"></header>
 <main>
-    <img>
-    <div  id="pepejuan" class="image-carousel-container">
-        <!-- Botones de navegación -->
-        <div class="carousel-button left" onclick="moveCarousel(-1)">❮</div>
-        <div class="carousel-button right" onclick="moveCarousel(1)">❯</div>
-    </div>
     <div id="information">
-        <h1 id = 'name-publication'></h1>
+        <div id="top Side">
+            <div id="publicationData">
+                <h1 id = 'name' ></h1>
+                <h1 id='score'></h1>
+            </div>
+            <div id="userData">
+                <img id="photoUser">
+                <h2 id = 'username' ></h2>
+            </div>
+        </div>
+        <img/>
+        <div  id="ImageCarrusel" class="image-carousel-container">
+            <!-- Botones de navegación -->
+            <div class="carousel-button left" onclick="moveCarousel(-1)">❮</div>
+            <div class="carousel-button right" onclick="moveCarousel(1)">❯</div>
+        </div>
+
         <div id="content-container">
             <p id = 'description'></p>
-            <div id="map"></div>
         </div>
+        <div id="map"></div>
     </div>
-
-    <div  class="add-Comments">
-        <h2>Comentarios</h2>
-        <!-- Botón para agregar comentario -->
-        <div class="description_section">
-            <textarea id="Comment" name="Comment" placeholder="Comment"></textarea>
-        </div>
+    <div class="Header-Comments">
+        <h2>Comments</h2>
+        <button id="mostrar-formulario">Add comments</button>
+        <h3>Ratings</h3>
+        <button id="addRating">Add rating</button>
     </div>
-    <button id="mostrar-formulario">Añadir comentario</button>
-    <ul id="listaComentarios"></ul>
-
+    <div id="coments"></div>
 </main>
 
 <footer></footer>
 <script>
-    document.addEventListener('DOMContentLoaded', async function() {
+    document.addEventListener('DOMContentLoaded',async function () {
         await displayDocumentData();
-        initCarousel('.image-carousel-container img');
-        // Otro código necesario
+        initCarousel('.image-carousel-container img')
     });
-    //initCarousel('.image-carousel-container img');
-    cargarTemplate('/Front_end/Header/header.html', 'header');
-    cargarTemplate('/Front_end/Nav/nav.html', 'nav');
-    cargarTemplate('/Front_end/Footer/footer.html', 'footer')
+    cargarTemplate('../PhoneHeader/phoneHeader.html', '#phoneHeader');
+    cargarTemplate('../Header/header.html', '#desktopHeader', () => {
+        const directory = localStorage.getItem("user");
+        loadProfilePhoto(directory, "profilePhotoHeader");
+    });
+    cargarTemplate('../Footer/footer.html', 'footer');
 </script>
 </body>
 </html>

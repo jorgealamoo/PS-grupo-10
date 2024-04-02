@@ -1,23 +1,19 @@
+body {
+    margin: 0;
+}
+
 main {
     min-height: 80vh;
 
 }
 
-body{
-    margin: 0;
-}
-
-.image {
-    list-style-type: none;
-}
-
 /* Estilo del carrusel */
 .image-carousel-container {
-    margin-top: 30px;
-    width: auto; /* ajusta el ancho */
+    margin-top: 10px;
+    width: auto;
     height: 50vh; /*Utiliza el 50% de la pantalla visible como alto*/
-    overflow: hidden; /* Oculta el contenido que excede el ancho */
-    position: relative; /* Permite posicionar los botones sobre el contenedor */
+    overflow: hidden;
+    position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -25,105 +21,106 @@ body{
 
 /* Estilo de las imágenes */
 .image-carousel-container img {
-    display: none; /* Oculta las imágenes inicialmente */
-    /*display: block; /* Asegura que las imágenes se muestren una debajo de la otra */
-    width: auto; /* Utiliza todo el ancho del contenedor */
-    height: 100%; /* Permite que la altura se ajuste automáticamente */
+    display: none;
+    width: auto;
+    height: 100%;
 }
 
 /* Estilo de los botones */
 .carousel-button {
     position: absolute; /* Posiciona los botones sobre el contenedor */
-    top: 50%; /* Los coloca en la mitad verticalmente */
-    transform: translateY(-50%); /* Los centra verticalmente */
-    background: rgba(0, 0, 0, 0.5); /* Color de fondo transparente */
-    color: white; /* Color del texto */
-    padding: 10px; /* Espaciado interno */
-    cursor: pointer; /* Cambia el cursor al pasar por encima */
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    padding: 10px;
+    cursor: pointer;
 }
 
 /* Estilo del botón de dirección izquierda */
 .carousel-button.left {
-    left: 0; /* Alinea a la izquierda */
+    left: 0;
 }
 
 /* Estilo del botón de dirección derecha */
 .carousel-button.right {
-    right: 0; /* Alinea a la derecha */
+    right: 0;
 }
 
 #information {
-    text-align: center; /* Centra los elementos de texto */
+    text-align: left;
+    margin-left: 2.5%;
+    margin-right: 2.5%;
+}
+#topSide {
+    display: flex;
+    flex-direction: column;
 }
 
+.star{
+    font-size: 24px;
+    color: gold;
+}
+#publicationData, #userData {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+#publicationData {
+    order: 1;
+}
+
+#photoUser {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+}
 #name {
-    margin-top: 20px; /* Espacio en la parte superior */
+    margin-top: 20px;
+    margin-right: 2.5%;
 }
 
 #content-container {
-    display: flex; /* Utiliza flexbox para mostrar elementos en línea */
-    justify-content: center; /* Centra los elementos horizontalmente */
+    display: flex;
+    justify-content: center;
     align-items: flex-start;
+    width: 97.5%;
 }
 
 #description {
-   /* width: 50vh; /* Ancho del párrafo */
-    margin-left: 20px;
-    margin-right: 20px; /* Margen derecho para separar del elemento adyacente */
-    text-align: justify;
+    width: 10vh;
+    margin-right: 20px;
     flex: 1;
 }
 
 #no_final_image {
-    width: 25vh; /* Ancho de la imagen */
+    width: 55vh;
     height: auto;
 }
 
-.add-Comments{
+.Header-Comments{
     display: flex;
-    flex-direction: column;
-    margin-left: 20px;
+    margin-left: 2%;
 }
-.add-Comments h2{
+.Header-Comments h2{
     margin: 10px;
+
 }
 
-textarea {
-    resize: vertical; /* Permite la expansión vertical */
-    max-width: 100%; /* Evita la expansión horizontal */
-    height: 50px !important; /* Establece la altura inicial del textarea */
+.Header-Comments #mostrar-formulario, .Header-Comments #addRating {
+    margin: 10px;
+    width: auto;
+    height: auto;
 }
 
-
-
-#mostrar-formulario {
-    float: right; /* Mueve el botón a la derecha */
-    margin-right: 100px; /* Agrega un margen derecho para separarlo del borde */
+#addRating {
+    margin-left: auto;
 }
 
-#listaComentarios {
-    margin-top: 50px;
+.Header-Comments #addRating {
+    margin-left: auto;
 }
-#listaComentarios li {
-    /* Estilos para cada elemento <li> */
-    list-style-type: none;
-    position: relative; /* Establecemos una posición relativa */
-    padding-right: 30px; /* Añadimos un espacio a la derecha del <li> para el emoji */
-    margin: 0 30px 10px -20px;
-    padding: 10px; /* Espacio interno dentro de cada comentario */
-    background-color: #f9f9f9; /* Color de fondo del comentario */
-    border: 1px solid #ccc; /* Borde del comentario */
-    border-radius: 5px; /* Borde redondeado del comentario */
-}
-
-.reporte {
-    position: absolute; /* Posiciona el emoji de reportar de manera absoluta */
-    right: 10px; /* Lo posiciona a 10px del borde derecho del <li> */
-    transform: translateY(-50%); /* Centra verticalmente el emoji */
-    font-size: 25px; /* Tamaño del emoji */
-    cursor: pointer;
-}
-
 
 /* Estilos para los comentarios */
 .comentario {
@@ -185,37 +182,51 @@ textarea {
     margin:10px;
 }
 
-/* ------ MAP ------ */
-
 #map {
-    width: 40%;
-    height: 260px;
-    overflow: hidden; /* Evita que la imagen sobresalga del contenedor */
+    height: 40vh;
+    width: 100%;
+    justify-content: center;
+}
+
+#comentarios {
+    margin-left: 1.5%;
+    width: 80%;
+}
+
+#comentarios li, #ratings li {
     margin-bottom: 10px;
 }
 
-/*.map img {
-    width: 100%;
-    height: 260px;
-    object-fit: cover;
-}*/
-
-/* ------ DESCRIPTION ------ */
-
-.description_section textarea {
-    width: 90vw;
-    height: 200px;
-    margin-bottom: 20px;
-    padding: 10px;
-    padding-right: 0;
-    border-radius: 8px;
-    background-color: #e0e0e0;
-    font-family: 'Inter', sans-serif;
-    font-size: 16px;
+.comments\&ratings {
+    display: flex;
 }
 
-.description_section textarea::placeholder {
-    font-weight: bold;
-    font-family: 'Inter', sans-serif;
-    font-size: 16px;
+/* ------ RESPONSIVE HEADERS ------ */
+
+/* Ocultar los headers por defecto */
+header#phoneHeader {
+    display: none;
+}
+
+header#desktopHeader {
+    display: none;
+}
+
+/* Mostrar el header correspondiente según el tamaño de la ventana */
+@media screen and (max-width: 720px) {
+    header#desktopHeader {
+        display: none;
+    }
+    header#phoneHeader {
+        display: block;
+    }
+}
+
+@media screen and (min-width: 721px) {
+    header#phoneHeader {
+        display: none;
+    }
+    header#desktopHeader {
+        display: block;
+    }
 }

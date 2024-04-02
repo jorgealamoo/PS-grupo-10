@@ -53,9 +53,8 @@ async function fetchImage(imageurl) {
 async function displayDocumentData() {
     const documentData = await fetchDocument();
     if (documentData) {
-        console.log(documentData);
         // Update the name element's text content
-        document.getElementById('name-publication').textContent = documentData['nombre'];
+        document.getElementById('name').textContent = documentData['nombre'];
         document.getElementById('description').textContent = documentData['descripcion'];
 
         const location = documentData['ubicacion'];
@@ -90,7 +89,7 @@ async function displayDocumentData() {
             }
         }
 
-        const listaImagenes = document.getElementById('pepejuan');
+        const listaImagenes = document.getElementById('ImageCarrusel');
 
         // Recorremos el mapa de imágenes
         for (const key in documentData["lista_imagenes"]) {
@@ -106,7 +105,6 @@ async function displayDocumentData() {
 
                 // Establecemos la URL de la imagen como el atributo src del elemento de imagen
                 nuevaImagen.src = imageUrl;
-                console.log(nuevaImagen);
                 // Agregamos el elemento de imagen al elemento de lista
                 //divImage.appendChild(nuevaImagen);
 
@@ -117,4 +115,3 @@ async function displayDocumentData() {
         }
     }
 }
-
