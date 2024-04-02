@@ -17,14 +17,22 @@
 <footer></footer>
 
 <script src='../JavaScript/templateLoader.js'></script>
-<script src='../JavaScript/imagenLoader.js'></script>
+<script src='../JavaScript/userDataLoader.js'></script>
 <script>
     cargarTemplate('../Header/header.html', '#desktopHeader');
     cargarTemplate('../PhoneHeader/phoneHeader.html', '#phoneHeader');
-    cargarImagenes()
-    cargarImagenes()
-    cargarImagenes()
     cargarTemplate('../Footer/footer.html', 'footer');
+</script>
+<script>
+    (async () => {
+        const publications = await loadUserData("lista_guardados");
+        for (let i=0; i<publications.length; i++) {
+            const imagen = await loadPublicationData("lista_imagenes", publications[i]);
+            const name = await loadPublicationData("nombre", publications[i]);
+            const url = await getImgURL(imagen[0]);
+            addImage(url, name, publications[i]);
+        }
+    })();
 </script>
 </body>
 </html>

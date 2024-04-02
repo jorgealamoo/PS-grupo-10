@@ -3,32 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <title>Your account</title>
-    <link rel="stylesheet" href="../Account/account.css">
-    <script type="module" src="../JavaScript/loadUserPublications.js"></script>
-    <link rel="icon" type="image/png" href="../Images/logo_ExploreSpots_sin_fondo.png">
+    <link rel="stylesheet" href="/Front_end/Account/account.css">
+    <script src="/Front_end/JavaScript/userDataLoader.js"></script>
 </head>
 <body>
-
 <header id="phoneHeader"></header>
 <header id="desktopHeader"></header>
+<nav></nav>
 <main>
     <div class="User">
-        <img src="../Images/usuario_generico.png" alt="">
-        <span><b>Lorem ipsum</b></span>
-        <a href="../Saved/saved.html">SAVED</a>
-        <a href="../AddPublication/add_publication.html">CREATE</a>
-        <a href="../EditProfile/edit_profile.html">EDIT PROFILE</a>
+        <img id="profilePhotoAccount" alt="" src="">
+        <b><span id="username"></span></b>
+        <div class="options">
+            <a href="../Saved/saved.html">SAVED</a>
+            <a href="../AddPublication/add_publication.html">CREATE</a>
+            <a href="../EditProfile/edit_profile.html">EDIT PROFILE</a>
+        </div>
     </div>
-    <div class="contImagen" id="imagenContainer"></div>
+    <div class="contImagen" id="imagenContainer">
+    </div>
 </main>
 <footer></footer>
 <script src='/Front_end/JavaScript/templateLoader.js'></script>
-<script src='/Front_end/JavaScript/imagenLoader.js'></script>
 <script>
     cargarTemplate('../Header/header.html', '#desktopHeader');
     cargarTemplate('../PhoneHeader/phoneHeader.html', '#phoneHeader');
     cargarTemplate('../Footer/footer.html', 'footer');
 </script>
-
+<script>
+    (async () => {
+        await loadProfilePhoto("profilePhotoAccount");
+        await loadUserName("username");
+        const publications = await loadUserData("lista_Publicaciones");
+        for (let i=0; i<publications.length; i++) {
+            const imagen = await loadPublicationData("lista_imagenes", publications[i]);
+            const name = await loadPublicationData("nombre", publications[i]);
+            const url = await getImgURL(imagen[0]);
+            addImage(url, name, publications[i]);
+        }
+    })();
+</script>
 </body>
 </html>
