@@ -10,7 +10,7 @@
 <body>
 <div class="whiteRectangle">
     <div class="center">
-        <form id="mainForm" onsubmit="validatePassword(); return false" method="post">
+        <form id="mainForm" method="post">
             <div>
                 <label for="firstName"></label><input type="text" id="firstName" name="firstName" placeholder="First name" required class="small_inputs">
                 <label for="lastName"></label><input type="text" id="lastName" name="lastName" placeholder="Last name" class="small_inputs">
@@ -116,14 +116,15 @@
             }) .then(() => {
             console.log("Campo 'user_id' actualizado con éxito.");
             alert("Usuario creado correctamente");
+            document.getElementById('mainForm').submit();
+            validatePassword();
             })
             .catch((error) => {
                 alert("Error: " + error.message);
                 console.error("Error al cambiar el campo en Firestore:", error);
             });
     }
-    document.getElementById('mainForm').addEventListener('submit', RegisterUser);
-
+    document.getElementById('SignUpButton').addEventListener('click',RegisterUser);
 
 </script>
 
