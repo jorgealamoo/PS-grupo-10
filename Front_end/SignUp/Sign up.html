@@ -54,8 +54,8 @@
 <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
     import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js";
+    import { getFirestore, collection, addDoc, query, where, updateDoc  } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
 
-    // Your web app's Firebase configuration
     const firebaseConfig = {
         apiKey: "AIzaSyBbGLFzzUj5y8F927mW6JcrObKnF9bynAY",
         authDomain: "proyecto-ps-22ec6.firebaseapp.com",
@@ -70,27 +70,60 @@
     const app = initializeApp(firebaseConfig);
 
     const auth = getAuth(app);
+    const db = getFirestore(app);
 
-    let email = document.getElementById('email');
-    let password = document.getElementById('password');
-    let firstname = document.getElementById('firstName');
-    let lastname = document.getElementById('lastName');
-    let username = document.getElementById('username')
 
     let RegisterUser = evt => {
         evt.preventDefault();
 
-        createUserWithEmailAndPassword(auth, email.value, password.value)
-            .then((credentials)=>{
-                console.log(credentials);
-            })
-            .catch((error)=> {
-                alert(error.message);
-                console.log(error.code);
-            })
-    }
+        let email = document.getElementById('email');
+        let password = document.getElementById('password');
+        let firstname = document.getElementById('firstName');
+        let lastname = document.getElementById('lastName');
+        let username = document.getElementById('username');
 
-    mainForm.addEventListener('submit', RegisterUser);
+        createUserWithEmailAndPassword(auth, email.value, password.value)
+            .then((credentials) => {
+                console.log(credentials);
+                return addDoc(collection(db, "usuario"), {
+                    administrador: false,
+                    lista_misEventos: [],
+                    lista_otrosEventos: [],
+                    lista_siguiendo: [],
+                    lista_guardados: [],
+                    lista_seguidores: [],
+                    lista_publicaciones: [],
+                    lista_misIncidencias: [],
+                    nombre: firstname.value,
+                    apellido: lastname.value,
+                    user_id: email.value,
+                    usuario: username.value,
+                    email: email.value,
+                    photoPerfil: "2024-03-17T13_07_47_126Z_Screenshot 2024-01-15 at 12.05.03.png"
+                }).then((docRef) => {
+                    // Devolver el DocumentReference
+                    return docRef;
+                });
+            })
+            .then((docRef) => {
+                // Después de agregar los datos del usuario, puedes realizar otras operaciones si es necesario
+                console.log("Usuario agregado correctamente a Firestore");
+                console.log("ID del documento:", docRef.id);
+                // Si necesitas actualizar algún campo con la ID del documento, aquí puedes hacerlo
+                return updateDoc(docRef, {
+                    user_id: docRef.id
+                });
+            }) .then(() => {
+            console.log("Campo 'user_id' actualizado con éxito.");
+            alert("Usuario creado correctamente");
+            })
+            .catch((error) => {
+                alert("Error: " + error.message);
+                console.error("Error al cambiar el campo en Firestore:", error);
+            });
+    }
+    document.getElementById('mainForm').addEventListener('submit', RegisterUser);
+
 
 </script>
 
