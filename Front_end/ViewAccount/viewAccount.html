@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>View Account</title>
+    <link rel="stylesheet" href="../ViewAccount/viewAccount.css">
+    <link rel="icon" type="image/png" href="../Images/logo_ExploreSpots_sin_fondo.png">
+    <script src="/Front_end/JavaScript/authorisationCheck.js"></script>
+    <script src="viewAccount.js"></script>
+</head>
+<body>
+
+<header id="phoneHeader"></header>
+<header id="desktopHeader"></header>
+<main>
+    <div class="User">
+        <img id="user_img" src="../Images/usuario_generico.png" alt="">
+        <span id="name"><b>Lorem ipsum</b></span>
+        <div class="followers">
+            <span id="seguidores"><b>Seguidores: 0</b></span>
+            <span id="siguiendo"><b>Siguiendo: 0</b></span>
+        </div>
+        <button class="FollowButton">Follow</button>
+    </div>
+
+    <div class="UserContent">
+        <h2 class="SectionTitle">Publications</h2>
+        <div class="lista_pubilicaciones">
+            <ul id="listaPublicaciones"></ul>
+        </div>
+    </div>
+
+</main>
+<footer></footer>
+<script src='/Front_end/JavaScript/templateLoader.js'></script>
+<script src='/Front_end/JavaScript/imagenLoader.js'></script>
+<script>
+    cargarTemplate('../PhoneHeader/phoneHeader.html', '#phoneHeader');
+    cargarTemplate('../Header/header.html', '#desktopHeader', () => {
+        const directory = localStorage.getItem("user");
+        loadProfilePhoto(directory, "profilePhotoHeader");
+    });
+    cargarTemplate('../Footer/footer.html', 'footer');
+</script>
+
+</body>
+</html>
