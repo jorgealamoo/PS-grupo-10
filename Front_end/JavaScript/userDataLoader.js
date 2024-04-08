@@ -36,9 +36,9 @@ function addImage(imagenPath, texto, publicationID) {
     nuevoElemento.appendChild(textoElemento);
     let contenedor = document.getElementById("imagenContainer");
     contenedor.appendChild(nuevoElemento);
-}
-async function getUserPublicationsIDs(url, fieldName) {
-    return fetch(url)
+}function loadUserData(fieldName) {
+    const userID = localStorage.getItem("userId");
+    return fetch('http://localhost:3000/api/getDocument/usuario/'+userID+'')
         .then(response => {
             if (!response.ok) {
                 throw new Error('Network response was not ok');
@@ -46,54 +46,11 @@ async function getUserPublicationsIDs(url, fieldName) {
             return response.json();
         })
         .then(data => {
-            const publicationList = data[fieldName];
-            return publicationList.map(publication => publication.publication_id);
-        });
-}
-async function loadUserName(url) {
-    return fetch(url)
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            return response.json();
-        })
-        .then(data => {
-            const userName = document.getElementById("userName");
-            userName.textContent = data["user"];
-        });
-}
-async function loadProfilePhoto(url, imageID) {
-    return fetch(url)
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            return response.json();
-        })
-        .then(data => {
-            const profile = document.getElementById(imageID);
-            profile.src = data["user_image"];
-            profile.style.borderRadius = "50%";
-        });
-}
-
-
-async function getPublicationURL(id) {
-    return fetch("/Front_end/Datos/publication.JSON")
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            return response.json();
-        })
-        .then(data => {
-            const publications = data["Publication"];
-            if (id >= 1 && id <= publications.length) {
-                const index = id - 1;
-                return publications[index].url;
+            if (data.hasOwnProperty(fieldName)) {
+                return data[fieldName];
             } else {
-                throw new Error('Publication ID out of range');
+                console.error('El campo no está presente en el documento');
+                return null;
             }
         })
         .catch(error => {
@@ -101,8 +58,21 @@ async function getPublicationURL(id) {
             throw error;
         });
 }
-async function loadPublicationField(url, fieldName) {
-    return fetch(url)
+
+function loadPublicationData(fieldName, publicationID) {
+    return fetch('http://localhost:3000/api/getDocument/publicacion/'+publicationID+'')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        }).then(data => {
+            return data[fieldName];
+        });
+}
+
+function getImgURL(imgName) {
+    return fetch("http://localhost:3000/api/getImage/" + imgName)
         .then(response => {
             if (!response.ok) {
                 throw new Error('Network response was not ok');
@@ -110,10 +80,19 @@ async function loadPublicationField(url, fieldName) {
             return response.json();
         })
         .then(data => {
-            return data[fieldName];
-        })
-        .then(data => {
-            return (fieldName === "name") ? data : data[0];
+            return data.imageUrl;
         });
 }
 
+async function loadProfilePhoto(imagenContainer) {
+    const profilePhoto = await loadUserData("photoPerfil");
+    const url = await getImgURL(profilePhoto);
+    const imagen = document.getElementById(imagenContainer);
+    imagen.src = url;
+}
+
+async function loadUserName(container) {
+    const username = await loadUserData("usuario");
+    const texto = document.getElementById(container);
+    texto.textContent = username;
+}
