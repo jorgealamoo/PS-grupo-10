@@ -71,6 +71,14 @@ main {
     order: 1;
 }
 
+#publicationData img {
+    width: 25px;
+    height: 25px;
+}
+
+#publicationData img:hover{
+    transform: scale(1.1);
+}
 #photoUser {
     width: 100px;
     height: 100px;
