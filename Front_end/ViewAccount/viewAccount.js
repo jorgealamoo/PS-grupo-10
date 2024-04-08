@@ -64,6 +64,13 @@ document.addEventListener('DOMContentLoaded', async function() {
     }
 
     async function displayDocumentData() {
+        const userId = localStorage.getItem('userId');
+        const viewingID = localStorage.getItem('viewAccountId');
+
+        if (userId == viewingID) {
+            window.location.href = "../Account/account.html"
+        }
+
         const documentData = await fetchDocument();
         if (documentData) {
             console.log(documentData);
