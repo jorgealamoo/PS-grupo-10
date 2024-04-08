@@ -16,7 +16,37 @@ function initializeMap(latitude, longitude) {
     return map;
 }
 
+function createScore(valoration) {
+    const valorationElement = document.getElementById("score");
+    valorationElement.innerHTML = valoration;
+    const valorationValue = parseFloat(valoration);
+    const roundedValue = Math.floor(valorationValue);
 
+    // Agregar cinco estrellas vacías por defecto
+    for (let i = 0; i < 5; i++) {
+        const star = document.createElement('span');
+        star.className = 'star';
+        star.innerHTML = '&#9734;'; // Unicode de estrella vacía
+        valorationElement.appendChild(star);
+    }
+
+    // Rellenar las estrellas según el puntaje
+    for (let i = 0; i < roundedValue; i++) {
+        const star = valorationElement.children[i];
+        star.innerHTML = '&#9733;';
+    }
+/*
+    // Rellenar media estrella si corresponde
+    const remainder = valorationValue - roundedValue;
+    if (remainder > 0 && roundedValue < 5) {
+        const halfStar = document.createElement('span');
+        halfStar.className = 'star';
+        halfStar.innerHTML = '&#x2BE0;'; // Unicode de media estrella
+        valorationElement.insertBefore(halfStar, valorationElement.children[roundedValue]);
+    }
+
+ */
+}
 
 async function fetchDocument() {
     try {
@@ -120,6 +150,7 @@ async function displayDocumentData() {
                 listaImagenes.appendChild(nuevaImagen);
             }
         }
-        loadComment(documentData["lista_comentarios"])
+        await loadComment(documentData["lista_comentarios"]);
+        createScore(documentData["valoracion"]);
     }
 }
