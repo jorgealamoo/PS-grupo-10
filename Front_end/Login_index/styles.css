@@ -13,7 +13,6 @@ body {
     padding: 10vh;
 }
 
-
 .left-side,
 .right-side {
     flex: 1;
@@ -60,6 +59,7 @@ body {
 }
 
 #LogIn {
+    margin-top: 2%;
     width: 60%;
     height: 6vh;
 }
