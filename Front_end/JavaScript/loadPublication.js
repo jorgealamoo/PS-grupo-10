@@ -1,7 +1,6 @@
 //import {initializeMap} from './loadMap.js';
 
 var dataJSON = null
-localStorage.setItem('userId','0zbkPGwrhlfAjIcQ3odeqSte5jD3');
 function initializeMap(latitude, longitude) {
     // Crea el mapa y configura la vista inicial utilizando las coordenadas proporcionadas
     var map = L.map('map').setView([latitude, longitude], 13);
@@ -140,7 +139,8 @@ async function isSave() {
                 return await response.json();
             }
         });
-    if(user.lista_guardados && user.lista_guardados.some(item => item.id === localStorage.getItem('currentPublication'))){
+    console.log(user.lista_guardados);
+    if(user.lista_guardados && user.lista_guardados.some(item => item === localStorage.getItem('currentPublication'))){
         const saves = document.getElementById('saves');
         saves.src='/Front_end/Images/guardar-activate.png';
     }
@@ -205,13 +205,15 @@ async function changeIcon() {
             }
         });
     const button = document.getElementById('saves');
-    if (button.src.endsWith('guardar-instagram.png')) {
-        button.src = '/Front_end/Images/guardar-activate.png';
+    if (button.src.endsWith('guardar-activate.png')) {
+        button.src = '/Front_end/Images/guardar-instagram.png';
         await modifyDoc('usuario',user_id,{lista_guardados: user.lista_guardados.filter(item => item !== localStorage.getItem('currentPublication'))})
 
     } else {
-        button.src = '/Front_end/Images/guardar-instagram.png';
-        await modifyDoc('usuario',user_id,{lista_guardados: user.lista_guardados.push(localStorage.getItem('currentPublication'))})
+        button.src = '/Front_end/Images/guardar-activate.png';
+        saves = user.lista_guardados;
+        saves.push(localStorage.getItem('currentPublication'))
+        await modifyDoc('usuario',user_id,{lista_guardados: saves})
 
     }
 }
