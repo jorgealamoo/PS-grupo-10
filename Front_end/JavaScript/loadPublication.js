@@ -1,7 +1,6 @@
 //import {initializeMap} from './loadMap.js';
 
 var dataJSON = null
-localStorage.setItem('userId','0zbkPGwrhlfAjIcQ3odeqSte5jD3');
 function initializeMap(latitude, longitude) {
     // Crea el mapa y configura la vista inicial utilizando las coordenadas proporcionadas
     var map = L.map('map').setView([latitude, longitude], 13);
