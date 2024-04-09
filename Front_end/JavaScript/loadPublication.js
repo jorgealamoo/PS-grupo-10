@@ -168,7 +168,7 @@ async function displayDocumentData() {
             }
         }
         await loadComment(documentData["lista_comentarios"]);
-        createScore(documentData["valoracion"]);
+        //createScore(documentData["valoracion"]);
         await isSave();
     }
 }

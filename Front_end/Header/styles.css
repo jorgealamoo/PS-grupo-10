@@ -22,8 +22,10 @@
 
 /* ------ LOGO IMAGE ------ */
 #header img {
-    max-height: 60px;
-    margin-left: 10px;
+    width: 8vh;
+    height: 8vh;
+    margin-right: 1%;
+    margin-left: 2%;
     padding-top: 10px;
     padding-bottom: 10px;
     cursor: pointer;
@@ -39,6 +41,10 @@
 
 #profilePhotoHeader {
     margin-right: 1em;
+}
+
+#ProfileImageHEADER {
+    border-radius: 50%;
 }
 
 

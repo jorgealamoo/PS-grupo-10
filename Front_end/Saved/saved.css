@@ -8,14 +8,10 @@ main {
 
 .contImagen {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-    grid-gap: 2em;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    grid-auto-flow: dense;
+    grid-gap: 1em;
     margin: 0.5em;
-}
-
-.contImagen > div {
-    width: 100%;
-    height: 100%;
 }
 
 #footerContainer {

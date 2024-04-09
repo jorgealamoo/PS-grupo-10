@@ -6,6 +6,7 @@
     <script src="../JavaScript/changeImage.js"></script>
     <script src="../JavaScript/changePasswordFunctions.js"></script>
     <script src="/Front_end/JavaScript/authorisationCheck.js"></script>
+    <script src="../JavaScript/userDataLoader.js"></script>
     <script src="./main.js"></script>
     <script src="/dist/bundle.js"></script>
     <title>Edit Profile</title>
@@ -21,7 +22,7 @@
 
         <div for="profile_change_image" class="profile_change_image">
             <input type="file" id="ProfileImageUpload" name="ProfileImageUpload" multiple accept="image/*">
-            <img src="../Images/usuario_generico.png" id="ProfileImage" alt="">
+            <img src="" id="ProfileImage" alt="">
             <p>Change Photo</p>
         </div>
 
@@ -70,6 +71,7 @@
     cargarTemplate('../Header/header.html', '#desktopHeader');
     cargarTemplate('../PhoneHeader/phoneHeader.html', '#phoneHeader');
     cargarTemplate('../Footer/footer.html', 'footer');
+    loadProfilePhoto("ProfileImage");
 </script>
 </body>
 </html>

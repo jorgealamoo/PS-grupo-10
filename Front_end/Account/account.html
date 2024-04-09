@@ -34,7 +34,7 @@
     (async () => {
         await loadProfilePhoto("profilePhotoAccount");
         await loadUserName("username");
-        const publications = await loadUserData("lista_Publicaciones");
+        const publications = await loadUserData("lista_publicaciones");
         for (let i=0; i<publications.length; i++) {
             const imagen = await loadPublicationData("lista_imagenes", publications[i]);
             const name = await loadPublicationData("nombre", publications[i]);
