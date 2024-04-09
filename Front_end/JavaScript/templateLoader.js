@@ -6,9 +6,9 @@ function cargarTemplate(url, selector) {
         .then(data => {
             let container = document.querySelector(selector);
             container.innerHTML = data;
+            loadProfilePhoto("ProfileImageHEADER");
         })
         .catch(error => {
             console.error('Error al cargar el template:', error);
         });
 }
-

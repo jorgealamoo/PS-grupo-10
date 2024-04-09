@@ -140,7 +140,7 @@ async function isSave() {
             }
         });
     console.log(user.lista_guardados);
-    if(user.lista_guardados && user.lista_guardados.some(item => item.id === localStorage.getItem('currentPublication'))){
+    if(user.lista_guardados && user.lista_guardados.some(item => item === localStorage.getItem('currentPublication'))){
         const saves = document.getElementById('saves');
         saves.src='/Front_end/Images/guardar-activate.png';
     }
@@ -205,12 +205,12 @@ async function changeIcon() {
             }
         });
     const button = document.getElementById('saves');
-    if (button.src.endsWith('guardar-instagram.png')) {
-        button.src = '/Front_end/Images/guardar-activate.png';
+    if (button.src.endsWith('guardar-activate.png')) {
+        button.src = '/Front_end/Images/guardar-instagram.png';
         await modifyDoc('usuario',user_id,{lista_guardados: user.lista_guardados.filter(item => item !== localStorage.getItem('currentPublication'))})
 
     } else {
-        button.src = '/Front_end/Images/guardar-instagram.png';
+        button.src = '/Front_end/Images/guardar-activate.png';
         saves = user.lista_guardados;
         saves.push(localStorage.getItem('currentPublication'))
         await modifyDoc('usuario',user_id,{lista_guardados: saves})
