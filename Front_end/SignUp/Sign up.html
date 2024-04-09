@@ -54,7 +54,7 @@
 <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
     import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js";
-    import { getFirestore, collection, addDoc, query, where, updateDoc  } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
+    import { getFirestore, setDoc, doc   } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
 
     const firebaseConfig = {
         apiKey: "AIzaSyBbGLFzzUj5y8F927mW6JcrObKnF9bynAY",
@@ -84,8 +84,8 @@
 
         createUserWithEmailAndPassword(auth, email.value, password.value)
             .then((credentials) => {
-                console.log(credentials);
-                return addDoc(collection(db, "usuario"), {
+                const userUID = credentials.user.uid
+                return setDoc(doc(db, "usuario", userUID), {
                     administrador: false,
                     lista_misEventos: [],
                     lista_otrosEventos: [],
@@ -96,24 +96,16 @@
                     lista_misIncidencias: [],
                     nombre: firstname.value,
                     apellido: lastname.value,
-                    user_id: email.value,
+                    user_id: userUID,
                     usuario: username.value,
                     email: email.value,
-                    photoPerfil: "2024-03-17T13_07_47_126Z_Screenshot 2024-01-15 at 12.05.03.png"
+                    photoPerfil: "2024-03-17T13_58_20_632Z_logo_ExploreSpots.jpg"
                 }).then((docRef) => {
                     // Devolver el DocumentReference
                     return docRef;
                 });
             })
-            .then((docRef) => {
-                // Después de agregar los datos del usuario, puedes realizar otras operaciones si es necesario
-                console.log("Usuario agregado correctamente a Firestore");
-                console.log("ID del documento:", docRef.id);
-                // Si necesitas actualizar algún campo con la ID del documento, aquí puedes hacerlo
-                return updateDoc(docRef, {
-                    user_id: docRef.id
-                });
-            }) .then(() => {
+            .then(() => {
             console.log("Campo 'user_id' actualizado con éxito.");
             alert("Usuario creado correctamente");
             document.getElementById('mainForm').submit();
