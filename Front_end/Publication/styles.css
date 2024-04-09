@@ -99,28 +99,64 @@ main {
     height: auto;
 }
 
-.Header-Comments{
+.buttonAddComments {
+    padding: 5px;
+    margin: 25px 0 15px 40px;
+}
+
+#elemento-oculto{
+    display: none;
+}
+
+.Comments{
     display: flex;
+    flex-direction: column;
     margin-left: 2%;
 }
-.Header-Comments h2{
-    margin: 10px;
 
+.description,
+.title,
+.image {
+    padding: 5px;
+    border-radius: 5px;
 }
 
-.Header-Comments #mostrar-formulario, .Header-Comments #addRating {
-    margin: 10px;
-    width: auto;
-    height: auto;
+
+.description {
+    height: 150px;
+    width: 100%;
+    min-width: 450px;
+    resize: vertical;
 }
 
-#addRating {
-    margin-left: auto;
+.headerAddComment {
+    display: flex;
+    align-items: center;
 }
 
-.Header-Comments #addRating {
-    margin-left: auto;
+.headerAddComment input {
+    margin-left: 20px;
 }
+
+.addComments {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+}
+
+.infoComment {
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px;
+}
+
+#submit {
+    margin-top: 7px;
+    padding: 6px;
+    width: 15%;
+    display: flex;
+}
+
 
 /* Estilos para los comentarios */
 .comentario {
@@ -200,6 +236,8 @@ main {
 .comments\&ratings {
     display: flex;
 }
+
+
 
 /* ------ RESPONSIVE HEADERS ------ */
 
