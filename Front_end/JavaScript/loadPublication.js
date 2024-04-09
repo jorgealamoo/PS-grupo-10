@@ -217,3 +217,14 @@ async function changeIcon() {
 
     }
 }
+
+document.addEventListener("DOMContentLoaded", function() {
+    document.getElementById("photoUser").addEventListener("click", redirectToUser);
+    document.getElementById("username").addEventListener("click", redirectToUser);
+
+});
+
+function redirectToUser() {
+    localStorage.setItem('viewAccountId', dataJSON["user_id"]);
+    window.location.href = "../ViewAccount/viewAccount.html";
+}
