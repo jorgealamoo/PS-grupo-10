@@ -139,6 +139,7 @@ async function isSave() {
                 return await response.json();
             }
         });
+    console.log(user.lista_guardados);
     if(user.lista_guardados && user.lista_guardados.some(item => item.id === localStorage.getItem('currentPublication'))){
         const saves = document.getElementById('saves');
         saves.src='/Front_end/Images/guardar-activate.png';
@@ -210,7 +211,9 @@ async function changeIcon() {
 
     } else {
         button.src = '/Front_end/Images/guardar-instagram.png';
-        await modifyDoc('usuario',user_id,{lista_guardados: user.lista_guardados.push(localStorage.getItem('currentPublication'))})
+        saves = user.lista_guardados;
+        saves.push(localStorage.getItem('currentPublication'))
+        await modifyDoc('usuario',user_id,{lista_guardados: saves})
 
     }
 }
