@@ -121,9 +121,14 @@ main {
     border-radius: 5px;
 }
 
+/* Este es un comentario de una sola línea */
+
+/* Este es un comentario de una sola línea */
 
 .description {
     height: 150px;
+    min-height: 25px;
+    max-height: 250px;
     width: 100%;
     min-width: 450px;
     resize: vertical;
