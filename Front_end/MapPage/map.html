@@ -2,15 +2,13 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <script src='/Front_end/JavaScript/templateLoader.js'></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
-    <script type="module" src="/Front_end/JavaScript/loadMap.js"></script>
-    <script type="module" src= "/Front_end/JavaScript/ShowLocation.js"></script>
+    <script type="module" src="../JavaScript/loadMap.js"></script>
+    <script type="module" src= "../JavaScript/ShowLocation.js"></script>
     <title>Map</title>
     <link href="style.css" rel="stylesheet">
-    <link rel="icon" type="image/png" href="../Images/logo_ExploreSpots_sin_fondo.png">
 </head>
 <body>
 <div id="top">
@@ -28,13 +26,12 @@
 </div--->
 <div id="map"></div>
 <footer></footer>
+<script src='../JavaScript/templateLoader.js'></script>
+<script src='../JavaScript/userDataLoader.js'></script>
 <script>
+    cargarTemplate('../Header/header.html', '#desktopHeader');
     cargarTemplate('../PhoneHeader/phoneHeader.html', '#phoneHeader');
-    cargarTemplate('/Front_end/header/header.html', '#desktopHeader');
-    cargarTemplate('/Front_end/Footer/footer.html', 'footer');
-    //userID();
-</script>
-<script type="module">
+    cargarTemplate('../Footer/footer.html', 'footer');
 </script>
 </body>
 </html>
