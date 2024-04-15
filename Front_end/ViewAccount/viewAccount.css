@@ -6,46 +6,80 @@ body {
     margin: 0;
 }
 
+/* Estilos para el contenedor de usuario */
 .User {
-    height: 200px;
+    display: flex; /* Establece un diseño de tipo flexbox */
+    align-items: center; /* Centra verticalmente los elementos */
+    width: 100%; /* Ocupa todo el ancho de la página */
+    font-size: 1.2em; /* Tamaño de la fuente */
     background-color: rgba(167, 225, 225, 0.37);
-    position: relative;
-    display: flex;
-    align-items: center;
 }
 
-.User img {
-    margin-left: 20px;
-    width: 100px;
+/* Estilos para la imagen de usuario */
+#image {
+    height: 100%;
+    flex-shrink: 0; /* Evita que la imagen se encoja */
+    margin: 20px; /* Espacio entre la imagen y el bloque de información */
+}
+
+#user_img {
+    border-radius: 50%; /* Hace que la imagen sea redonda */
+    width: 100px; /* Tamaño de la imagen */
     height: 100px;
 }
-.User #name {
-    color: #061b4b;
-    margin-left: 10px;
-    font-size: 30px;
-}
-.User a {
-    position: relative;
-    color: #061b4b;
-    margin-left:70px;
-    text-decoration: none;
-    font-size: 30px;
-    top: 35%;
-}
-.User a:hover {
-    color: #18449b;
+
+/* Estilos para el contenedor de información del usuario */
+#information_user {
+    flex-grow: 1; /* Permite que el contenedor ocupe el espacio restante */
 }
 
-.User .followers {
-    margin: 20px;
+/* Estilos para el nombre de usuario */
+#name {
+    display: block; /* Hace que el nombre ocupe todo el ancho */
+    text-align: center; /* Centra el nombre */
+    margin-bottom: 10px; /* Espacio entre el nombre y los seguidores */
+    font-size: 1.4em; /* Tamaño de la fuente */
 }
-#siguiendo {
-    margin-left: 10px;
+
+/* Estilos para el bloque de seguidores */
+.followers {
+    display: flex; /* Establece un diseño de tipo flexbox */
+    justify-content: space-between; /* Distribuye los elementos horizontalmente */
+    margin-bottom: 10px; /* Espacio entre los seguidores y el botón */
 }
+
+/* Estilos para los bloques de seguidos y siguiendo */
+#seguidos, #siguiedo {
+    flex: 1; /* Hace que ambos bloques ocupen el mismo ancho */
+    text-align: center; /* Centra el contenido */
+}
+
+/* Estilos para los números de seguidores y siguiendo */
+#seguidores, #siguiendo {
+    display: block; /* Hace que los números ocupen todo el ancho */
+}
+
+/* Estilos para el botón de seguir */
+.FollowButton {
+    display: block; /* Hace que el botón ocupe todo el ancho */
+    margin: 10px auto; /* Centra el botón horizontalmente */
+    text-align: center; /* Centra el texto del botón */
+    font-size: 1em; /* Tamaño de la fuente */
+}
+
+/* Media queries para hacer que el texto sea más grande en pantallas más grandes */
+@media screen and (min-width: 768px) {
+    .User {
+        font-size: 1.5em;
+    }
+
+    #name {
+        font-size: 1.8em;
+    }
+}
+
 
 .FollowButton {
-    margin-left: auto; /* Pushes the button to the right */
-    margin-right: 20px; /* Pushes the button to the right */
     padding: 10px 20px; /* Increase padding to make the button bigger */
     background-color: #007bff; /* Adjust color as needed */
     color: #fff; /* Text color */
