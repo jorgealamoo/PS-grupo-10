@@ -77,10 +77,10 @@ document.addEventListener('DOMContentLoaded', async function() {
             console.log(documentData['nombre']);
             // Update the name element's text content
             document.getElementById('name').innerHTML = "<b>" + documentData['usuario'] + "<b>";
-            document.getElementById('seguidores').innerHTML = "<b>" + "Seguidores: " + documentData['lista_seguidores'].length + "<b>";
+            document.getElementById('seguidores').innerHTML = "<b>" + documentData['lista_seguidores'].length + "<b>";
             console.log(documentData['lista_seguidores'])
             console.log(documentData['lista_siguiendo'])
-            document.getElementById('siguiendo').innerHTML = "<b>" + "Siguiendo: " + documentData['lista_siguiendo'].length + "<b>";
+            document.getElementById('siguiendo').innerHTML = "<b>" +documentData['lista_siguiendo'].length + "<b>";
 
             const imageUrl = await fetchImage(documentData);
 
