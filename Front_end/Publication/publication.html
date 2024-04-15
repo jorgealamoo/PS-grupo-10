@@ -12,6 +12,7 @@
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
     <script type="module" src="../JavaScript/loadMap.js" ></script>
     <script src= "../JavaScript/loadPublication.js"></script>
+    <script type="module" src="./mainPublication.js" ></script>
     <title>Publication</title>
     <link rel="icon" type="image/png" href="../Images/logo_ExploreSpots_sin_fondo.png">
 
@@ -41,6 +42,18 @@
             <div id="userData">
                 <img id="photoUser">
                 <h2 id='username'></h2>
+                <div id = "botonAñadir" >
+                    <div class="add_publication_left_side">
+                        <div id="add_images_section" class="add_images_section">
+                            <input type="file" id="imageUpload" name="imageUpload" multiple accept="image/*">
+                            <label for="imageUpload" id="addImageLabel" class="add_images_symbol">+</label>
+                            <p class="add_images_text">ADD IMAGES</p>
+                        </div>
+                        <div class="save_button">
+                            <button id="saveBtn">Save</button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
         <img/>
