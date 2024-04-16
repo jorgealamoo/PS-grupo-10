@@ -7,6 +7,7 @@
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
     <script type="module" src="../JavaScript/loadMap.js"></script>
     <script type="module" src= "../JavaScript/ShowLocation.js"></script>
+    <script src="/Front_end/JavaScript/authorisationCheck.js"></script>
     <title>Map</title>
     <link href="style.css" rel="stylesheet">
 </head>
@@ -29,6 +30,7 @@
 <script src='../JavaScript/templateLoader.js'></script>
 <script src='../JavaScript/userDataLoader.js'></script>
 <script>
+    document.addEventListener('DOMContentLoaded', checkAuth);
     cargarTemplate('../Header/header.html', '#desktopHeader');
     cargarTemplate('../PhoneHeader/phoneHeader.html', '#phoneHeader');
     cargarTemplate('../Footer/footer.html', 'footer');
