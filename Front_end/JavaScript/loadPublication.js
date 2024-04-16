@@ -34,17 +34,6 @@ function createScore(valoration) {
         const star = valorationElement.children[i];
         star.innerHTML = '&#9733;';
     }
-/*
-    // Rellenar media estrella si corresponde
-    const remainder = valorationValue - roundedValue;
-    if (remainder > 0 && roundedValue < 5) {
-        const halfStar = document.createElement('span');
-        halfStar.className = 'star';
-        halfStar.innerHTML = '&#x2BE0;'; // Unicode de media estrella
-        valorationElement.insertBefore(halfStar, valorationElement.children[roundedValue]);
-    }
-
- */
 }
 
 async function fetchDocument() {
@@ -168,10 +157,11 @@ async function displayDocumentData() {
             }
         }
         await loadComment(documentData["lista_comentarios"]);
-        //createScore(documentData["valoracion"]);
+        createScore(calculateValoration(documentData["valoracion"]));
         await isSave();
     }
 }
+
 async function modifyDoc(collection,document,data) {
     try {
         const response = await fetch(`http://localhost:3000/api/changeDoc/`+collection+'/'+document+'', {
@@ -192,6 +182,9 @@ async function modifyDoc(collection,document,data) {
         console.error('Error al añadir a la lista del documento:', error);
         throw error;
     }
+}
+function calculateValoration(publicationValoration) {
+    return publicationValoration;
 }
 
 async function changeIcon() {
