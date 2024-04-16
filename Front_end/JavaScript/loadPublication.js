@@ -1,4 +1,3 @@
-
 //import {initializeMap} from './loadMap.js';
 
 var dataJSON = null
@@ -35,6 +34,17 @@ function createScore(valoration) {
         const star = valorationElement.children[i];
         star.innerHTML = '&#9733;';
     }
+/*
+    // Rellenar media estrella si corresponde
+    const remainder = valorationValue - roundedValue;
+    if (remainder > 0 && roundedValue < 5) {
+        const halfStar = document.createElement('span');
+        halfStar.className = 'star';
+        halfStar.innerHTML = '&#x2BE0;'; // Unicode de media estrella
+        valorationElement.insertBefore(halfStar, valorationElement.children[roundedValue]);
+    }
+
+ */
 }
 
 async function fetchDocument() {
@@ -88,6 +98,7 @@ async function loadComment(comment_list) {
         var photoUser =  await fetchImage(user.photoPerfil);
         var text = response.contenido;
         createComment(userName,photoUser,text);
+
     }
 }
 function createComment(userName, photoUser, text) {
@@ -157,14 +168,9 @@ async function displayDocumentData() {
             }
         }
         await loadComment(documentData["lista_comentarios"]);
-        createScore(calculateRate(documentData["valoracion"]));
+        //createScore(documentData["valoracion"]);
         await isSave();
     }
-}
-
-// Función pensada por si se tuviera que calcular la valoración junto a la añadida en los comentarios
-function calculateRate(publicationValoration) {
-    return publicationValoration;
 }
 async function modifyDoc(collection,document,data) {
     try {
@@ -216,6 +222,14 @@ document.addEventListener("DOMContentLoaded", function() {
     document.getElementById("photoUser").addEventListener("click", redirectToUser);
     document.getElementById("username").addEventListener("click", redirectToUser);
 
+    fetchDocument().then(function(documentData) {
+        console.log("Nº Comentarios: " + documentData["lista_comentarios"].length);
+        for (var i = 1; i <= documentData["lista_comentarios"].length; i++) {
+            var imagenUsuario = document.querySelector('#coments')
+            console.log(imagenUsuario)
+            imagenUsuario.addEventListener('click', redirectToUser);
+        }
+    });
 });
 
 function redirectToUser() {
