@@ -36,8 +36,9 @@ function addImage(imagenPath, texto, publicationID) {
     nuevoElemento.appendChild(textoElemento);
     let contenedor = document.getElementById("imagenContainer");
     contenedor.appendChild(nuevoElemento);
-}function loadUserData(fieldName) {
-    const userID = localStorage.getItem("userId");
+}function loadUserData(fieldName, selfUser=true) {
+    let userID = localStorage.getItem("userId");
+    if (!selfUser) userID = localStorage.getItem("viewAccountId");
     return fetch('http://localhost:3000/api/getDocument/usuario/'+userID+'')
         .then(response => {
             if (!response.ok) {
@@ -84,15 +85,15 @@ function getImgURL(imgName) {
         });
 }
 
-async function loadProfilePhoto(imagenContainer) {
-    const profilePhoto = await loadUserData("photoPerfil");
+async function loadProfilePhoto(imagenContainer, selfUser=true) {
+    const profilePhoto = await loadUserData("photoPerfil", selfUser);
     const url = await getImgURL(profilePhoto);
     const imagen = document.getElementById(imagenContainer);
     imagen.src = url;
 }
 
-async function loadUserName(container) {
-    const username = await loadUserData("usuario");
+async function loadUserName(container, selfUser=true) {
+    const username = await loadUserData("usuario", selfUser);
     const texto = document.getElementById(container);
     texto.textContent = username;
 }

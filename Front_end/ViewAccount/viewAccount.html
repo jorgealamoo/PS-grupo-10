@@ -7,6 +7,7 @@
     <link rel="icon" type="image/png" href="../Images/logo_ExploreSpots_sin_fondo.png">
     <script src="/Front_end/JavaScript/authorisationCheck.js"></script>
     <script src="viewAccount.js"></script>
+    <script src="../JavaScript/userDataLoader.js"></script>
 </head>
 <body>
 
@@ -15,10 +16,10 @@
 <main>
     <div class="User">
         <div id="image">
-            <img id="user_img" src="../Images/usuario_generico.png" alt="">
+            <img id="user_img" src="" alt="">
         </div>
         <div id="information_user">
-            <span id="name"><b>Lorem ipsum</b></span>
+            <span id="name"><b></b></span>
             <div class="followers">
                 <div id="seguidos">
                     <span>Seguidores</span>
@@ -36,9 +37,8 @@
 
     <div class="UserContent">
         <h2 class="SectionTitle">Publications</h2>
-        <div class="lista_pubilicaciones">
-            <ul id="listaPublicaciones"></ul>
-        </div>
+    </div>
+    <div class="contImagen" id="imagenContainer">
     </div>
 
 </main>
@@ -47,12 +47,21 @@
 <script src='/Front_end/JavaScript/imagenLoader.js'></script>
 <script>
     cargarTemplate('../PhoneHeader/phoneHeader.html', '#phoneHeader');
-    cargarTemplate('../Header/header.html', '#desktopHeader', () => {
-        const directory = localStorage.getItem("user");
-        loadProfilePhoto(directory, "profilePhotoHeader");
-    });
+    cargarTemplate('../Header/header.html', '#desktopHeader');
     cargarTemplate('../Footer/footer.html', 'footer');
 </script>
-
+<script>
+    (async () => {
+        await loadProfilePhoto("user_img", false);
+        await loadUserName("name", false);
+        const publications = await loadUserData("lista_publicaciones", false);
+        for (let i=0; i<publications.length; i++) {
+            const imagen = await loadPublicationData("lista_imagenes", publications[i]);
+            const name = await loadPublicationData("nombre", publications[i]);
+            const url = await getImgURL(imagen[0]);
+            addImage(url, name, publications[i]);
+        }
+    })();
+</script>
 </body>
 </html>
