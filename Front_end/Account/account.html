@@ -5,6 +5,7 @@
     <title>Your account</title>
     <link rel="stylesheet" href="/Front_end/Account/account.css">
     <script src="/Front_end/JavaScript/userDataLoader.js"></script>
+    <script src="/Front_end/JavaScript/authorisationCheck.js"></script>
 </head>
 <body>
 <header id="phoneHeader"></header>
@@ -42,6 +43,8 @@
             addImage(url, name, publications[i]);
         }
     })();
+
+    document.addEventListener('DOMContentLoaded', checkAuth);
 </script>
 </body>
 </html>

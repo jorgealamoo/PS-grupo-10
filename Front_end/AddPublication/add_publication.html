@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <script src='../JavaScript/templateLoader.js'></script>
     <script src='../JavaScript/userDataLoader.js'></script>
+    <script src="/Front_end/JavaScript/authorisationCheck.js"></script>
     <title>Add Publication</title>
     <link href="styles.css" rel="stylesheet">
     <link rel="icon" type="image/png" href="../Images/logo_ExploreSpots_sin_fondo.png">
@@ -68,6 +69,7 @@
 </main>
 <footer></footer>
 <script>
+    document.addEventListener('DOMContentLoaded', checkAuth);
     cargarTemplate('../Header/header.html', '#desktopHeader');
     cargarTemplate('../PhoneHeader/phoneHeader.html', '#phoneHeader');
     cargarTemplate('/Front_end/Footer/footer.html', 'footer')
