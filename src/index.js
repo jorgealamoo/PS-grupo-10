@@ -39,9 +39,14 @@ document.getElementById('LogIn').addEventListener('click', async function() {
                 console.log('El usuario ha iniciado sesión correctamente con su email:', user);
                 location.href='/PS-grupo-10/Front_end/MapPage/map.html';
             }).catch (error=>{
-            console.error('Error al iniciar sesión con email:', error);
-            alert('Error al iniciar sesión con email: ' + error.message);
-        });
+                console.error('Error al iniciar sesión con email:', error);
+                var errorMessage = document.getElementById('errorMessage');
+                if (errorMessage) {
+                    errorMessage.style.display = "block";
+                } else {
+                    console.error("Element with id 'errorMessage' not found.");
+                }
+            });
     } catch (error) {
         console.error('Error al iniciar sesión con Google:', error);
         alert('Error al iniciar sesión con Google: ' + error.message);
@@ -63,8 +68,12 @@ document.getElementById('password').addEventListener('keypress', async function(
                     console.log('El usuario ha iniciado sesión correctamente con su email:', user);
                     location.href='/PS-grupo-10/Front_end/MapPage/map.html';
                 }).catch (error=>{
-                console.error('Error al iniciar sesión con email:', error);
-                alert('Error al iniciar sesión con email: ' + error.message);
+                var errorMessage = document.getElementById('errorMessage');
+                if (errorMessage) {
+                    errorMessage.style.display = "block";
+                } else {
+                    console.error("Element with id 'errorMessage' not found.");
+                }
             });
         } catch (error) {
             console.error('Error al iniciar sesión con Google:', error);
