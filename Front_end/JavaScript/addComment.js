@@ -10,9 +10,9 @@ document.addEventListener('DOMContentLoaded', function() {
     var title = document.getElementById('title');
     var form = document.getElementById('addComment');
     const user_id = localStorage.getItem("userId");
-    const publication_id = localStorage.getItem("currentPublication")
+    const publication_id = localStorage.getItem("currentPublication");
     const inputElement = document.getElementById('imageUpload');
-    var images= [];
+    var images = [];
 
     // Agregar evento de envío al formulario
     form.addEventListener('submit', async function(event) {
@@ -24,14 +24,12 @@ document.addEventListener('DOMContentLoaded', function() {
             descripcion: description.value,
             user_id: user_id,
             publication_id: publication_id,
-            lista_imagenes: []
+            lista_imagenes: await uploadAllImagesToAPI(images)
         };
-
-        datos.lista_imagenes = await uploadAllImagesToAPI(images);
 
         try {
             // Realizar la petición al servidor
-            var opciones = {
+            const opciones = {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -39,13 +37,24 @@ document.addEventListener('DOMContentLoaded', function() {
                 body: JSON.stringify(datos)
             };
 
-            var response = await fetch('http://localhost:3000/api/addUniqueDoc/comentario', opciones);
+            const response = await fetch('http://localhost:3000/api/addUniqueDoc/comentario', opciones);
             if (!response.ok) {
                 throw new Error('Error al agregar datos');
             }
 
-            var data = await response.json();
+            // Obtener el ID del comentario agregado
+            const data = await response.json();
             console.log('Datos agregados con éxito:', data);
+            const comentarioId = data.id;
+
+            // Modificar el documento de comentario con el ID del comentario
+            await modifyDoc("comentario", comentarioId, {comment_id: comentarioId});
+
+            // Obtener y actualizar la lista de comentarios asociada a la publicación
+            let commentsList = await takePublicationCommentsList(publication_id);
+            commentsList = commentsList.length === 0 ? [comentarioId] : [...commentsList, comentarioId];
+            const newJson = { lista_comentarios: commentsList };
+            await modifyDoc("publicacion", publication_id, newJson);
         } catch (error) {
             console.error('Error al agregar datos:', error);
         }
@@ -82,28 +91,6 @@ document.addEventListener('DOMContentLoaded', function() {
         console.log(images);
     }
 
-    function modifyDoc(collection,document,data) {
-        try {
-            const response =  fetch(`http://localhost:3000/api/changeDoc/` + collection + '/' + document + '', {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(data)
-            });
-
-            if (!response.ok) {
-                throw new Error('Error al añadir el documento');
-            }
-            const responseDoc =  response.json();
-            //console.log(data);
-            return data;
-        } catch (error) {
-            console.error('Error al añadir a la lista del documento:', error);
-            throw error;
-        }
-    }
-
     function takePublicationCommentsList(publication_id) {
         return fetch('http://localhost:3000/api/getDocument/publicacion/'+publication_id+'')
             .then(response => {
@@ -115,7 +102,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 return response.json();
             })
             .then(data => {
-                // Verificar si el campo lista_publicaciones está presente en el documento
+                // Verificar si el campo lista_comentarios está presente en el documento
                 if (data.hasOwnProperty('lista_comentarios')) {
                     const listaComentarios = data.lista_comentarios;
                     return listaComentarios;
@@ -130,19 +117,33 @@ document.addEventListener('DOMContentLoaded', function() {
             });
     }
 
-    let commentsList =  takePublicationCommentsList(publication_id);
-    if (commentsList.length === 0) {
-        commentsList = [id];
-    }else {
-        commentsList.push(id);
+    async function modifyDoc(collection, document, data) {
+        try {
+            const response = await fetch(`http://localhost:3000/api/changeDoc/${collection}/${document}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            });
+
+            if (!response.ok) {
+                throw new Error('Error al añadir el documento');
+            }
+
+            const responseDoc = await response.json(); // Esperar a que se resuelva la promesa de respuesta JSON
+            return responseDoc;
+        } catch (error) {
+            console.error('Error al añadir a la lista del documento:', error);
+            throw error;
+        }
     }
-    const newJson = {
-        lista_comentarios: commentsList
-    }
-    modifyDoc("publicacion",publication_id,newJson);
 
 
-inputElement.addEventListener('change', loaderImage);
+
+
+
+    inputElement.addEventListener('change', loaderImage);
 
 
 });
