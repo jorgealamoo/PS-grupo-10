@@ -103,11 +103,12 @@ main {
     padding: 5px;
     margin: 25px 0 15px 40px;
 }
-/*
-#elemento-oculto{
-    display: none;
+
+textarea {
+    margin: 10px 0 10px 0;
 }
-*/
+
+
 .Comments{
     display: flex;
     flex-direction: column;
@@ -126,8 +127,8 @@ main {
 .add_images_section {
     background-color: #D9D9D9;
     text-align: center;
-    width: 230px;
-    height: 230px;
+    width: 40%;
+    height: 150px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -255,11 +256,9 @@ main {
     margin-top: 10px;
 }
 
-#submit {
-    margin-top: 7px;
-    padding: 6px;
-    width: 15%;
-    display: flex;
+.submit {
+    padding: 7px;
+    width: 60px;
 }
 
 

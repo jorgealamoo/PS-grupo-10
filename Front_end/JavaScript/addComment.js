@@ -1,8 +1,6 @@
-// Función para mostrar u ocultar un elemento
-
-
 // Obtenemos los elementos description y title cuando se carga el DOM
 import {uploadAllImagesToAPI} from "./UploadImages.js";
+
 
 document.addEventListener('DOMContentLoaded', function() {
     // Seleccionar elementos después de que el DOM esté completamente cargado
