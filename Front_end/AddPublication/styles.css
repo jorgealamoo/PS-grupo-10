@@ -7,16 +7,6 @@ main {
     padding: 70px;
 }
 
-/*
-.top_side{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-}
-*/
-
-
 /* ------ ADD IMAGES ------ */
 
 .add_images_section {
@@ -136,8 +126,12 @@ main {
 
 /* ------ DESCRIPTION ------ */
 
+.description_section {
+    width: 75%;
+}
+
 .description_section textarea {
-    width: 1300px;
+    width: 98%;
     height: 200px;
     margin-bottom: 20px;
     padding: 10px;
@@ -168,7 +162,7 @@ main {
 }
 
 .select_location_text,
-.current_location_button {
+.rate {
     display: inline-block;
 }
 
@@ -178,21 +172,44 @@ main {
     font-weight: bold;
     font-family: 'Inter', sans-serif;
     font-size: 18px;
-    margin-right: 70%;
 }
 
-/* ------ SELECT LOCATION BUTTON ------ */
-
-.current_location_button button {
-    width: 240px;
-    padding: 10px;
-    margin-bottom: 20px;
-    border-radius: 8px;
-    background-color: #e0e0e0;
-    font-weight: bold;
-    font-family: 'Inter', sans-serif;
-    font-size: 16px;
-    cursor: pointer;
+/* ----- DYNAMIC RATE ----- */
+.rate {
+    vertical-align: bottom;
+    height: 46px;
+    padding: 0 10px;
+    margin-bottom: 8px;
+}
+.rate:not(:checked) > input {
+    position:absolute;
+    top:-9999px;
+}
+.rate:not(:checked) > label {
+    float:right;
+    width:1em;
+    overflow:hidden;
+    white-space:nowrap;
+    cursor:pointer;
+    font-size:30px;
+    color: #ffffff;
+}
+.rate:not(:checked) > label:before {
+    content: '★ ';
+}
+.rate > input:checked ~ label {
+    color: #ffc700;
+}
+.rate:not(:checked) > label:hover,
+.rate:not(:checked) > label:hover ~ label {
+    color: #deb217;
+}
+.rate > input:checked + label:hover,
+.rate > input:checked + label:hover ~ label,
+.rate > input:checked ~ label:hover,
+.rate > input:checked ~ label:hover ~ label,
+.rate > label:hover ~ input:checked ~ label {
+    color: #c59b08;
 }
 
 .current_location_button button:hover {background-color: #BFBFBF}
@@ -217,13 +234,14 @@ main {
 
 .save_and_exit_buttons {
     margin-left: 20px;
-    width: max-content;
+    width: 18%;
+    height: 20%;
 }
 
 /* ------ SAVE & EXIT BUTTONS ------ */
 
 .save_button button {
-    width: 300px;
+    width: 95%;
     height: 100px;
     padding: 10px;
     margin-bottom: 20px;
@@ -237,7 +255,7 @@ main {
 }
 
 .exit_button button {
-    width: 300px;
+    width: 95%;
     height: 100px;
     padding: 10px;
     margin-bottom: 20px;
