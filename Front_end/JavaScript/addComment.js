@@ -53,6 +53,8 @@ document.addEventListener('DOMContentLoaded', function() {
             commentsList = commentsList.length === 0 ? [comentarioId] : [...commentsList, comentarioId];
             const newJson = { lista_comentarios: commentsList };
             await modifyDoc("publicacion", publication_id, newJson);
+
+            window.location.href = "../Publication/publication.html";
         } catch (error) {
             console.error('Error al agregar datos:', error);
         }
