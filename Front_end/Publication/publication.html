@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
     <script type="module" src="../JavaScript/loadMap.js" ></script>
+    <script type="module" src="../../Front_end/JavaScript/addComment.js"></script>
     <script src= "../JavaScript/loadPublication.js"></script>
     <script type="module" src="./mainPublication.js" ></script>
     <title>Publication</title>
@@ -68,11 +69,21 @@
         </div>
         <div id="map"></div>
     </div>
-    <div class="Header-Comments">
-        <h2>Comments</h2>
-        <button id="mostrar-formulario">Add comments</button>
-        <h3>Ratings</h3>
-        <button id="addRating">Add rating</button>
+    <div class="Comments" id="elemento-oculto">
+        <h2>Comentarios</h2>
+        <form id="addComment" class="addComments">
+            <div class="infoComment">
+                <input type="text" id="title" class="title" name="title" placeholder="Título" maxlength="100" required>
+                <textarea class="descriptionComment" id="descripcion" name="description" placeholder="Descripción"
+                          maxlength="500" required></textarea>
+            </div>
+            <div id="add_images_section_Comment" class="add_images_section">
+                <input type="file" id="imageUpload_Comment" name="imageUpload" multiple accept="image/*">
+                <label for="imageUpload" id="addImageLabel_Comment" class="add_images_symbol">+</label>
+                <p class="add_images_text">ADD IMAGES</p>
+            </div>
+            <button id="submit" class="submit">Añadir</button>
+        </form>
     </div>
     <div id="coments"></div>
 </main>
