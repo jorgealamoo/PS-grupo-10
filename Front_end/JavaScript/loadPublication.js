@@ -34,17 +34,6 @@ function createScore(valoration) {
         const star = valorationElement.children[i];
         star.innerHTML = '&#9733;';
     }
-/*
-    // Rellenar media estrella si corresponde
-    const remainder = valorationValue - roundedValue;
-    if (remainder > 0 && roundedValue < 5) {
-        const halfStar = document.createElement('span');
-        halfStar.className = 'star';
-        halfStar.innerHTML = '&#x2BE0;'; // Unicode de media estrella
-        valorationElement.insertBefore(halfStar, valorationElement.children[roundedValue]);
-    }
-
- */
 }
 
 async function fetchDocument() {
@@ -168,10 +157,11 @@ async function displayDocumentData() {
             }
         }
         await loadComment(documentData["lista_comentarios"]);
-        //createScore(documentData["valoracion"]);
+        createScore(calculateValoration(documentData["valoracion"]));
         await isSave();
     }
 }
+
 async function modifyDoc(collection,document,data) {
     try {
         const response = await fetch(`http://localhost:3000/api/changeDoc/`+collection+'/'+document+'', {
@@ -192,6 +182,9 @@ async function modifyDoc(collection,document,data) {
         console.error('Error al añadir a la lista del documento:', error);
         throw error;
     }
+}
+function calculateValoration(publicationValoration) {
+    return publicationValoration;
 }
 
 async function changeIcon() {
@@ -222,6 +215,14 @@ document.addEventListener("DOMContentLoaded", function() {
     document.getElementById("photoUser").addEventListener("click", redirectToUser);
     document.getElementById("username").addEventListener("click", redirectToUser);
 
+    fetchDocument().then(function(documentData) {
+        console.log("Nº Comentarios: " + documentData["lista_comentarios"].length);
+        for (var i = 1; i <= documentData["lista_comentarios"].length; i++) {
+            var imagenUsuario = document.querySelector('#coments')
+            console.log(imagenUsuario)
+            imagenUsuario.addEventListener('click', redirectToUser);
+        }
+    });
 });
 
 function redirectToUser() {

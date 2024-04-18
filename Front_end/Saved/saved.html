@@ -18,12 +18,15 @@
 
 <script src='../JavaScript/templateLoader.js'></script>
 <script src='../JavaScript/userDataLoader.js'></script>
+<script src="/Front_end/JavaScript/authorisationCheck.js"></script>
 <script>
     cargarTemplate('../Header/header.html', '#desktopHeader');
     cargarTemplate('../PhoneHeader/phoneHeader.html', '#phoneHeader');
     cargarTemplate('../Footer/footer.html', 'footer');
 </script>
 <script>
+    document.addEventListener('DOMContentLoaded', checkAuth);
+
     (async () => {
         const publications = await loadUserData("lista_guardados");
         for (let i=0; i<publications.length; i++) {
