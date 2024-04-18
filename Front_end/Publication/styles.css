@@ -103,11 +103,11 @@ main {
     padding: 5px;
     margin: 25px 0 15px 40px;
 }
-
+/*
 #elemento-oculto{
     display: none;
 }
-
+*/
 .Comments{
     display: flex;
     flex-direction: column;
@@ -120,6 +120,106 @@ main {
     padding: 5px;
     border-radius: 5px;
 }
+
+/* ------ ADD IMAGES ------ */
+
+.add_images_section {
+    background-color: #D9D9D9;
+    text-align: center;
+    width: 230px;
+    height: 230px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 2px dashed #000000;
+    position: relative;
+}
+
+.add_images_section {
+    cursor: pointer;
+}
+
+#imageUpload {
+    display: none;
+}
+#imageUpload {
+    display: none;
+}
+
+.add_images_symbol {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    font-size: 60px;
+    color: #000;
+    text-align: center;
+    line-height: 200px;
+    background-color: rgba(217, 217, 217, 1);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.add_images_symbol::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(217, 217, 217, 1);    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    z-index: -1; /* Coloca el fondo detrás del símbolo "+" */
+}
+
+.add_images_symbol:hover {
+    background-color: #C0C0C0;
+}
+.add_images_symbol {
+    font-weight: bold;
+    font-family: 'Inter', sans-serif;
+    font-size: 24px;
+}
+.add_images_text {
+    position: absolute;
+    margin: 10px;
+    width: 100%;
+    text-align: center;
+    color: #000;
+    font-weight: bold;
+    font-family: 'Inter', sans-serif;
+}
+
+
+#icono-advertencia_ubi {
+    color: red; /* Color rojo para indicar la advertencia */
+    margin-left: 5px; /* Espaciado entre el campo de formulario y el icono */
+    font-size: 40px;
+    position: absolute;
+    display: none; /* Ocultar el icono inicialmente */
+}
+
+#icono-advertencia_description {
+    color: red; /* Color rojo para indicar la advertencia */
+    font-size: 40px;
+    display: none; /* Ocultar el icono inicialmente */
+    position: absolute;
+    margin: 10px;
+}
+#icono-advertencia-name {
+    color: red; /* Color rojo para indicar la advertencia */
+    font-size: 40px;
+    display: none; /* Ocultar el icono inicialmente */
+    position: absolute;
+    margin-bottom: 5px;
+}
+
 
 /* Este es un comentario de una sola línea */
 

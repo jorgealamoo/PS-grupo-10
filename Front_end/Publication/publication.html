@@ -13,7 +13,9 @@
             integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
     <script type="module" src="/Front_end/JavaScript/loadMap.js"></script>
     <script src="/Front_end/JavaScript/loadPublication.js"></script>
-    <script src="/Front_end/JavaScript/addComment.js"></script>
+    <script type="module" src="/Front_end/JavaScript/addComment.js"></script>
+    <script type="module" src="/Front_end/JavaScript/UploadImages.js"></script>
+
     <title>Publication</title>
     <link rel="icon" type="image/png" href="../Images/logo_ExploreSpots_sin_fondo.png">
 
@@ -55,17 +57,14 @@
             </div>
 
             <div class="infoComment">
-                <textarea class="description" id="comentario" name="comentario" placeholder="Descripción"
+                <textarea class="description" id="descripcion" name="description" placeholder="Descripción"
                           maxlength="500"></textarea>
             </div>
-            <div class="col-xl-2 col-lg-2 col-md-3 col-sm-4 col-xs-12" id="add-photo-container">
-                <div class="add-new-photo first" id="add-photo">
-                    <i class="add-icon">+</i>
-                </div>
-                <input type="file" multiple id="add-new-photo" name="images[]">
+            <div id="add_images_section" class="add_images_section">
+                <input type="file" id="imageUpload" name="imageUpload" multiple accept="image/*">
+                <label for="imageUpload" id="addImageLabel" class="add_images_symbol">+</label>
+                <p class="add_images_text">ADD IMAGES</p>
             </div>
-
-
             <button id="submit" class="submit">Añadir</button>
         </form>
     </div>
