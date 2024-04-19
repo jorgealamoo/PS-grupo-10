@@ -110,3 +110,15 @@ header#desktopHeader {
         display: block;
     }
 }
+
+.follower-info {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end; /* Align items to the right */
+}
+
+#followers,
+#following {
+    font-size: 15px; /* Adjust font size as needed */
+    margin-left: 10px; /* Add some space between the counts */
+}

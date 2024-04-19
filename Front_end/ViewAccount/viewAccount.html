@@ -22,11 +22,11 @@
             <span id="name"><b>Lorem ipsum</b></span>
             <div class="followers">
                 <div id="seguidos">
-                    <span>Seguidores</span>
+                    <span>Followers</span>
                     <span id="seguidores"><b>0</b></span>
                 </div>
                 <div id="siguiedo">
-                    <span>Siguiendo</span>
+                    <span>Following</span>
                     <span id="siguiendo"><b>0</b></span>
 
                 </div>
@@ -47,12 +47,10 @@
 <script src='/Front_end/JavaScript/templateLoader.js'></script>
 <script src='/Front_end/JavaScript/imagenLoader.js'></script>
 <script>
+    cargarTemplate('../Header/header.html', '#desktopHeader');
     cargarTemplate('../PhoneHeader/phoneHeader.html', '#phoneHeader');
-    cargarTemplate('../Header/header.html', '#desktopHeader', () => {
-        const directory = localStorage.getItem("user");
-        loadProfilePhoto(directory, "profilePhotoHeader");
-    });
     cargarTemplate('../Footer/footer.html', 'footer');
+    loadProfilePhoto("ProfileImage");
 </script>
 
 </body>

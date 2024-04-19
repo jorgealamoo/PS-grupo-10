@@ -96,3 +96,15 @@ async function loadUserName(container) {
     const texto = document.getElementById(container);
     texto.textContent = username;
 }
+
+async function loadFollowers(container) {
+    const followers = await loadUserData("lista_seguidores");
+    const texto = document.getElementById(container);
+    texto.textContent = "Followers: " + followers.length;
+}
+
+async function loadFollowing(container) {
+    const following = await loadUserData("lista_siguiendo");
+    const texto = document.getElementById(container);
+    texto.textContent = "Following: " + following.length;
+}
