@@ -62,11 +62,23 @@ body {
 
 .contImagen {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    grid-auto-flow: dense;
-    grid-gap: 1em;
-    margin: 0.5em;
+    grid-template-columns: repeat(5, 1fr);
+    column-gap: 7px;
+    row-gap: 60px;
+    margin: 10px 5px;
 }
+
+.contImagen > div {
+    width: 100%;
+    height: 100%;
+}
+
+/* Ajusta el tamaño de las imágenes */
+.contImagen img {
+    width: auto;
+    height: auto;
+}
+
 
 .contImagen > div {
     width: 100%;
@@ -98,7 +110,8 @@ header#desktopHeader {
     }
 
     .contImagen {
-        margin-left: 7em;
+        margin-left: 21%;
+        grid-template-columns: repeat(1, 1fr);
     }
 
     .User span {

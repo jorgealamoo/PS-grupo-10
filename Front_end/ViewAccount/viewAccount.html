@@ -54,7 +54,6 @@
 <script>
     checkIfFollowing();
     const followButton = document.getElementById("FollowButton");
-    followButton.addEventListener("click", toggleFollow);
     (async () => {
         await loadProfilePhoto("user_img", false);
         await loadUserName("name", false);

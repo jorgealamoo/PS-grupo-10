@@ -18,7 +18,7 @@ function addImage(imagenPath, texto, publicationID) {
     textoElemento.style.backgroundColor = 'rgba(0, 0, 0, 0.5)';
     textoElemento.style.padding = '5px';
     textoElemento.style.display = 'none';
-    textoElemento.style.width = '97.5%'
+    textoElemento.style.width = '96.5%'
 
     nuevoElemento.addEventListener('mouseover', function() {
         textoElemento.style.display = 'block';
@@ -122,5 +122,4 @@ async function getTotalFollow(element, followers) {
     } else {
         const list = await loadUserData("lista_siguiendo");
     }
-    element.tet
 }
