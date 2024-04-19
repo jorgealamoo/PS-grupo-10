@@ -32,6 +32,19 @@ body {
     font-family: ABeeZee, serif;
 }
 
+#Followers, #Following {
+    margin-left: 20em;
+    font-size: 30px;
+}
+
+#Following {
+    margin-left: 5em;
+}
+
+.following {
+    margin-left: 12%;
+}
+
 .options {
     width: 100%;
     position: absolute;
@@ -85,7 +98,7 @@ header#desktopHeader {
     }
 
     .contImagen {
-        margin-left: 3.25em;
+        margin-left: 7em;
     }
 
     .User span {
@@ -94,7 +107,7 @@ header#desktopHeader {
     }
 
     .options {
-        margin-left: 1em;
+        margin-left: 4em;
     }
 
     .options a {

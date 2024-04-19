@@ -6,7 +6,6 @@
     <link rel="stylesheet" href="../ViewAccount/viewAccount.css">
     <link rel="icon" type="image/png" href="../Images/logo_ExploreSpots_sin_fondo.png">
     <script src="/Front_end/JavaScript/authorisationCheck.js"></script>
-    <script src="viewAccount.js"></script>
     <script src="../JavaScript/userDataLoader.js"></script>
 </head>
 <body>
@@ -18,39 +17,43 @@
         <div id="image">
             <img id="user_img" src="" alt="">
         </div>
+        <b><span id="name"></span></b>
         <div id="information_user">
-            <span id="name"><b></b></span>
             <div class="followers">
                 <div id="seguidos">
                     <span>Seguidores</span>
-                    <span id="seguidores"><b>0</b></span>
+                    <span id="seguidores"><b></b></span>
                 </div>
                 <div id="siguiedo">
                     <span>Siguiendo</span>
-                    <span id="siguiendo"><b>0</b></span>
+                    <span id="siguiendo"><b></b></span>
 
                 </div>
             </div>
-            <button class="FollowButton">Follow</button>
+            <button id="FollowButton">Follow</button>
         </div>
     </div>
 
     <div class="UserContent">
         <h2 class="SectionTitle">Publications</h2>
     </div>
-    <div class="contImagen" id="imagenContainer">
-    </div>
+    <div class="contImagen" id="imagenContainer"></div>
 
 </main>
 <footer></footer>
 <script src='/Front_end/JavaScript/templateLoader.js'></script>
 <script src='/Front_end/JavaScript/imagenLoader.js'></script>
+<script src="viewAccount.js"></script>
+
 <script>
     cargarTemplate('../PhoneHeader/phoneHeader.html', '#phoneHeader');
     cargarTemplate('../Header/header.html', '#desktopHeader');
     cargarTemplate('../Footer/footer.html', 'footer');
 </script>
 <script>
+    checkIfFollowing();
+    const followButton = document.getElementById("FollowButton");
+    followButton.addEventListener("click", toggleFollow);
     (async () => {
         await loadProfilePhoto("user_img", false);
         await loadUserName("name", false);

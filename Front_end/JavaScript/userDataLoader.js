@@ -36,7 +36,8 @@ function addImage(imagenPath, texto, publicationID) {
     nuevoElemento.appendChild(textoElemento);
     let contenedor = document.getElementById("imagenContainer");
     contenedor.appendChild(nuevoElemento);
-}function loadUserData(fieldName, selfUser=true) {
+}
+function loadUserData(fieldName, selfUser=true) {
     let userID = localStorage.getItem("userId");
     if (!selfUser) userID = localStorage.getItem("viewAccountId");
     return fetch('http://localhost:3000/api/getDocument/usuario/'+userID+'')
@@ -96,4 +97,30 @@ async function loadUserName(container, selfUser=true) {
     const username = await loadUserData("usuario", selfUser);
     const texto = document.getElementById(container);
     texto.textContent = username;
+}
+
+async function checkIfFollowing() {
+    const followButton = document.getElementById("FollowButton");
+    const seguidores = document.getElementById("seguidores");
+    const siguiendo = document.getElementById("siguiendo");
+    const selfID = localStorage.getItem("userId");
+    const lista_seguidores = await loadUserData("lista_seguidores", false);
+    const lista_siguiendo = await loadUserData("lista_siguiendo", false);
+
+    seguidores.textContent = lista_seguidores.length;
+    siguiendo.textContent = lista_siguiendo.length;
+
+    for (let i=0; i<lista_seguidores.length; i++) {
+        if (selfID === lista_seguidores[i]) {
+            followButton.textContent = "Following";
+        }
+    }
+}
+async function getTotalFollow(element, followers) {
+    if (followers) {
+        const list = await loadUserData("lista_seguidores");
+    } else {
+        const list = await loadUserData("lista_siguiendo");
+    }
+    element.tet
 }

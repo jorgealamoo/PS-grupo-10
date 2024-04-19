@@ -1,3 +1,4 @@
+
 main {
     min-height: 80vh;
 }
@@ -38,7 +39,8 @@ body {
     display: block; /* Hace que el nombre ocupe todo el ancho */
     text-align: center; /* Centra el nombre */
     margin-bottom: 10px; /* Espacio entre el nombre y los seguidores */
-    font-size: 1.4em; /* Tamaño de la fuente */
+    font-size: 40px; /* Tamaño de la fuente */
+    font-family: ABeeZee, serif;
 }
 
 /* Estilos para el bloque de seguidores */
@@ -60,7 +62,7 @@ body {
 }
 
 /* Estilos para el botón de seguir */
-.FollowButton {
+#FollowButton {
     display: block; /* Hace que el botón ocupe todo el ancho */
     margin: 10px auto; /* Centra el botón horizontalmente */
     text-align: center; /* Centra el texto del botón */
@@ -79,7 +81,7 @@ body {
 }
 
 
-.FollowButton {
+#FollowButton {
     padding: 10px 20px; /* Increase padding to make the button bigger */
     background-color: #007bff; /* Adjust color as needed */
     color: #fff; /* Text color */
@@ -88,7 +90,7 @@ body {
     cursor: pointer;
     transition: background-color 0.3s;
 }
-.FollowButton:hover {
+#FollowButton:hover {
     background-color: #0056b3; /* Adjust hover color as needed */
 }
 
@@ -151,10 +153,6 @@ body {
     opacity: 1; /* Show text on hover */
 }
 
-
-
-
-
 .contImagen {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -166,8 +164,6 @@ body {
 #footerContainer {
     margin-top: 26vh;
 }
-
-
 
 /* ------ RESPONSIVE HEADERS ------ */
 
@@ -198,4 +194,3 @@ header#desktopHeader {
         display: block;
     }
 }
-
