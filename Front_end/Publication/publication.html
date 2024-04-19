@@ -11,7 +11,9 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
     <script type="module" src="../JavaScript/loadMap.js" ></script>
+    <script type="module" src="../../Front_end/JavaScript/addComment.js"></script>
     <script src= "../JavaScript/loadPublication.js"></script>
+    <script type="module" src="./mainPublication.js" ></script>
     <title>Publication</title>
     <link rel="icon" type="image/png" href="../Images/logo_ExploreSpots_sin_fondo.png">
 
@@ -30,6 +32,18 @@
             <div id="userData">
                 <img id="photoUser" style="cursor: pointer">
                 <h2 id='username'></h2>
+                <div id = "botonAñadir" >
+                    <div class="add_publication_left_side">
+                        <div id="add_images_section" class="add_images_section">
+                            <input type="file" id="imageUpload" name="imageUpload" multiple accept="image/*">
+                            <label for="imageUpload" id="addImageLabel" class="add_images_symbol">+</label>
+                            <p class="add_images_text">ADD MORE IMAGES</p>
+                        </div>
+                        <div class="save_button">
+                            <button id="saveBtn">Save</button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
         <img/>
@@ -44,13 +58,24 @@
         </div>
         <div id="map"></div>
     </div>
-    <div class="Header-Comments">
+    <div class="Comments" id="elemento-oculto">
         <h2>Comments</h2>
-        <button id="mostrar-formulario">Add comments</button>
-        <h3>Ratings</h3>
-        <button id="addRating">Add rating</button>
+        <div id="coments"></div>
+        <h3>Add Comments</h3>
+        <form id="addComment" class="addComments">
+            <div class="infoComment">
+                <input type="text" id="title" class="title" name="title" placeholder="Título" maxlength="100" required>
+                <textarea class="descriptionComment" id="contenido" name="contenido" placeholder="Descripción"
+                          maxlength="500" required></textarea>
+            </div>
+            <div id="add_images_section_Comment" class="add_images_section">
+                <input type="file" id="imageUpload_Comment" name="imageUpload" multiple accept="image/*">
+                <label for="imageUpload" id="addImageLabel_Comment" class="add_images_symbol">+</label>
+                <p class="add_images_text">ADD IMAGES</p>
+            </div>
+            <button id="submit" class="submit">Añadir</button>
+        </form>
     </div>
-    <div id="coments"></div>
 </main>
 
 <footer></footer>

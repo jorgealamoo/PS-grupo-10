@@ -86,11 +86,12 @@ async function loadComment(comment_list) {
         var userName = user.nombre;
         var photoUser =  await fetchImage(user.photoPerfil);
         var text = response.contenido;
-        createComment(userName,photoUser,text);
+        var titulo = response.titulo;
+        createComment(userName,photoUser,text,titulo);
 
     }
 }
-function createComment(userName, photoUser, text) {
+function createComment(userName, photoUser, text, title) {
     var comentariosDiv = document.getElementById('coments');
     var comentarioHTML = `
                 <div class="comentario">
@@ -98,6 +99,7 @@ function createComment(userName, photoUser, text) {
                         <img src="${photoUser}" class="imagen-comentario"> 
                         <h3 class="nombre">${userName}</h3>
                     </div>
+                    <div class="title">${title}</div>
                     <div class="mensaje">${text}</div>
                 </div>
             `;

@@ -119,7 +119,22 @@ async function modifyDoc(collection,document,data) {
     }
 }
 
+function selectRate() {
+    const rateButtons = document.getElementsByName('rate');
+    let selectedRate = 0;
+    for (const button of rateButtons) {
+        if (button.checked) {
+            selectedRate = parseInt(button.value);
+            break;
+        }
+    }
+    return selectedRate;
+}
+
 async function addDocument() {
+
+    datos.valoracion = selectRate();
+    console.log(datos.valoracion);
     datos.descripcion = comment.value.trim();
     datos.nombre = titel.value.trim();
     //console.log(images);

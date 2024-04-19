@@ -75,7 +75,7 @@ body {
 }
 
 input {
-    width: 95%;
+    width: 90%;
     padding: 10px;
     margin-bottom: 15px;
 }
@@ -88,6 +88,7 @@ button {
     border: none;
     cursor: pointer;
     border-radius: 12px;
+    font-size: 28px;
 }
 
 button:hover {
@@ -95,7 +96,7 @@ button:hover {
 }
 
 .dont-have-account-link {
-    margin-top: 10%;
+    margin-top: 7%;
 }
 .forgot-password-link {
     margin-top: 3%;
@@ -106,26 +107,12 @@ button:hover {
     text-decoration: none;
     color: #696565;
     margin-right: 0;
-    font-size: 12px;
+    font-size: 18px;
 }
 
 .dont-have-account-link a:hover,
 .forgot-password-link a:hover {
     text-decoration: underline;
-}
-
-.other_options a {
-    display: block;
-    font-size: 15px;
-}
-
-#accOptions {
-    margin-top: 20%;
-}
-
-#accOptions a {
-    text-decoration: none;
-    color: #605959;
 }
 
 .social-login-options {
@@ -202,6 +189,4 @@ button:hover {
     }
 }
 
-.right-side b {
-    font-size: 35px;
-}
+
