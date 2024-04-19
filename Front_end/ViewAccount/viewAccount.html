@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="../ViewAccount/viewAccount.css">
     <link rel="icon" type="image/png" href="../Images/logo_ExploreSpots_sin_fondo.png">
     <script src="/Front_end/JavaScript/authorisationCheck.js"></script>
-    <script src="viewAccount.js"></script>
+    <script src="../JavaScript/userDataLoader.js"></script>
 </head>
 <body>
 
@@ -16,42 +16,56 @@
 <main>
     <div class="User">
         <div id="image">
-            <img id="user_img" src="../Images/usuario_generico.png" alt="">
+            <img id="user_img" src="" alt="">
         </div>
+        <b><span id="name"></span></b>
         <div id="information_user">
-            <span id="name"><b>Lorem ipsum</b></span>
             <div class="followers">
                 <div id="seguidos">
-                    <span>Followers</span>
-                    <span id="seguidores"><b>0</b></span>
+                    <span>Seguidores</span>
+                    <span id="seguidores"><b></b></span>
                 </div>
                 <div id="siguiedo">
-                    <span>Following</span>
-                    <span id="siguiendo"><b>0</b></span>
+                    <span>Siguiendo</span>
+                    <span id="siguiendo"><b></b></span>
 
                 </div>
             </div>
-            <button class="FollowButton">Follow</button>
+            <button id="FollowButton">Follow</button>
         </div>
     </div>
 
     <div class="UserContent">
         <h2 class="SectionTitle">Publications</h2>
-        <div class="lista_pubilicaciones">
-            <ul id="listaPublicaciones"></ul>
-        </div>
     </div>
+    <div class="contImagen" id="imagenContainer"></div>
 
 </main>
 <footer></footer>
 <script src='/Front_end/JavaScript/templateLoader.js'></script>
 <script src='/Front_end/JavaScript/imagenLoader.js'></script>
-<script>
-    cargarTemplate('../Header/header.html', '#desktopHeader');
-    cargarTemplate('../PhoneHeader/phoneHeader.html', '#phoneHeader');
-    cargarTemplate('../Footer/footer.html', 'footer');
-    loadProfilePhoto("ProfileImage");
-</script>
+<script src="viewAccount.js"></script>
 
+<script>
+    cargarTemplate('../PhoneHeader/phoneHeader.html', '#phoneHeader');
+    cargarTemplate('../Header/header.html', '#desktopHeader');
+    cargarTemplate('../Footer/footer.html', 'footer');
+</script>
+<script>
+    checkIfFollowing();
+    const followButton = document.getElementById("FollowButton");
+    followButton.addEventListener("click", toggleFollow);
+    (async () => {
+        await loadProfilePhoto("user_img", false);
+        await loadUserName("name", false);
+        const publications = await loadUserData("lista_publicaciones", false);
+        for (let i=0; i<publications.length; i++) {
+            const imagen = await loadPublicationData("lista_imagenes", publications[i]);
+            const name = await loadPublicationData("nombre", publications[i]);
+            const url = await getImgURL(imagen[0]);
+            addImage(url, name, publications[i]);
+        }
+    })();
+</script>
 </body>
 </html>
