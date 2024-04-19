@@ -6,13 +6,13 @@ body {
     margin: 0;
     min-width: 375px;
     overflow-x: hidden;
-    background-color: #fff8dc;
+    background-color: white;
 }
 
 .User {
     width: 100%;
     height: 15em;
-    background-color: gray;
+    background-color: rgba(167, 225, 225, 0.37);
     position: relative;
     display: flex;
     align-items: center;
@@ -58,6 +58,10 @@ body {
     text-decoration: none;
     color: black;
     margin-right: 2em;
+}
+
+.options a:hover {
+    color: #18449b;
 }
 
 .contImagen {
