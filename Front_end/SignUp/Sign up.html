@@ -31,7 +31,9 @@
             <div>
                 <label for="confirmPassword"></label><input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm Password" required class="big_inputs">
             </div>
-            <div id="passwordError"></div>
+
+            <div id="errorMessage" style="color: red; text-align: center; font-size: 20px; margin-bottom: 5px; display: none">Error Message</div>
+            <div id="createdMessage" style="color: limegreen; text-align: center; font-size: 20px; margin-bottom: 5px; display: none">Account Created Succesfully!</div>
 
             <div class="checkbox-container">
                 <input type="checkbox" id="agreeTerms" name="agreeTerms">
@@ -72,15 +74,50 @@
     const auth = getAuth(app);
     const db = getFirestore(app);
 
+    function isValidEmail(email) {
+        // Regular expression for email validation
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return emailRegex.test(email);
+    }
+
 
     let RegisterUser = evt => {
         evt.preventDefault();
 
         let email = document.getElementById('email');
         let password = document.getElementById('password');
+        let confirmPassword = document.getElementById('confirmPassword');
         let firstname = document.getElementById('firstName');
         let lastname = document.getElementById('lastName');
         let username = document.getElementById('username');
+        let agreeTerms = document.getElementById('agreeTerms');
+
+        let errorMessage = document.getElementById('errorMessage');
+        let createdMessage = document.getElementById('createdMessage');
+
+        if (email.value == "" || password.value == "" || confirmPassword.value == "" || firstname.value == "" || lastname.value == "" || username.value == "") {
+            errorMessage.textContent = "Fill in all fields";
+            errorMessage.style.display = "block";
+            return;
+        }
+
+        if (!isValidEmail(email.value)) {
+            errorMessage.textContent = "Email is not valid";
+            errorMessage.style.display = "block";
+            return;
+        }
+
+        if (password.value != confirmPassword.value) {
+            errorMessage.textContent = "Passwords do not match";
+            errorMessage.style.display = "block";
+            return;
+        }
+
+        if (!agreeTerms.checked) {
+            errorMessage.textContent = "Must accept terms and contitions";
+            errorMessage.style.display = "block";
+            return;
+        }
 
         createUserWithEmailAndPassword(auth, email.value, password.value)
             .then((credentials) => {
@@ -106,10 +143,15 @@
                 });
             })
             .then(() => {
-            console.log("Campo 'userID' actualizado con éxito.");
-            alert("Usuario creado correctamente");
-            document.getElementById('mainForm').submit();
-            validatePassword();
+                errorMessage.style.display = "none";
+                createdMessage.style.display = "block";
+                email.value = ""
+                password.value = ""
+                confirmPassword.value = ""
+                firstname.value = ""
+                lastname.value = ""
+                username.value = ""
+                agreeTerms.value = ""
             })
             .catch((error) => {
                 alert("Error: " + error.message);
