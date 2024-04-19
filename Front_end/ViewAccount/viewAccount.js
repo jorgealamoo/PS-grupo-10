@@ -197,11 +197,74 @@ document.addEventListener('DOMContentLoaded', async function() {
             const responseData = await response.json();
             console.log('Response:', responseData);
             console.log("SUCCESS");
-            document.getElementById('seguidores').innerHTML = "<b>" + "Seguidores: " + dataJSON['lista_seguidores'].length + "<b>";
+            document.getElementById('seguidores').innerHTML = "<b>" + dataJSON['lista_seguidores'].length + "<b>";
         } catch (error) {
             console.error('Error updating document:', error.message);
         }
     }
+
+    async function updateCurrentUser(data) {
+        try {
+            const userId = localStorage.getItem('userId');
+            const apiUrl = 'http://localhost:3000/api/changeDoc/usuario/' + userId + '';
+            const response = await fetch(apiUrl, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            });
+
+            if (!response.ok) {
+                throw new Error('Failed to update document');
+            }
+
+            const responseData = await response.json();
+            console.log('Response:', responseData);
+            console.log("SUCCESS");
+        } catch (error) {
+            console.error('Error updating document:', error.message);
+        }
+    }
+
+
+    async function fetchCurrentUserDocument() {
+        try {
+            const userId = localStorage.getItem('userId');
+            const response = await fetch('http://localhost:3000/api/getDocument/usuario/' + userId);
+            if (!response.ok) {
+                throw new Error('Failed to fetch document');
+            }
+            const data = await response.json();
+            return data;    //Devuelve datos del usuario actual
+        } catch (error) {
+            console.error('Error fetching document:', error.message);
+            return null;
+        }
+    }
+
+    function toggleSiguiendo(te_segui) {
+        fetchCurrentUserDocument()
+            .then(data => {
+                const userId = localStorage.getItem('userId');
+                const viewinguserId = localStorage.getItem('viewAccountId');
+                if (te_segui) {    //Se añade 1 a lista de Siguiendo de Usuario Actual
+                    var lista = data["lista_siguiendo"];
+                    lista.push(viewinguserId);
+                    data["lista_siguiendo"] = lista;
+                    updateCurrentUser(data)
+                } else {    //Se resta 1 a lista de Siguiendo de Usuario Actual
+                    index = data["lista_siguiendo"].indexOf(viewinguserId);
+                    data["lista_siguiendo"].splice(index, 1);
+                    updateCurrentUser(data)
+                }
+            })
+            .catch(error => {
+                console.error('Error fetching document:', error.message);
+            });
+    }
+
+
 
 
     // Get the button element by its class name
@@ -215,6 +278,8 @@ document.addEventListener('DOMContentLoaded', async function() {
             lista.push(userId);
             dataJSON["lista_seguidores"] = lista;
             updateUser();
+            //Añadimos 1 a la lista de siguiendo de el UsuarioActual
+            toggleSiguiendo(true)
             followButton.textContent = "Following";
         } else {
             try {
@@ -227,6 +292,8 @@ document.addEventListener('DOMContentLoaded', async function() {
                     dataJSON["lista_seguidores"].splice(index, 1);
                     console.log(`User ${userId} removed from lista_seguidores`);
                     updateUser();
+                    //Restamos 1 a la lista de siguiendo de el UsuarioActual
+                    toggleSiguiendo(false)
                     followButton.textContent = "Follow";
                 } else {
                     console.log(`User ${userId} not found in lista_seguidores`);
@@ -240,7 +307,7 @@ document.addEventListener('DOMContentLoaded', async function() {
         }
     }
 
-// Add click event listener to the button to call the toggleFollow function
+    // Add click event listener to the button to call the toggleFollow function
     followButton.addEventListener("click", toggleFollow);
 
 
