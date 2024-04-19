@@ -1,10 +1,10 @@
-// Obtenemos los elementos description y title cuando se carga el DOM
+// Obtenemos los elementos contenido y title cuando se carga el DOM
 import {uploadAllImagesToAPI} from "./UploadImages.js";
 
 
 document.addEventListener('DOMContentLoaded', function() {
     // Seleccionar elementos después de que el DOM esté completamente cargado
-    var description = document.getElementById('descripcion');
+    var contenido = document.getElementById('contenido');
     var title = document.getElementById('title');
     var form = document.getElementById('addComment');
     const user_id = localStorage.getItem("userId");
@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', function() {
         // Obtener valores de los campos de entrada
         const datos = {
             titulo: title.value,
-            descripcion: description.value,
+            contenido: contenido.value,
             user_id: user_id,
             publication_id: publication_id,
             lista_imagenes: await uploadAllImagesToAPI(images)
