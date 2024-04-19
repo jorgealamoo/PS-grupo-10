@@ -128,10 +128,57 @@ async function checkIfFollowing() {
         }
     }
 }
-async function getTotalFollow(element, followers) {
-    if (followers) {
-        const list = await loadUserData("lista_seguidores");
-    } else {
-        const list = await loadUserData("lista_siguiendo");
+
+async function updateFollowers(lista_seguidores) {
+    try {
+        const userId = localStorage.getItem('viewAccountId');
+        const response = await fetch('http://localhost:3000/api/getDocument/usuario/' + userId);
+        if (!response.ok) {
+            throw new Error('Failed to fetch document');
+        }
+        dataJSON = await response.json();
+        dataJSON["lista_seguidores"] = await lista_seguidores;
+
+        updateNumber(dataJSON["lista_seguidores"].length);
+
+        const apiUrl = 'http://localhost:3000/api/changeDoc/usuario/' + dataJSON['id'] + '';
+        const response2 = await fetch(apiUrl, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(dataJSON)
+        });
+    } catch (error) {
+        console.error('Error fetching document:', error.message);
+        return null;
     }
+}
+
+function updateNumber(number) {
+    const nFollowers = document.getElementById("seguidores");
+    nFollowers.textContent = number;
+}
+
+async function toggleFollow() {
+    const button = document.getElementById("FollowButton");
+    let lista_seguidores = await loadUserData("lista_seguidores", false);
+    const userId = localStorage.getItem("userId");
+    let index = lista_seguidores.indexOf(userId);
+
+    if (button.textContent === "Following") lista_seguidores = unfollow(lista_seguidores, index, button);
+    else if (button.textContent === "Follow") lista_seguidores = follow(lista_seguidores, userId, button);
+    updateFollowers(lista_seguidores).then();
+}
+
+async function unfollow(lista_seguidores, index, button) {
+    lista_seguidores.splice(index, index);
+    button.textContent = "Follow";
+    return lista_seguidores;
+}
+
+async function follow(lista_seguidores, userId, button) {
+    lista_seguidores.push(userId);
+    button.textContent = "Following";
+    return lista_seguidores;
 }

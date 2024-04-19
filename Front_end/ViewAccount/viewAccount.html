@@ -50,7 +50,9 @@
 </script>
 <script>
     checkIfFollowing();
-    const followButton = document.getElementById("FollowButton");
+    const b = document.getElementById("FollowButton");
+    b.addEventListener("click", toggleFollow);
+
     (async () => {
         await loadProfilePhoto("user_img", false);
         await loadUserName("name", false);
