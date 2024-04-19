@@ -134,12 +134,7 @@ main {
 }
 
 /* Estilos para los comentarios */
-.comentario {
-    margin-bottom: 20px;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-}
+
 .nombre {
     font-weight: bold;
 }
@@ -239,14 +234,8 @@ main {
     min-height: 25px;
     max-height: 250px;
     width: 100%;
-    min-width: 450px;
     resize: vertical;
 }
-
-
-/* ------ ADD IMAGES ------ */
-
-
 
 /*------ AÑADIR COMENTARIOS ------*/
 
@@ -280,7 +269,7 @@ main {
 }
 
 .descriptionComment {
-    width: 98%;
+    width: 95%;
     height: 200px;
     margin-bottom: 20px;
     padding: 10px;
