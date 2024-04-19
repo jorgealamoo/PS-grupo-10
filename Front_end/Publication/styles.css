@@ -245,87 +245,137 @@ main {
 
 
 /* ------ ADD IMAGES ------ */
-#botonAñadir {
-    display: none;
-}
-.add_images_section {
-    margin-left: 20px;
-    background-color: #D9D9D9;
-    text-align: center;
-    width: 200px;
-    height: 100px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    border-radius: 8px;
-    padding: 15px;
-    margin-bottom: 20px;
-    border: 2px dashed #000000;
-    position: relative;
-}
 
-.add_images_section {
-    cursor: pointer;
-}
 
-#imageUpload {
-    display: none;
-}
-#imageUpload_Comment {
-    display: none;
-}
-
-.add_images_symbol {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    font-size: 60px;
-    color: #000;
-    text-align: center;
-    line-height: 200px;
-    background-color: rgba(217, 217, 217, 1);
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
-}
-.add_images_symbol::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(217, 217, 217, 1);    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-    z-index: -1; /* Coloca el fondo detrás del símbolo "+" */
-}
-
-.add_images_symbol:hover {
-    background-color: #C0C0C0;
-}
-.add_images_symbol {
-    font-weight: bold;
-    font-family: 'Inter', sans-serif;
-    font-size: 24px;
-}
-.add_images_text {
-    position: absolute;
-    margin: 10px;
-    width: 100%;
-    text-align: center;
-    color: #000;
-    font-weight: bold;
-    font-family: 'Inter', sans-serif;
-}
 
 /*------ AÑADIR COMENTARIOS ------*/
 
+.Comments h2 {
+    font-weight: bold;
+    font-family: 'Inter', sans-serif;
+    color: #0C6DFF;
+}
 
+.addCommentsText {
+    font-weight: bold;
+    font-family: 'Inter', sans-serif;
+    color: #0C6DFF;
+}
 
+.titleInput {
+    width: 240px;
+    margin-bottom: 20px;
+    padding: 10px;
+    border-radius: 8px;
+    background-color: #e0e0e0;
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.titleInput::placeholder {
+    font-weight: bold;
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+}
+
+.descriptionComment {
+    width: 98%;
+    height: 200px;
+    margin-bottom: 20px;
+    padding: 10px;
+    border-radius: 8px;
+    background-color: #e0e0e0;
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    resize: none;
+}
+
+.descriptionComment::placeholder {
+    font-weight: bold;
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+}
+
+.submit {
+    width: 150px;
+    padding: 10px;
+    border-radius: 8px;
+    background-color: #0C6DFF;
+    color: white;
+    font-weight: bold;
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    cursor: pointer;
+    margin-bottom: 20px;
+}
+
+.submit:hover {
+    background-color: #58a9fa;
+}
+
+/* ----- AÑADIR IMAGENES EN COMENTARIOS ----- */
+
+.titleInput,
+.add_images_section {
+    display: inline-block;
+}
+
+.image-upload-label {
+    display: inline-block;
+    position: relative;
+    width: 150px;
+    height: 50px;
+    border: 2px dashed #e0e0e0;
+    border-radius: 8px;
+    text-align: center;
+    cursor: pointer;
+    margin-left: 20px;
+    margin-bottom: 20px;
+}
+
+.select-images {
+    margin-top: 15px;
+    color: #666;
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.image-upload-label:hover {
+    background-color: #f9f9f9;
+}
+
+.imageUpload_Comment {
+    display: none; /* Esto oculta el input de tipo file */
+}
+
+/* ------ AÑADIR NUEVAS IMAGENES A MI PROPIA PUBLICACION ------ */
+
+.add_new_images_section,
+.save_image_button {
+    display: inline-block;
+}
+
+.add_new_images_section {
+}
+
+.save_image_button button {
+    width: 180px;
+    padding: 10px;
+    border-radius: 8px;
+    background-color: #0C6DFF;
+    color: white;
+    font-weight: bold;
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    cursor: pointer;
+    margin-left: 15px;
+}
+
+.save_image_button button:hover {
+    background-color: #58a9fa;
+}
 
 /* ------ RESPONSIVE HEADERS ------ */
 
