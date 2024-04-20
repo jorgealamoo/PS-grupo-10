@@ -53,7 +53,7 @@ document.getElementById('LogIn').addEventListener('click', async function() {
     }
 });
 
-document.getElementById('password').addEventListener('keypress', async function(event) {
+document.addEventListener('keypress', async function(event) {
     if (event.key === 'Enter') {
         try {
             const email = document.getElementById('user_name').value;
