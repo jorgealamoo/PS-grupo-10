@@ -49,6 +49,11 @@
     cargarTemplate('../Footer/footer.html', 'footer');
 </script>
 <script>
+    let userId = localStorage.getItem("userId");
+    let viewAccountId = localStorage.getItem("viewAccountId");
+    if (viewAccountId == userId) {
+        window.location.href = "../Account/account.html"
+    }
     checkIfFollowing();
     const b = document.getElementById("FollowButton");
     b.addEventListener("click", toggleFollow);
