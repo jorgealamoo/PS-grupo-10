@@ -91,6 +91,7 @@ main {
 
 #username {
     margin-left: 20px;
+    cursor: pointer;
 }
 
 #name {
@@ -222,11 +223,33 @@ main {
     margin-left: 2%;
 }
 
+.header-comment img, h3 {
+    cursor: pointer;
+}
+
+.header-comment h3 {
+    font-weight: bold;
+    font-family: 'Inter', sans-serif;
+    font-size: 20px;
+    margin-top: 10px;
+}
+
 .description,
 .title,
 .image {
     padding: 5px;
     border-radius: 5px;
+}
+
+.title {
+    font-weight: bold;
+    font-family: 'Inter', sans-serif;
+    font-size: 17px;
+}
+
+.mensaje {
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
 }
 
 .descriptionComment {

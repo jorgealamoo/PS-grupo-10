@@ -93,6 +93,12 @@ body {
     margin-top: 26vh;
 }
 
+.follower-info span {
+    font-family: 'Inter', sans-serif;
+    font-weight: bold;
+    font-size: 16px;
+}
+
 /* ------ RESPONSIVE HEADERS ------ */
 
 /* Ocultar los headers por defecto */
