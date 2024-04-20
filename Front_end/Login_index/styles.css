@@ -33,13 +33,14 @@ body {
 }
 
 .right-side {
-    border-radius: 0 10% 10% 0;
+    border-radius: 0 16px 16px 0;
 }
 
 .login-form-container {
     max-width: max-content;
     margin: 0 auto;
     box-sizing: border-box;
+    border-radius: 50%;
 }
 
 .form-group {
@@ -88,7 +89,7 @@ button {
     border: none;
     cursor: pointer;
     border-radius: 12px;
-    font-size: 28px;
+    font-size: 100%;
 }
 
 button:hover {
@@ -144,7 +145,7 @@ button:hover {
     color: #ffffff;
 }
 
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 908px) {
     body {
         margin: 0;
         padding: 0;
