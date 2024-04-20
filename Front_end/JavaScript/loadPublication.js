@@ -87,23 +87,57 @@ async function loadComment(comment_list) {
         var photoUser =  await fetchImage(user.photoPerfil);
         var text = response.contenido;
         var titulo = response.titulo;
-        createComment(userName,photoUser,text,titulo);
+        var userID = response.user_id
+        createComment(userName,photoUser,text,titulo, userID);
 
     }
 }
-function createComment(userName, photoUser, text, title) {
+function createComment(userName, photoUser, text, title, userID) {
     var comentariosDiv = document.getElementById('coments');
-    var comentarioHTML = `
-                <div class="comentario">
-                    <div class="header-comment">
-                        <img src="${photoUser}" class="imagen-comentario"> 
-                        <h3 class="nombre">${userName}</h3>
-                    </div>
-                    <div class="title">${title}</div>
-                    <div class="mensaje">${text}</div>
-                </div>
-            `;
-    comentariosDiv.innerHTML += comentarioHTML;
+
+    // Create new comment element
+    var nuevoComentario = document.createElement('div');
+    nuevoComentario.id = userID;
+    nuevoComentario.classList.add('comentario');
+
+    // Create header-comment div
+    var headerCommentDiv = document.createElement('div');
+    headerCommentDiv.classList.add('header-comment');
+    nuevoComentario.appendChild(headerCommentDiv);
+
+    // Create image element
+    var imagenComentarioImg = document.createElement('img');
+    imagenComentarioImg.src = photoUser;
+    imagenComentarioImg.classList.add('imagen-comentario');
+    imagenComentarioImg.addEventListener('click', function() {
+        redirectToUser(userID);
+    });
+
+    headerCommentDiv.appendChild(imagenComentarioImg);
+
+    // Create nombre h3 element
+    var nombreH3 = document.createElement('h3');
+    nombreH3.classList.add('nombre');
+    nombreH3.textContent = userName;
+    nombreH3.addEventListener('click', function() {
+        redirectToUser(userID);
+    });
+    headerCommentDiv.appendChild(nombreH3);
+
+    // Create title div
+    var titleDiv = document.createElement('div');
+    titleDiv.classList.add('title');
+    titleDiv.textContent = title;
+    nuevoComentario.appendChild(titleDiv);
+
+    // Create mensaje div
+    var mensajeDiv = document.createElement('div');
+    mensajeDiv.classList.add('mensaje');
+    mensajeDiv.textContent = text;
+    nuevoComentario.appendChild(mensajeDiv);
+
+    // Append the new comment to the comments div
+    comentariosDiv.appendChild(nuevoComentario);
 }
 
 async function showCreatorData(user_id) {
@@ -214,20 +248,30 @@ async function changeIcon() {
 }
 
 document.addEventListener("DOMContentLoaded", function() {
-    document.getElementById("photoUser").addEventListener("click", redirectToUser);
-    document.getElementById("username").addEventListener("click", redirectToUser);
+    const userId = localStorage.getItem('userId');
+    document.getElementById("photoUser").addEventListener("click", redirectToCreatorUser);
+    document.getElementById("username").addEventListener("click", redirectToCreatorUser);
 
-    fetchDocument().then(function(documentData) {
-        console.log("Nº Comentarios: " + documentData["lista_comentarios"].length);
-        for (var i = 1; i <= documentData["lista_comentarios"].length; i++) {
-            var imagenUsuario = document.querySelector('#coments')
-            console.log(imagenUsuario)
-            imagenUsuario.addEventListener('click', redirectToUser);
-        }
+    function myFunction(event) {
+        console.log(event.target.id + " was clicked.");
+    }
+
+    // Get all div elements with the class 'prpr'
+    var prprDivs = document.getElementsByClassName('comentario');
+    console.log(prprDivs)
+
+    // Add onclick event listener to each prpr div
+    Array.from(prprDivs).forEach(function(prprDiv) {
+        prprDiv.addEventListener('click', myFunction);
     });
 });
 
-function redirectToUser() {
+function redirectToCreatorUser() {
     localStorage.setItem('viewAccountId', dataJSON["user_id"]);
+    window.location.href = "../ViewAccount/viewAccount.html";
+}
+
+function redirectToUser(userID) {
+    localStorage.setItem('viewAccountId', userID);
     window.location.href = "../ViewAccount/viewAccount.html";
 }
