@@ -18,12 +18,13 @@ body {
     flex: 1;
     box-sizing: border-box;
     background-color: #ffffff;
+    border-radius: 16px;
 }
 
 .left-side {
     position: relative;
     overflow: hidden;
-    border-radius: 10% 0 0 10%;
+    border-radius: 16px 0 0 16px;
 }
 
 .left-side img {
@@ -40,7 +41,7 @@ body {
     max-width: max-content;
     margin: 0 auto;
     box-sizing: border-box;
-    border-radius: 50%;
+    border-radius: 16px;
 }
 
 .form-group {
@@ -51,6 +52,7 @@ body {
 .login-form {
     padding: 10px;
     background-color: #ffffff;
+    border-radius: 16px;
     color: #0C6DFF;
     max-width: 500px;
     margin: 0 auto;
@@ -73,6 +75,7 @@ body {
 .form-group label {
     display: block;
     margin-bottom: 5px;
+    width: 90%;
 }
 
 input {
@@ -145,7 +148,7 @@ button:hover {
     color: #ffffff;
 }
 
-@media only screen and (max-width: 908px) {
+@media only screen and (max-width: 900px) {
     body {
         margin: 0;
         padding: 0;
