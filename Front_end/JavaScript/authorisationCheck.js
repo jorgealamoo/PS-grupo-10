@@ -1,10 +1,15 @@
 function checkAuth() {
+    //npm install dotenv
+    //require('dotenv').config();
+
     var authenticate = true     //If "true" se prueba la autenticación
     const userId = localStorage.getItem('userId');
 
     if (authenticate) {
         // Make a GET request to your server-side API endpoint
         document.body.style.display = 'none';
+
+        //fetch(process.env.HOST_API + '/api/checkAuth/' + userId)
         fetch('http://localhost:3000/api/checkAuth/' + userId)
             .then(response => {
                 if (response.ok) {
