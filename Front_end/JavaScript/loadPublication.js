@@ -87,12 +87,17 @@ async function loadComment(comment_list) {
         var photoUser =  await fetchImage(user.photoPerfil);
         var text = response.contenido;
         var titulo = response.titulo;
-        var userID = response.user_id
-        createComment(userName,photoUser,text,titulo, userID);
+        var userID = response.user_id;
+
+        var imageComment = null;
+        if (response.lista_imagenes.length > 0) {
+             imageComment = await fetchImage(response.lista_imagenes[0]);
+        }
+        createComment(userName,photoUser,text,titulo, userID, imageComment);
 
     }
 }
-function createComment(userName, photoUser, text, title, userID) {
+function createComment(userName, photoUser, text, title, userID, imageComment) {
     var comentariosDiv = document.getElementById('coments');
 
     // Create new comment element
@@ -136,6 +141,12 @@ function createComment(userName, photoUser, text, title, userID) {
     mensajeDiv.textContent = text;
     nuevoComentario.appendChild(mensajeDiv);
 
+    //Crear imagen añadida por el usuario
+    if (imageComment != null) {
+        var imageAddComment = document.createElement('img');
+        imageAddComment.src = imageComment;
+        nuevoComentario.appendChild(imageAddComment);
+    }
     // Append the new comment to the comments div
     comentariosDiv.appendChild(nuevoComentario);
 }

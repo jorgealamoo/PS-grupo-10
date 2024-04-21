@@ -9,9 +9,10 @@ document.addEventListener('DOMContentLoaded', function() {
     var form = document.getElementById('addComment');
     const user_id = localStorage.getItem("userId");
     const publication_id = localStorage.getItem("currentPublication");
-    const inputElement = document.getElementById('imageUpload_Comment');
+    const inputElementImage = document.getElementById('imageUpload_Comment');
     var images = [];
 
+    inputElementImage.addEventListener('change', loaderImageComments);
     // Agregar evento de envío al formulario
     form.addEventListener('submit', async function(event) {
         event.preventDefault(); // Prevenir el comportamiento de envío predeterminado
@@ -138,12 +139,5 @@ document.addEventListener('DOMContentLoaded', function() {
             throw error;
         }
     }
-
-
-
-
-
-    inputElement.addEventListener('change', loaderImageComments);
-
 
 });
