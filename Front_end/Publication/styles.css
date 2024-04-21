@@ -361,7 +361,9 @@ main {
 .imageUpload_Comment {
     display: none; /* Esto oculta el input de tipo file */
 }
-
+.imageUpload {
+    display: none; /* Esto oculta el input de tipo file */
+}
 /* ------ AÑADIR NUEVAS IMAGENES A MI PROPIA PUBLICACION ------ */
 
 .add_new_images_section,

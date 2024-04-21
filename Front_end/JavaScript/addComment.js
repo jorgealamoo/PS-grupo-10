@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', function() {
     var form = document.getElementById('addComment');
     const user_id = localStorage.getItem("userId");
     const publication_id = localStorage.getItem("currentPublication");
-    const inputElement = document.getElementById('imageUpload');
+    const inputElement = document.getElementById('imageUpload_Comment');
     var images = [];
 
     // Agregar evento de envío al formulario
@@ -73,7 +73,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    function loaderImage(event) {
+    function loaderImageComments(event) {
         const files = event.target.files;
         showImage(files[0]);
         for (const file of files) {
@@ -143,7 +143,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 
-    inputElement.addEventListener('change', loaderImage);
+    inputElement.addEventListener('change', loaderImageComments);
 
 
 });
