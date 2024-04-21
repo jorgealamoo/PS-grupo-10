@@ -145,6 +145,10 @@ function createComment(userName, photoUser, text, title, userID, imageComment) {
     if (imageComment != null) {
         var imageAddComment = document.createElement('img');
         imageAddComment.src = imageComment;
+        imageAddComment.style.width = 'auto';
+        imageAddComment.style.height = '300px';
+        imageAddComment.style.display = 'block'; // Hacer que la imagen sea un bloque para centrarla horizontalmente
+        imageAddComment.style.margin = '0 auto'
         nuevoComentario.appendChild(imageAddComment);
     }
     // Append the new comment to the comments div
