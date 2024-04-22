@@ -66,7 +66,7 @@ body {
 
 .contImagen {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(auto-fill, minmax(40vh, 1fr));
     column-gap: 7px;
     row-gap: 60px;
     margin: 10px 5px;
@@ -96,7 +96,6 @@ body {
 .follower-info span {
     font-family: 'Inter', sans-serif;
     font-weight: bold;
-    font-size: 16px;
 }
 
 /* ------ RESPONSIVE HEADERS ------ */
@@ -147,14 +146,28 @@ header#desktopHeader {
     }
 }
 
-.follower-info {
-    display: flex;
-    align-items: center;
-    justify-content: flex-end; /* Align items to the right */
+.followers {
+    display: flex; /* Establece un diseño de tipo flexbox */
+    justify-content: space-between; /* Distribuye los elementos horizontalmente */
+    margin-bottom: 10px; /* Espacio entre los seguidores y el botón */
+    margin-left: 30%;
 }
 
-#followers,
-#following {
-    font-size: 15px; /* Adjust font size as needed */
-    margin-left: 10px; /* Add some space between the counts */
+/* Estilos para los bloques de seguidos y siguiendo */
+#seguidos, #siguiedo {
+    flex: 1; /* Hace que ambos bloques ocupen el mismo ancho */
+    text-align: center; /* Centra el contenido */
+}
+
+#seguidos span, #siguiedo span {
+    font-size: 30px;
+    margin-right: 15vh;
+    color: black;
+    font-family: Inter, serif;
+    font-weight: bold;
+}
+
+/* Estilos para los números de seguidores y siguiendo */
+#seguidores, #siguiendo {
+    display: block;
 }

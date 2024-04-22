@@ -110,6 +110,10 @@ main {
     width: 10vh;
     margin-right: 20px;
     flex: 1;
+    border: 1px solid lightgrey;
+    padding: 10px;
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
 }
 
 .Header-Comments{
@@ -141,6 +145,7 @@ main {
 }
 .mensaje {
     margin-top: 5px;
+    margin-bottom: 20px;
 }
 
 
@@ -262,10 +267,11 @@ main {
 
 /*------ AÑADIR COMENTARIOS ------*/
 
-.Comments h2 {
+#DesH2 {
     font-weight: bold;
     font-family: 'Inter', sans-serif;
     color: #0C6DFF;
+    margin: 0;
 }
 
 .addCommentsText {

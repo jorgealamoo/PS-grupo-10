@@ -103,59 +103,9 @@ body {
     text-decoration: underline;
 }
 
-
-.lista_pubilicaciones {
-    background-color: #f2f2f2; /* Background color */
-    padding: 10px; /* Padding around the container */
-    border-radius: 10px; /* Rounded corners */
-    margin: 20px; /* Top margin */
-}
-#listaPublicaciones {
-    list-style-type: none; /* Remove list bullets */
-    padding: 0; /* Remove default padding */
-    overflow: hidden; /* Clear floats */
-}
-#listaPublicaciones li {
-    width: 350px; /* Set width for each item, minus margin */
-    display: inline-block; /* Display list items horizontally */
-    margin-right: 10px; /* Adjust spacing between list items */
-    margin-bottom: 10px; /* Add margin bottom to create space between rows */
-    position: relative; /* Set position relative for absolutely positioned elements */
-    vertical-align: top; /* Align items to the top */
-    box-sizing: border-box; /* Include padding and border in element's total width */
-}
-#listaPublicaciones li:nth-child(3n) {
-    margin-right: 0; /* Remove right margin for every third item to avoid exceeding container width */
-}
-#listaPublicaciones li a {
-    display: block; /* Make anchor tags fill the entire list item */
-    position: relative; /* Set position relative for absolutely positioned elements */
-}
-#listaPublicaciones li a img {
-    width: 350px; /* Set image width to 150px (adjust as needed) */
-    height: auto; /* Maintain aspect ratio */
-    display: block; /* Make images fill the anchor tag */
-}
-#listaPublicaciones li a span {
-    position: absolute; /* Position text absolutely */
-    bottom: 0; /* Place at the bottom of the parent container */
-    left: 0; /* Place at the left of the parent container */
-    width: 100%; /* Occupy full width */
-    background-color: rgba(0, 0, 0, 0.5); /* Background color for text */
-    color: #fff; /* Text color */
-    padding: 5px; /* Padding for text */
-    box-sizing: border-box; /* Include padding in element's total width */
-    opacity: 0; /* Initially hide the text */
-    transition: opacity 0.3s; /* Smooth transition for opacity change */
-}
-
-#listaPublicaciones li a:hover span {
-    opacity: 1; /* Show text on hover */
-}
-
 .contImagen {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(auto-fill, minmax(40vh, 1fr));
     column-gap: 7px;
     row-gap: 60px;
     margin: 10px 5px;

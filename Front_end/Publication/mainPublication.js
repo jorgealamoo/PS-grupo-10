@@ -41,10 +41,11 @@ document.addEventListener('DOMContentLoaded', async function() {
     inputElementImage.addEventListener('change', loaderImage);
     document.getElementById('saveBtn').addEventListener('click', async function () {
         await addImageToDocument(publicationID);
+        window.location.href = "../Publication/publication.html";
     });
 
 });
-async function addImageToDocument(documentID) {
+export async function addImageToDocument(documentID) {
     try {
         const documento = await fetch('http://localhost:3000/api/getDocument/publicacion/'+documentID);
         const documentoData = await documento.json();

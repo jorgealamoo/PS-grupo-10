@@ -23,11 +23,11 @@
             <div class="followers">
                 <div id="seguidos">
                     <span>Followers</span>
-                    <span id="seguidores"><b></b></span>
+                    <span id="seguidores"></span>
                 </div>
                 <div id="siguiedo">
                     <span>Following</span>
-                    <span id="siguiendo"><b></b></span>
+                    <span id="siguiendo"></span>
                 </div>
             </div>
             <button id="FollowButton">Follow</button>
@@ -39,7 +39,6 @@
 </main>
 <footer></footer>
 <script src='/Front_end/JavaScript/templateLoader.js'></script>
-<script src='/Front_end/JavaScript/imagenLoader.js'></script>
 <script src="viewAccount.js"></script>
 
 <script>
@@ -50,7 +49,7 @@
 <script>
     let userId = localStorage.getItem("userId");
     let viewAccountId = localStorage.getItem("viewAccountId");
-    if (viewAccountId == userId) {
+    if (viewAccountId === userId) {
         window.location.href = "../Account/account.html"
     }
     checkIfFollowing();

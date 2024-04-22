@@ -8,7 +8,7 @@ main {
 
 .contImagen {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(auto-fill, minmax(40vh, 1fr));
     column-gap: 7px;
     row-gap: 60px;
     margin: 10px 5px;

@@ -16,10 +16,16 @@
     <div class="User">
         <img id="profilePhotoAccount" alt="" src="">
         <b><span id="username"></span></b>
-        <div class="follower-info">
-            <span id="followers" class="followers">Followers: 0</span>
-            <span id="following" class="following">Following: 0</span>
+        <div class="followers">
+        <div id="seguidos">
+            <span>Followers</span>
+            <span class="seguidores" id="seguidores"><b></b></span>
         </div>
+        <div id="siguiedo">
+            <span>Following</span>
+            <span class="siguiendo" id="siguiendo"><b></b></span>
+        </div>
+    </div>
         <div class="options">
             <a href="../Saved/saved.html">SAVED</a>
             <a href="../AddPublication/add_publication.html">CREATE</a>
@@ -39,8 +45,8 @@
     (async () => {
         await loadProfilePhoto("profilePhotoAccount");
         await loadUserName("username");
-        await loadFollowers("followers");
-        await loadFollowing("following");
+        await loadFollowers("seguidores");
+        await loadFollowing("siguiendo");
         const publications = await loadUserData("lista_publicaciones");
         for (let i=0; i<publications.length; i++) {
             const imagen = await loadPublicationData("lista_imagenes", publications[i]);

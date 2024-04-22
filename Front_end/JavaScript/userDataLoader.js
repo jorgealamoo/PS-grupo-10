@@ -118,7 +118,7 @@ async function loadUserName(container, selfUser = true) {
 async function loadFollowers(container, selfUser = true) {
     try {
         const followers = await loadUserData("lista_seguidores", selfUser);
-        document.getElementById(container).textContent = "Followers: " + followers.length;
+        document.getElementById(container).textContent = followers.length;
     } catch (error) {
         console.error('Error loading followers:', error);
     }
@@ -128,7 +128,7 @@ async function loadFollowers(container, selfUser = true) {
 async function loadFollowing(container, selfUser = true) {
     try {
         const following = await loadUserData("lista_siguiendo", selfUser);
-        document.getElementById(container).textContent = "Following: " + following.length;
+        document.getElementById(container).textContent = following.length;
     } catch (error) {
         console.error('Error loading following:', error);
     }
