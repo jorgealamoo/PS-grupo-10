@@ -14,6 +14,9 @@
 <header id="phoneHeader"></header>
 <header id="desktopHeader"></header>
 <main>
+    <div class="inactive" id="followersDisplay"></div>
+    <div class="inactive" id="followingDisplay"></div>
+
     <div class="User">
         <div id="image">
             <img id="user_img" src="" alt="">
@@ -22,11 +25,11 @@
         <div id="information_user">
             <div class="followers">
                 <div id="seguidos">
-                    <span>Followers</span>
+                    <a onclick="toggleDisplay('followers', false)">Followers</a>
                     <span id="seguidores"></span>
                 </div>
                 <div id="siguiedo">
-                    <span>Following</span>
+                    <a onclick="toggleDisplay('following', false)">Following</a>
                     <span id="siguiendo"></span>
                 </div>
             </div>
