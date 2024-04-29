@@ -106,7 +106,6 @@ async function modifyDoc(collection,document,data) {
             },
             body: JSON.stringify(data)
         });
-
         if (!response.ok) {
             throw new Error('Error al añadir el documento');
         }
@@ -132,7 +131,6 @@ function selectRate() {
 }
 
 async function addDocument() {
-
     datos.valoracion = selectRate();
     console.log(datos.valoracion);
     datos.descripcion = comment.value.trim();
@@ -146,7 +144,7 @@ async function addDocument() {
         },
         body: JSON.stringify(datos)
     };
-   const id = await fetch('http://localhost:3000/api/addUniqueDoc/publicacion', opciones)
+   const data = await fetch('http://localhost:3000/api/addUniqueDoc/publicacion', opciones)
         .then(response => {
             if (!response.ok) {
                 throw new Error('Error al agregar datos');
@@ -155,22 +153,26 @@ async function addDocument() {
         })
         .then(data => {
                 console.log('Datos agregados con éxito:', data);
-                return data.id;
+                return data;
             }
         ).catch(error => {
             console.error('Error al agregar datos:', error);
         });
-   modifyDoc("publicacion",id,{publication_id:id});
+   modifyDoc("publicacion",data.id,{publication_id:data.id});
+   let publicationMap ={};
+   publicationMap[data.id] = datos.nombre;
+   modifyDoc("listas","publicaciones",{publicaciones:publicationMap});
    let publicationList = await takeUserPublicationList(user_id);
    if (publicationList.length === 0) {
-       publicationList = [id];
+       publicationList = [data.id];
    }else {
-       publicationList.push(id);
+       publicationList.push(data.id);
    }
    const newJson = {
        lista_publicaciones: publicationList
    }
    modifyDoc("usuario",user_id,newJson);
+
 }
 
 function checkVariables() {
