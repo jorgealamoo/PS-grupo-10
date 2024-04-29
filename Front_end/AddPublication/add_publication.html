@@ -22,11 +22,13 @@
     <div class="add_publication_container">
         <div class="top_side">
             <div class="add_publication_left_side">
+                <!-- File input -->
                 <div id="add_images_section" class="add_images_section">
-                    <input type="file" id="imageUpload" name="imageUpload" multiple accept="image/*">
+                    <input type="file" id="imageUpload" name="imageUpload" accept="image/*, video/*">
                     <label for="imageUpload" id="addImageLabel" class="add_images_symbol">+</label>
-                    <p class="add_images_text">ADD IMAGES</p>
+                    <p class="add_images_text">ADD IMAGE</p>
                 </div>
+                <div id="imagesContainer"></div>
                 <div class="publication_name_section">
                     <label for="publicationName"></label>
                     <input type="text" id="publicationName" placeholder="Publication name" value="">
