@@ -93,6 +93,16 @@ async function getImgURL(imgName) {
     }
 }
 
+// Función para alternar el botón de logout
+function toggleLogOut() {
+    var logOutButton = document.getElementById("LogOut");
+    if (logOutButton.style.opacity === "1") {
+        logOutButton.style.opacity = "0";
+    } else {
+        logOutButton.style.opacity = "1";
+    }
+}
+
 // Función para cargar la foto de perfil
 async function loadProfilePhoto(imageContainer, selfUser = true) {
     try {
