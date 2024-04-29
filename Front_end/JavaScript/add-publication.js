@@ -36,36 +36,107 @@ const datos = {
     descripcion:comment
 };
 
-function showImage(fileElement) {
-    if (fileElement && fileElement.type.startsWith('image/')) {
+
+
+
+//.......... AQUÍ VA EL LOADER + MODAL
+function loaderMedia(event) {
+    const file = (event.target.files)[0];
+
+    if (file.type.startsWith('image/') || file.type.startsWith('video/')) {
         const reader = new FileReader();
+        const videoURL = URL.createObjectURL(file);
         reader.onload = function(event) {
-            const imageDataURL = event.target.result;
-            document.getElementById('addImageLabel').style.backgroundImage = `url('${imageDataURL}')`;
+            const mediaDataURL = event.target.result;
+
+            // Show modal with media
+            showModal(videoURL, mediaDataURL, file.type.startsWith('image/'));
         };
-        reader.readAsDataURL(fileElement);
+        reader.readAsDataURL(file);
     } else {
-        console.warn('El archivo seleccionado no es una imagen:', fileElement ? fileElement.name : 'No se seleccionó ningún archivo');
+        console.warn('The selected file is not an image or a video:', file ? file.name : 'No file selected');
     }
 }
 
-function loaderImage(event) {
-    const files = event.target.files;
-    showImage(files[0]);
-    for (const file of files) {
-        if (file && file.type.startsWith('image/')) {
-            const reader = new FileReader();
-            reader.onload = function(event) {
-                const imageDataURL = event.target.result;
-                images.push(imageDataURL);
-            };
-            reader.readAsDataURL(file);
-        } else {
-            console.warn('El archivo seleccionado no es una imagen:', file ? file.name : 'No se seleccionó ningún archivo');
-        }
+function showModal(mediaDataURL, reader, isImage) {
+    // Create modal container
+    const modalContainer = document.createElement('div');
+    modalContainer.className = 'modal';
+
+    // Create modal content
+    const modalContent = document.createElement('div');
+    modalContent.className = 'modal-content';
+
+    // Create close button
+    const closeBtn = document.createElement('span');
+    closeBtn.className = 'close';
+    closeBtn.textContent = '×';
+
+    // Append close button to modal content
+    modalContent.appendChild(closeBtn);
+
+    // Create container for media element
+    const container = document.createElement('div');
+    container.className = 'container';
+
+    if (isImage) {
+        const mediaElement = document.createElement('img');
+        mediaElement.src = mediaDataURL;
+        container.appendChild(mediaElement);
+    } else {
+        const videoElement = document.createElement('video');
+        videoElement.src = mediaDataURL;
+        videoElement.controls = true;
+        container.appendChild(videoElement);
     }
-    console.log(images);
+
+    // Append container to modal content
+    modalContent.appendChild(container);
+    modalContainer.appendChild(modalContent);
+    document.body.appendChild(modalContainer);
+
+    // Show modal
+    modalContainer.style.display = 'block';
+
+    // Close modal when close button is clicked
+    closeBtn.onclick = function() {
+        closeModal(modalContainer);
+    };
+
+    // Add Cancel and Add Media buttons
+    const footer = document.createElement('div');
+    footer.className = 'modal-footer';
+    const cancelBtn = document.createElement('button');
+    cancelBtn.textContent = 'Cancel';
+    cancelBtn.id = 'CancelBTN';
+    cancelBtn.onclick = function() {
+        closeModal(modalContainer);
+    };
+    const addMediaBtn = document.createElement('button');
+    addMediaBtn.textContent = 'Add Media';
+    addMediaBtn.id = 'AddBTN';
+    addMediaBtn.onclick = function() {
+        // Add media to array or perform any action needed
+        images.push(reader);
+        console.log(images)
+        closeModal(modalContainer);
+    };
+
+    // Append buttons to footer
+    footer.appendChild(cancelBtn);
+    footer.appendChild(addMediaBtn);
+    modalContent.appendChild(footer);
 }
+
+
+function closeModal(modalContainer) {
+    modalContainer.style.display = 'none';
+}
+
+// Event listener for file input change
+const fileInput = document.getElementById('imageUpload');
+fileInput.addEventListener('change', loaderMedia);
+
 
 
 function takeUserPublicationList(userID) {
@@ -187,7 +258,6 @@ function checkVariables() {
 }
 
 export {datos};
-inputElement.addEventListener('change', loaderImage);
 document.addEventListener('DOMContentLoaded', addPingToMap());
 
 document.getElementById('saveBtn').addEventListener('click', async function () {
@@ -195,6 +265,6 @@ document.getElementById('saveBtn').addEventListener('click', async function () {
         alert('Debes rellenar todos los campos antes de crear la publicación');
     } else {
         await addDocument();
-        window.location.href = "../Account/account.html";
+        //window.location.href = "../Account/account.html";
     }
 });

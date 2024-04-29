@@ -43,9 +43,28 @@ function addImage(imagePath, text, publicationID) {
 }
 
 // Función para cargar datos del usuario
-async function loadUserData(fieldName, selfUser = true) {
+ async function loadUserData(fieldName, selfUser = true) {
     try {
         let userID = localStorage.getItem(selfUser ? "userId" : "viewAccountId");
+        const response = await fetch(`http://localhost:3000/api/getDocument/usuario/${userID}`);
+        if (!response.ok) {
+            throw new Error('Failed to fetch user data');
+        }
+        const data = await response.json();
+        if (data.hasOwnProperty(fieldName)) {
+            return data[fieldName];
+        } else {
+            console.error('The field is not present in the document');
+            return null;
+        }
+    } catch (error) {
+        console.error('Error fetching user data:', error);
+        throw error;
+    }
+}
+
+async function loadAnotherUserData(fieldName, userID) {
+    try {
         const response = await fetch(`http://localhost:3000/api/getDocument/usuario/${userID}`);
         if (!response.ok) {
             throw new Error('Failed to fetch user data');
@@ -93,12 +112,21 @@ async function getImgURL(imgName) {
     }
 }
 
+// Función para alternar el botón de logout
+function toggleLogOut() {
+    var logOutButton = document.getElementById("LogOut");
+    if (logOutButton.style.opacity === "1") {
+        logOutButton.style.opacity = "0";
+    } else {
+        logOutButton.style.opacity = "1";
+    }
+}
+
 // Función para cargar la foto de perfil
 async function loadProfilePhoto(imageContainer, selfUser = true) {
     try {
         const profilePhoto = await loadUserData("photoPerfil", selfUser);
-        const url = await getImgURL(profilePhoto);
-        document.getElementById(imageContainer).src = url;
+        document.getElementById(imageContainer).src = await getImgURL(profilePhoto);
     } catch (error) {
         console.error('Error loading profile photo:', error);
     }
@@ -107,8 +135,7 @@ async function loadProfilePhoto(imageContainer, selfUser = true) {
 // Función para cargar el nombre de usuario
 async function loadUserName(container, selfUser = true) {
     try {
-        const username = await loadUserData("usuario", selfUser);
-        document.getElementById(container).textContent = username;
+        document.getElementById(container).textContent = await loadUserData("usuario", selfUser);
     } catch (error) {
         console.error('Error loading username:', error);
     }
@@ -240,3 +267,84 @@ async function updateListaSeguidos(lista_siguiendo) {
         console.error('Error updating followed users:', error);
     }
 }
+
+function addToList(username, imageURL) {
+
+    const followerDiv = document.createElement('div');
+    followerDiv.classList.add('follower');
+
+    const img = document.createElement('img');
+    img.src = imageURL;
+    img.alt = 'Profile Picture';
+
+
+    const usernamePara = document.createElement('p');
+    usernamePara.textContent = username;
+
+    followerDiv.appendChild(img);
+    followerDiv.appendChild(usernamePara);
+
+    const followersDisplay = document.getElementById('followersDisplay');
+
+    followersDisplay.appendChild(followerDiv);
+}
+
+
+async function toggleDisplay(text, selfUser= true) {
+    let elemento;
+    let follow = [];
+    if (text === "followers") {
+        follow = await loadUserData("lista_seguidores", selfUser);
+        elemento = document.getElementById("followersDisplay");
+        const other = document.getElementById("followingDisplay");
+        other.classList.remove('active');
+        other.classList.add('inactive');
+    } else {
+        follow = await loadUserData("lista_siguiendo", selfUser);
+        elemento = document.getElementById("followingDisplay");
+        const other = document.getElementById("followersDisplay");
+        other.classList.remove('active');
+        other.classList.add('inactive');
+    }
+
+    // Vaciar el contenido del elemento
+    elemento.innerHTML = '';
+
+    // Verificar si tiene la clase "active"
+    if (elemento.classList.contains("active")) {
+        elemento.classList.remove("active");
+        elemento.classList.add("inactive");
+    } else {
+        // Si no tiene la clase "active", entonces asumimos que tiene "inactive"
+        elemento.classList.remove("inactive");
+        elemento.classList.add("active");
+
+        for (let i = 0; i < follow.length; i++) {
+            const fotoName = await loadAnotherUserData("photoPerfil", follow[i]);
+            const foto = await getImgURL(fotoName);
+            const name = await loadAnotherUserData("usuario", follow[i]);
+
+            const followerDiv = document.createElement("div");
+            followerDiv.style.cursor = 'pointer';
+            followerDiv.classList.add("follower");
+
+            followerDiv.addEventListener('click', () => {
+                localStorage.setItem("viewAccountId", follow[i]);
+                window.location.href = '../ViewAccount/viewAccount.html';
+            });
+
+            const fotoImg = document.createElement("img");
+            fotoImg.src = foto;
+            fotoImg.alt = "Foto de perfil de " + name;
+
+            const namePara = document.createElement("p");
+            namePara.textContent = name;
+
+            followerDiv.appendChild(fotoImg);
+            followerDiv.appendChild(namePara);
+
+            elemento.appendChild(followerDiv);
+        }
+    }
+}
+

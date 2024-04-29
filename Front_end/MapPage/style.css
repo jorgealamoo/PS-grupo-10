@@ -50,7 +50,7 @@ header#desktopHeader {
 }
 
 /* Mostrar el header correspondiente según el tamaño de la ventana */
-@media screen and (max-width: 720px) {
+@media screen and (max-width: 815px) {
     header#desktopHeader {
         display: none;
     }
@@ -59,7 +59,7 @@ header#desktopHeader {
     }
 }
 
-@media screen and (min-width: 721px) {
+@media screen and (min-width: 816px) {
     header#phoneHeader {
         display: none;
     }

@@ -52,21 +52,32 @@ body {
 
 /* Estilos para los bloques de seguidos y siguiendo */
 #seguidos, #siguiedo {
+    margin-top: 4%;
     flex: 1; /* Hace que ambos bloques ocupen el mismo ancho */
     text-align: center; /* Centra el contenido */
+}
+
+#seguidos a, #siguiedo a {
+    font-family: ABeeZee, serif;
+    font-weight: bold;
+    font-size: 25px;
+    cursor: pointer;
 }
 
 /* Estilos para los números de seguidores y siguiendo */
 #seguidores, #siguiendo {
     display: block; /* Hace que los números ocupen todo el ancho */
+    font-weight: bold;
+    font-family: ABeeZee, serif;
 }
 
 /* Estilos para el botón de seguir */
 #FollowButton {
     display: block; /* Hace que el botón ocupe todo el ancho */
-    margin: 10px auto; /* Centra el botón horizontalmente */
     text-align: center; /* Centra el texto del botón */
     font-size: 1em; /* Tamaño de la fuente */
+    margin-left: 43%;
+    margin-bottom: 2%;
 }
 
 /* Media queries para hacer que el texto sea más grande en pantallas más grandes */
@@ -127,25 +138,94 @@ header#desktopHeader {
 }
 
 /* Mostrar el header correspondiente según el tamaño de la ventana */
-@media screen and (max-width: 720px) {
+@media screen and (max-width: 815px) {
     header#desktopHeader {
         display: none;
     }
     header#phoneHeader {
         display: block;
     }
+}
 
+@media screen and (max-width: 720px) {
     .contImagen {
         margin-left: 21%;
         grid-template-columns: repeat(1, 1fr);
     }
 }
 
-@media screen and (min-width: 721px) {
+@media screen and (min-width: 816px) {
     header#phoneHeader {
         display: none;
     }
     header#desktopHeader {
         display: block;
     }
+}
+
+
+
+.follower {
+    display: flex;
+    margin: 5%;
+}
+
+.follower p {
+    font-size: 20px;
+    font-family: ABeeZee, serif;
+}
+
+.follower img {
+    border: 2px solid black;
+    width: 15vh;
+    height: 15vh;
+    border-radius: 50%;
+    margin-right: 1em;
+}
+
+.follower-username {
+    margin: 0;
+}
+
+#followersDisplay, #followingDisplay {
+    background-color: whitesmoke;
+    max-height: 50%;
+    overflow-y: auto;
+    border: 1px solid black;
+    margin: 0;
+    width: 80em;
+    padding: 0;
+}
+
+#followersDisplay p, #followingDisplay p {
+    margin-top: 13%;
+    font-family: ABeeZee, serif;
+    font-weight: bold;
+    font-size: 25px;
+}
+
+#followersDisplay.active {
+    margin-left: 31%;
+    margin-top: 7%;
+    width: 25em;
+    display: block;
+    position: absolute;
+    z-index: 9999; /* O cualquier valor mayor que los z-index de los otros elementos */
+}
+
+#followingDisplay.active {
+    margin-left: 68%;
+    margin-top: 7%;
+    width: 25em;
+    display: block;
+    position: absolute;
+    z-index: 9999; /* O cualquier valor mayor que los z-index de los otros elementos */
+}
+
+.inactive {
+    display: none;
+}
+
+.active {
+    display: block;
 }
