@@ -39,6 +39,7 @@ export async function addToList(document, name, id) {
                 return response.json();
             }
         });
+    delete data.id;
     if (data.hasOwnProperty(name)){
         data[name].push(id);
     }else{
@@ -48,5 +49,37 @@ export async function addToList(document, name, id) {
 }
 
 
-await updatePublicationList("listas","publicaciones", "publicacion");
+export async function deleteDocument(collection,document) {
+    await fetch(`http://localhost:3000/api/deleteDocument/${collection}/${document}`,{
+        method: 'DELETE'
+    });
+}
+
+export async function deletePulicationFromList(document, name, id) {
+    let data = await fetch('http://localhost:3000/api/getDocument/listas/' + document)
+        .then(response =>{
+            if (!response){
+                throw new Error("no se ha podido encontrar la lista");
+            }else {
+                return response.json();
+            }
+        });
+    delete data.id;
+    if(data.hasOwnProperty(name)){
+        const index = data[name].indexOf(id);
+        if(index !== -1){
+            data[name].splice(index,1);
+            if (data[name].length === 0){
+                delete data[name];
+            }
+        }
+    }else {
+        throw Error("No se ha encontrado esa publicacion");
+    }
+    loadMapInToList(document,data);
+}
+
+//await updatePublicationList("listas","publicaciones", "publicacion");
+//await addToList("publicaciones","Osorio","ejemplo");
+await deletePulicationFromList("publicaciones","Osorio","ejemplo");
 
