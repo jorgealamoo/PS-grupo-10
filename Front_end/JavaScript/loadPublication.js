@@ -66,9 +66,9 @@ async function fetchImage(imageurl) {
     }
 }
 
-
 async function loadComment(comment_list) {
-    for ( comment of comment_list){
+
+    for ( let comment of comment_list) {
         const response = await fetch('http://localhost:3000/api/getDocument/comentario/' + comment)
             .then(response =>{
                 if (!response.ok){
@@ -93,11 +93,12 @@ async function loadComment(comment_list) {
         if (response.lista_imagenes.length > 0) {
              imageComment = await fetchImage(response.lista_imagenes[0]);
         }
-        createComment(userName,photoUser,text,titulo, userID, imageComment);
-
+        if (userID === localStorage.getItem("userId")) createComment(userName,photoUser,text,titulo, userID, imageComment, true, response.id);
+        else createComment(userName,photoUser,text,titulo, userID, imageComment, false, response.id);
     }
 }
-function createComment(userName, photoUser, text, title, userID, imageComment) {
+
+function createComment(userName, photoUser, text, title, userID, imageComment, selfUser=false, commentID) {
     var comentariosDiv = document.getElementById('coments');
 
     // Create new comment element
@@ -151,8 +152,60 @@ function createComment(userName, photoUser, text, title, userID, imageComment) {
         imageAddComment.style.margin = '0 auto'
         nuevoComentario.appendChild(imageAddComment);
     }
+
+    if (selfUser) {
+        const deleteButton = document.createElement('img');
+        deleteButton.src = "../Images/borrar.png";
+        deleteButton.classList.add("deleteButton");
+        deleteButton.addEventListener('click', function () {
+            deleteComment(commentID);
+        });
+        nuevoComentario.appendChild(deleteButton);
+    }
+
     // Append the new comment to the comments div
     comentariosDiv.appendChild(nuevoComentario);
+}
+
+async function deleteFromDatabase(commentID) {
+    await fetch('http://localhost:3000/api/deleteDocument/comentario/' + commentID,{
+        method: 'DELETE'
+    });
+}
+
+async function deleteComment(commentID) {
+    const cp = localStorage.getItem("currentPublication");
+    const lista_comentarios = await loadPublicationData("lista_comentarios", cp);
+    const index = lista_comentarios.indexOf(commentID);
+    lista_comentarios.splice(index, 1);
+    const pubData = await fetch('http://localhost:3000/api/getDocument/publicacion/' + cp)
+        .then(async response => {
+            if (!response.ok) {
+                throw new Error("Fail to fetch document");
+            }
+            return await response.json()
+        });
+    pubData['lista_comentarios'] = lista_comentarios;
+    await modifyDoc("publicacion", cp, pubData);
+    await deleteCommentImages(commentID);
+    await deleteFromDatabase(commentID);
+    alert("Comentario borrado con éxito");
+    window.location.href = "../Publication/publication.html";
+}
+
+async function deleteCommentImages(commentID) {
+    const data = await fetch('http://localhost:3000/api/getDocument/comentario/' + commentID)
+        .then(async response => {
+            if (!response.ok) {
+                throw new Error("Fail to fetch document");
+            }
+            return await response.json();
+        });
+    const images = data['lista_imagenes'];
+    if (images.length === 0) return;
+    for (let i=0; i<images.length; i++) {
+        await fetch('http://localhost:3000/api/deleteImage' + images[i]);
+    }
 }
 
 async function showCreatorData(user_id) {

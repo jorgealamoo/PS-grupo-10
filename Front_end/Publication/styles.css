@@ -397,6 +397,13 @@ main {
     background-color: #58a9fa;
 }
 
+.deleteButton {
+    width: 5em;
+    height: 5em;
+    cursor: pointer;
+    margin-left: 95%;
+}
+
 /* ------ RESPONSIVE HEADERS ------ */
 
 /* Ocultar los headers por defecto */
