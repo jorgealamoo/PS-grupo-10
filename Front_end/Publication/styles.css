@@ -207,6 +207,17 @@ main {
     justify-content: center;
 }
 
+#mapButton {
+    background-color: #e0e0e0;
+    color: #0C6DFF;
+    /*padding: 10px;
+    border-radius: 8px;*/
+    font-weight: bold;
+    font-family: 'Inter', sans-serif;
+    /*font-size: 10px;*/
+    cursor: pointer;
+}
+
 #comentarios {
     margin-left: 1.5%;
     width: 80%;

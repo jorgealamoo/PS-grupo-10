@@ -300,6 +300,8 @@ async function displayDocumentData() {
             }
         }
         console.log(listaImagenes)
+        console.log(dataJSON["ubicacion"].latitude)
+        console.log(dataJSON["ubicacion"].longitude)
 
         await loadComment(documentData["lista_comentarios"]);
         createScore(calculateValoration(documentData["valoracion"]));
@@ -360,6 +362,7 @@ document.addEventListener("DOMContentLoaded", function() {
     const userId = localStorage.getItem('userId');
     document.getElementById("photoUser").addEventListener("click", redirectToCreatorUser);
     document.getElementById("username").addEventListener("click", redirectToCreatorUser);
+    document.getElementById("mapButton").addEventListener("click", redirectGoogleMaps);
 
     function myFunction(event) {
         console.log(event.target.id + " was clicked.");
@@ -383,4 +386,11 @@ function redirectToCreatorUser() {
 function redirectToUser(userID) {
     localStorage.setItem('viewAccountId', userID);
     window.location.href = "../ViewAccount/viewAccount.html";
+}
+
+function redirectGoogleMaps() {
+    // Crear la URL de Google Maps con la latitud y longitud especificadas
+    var url = "https://www.google.com/maps?q=" + dataJSON["ubicacion"].latitude + "," + dataJSON["ubicacion"].longitude;
+    // Abrir la ubicación en Google Maps en una nueva ventana
+    window.open(url);
 }
