@@ -5,7 +5,7 @@
     <link rel="stylesheet" href="styles.css">
     <script src='../JavaScript/templateLoader.js'></script>
     <script src='../JavaScript/userDataLoader.js'></script>
-    <script src='../JavaScript/carrusel.js'></script>
+    <script src='../JavaScript/carruselHTML.js'></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
@@ -86,7 +86,7 @@
 <script>
     document.addEventListener('DOMContentLoaded',async function () {
         await displayDocumentData();
-        initCarousel('.image-carousel-container img')
+        initCarousel('.image-carousel-container img, .image-carousel-container video');
     });
     cargarTemplate('../PhoneHeader/phoneHeader.html', '#phoneHeader');
     cargarTemplate('../Header/header.html', '#desktopHeader', () => {

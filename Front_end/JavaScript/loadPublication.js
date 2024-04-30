@@ -66,6 +66,20 @@ async function fetchImage(imageurl) {
     }
 }
 
+async function fetchImageType(imageurl) {
+    try {
+        const response = await fetch('http://localhost:3000/api/getImage/' + imageurl);
+        if (!response.ok) {
+            throw new Error('Failed to fetch image');
+        }
+        const data = await response.json();
+        return data.imageType;
+    } catch (error) {
+        console.error('Error fetching image:', error.message);
+        return null;
+    }
+}
+
 async function loadComment(comment_list) {
 
     for ( let comment of comment_list) {
@@ -240,6 +254,18 @@ async function isSave() {
 
 }
 
+
+function getTypeFromMimeType(mimeType) {
+    if (mimeType.startsWith('image/')) {
+        return 'image';
+    } else if (mimeType.startsWith('video/')) {
+        return 'video';
+    } else {
+        return 'unknown';
+    }
+}
+
+
 async function displayDocumentData() {
     const documentData = await fetchDocument();
     if (documentData) {
@@ -252,14 +278,29 @@ async function displayDocumentData() {
         const longitude = location.longitude;
         const map = initializeMap(latitude, longitude);
         const listaImagenes = document.getElementById('ImageCarrusel');
+        console.log(documentData["lista_imagenes"]);
+
         for (const key in documentData["lista_imagenes"]) {
             if (Object.hasOwnProperty.call(documentData["lista_imagenes"], key)) {
-                const nuevaImagen = document.createElement('img');
-                const imageUrl = await fetchImage(documentData["lista_imagenes"][key]);
-                nuevaImagen.src = imageUrl;
-                listaImagenes.appendChild(nuevaImagen);
+                const url = await fetchImage(documentData["lista_imagenes"][key]);
+                const type = await fetchImageType(documentData["lista_imagenes"][key]);
+                const mediaType = await getTypeFromMimeType(type);
+                console.log(url + " || " + mediaType)
+
+                if (mediaType === 'image') {
+                    const nuevaImagen = document.createElement('img');
+                    nuevaImagen.src = url;
+                    listaImagenes.appendChild(nuevaImagen);
+                } else if (mediaType === 'video') {
+                    const nuevoVideo = document.createElement('video');
+                    nuevoVideo.src = url;
+                    nuevoVideo.controls = true; // Add controls to the video element
+                    listaImagenes.appendChild(nuevoVideo);
+                }
             }
         }
+        console.log(listaImagenes)
+
         await loadComment(documentData["lista_comentarios"]);
         createScore(calculateValoration(documentData["valoracion"]));
         await isSave();

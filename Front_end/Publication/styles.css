@@ -25,6 +25,13 @@ main {
     height: 100%;
 }
 
+/* Estilo de las video */
+.image-carousel-container video {
+    display: none;
+    width: auto;
+    height: 100%;
+}
+
 /* Estilo de los botones */
 .carousel-button {
     position: absolute; /* Posiciona los botones sobre el contenedor */
