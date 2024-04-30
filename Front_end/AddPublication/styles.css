@@ -386,6 +386,7 @@ header#desktopHeader {
 }
 
 .container {
+    margin-top: 30px;
     text-align: center;
 }
 
@@ -438,4 +439,53 @@ header#desktopHeader {
 
 #CancelBTN:hover {
     background-color: #ad2c2c; /* Darker blue on hover */
+}
+
+
+
+/* Estilo del carrusel */
+.image-carousel-container {
+    margin-top: 10px;
+    width: auto;
+    height: 50vh; /*Utiliza el 50% de la pantalla visible como alto*/
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Estilo de las imágenes */
+.image-carousel-container img {
+    display: none;
+    width: auto;
+    height: 100%;
+}
+
+/* Estilo de las videos */
+.image-carousel-container video {
+    display: none;
+    width: auto;
+    height: 100%;
+}
+
+/* Estilo de los botones */
+.carousel-button {
+    position: absolute; /* Posiciona los botones sobre el contenedor */
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    padding: 10px;
+    cursor: pointer;
+}
+
+/* Estilo del botón de dirección izquierda */
+.carousel-button.left {
+    left: 0;
+}
+
+/* Estilo del botón de dirección derecha */
+.carousel-button.right {
+    right: 0;
 }
