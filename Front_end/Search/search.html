@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Search</title>
+    <link rel="icon" type="image/png" href="../Images/logo_ExploreSpots_sin_fondo.png">
+    <link rel="stylesheet" href="/Front_end/Search/search.css">
+    <script src='/Front_end/JavaScript/templateLoader.js'></script>
+    <script src="/Front_end/JavaScript/userDataLoader.js"></script>
+    <script src="/Front_end/JavaScript/authorisationCheck.js"></script>
+</head>
+<body>
+<header id="phoneHeader"></header>
+<header id="desktopHeader"></header>
+<main>
+    <div class="search-bar">
+        <label for="searchInput"></label>
+        <div class="search-input-wrapper">
+            <input type="text" id="searchInput" placeholder="Search publication or user">
+            <img src="../Images/lupa_busqueda.png" alt="Search" class="search-icon">
+        </div>
+        <div class="search-type-selector">
+            <img src="../Images/publication_seleccionada.png" alt="Showing publications" title="Toggle to users">
+            <!--img src="../Images/user_seleccionado.png" alt="Showing users" title="Toggle to publications"-->
+        </div>
+    </div>
+
+
+    <div id="publications"></div>
+    <div id="users"></div>
+</main>
+<footer></footer>
+<script>
+    cargarTemplate('../Header/header.html', '#desktopHeader');
+    cargarTemplate('../PhoneHeader/phoneHeader.html', '#phoneHeader');
+    cargarTemplate('../Footer/footer.html', 'footer');
+</script>
+</body>
+</html>

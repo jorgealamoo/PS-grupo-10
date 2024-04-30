@@ -1,0 +1,129 @@
+body {
+    margin: 0;
+}
+
+main {
+    min-height: 82.1vh;
+}
+
+/* ------ SEARCHING BAR ------ */
+
+.search-bar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 30px;
+    position: relative;
+}
+
+.search-input-wrapper {
+    position: relative;
+    display: inline-block;
+}
+
+#searchInput {
+    width: 400px;
+    margin-bottom: 20px;
+    padding: 15px;
+    border-radius: 35px;
+    background-color: #e0e0e0;
+    font-family: ABeeZee, sans-serif;
+    font-size: 18px;
+    text-align: center;
+}
+
+#searchInput::placeholder {
+    font-weight: bold;
+    font-family: ABeeZee, sans-serif;
+    font-size: 18px;
+    text-align: center;
+}
+
+.search-icon {
+    position: absolute;
+    right: 15px;
+    top: 35%;
+    transform: translateY(-50%);
+    width: 25px;
+    height: auto;
+    cursor: pointer;
+    padding: 7px;
+}
+
+.search-type-selector {
+    cursor: pointer;
+    padding: 7px;
+    margin-bottom: 15px;
+}
+
+.search-type-selector img {
+    width: 30px;
+    height: auto;
+    padding: 3px;
+}
+
+/* ------ RESPONSIVE HEADERS ------ */
+@media screen and (max-width: 490px) {
+    #searchInput {
+        width: 250px;
+        margin-bottom: 20px;
+        padding: 10px;
+        border-radius: 35px;
+        background-color: #e0e0e0;
+        font-family: ABeeZee, sans-serif;
+        font-size: 14px;
+        text-align: center;
+    }
+
+    #searchInput::placeholder {
+        font-weight: bold;
+        font-family: ABeeZee, sans-serif;
+        font-size: 14px;
+        text-align: center;
+    }
+
+    .search-icon {
+        position: absolute;
+        right: 4px;
+        top: 35%;
+        transform: translateY(-50%);
+        width: 22px;
+        height: auto;
+        cursor: pointer;
+        padding: 7px;
+    }
+}
+
+
+
+/* ------ RESPONSIVE HEADERS ------ */
+
+/* Ocultar los headers por defecto */
+header#phoneHeader {
+    display: none;
+}
+
+header#desktopHeader {
+    display: none;
+}
+
+/* Mostrar el header correspondiente según el tamaño de la ventana */
+@media screen and (max-width: 815px) {
+    header#desktopHeader {
+        display: none;
+    }
+    header#phoneHeader {
+        display: block;
+    }
+}
+
+@media screen and (min-width: 816px) {
+    header#phoneHeader {
+        display: none;
+    }
+    header#desktopHeader {
+        display: block;
+    }
+}
+
+
