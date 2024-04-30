@@ -1,8 +1,6 @@
 import {uploadAllImagesToAPI} from './UploadImages.js';
 import {initializeMap} from './loadMap.js';
-
-//localStorage.setItem('userId', '0zbkPGwrhlfAjIcQ3odeqSte5jD3'); //para poder hacer pruebas
-
+import {addToList} from './cargarTodasLasPublicaciones.js'
 var Pointermap = {};
 var comment = document.getElementById('description');
 var images   = [];
@@ -230,9 +228,8 @@ async function addDocument() {
             console.error('Error al agregar datos:', error);
         });
    modifyDoc("publicacion",data.id,{publication_id:data.id});
-   let publicationMap ={};
-   publicationMap[data.id] = datos.nombre;
-   modifyDoc("listas","publicaciones",{publicaciones:publicationMap});
+   const nombre = datos.nombre;
+   addToList("publicaciones",nombre,data.id);
    let publicationList = await takeUserPublicationList(user_id);
    if (publicationList.length === 0) {
        publicationList = [data.id];
