@@ -63,11 +63,6 @@ function loaderMedia(event) {
     }
 }
 
-var selectedImages   = [];
-var fileType   = [];    //true == image | false == video
-var imagesTrash   = [];
-
-
 
 function showModal(mediaDataURL, reader, isImage) {
     // Create modal container
@@ -154,12 +149,15 @@ function showFilesSelectedModal() {
     modalContent.className = 'modal-content';
 
     // Create close button
+    const closeDIV = document.createElement('div');
+    closeDIV.className = 'close-div';
     const closeBtn = document.createElement('span');
     closeBtn.className = 'close';
     closeBtn.textContent = '×';
 
     // Append close button to modal content
-    modalContent.appendChild(closeBtn);
+    closeDIV.appendChild(closeBtn)
+    modalContent.appendChild(closeDIV);
 
     // Create container for media element
     const container = document.createElement('div');
@@ -167,7 +165,7 @@ function showFilesSelectedModal() {
 
     if (images.length == 0) {   //No hay imágenes
         const emptyMessage = document.createElement('h1');
-        emptyMessage.textContent = 'No Images Added';
+        emptyMessage.textContent = 'No Media Selected';
         container.appendChild(emptyMessage)
     } else {    //Hay imágenes
         // Crear el carrusel
@@ -252,8 +250,8 @@ function showFilesSelectedModal() {
     };
 
     // Append buttons to footer
-    images.length !== 0 && footer.appendChild(deleteBtn);
     footer.appendChild(cancelBtn);
+    images.length !== 0 && footer.appendChild(deleteBtn);
     modalContent.appendChild(footer);
 }
 
@@ -404,6 +402,6 @@ document.getElementById('saveBtn').addEventListener('click', async function () {
         alert('Debes rellenar todos los campos antes de crear la publicación');
     } else {
         await addDocument();
-        //window.location.href = "../Account/account.html";
+        window.location.href = "../Account/account.html";
     }
 });
