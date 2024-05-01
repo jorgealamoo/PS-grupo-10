@@ -13,7 +13,7 @@
     border: none;
     padding: 10px 20px;
     cursor: pointer;
-    margin-left:0;
+    margin-left: 0;
     border-radius: 10px;
 }
 
@@ -32,6 +32,10 @@
     cursor: pointer;
 }
 
+#logoPhoto:hover {
+    transform: scale(1.1);
+}
+
 #ProfileImageHEADER {
     border-radius: 50%;
     width: 8vh;
@@ -41,6 +45,10 @@
     padding-top: 10px;
     padding-bottom: 10px;
     cursor: pointer;
+}
+
+#ProfileImageHEADER:hover {
+    transform: scale(1.1);
 }
 
 #LogOut {
@@ -80,5 +88,11 @@ nav a:hover {
 @media screen and (max-width: 600px) {
     #header img {
         width: 80vh;
+    }
+}
+
+@media screen and (max-width: 980px) {
+    nav a {
+        font-size: 14px;
     }
 }

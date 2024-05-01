@@ -5,8 +5,7 @@
     <link rel="stylesheet" href="styles.css">
     <script src='../JavaScript/templateLoader.js'></script>
     <script src='../JavaScript/userDataLoader.js'></script>
-    <script src='../JavaScript/carrusel.js'></script>
-    <script src='../JavaScript/UploadComments.js'></script>
+    <script src='../JavaScript/carruselHTML.js'></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
@@ -27,7 +26,7 @@
             <div id="publicationData">
                 <h1 id='name'></h1>
                 <h1 id='score' class="score"></h1>
-                <img id="saves" src="../Images/guardar-instagram.png" onclick="changeIcon()">
+                <img id="saves" src="../Images/guardar-instagram.png" onclick="changeIcon()" title="Save publication">
             </div>
 
             <div id="botonAñadir">
@@ -35,10 +34,13 @@
                     <label for="imageUpload" class="image-upload-label">
                         <div class="select-images">Add New Images</div>
                     </label>
-                    <input type="file" id="imageUpload" class="imageUpload" name="imageUpload" multiple accept="image/*">
+                    <input type="file" id="imageUpload" class="imageUpload" name="imageUpload" multiple accept="image/*, video/*">
                 </div>
                 <div id="save_image_button" class="save_image_button">
                     <button id="saveBtn">Save New Images</button>
+                </div>
+                <div id="show_images_section" class="show_new_images_section">
+                    <button id="carrouselBTN">View Selected Media</button>
                 </div>
             </div>
 
@@ -59,6 +61,7 @@
             <p id='description'></p>
         </div>
         <div id="map"></div>
+        <button id="mapButton">Take Me There</button>
     </div>
 
     <div class="Comments" id="elemento-oculto">
@@ -87,7 +90,7 @@
 <script>
     document.addEventListener('DOMContentLoaded',async function () {
         await displayDocumentData();
-        initCarousel('.image-carousel-container img')
+        initCarousel('.image-carousel-container img, .image-carousel-container video');
     });
     cargarTemplate('../PhoneHeader/phoneHeader.html', '#phoneHeader');
     cargarTemplate('../Header/header.html', '#desktopHeader', () => {

@@ -1,9 +1,14 @@
 import {uploadAllImagesToAPI} from './UploadImages.js';
 import {initializeMap} from './loadMap.js';
 import {addToList} from './cargarTodasLasPublicaciones.js'
+import {initCarousel, moveCarousel, getSlideNumber} from './carrusel.js'
+
 var Pointermap = {};
 var comment = document.getElementById('description');
 var images   = [];
+var selectedImages   = [];
+var fileType   = [];    //true == image | false == video
+var imagesTrash   = [];
 const inputElement = document.getElementById('imageUpload');
 var comment_list = [];
 var label=[];
@@ -58,6 +63,7 @@ function loaderMedia(event) {
     }
 }
 
+
 function showModal(mediaDataURL, reader, isImage) {
     // Create modal container
     const modalContainer = document.createElement('div');
@@ -89,6 +95,125 @@ function showModal(mediaDataURL, reader, isImage) {
         videoElement.controls = true;
         container.appendChild(videoElement);
     }
+    console.log("Deciding On: " + mediaDataURL)
+
+    // Append container to modal content
+    modalContent.appendChild(container);
+    modalContainer.appendChild(modalContent);
+    document.body.appendChild(modalContainer);
+
+    // Show modal
+    modalContainer.style.display = 'block';
+
+    // Close modal when close button is clicked
+    closeBtn.onclick = function() {
+        closeModal(modalContainer);
+    };
+
+    // Add Cancel and Add Media buttons
+    const footer = document.createElement('div');
+    footer.className = 'modal-footer';
+    const cancelBtn = document.createElement('button');
+    cancelBtn.textContent = 'Cancel';
+    cancelBtn.id = 'CancelBTN';
+    cancelBtn.onclick = function() {
+        imagesTrash.push(reader)
+        console.log(images)
+        closeModal(modalContainer);
+    };
+    const addMediaBtn = document.createElement('button');
+    addMediaBtn.textContent = 'Add Media';
+    addMediaBtn.id = 'AddBTN';
+    addMediaBtn.onclick = function() {
+        // Add media to array or perform any action needed
+        images.push(reader);
+        selectedImages.push(mediaDataURL)
+        fileType.push(isImage)
+        console.log(images, fileType)
+        closeModal(modalContainer);
+    };
+
+    // Append buttons to footer
+    footer.appendChild(cancelBtn);
+    footer.appendChild(addMediaBtn);
+    modalContent.appendChild(footer);
+}
+
+function showFilesSelectedModal() {
+    // Create modal container
+    const modalContainer = document.createElement('div');
+    modalContainer.className = 'modal';
+
+    // Create modal content
+    const modalContent = document.createElement('div');
+    modalContent.className = 'modal-content';
+
+    // Create close button
+    const closeDIV = document.createElement('div');
+    closeDIV.className = 'close-div';
+    const closeBtn = document.createElement('span');
+    closeBtn.className = 'close';
+    closeBtn.textContent = '×';
+
+    // Append close button to modal content
+    closeDIV.appendChild(closeBtn)
+    modalContent.appendChild(closeDIV);
+
+    // Create container for media element
+    const container = document.createElement('div');
+    container.className = 'container';
+
+    if (images.length == 0) {   //No hay imágenes
+        const emptyMessage = document.createElement('h1');
+        emptyMessage.textContent = 'No Media Selected';
+        container.appendChild(emptyMessage)
+    } else {    //Hay imágenes
+        // Crear el carrusel
+        const carousel = document.createElement('div');
+        carousel.id = 'ImageCarrusel';
+        carousel.className = 'image-carousel-container';
+
+        console.log("Viewing: " + selectedImages)
+
+        //------------------------------ AÑADIR IMÁGENES/VIDEOS A CARROUSEL
+        for (let i = 0; i < images.length; i++) {
+            if (fileType[i]) { //Es una imagen
+                const nuevaImagen = document.createElement('img');
+                nuevaImagen.src = selectedImages[i];
+                carousel.appendChild(nuevaImagen);
+            } else {    //Es un vídeo
+                const nuevoVideo = document.createElement('video');
+                nuevoVideo.src = selectedImages[i];
+                nuevoVideo.controls = true; // Add controls to the video element
+                carousel.appendChild(nuevoVideo);
+            }
+        }
+
+        // Crear botones de navegación
+        const leftButton = document.createElement('div');
+        leftButton.className = 'carousel-button left';
+        leftButton.textContent = '❮';
+        leftButton.onclick = function() {
+            moveCarousel(-1);
+            console.log(getSlideNumber())
+        };
+
+        const rightButton = document.createElement('div');
+        rightButton.className = 'carousel-button right';
+        rightButton.textContent = '❯';
+        rightButton.onclick = function() {
+            moveCarousel(1);
+            console.log(getSlideNumber())
+        };
+
+// Agregar los botones al carrusel
+        carousel.appendChild(leftButton);
+        carousel.appendChild(rightButton);
+
+// Agregar el carrusel al contenedor
+        container.appendChild(carousel);
+    }
+
 
     // Append container to modal content
     modalContent.appendChild(container);
@@ -112,30 +237,42 @@ function showModal(mediaDataURL, reader, isImage) {
     cancelBtn.onclick = function() {
         closeModal(modalContainer);
     };
-    const addMediaBtn = document.createElement('button');
-    addMediaBtn.textContent = 'Add Media';
-    addMediaBtn.id = 'AddBTN';
-    addMediaBtn.onclick = function() {
-        // Add media to array or perform any action needed
-        images.push(reader);
-        console.log(images)
+
+    const deleteBtn = document.createElement('button');
+    deleteBtn.textContent = 'Delete';
+    deleteBtn.id = 'DeleteBTN';
+    deleteBtn.onclick = function() {
+        images.splice(getSlideNumber()-1, 1);
+        fileType.splice(getSlideNumber()-1, 1);
+        selectedImages.splice(getSlideNumber()-1, 1);
         closeModal(modalContainer);
+        console.log(images, fileType, selectedImages)
     };
 
     // Append buttons to footer
     footer.appendChild(cancelBtn);
-    footer.appendChild(addMediaBtn);
+    images.length !== 0 && footer.appendChild(deleteBtn);
     modalContent.appendChild(footer);
 }
 
 
+
 function closeModal(modalContainer) {
     modalContainer.style.display = 'none';
+    modalContainer.remove();
+}
+
+function viewSelectedModal() {
+    showFilesSelectedModal()
+    initCarousel('.image-carousel-container img, .image-carousel-container video')
 }
 
 // Event listener for file input change
 const fileInput = document.getElementById('imageUpload');
+const carrouselView = document.getElementById('carrouselBTN');
 fileInput.addEventListener('change', loaderMedia);
+carrouselView.addEventListener('click', viewSelectedModal);
+
 
 
 
@@ -265,6 +402,6 @@ document.getElementById('saveBtn').addEventListener('click', async function () {
         alert('Debes rellenar todos los campos antes de crear la publicación');
     } else {
         await addDocument();
-        //window.location.href = "../Account/account.html";
+        window.location.href = "../Account/account.html";
     }
 });

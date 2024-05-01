@@ -25,6 +25,13 @@ main {
     height: 100%;
 }
 
+/* Estilo de las video */
+.image-carousel-container video {
+    display: none;
+    width: auto;
+    height: 100%;
+}
+
 /* Estilo de los botones */
 .carousel-button {
     position: absolute; /* Posiciona los botones sobre el contenedor */
@@ -34,6 +41,10 @@ main {
     color: white;
     padding: 10px;
     cursor: pointer;
+}
+
+.carousel-button:hover {
+    transform: translateY(-50%) scale(1.1);
 }
 
 /* Estilo del botón de dirección izquierda */
@@ -82,6 +93,7 @@ main {
 
 #publicationData img:hover{
     transform: scale(1.1);
+    cursor: pointer;
 }
 #photoUser {
     width: 100px;
@@ -198,6 +210,17 @@ main {
     height: 40vh;
     width: 100%;
     justify-content: center;
+}
+
+#mapButton {
+    background-color: #e0e0e0;
+    color: #0C6DFF;
+    /*padding: 10px;
+    border-radius: 8px;*/
+    font-weight: bold;
+    font-family: 'Inter', sans-serif;
+    /*font-size: 10px;*/
+    cursor: pointer;
 }
 
 #comentarios {
@@ -373,8 +396,13 @@ main {
 /* ------ AÑADIR NUEVAS IMAGENES A MI PROPIA PUBLICACION ------ */
 
 .add_new_images_section,
-.save_image_button {
+.save_image_button,
+.show_new_images_section{
     display: inline-block;
+}
+
+.show_new_images_section {
+    margin-left: 10px;
 }
 
 .add_new_images_section {
@@ -395,6 +423,13 @@ main {
 
 .save_image_button button:hover {
     background-color: #58a9fa;
+}
+
+.deleteButton {
+    width: 5em;
+    height: 5em;
+    cursor: pointer;
+    margin-left: 95%;
 }
 
 /* ------ RESPONSIVE HEADERS ------ */
@@ -425,4 +460,122 @@ header#desktopHeader {
     header#desktopHeader {
         display: block;
     }
+}
+
+
+
+
+
+/* ------ Modal Styling ------ */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4); /* Semi-transparent background */
+}
+
+.modal-content {
+    background-color: #fff; /* White background */
+    margin: 10% auto;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Shadow */
+    max-width: 80%;
+    position: relative;
+}
+
+.container {
+    margin-top: 30px;
+    text-align: center;
+}
+
+.container img,
+.container video {
+    max-width: 100%; /* Ensure the image/video does not exceed the width of its container */
+    max-height: 400px; /* Limit the maximum height of the media element */
+    display: block; /* Ensure the image/video behaves as a block element */
+    margin: 0 auto; /* Center the image/video horizontally */
+}
+
+.close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    bottom: 10px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    font-size: 30px;
+    cursor: pointer;
+}
+.close:hover {
+    font-weight: bold;
+}
+
+.modal-footer {
+    margin-top: 20px;
+    text-align: right;
+}
+
+#AddBTN {
+    margin-left: 10px;
+    padding: 10px 20px;
+    background-color: #007bff; /* Blue button */
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+#AddBTN:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+}
+
+#CancelBTN {
+    margin-left: 10px;
+    padding: 10px 20px;
+    color: #000;
+    border: 2px solid transparent; /* Set initial border as transparent */
+    border-radius: 4px;
+    cursor: pointer;
+    transition: border-color 0.3s ease; /* Add transition for smoother hover effect */
+}
+
+#CancelBTN:hover {
+    background-color: #c7c7c7;
+}
+
+#DeleteBTN {
+    margin-left: 10px;
+    padding: 10px 20px;
+    background-color: #f53030; /* Blue button */
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+#DeleteBTN:hover {
+    background-color: #ad2c2c; /* Darker blue on hover */
+}
+
+
+#carrouselBTN {
+    background-color: #e0e0e0;
+    color: #0C6DFF;
+    width: 100%;
+    height: 40px;
+    padding: 10px;
+    border-radius: 8px;
+    font-weight: bold;
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    cursor: pointer;
+}
+#carrouselBTN:hover {
+    background-color: #BFBFBF;
 }
