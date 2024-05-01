@@ -196,11 +196,14 @@ app.get('/api/getImage/:imageName', async (req, res) => {
         const file = bucket.file(filePath);
 
         // Check if the file exists
-        const [exists] = await file.exists();
-        if (!exists) {
+        const [metadata] = await file.getMetadata();
+        if (!metadata) {
             res.status(404).json({ error: 'Image not found' });
             return;
         }
+
+        // Get the content type (mime type) of the file
+        const contentType = metadata.contentType;
 
         // Generate a signed URL for the file
         const [url] = await file.getSignedUrl({
@@ -208,7 +211,7 @@ app.get('/api/getImage/:imageName', async (req, res) => {
             expires: Date.now() + 60 * 1000, // Link expires in 1 minute
         });
 
-        res.json({ imageUrl: url });
+        res.json({ imageUrl: url, imageType: contentType });
     } catch (error) {
         console.error('Error fetching image:', error);
         res.status(500).json({ error: 'Internal Server Error' });
