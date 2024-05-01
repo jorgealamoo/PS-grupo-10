@@ -30,6 +30,23 @@ async function updatePublicationList(collection,document,from) {
     }
     await loadMapInToList(document,publicationMap);
 }
+
+async function updateUsersList(collection,document,from) {
+    const userMap = {};
+    const users = await loadAllPublication(from);
+    console.log(users)
+    for (const user of users) {
+        const id = user.userID;
+        const nombre = user.usuario;
+        if (nombre in userMap) {
+            userMap[nombre].push(id);
+        } else {
+            userMap[nombre] = [id];
+        }
+    }
+    await loadMapInToList(document,userMap);
+}
+
 export async function addToList(document, name, id) {
     let data = await fetch('http://localhost:3000/api/getDocument/listas/' + document)
         .then(response =>{
@@ -81,5 +98,6 @@ export async function deletePulicationFromList(document, name, id) {
 
 //await updatePublicationList("listas","publicaciones", "publicacion");
 //await addToList("publicaciones","Osorio","ejemplo");
-await deletePulicationFromList("publicaciones","Osorio","ejemplo");
+//await deletePulicationFromList("publicaciones","Osorio","ejemplo");
+await updateUsersList("listas","usuarios","usuario")
 
