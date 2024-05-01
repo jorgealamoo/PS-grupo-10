@@ -43,6 +43,10 @@ main {
     cursor: pointer;
 }
 
+.carousel-button:hover {
+    transform: translateY(-50%) scale(1.1);
+}
+
 /* Estilo del botón de dirección izquierda */
 .carousel-button.left {
     left: 0;
@@ -89,6 +93,7 @@ main {
 
 #publicationData img:hover{
     transform: scale(1.1);
+    cursor: pointer;
 }
 #photoUser {
     width: 100px;

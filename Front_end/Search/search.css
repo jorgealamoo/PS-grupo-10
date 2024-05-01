@@ -3,7 +3,7 @@ body {
 }
 
 main {
-    min-height: 82.1vh;
+    min-height: 77.6vh;
 }
 
 /* ------ SEARCHING BAR ------ */
@@ -50,6 +50,10 @@ main {
     padding: 7px;
 }
 
+.search-icon:hover {
+    transform: translateY(-50%) scale(1.1);
+}
+
 .search-type-selector {
     cursor: pointer;
     padding: 7px;
@@ -61,6 +65,18 @@ main {
     height: auto;
     padding: 3px;
 }
+
+.search-type-selector img:hover {
+    transform: scale(1.1);
+}
+
+/* ------ SEARCH RESULTS ------ */
+
+#publications,
+#users {
+    text-align: center;
+}
+
 
 /* ------ RESPONSIVE HEADERS ------ */
 @media screen and (max-width: 490px) {

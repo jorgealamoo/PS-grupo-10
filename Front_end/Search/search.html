@@ -8,6 +8,7 @@
     <script src='/Front_end/JavaScript/templateLoader.js'></script>
     <script src="/Front_end/JavaScript/userDataLoader.js"></script>
     <script src="/Front_end/JavaScript/authorisationCheck.js"></script>
+    <script src="loadSearch.js"></script>
 </head>
 <body>
 <header id="phoneHeader"></header>
@@ -20,8 +21,8 @@
             <img src="../Images/lupa_busqueda.png" alt="Search" class="search-icon">
         </div>
         <div class="search-type-selector">
-            <img src="../Images/publication_seleccionada.png" alt="Showing publications" title="Toggle to users">
-            <!--img src="../Images/user_seleccionado.png" alt="Showing users" title="Toggle to publications"-->
+            <img id="toggleSearch" src="../Images/publication_seleccionada.png" alt="Showing publications"
+                 title="Toggle search mode" onclick="toggleSearch()">
         </div>
     </div>
 
