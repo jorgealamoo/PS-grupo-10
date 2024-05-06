@@ -57,6 +57,17 @@ function initializeMap() {
     } else {
         console.error('Geolocalización no es soportada por este navegador.');
     }
+    map.setMinZoom(5);
+    map.setMaxZoom(20);
+    const southWest = L.latLng(-66.206333, -168.986456); // Esquina suroeste
+    const northEast = L.latLng(78.829917, 179.876336); // Esquina noreste
+    const bounds = L.latLngBounds(southWest, northEast);
+
+// Aplica los límites al mapa
+    map.setMaxBounds(bounds);
+    map.on('drag', function () {
+        map.panInsideBounds(bounds, { animate: false });
+    });
     return map;
 }
 
