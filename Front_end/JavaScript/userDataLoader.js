@@ -296,15 +296,9 @@ async function toggleDisplay(text, selfUser= true) {
     if (text === "followers") {
         follow = await loadUserData("lista_seguidores", selfUser);
         elemento = document.getElementById("followersDisplay");
-        const other = document.getElementById("followingDisplay");
-        other.classList.remove('active');
-        other.classList.add('inactive');
     } else {
         follow = await loadUserData("lista_siguiendo", selfUser);
         elemento = document.getElementById("followingDisplay");
-        const other = document.getElementById("followersDisplay");
-        other.classList.remove('active');
-        other.classList.add('inactive');
     }
 
     // Vaciar el contenido del elemento

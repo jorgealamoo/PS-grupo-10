@@ -155,13 +155,16 @@ header#desktopHeader {
 
 /* Estilos para los bloques de seguidos y siguiendo */
 #seguidos, #siguiedo {
+    width: 23em;
     flex: 1; /* Hace que ambos bloques ocupen el mismo ancho */
     text-align: center; /* Centra el contenido */
+    border: 2px solid black;
+    cursor: pointer;
 }
 
 #seguidos a, #siguiedo a {
     font-size: 30px;
-    margin-right: 10vh;
+    margin-right: 15vh;
     color: black;
     font-family: ABeeZee, serif;
     font-weight: bold;
@@ -172,7 +175,8 @@ header#desktopHeader {
 
 /* Estilos para los números de seguidores y siguiendo */
 #seguidores, #siguiendo {
-    display: block;
+    display: -webkit-flex;
+    margin-left: 26vh;
 }
 
 .follower {
@@ -201,9 +205,8 @@ header#desktopHeader {
     background-color: whitesmoke;
     max-height: 50%;
     overflow-y: auto;
-    border: 1px solid black;
+    border: 2px solid black;
     margin: 0;
-    width: 80em;
     padding: 0;
 }
 
@@ -215,21 +218,21 @@ header#desktopHeader {
 }
 
 #followersDisplay.active {
-    margin-left: 37%;
-    margin-top: 10%;
-    width: 25em;
+    margin-left: 39.4%;
+    margin-top: 10.3%;
+    width: 23em;
     display: block;
     position: absolute;
-    z-index: 9999; /* O cualquier valor mayor que los z-index de los otros elementos */
+    z-index: 9999;
 }
 
 #followingDisplay.active {
-    margin-left: 59%;
-    margin-top: 10%;
-    width: 25em;
+    margin-left: 63.8%;
+    margin-top: 10.3%;
+    width: 23em;
     display: block;
     position: absolute;
-    z-index: 9999; /* O cualquier valor mayor que los z-index de los otros elementos */
+    z-index: 9999;
 }
 
 .inactive {
