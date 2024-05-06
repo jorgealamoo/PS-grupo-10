@@ -112,6 +112,12 @@ async function loadComment(comment_list) {
     }
 }
 
+function confirmationMessage(commentID) {
+    const confirmDelete = confirm("¿Estás seguro de que quieres borrar este comentario?");
+    if (confirmDelete) deleteComment(commentID);
+}
+
+
 function createComment(userName, photoUser, text, title, userID, imageComment, selfUser=false, commentID) {
     var comentariosDiv = document.getElementById('coments');
 
@@ -172,7 +178,7 @@ function createComment(userName, photoUser, text, title, userID, imageComment, s
         deleteButton.src = "../Images/borrar.png";
         deleteButton.classList.add("deleteButton");
         deleteButton.addEventListener('click', function () {
-            deleteComment(commentID);
+            confirmationMessage(commentID);
         });
         nuevoComentario.appendChild(deleteButton);
     }
@@ -182,10 +188,24 @@ function createComment(userName, photoUser, text, title, userID, imageComment, s
 }
 
 async function deleteFromDatabase(commentID) {
-    await fetch('http://localhost:3000/api/deleteDocument/comentario/' + commentID,{
-        method: 'DELETE'
-    });
+    try {
+        const response = await fetch('http://localhost:3000/api/deleteDocument/comentario/' + commentID,{
+            method: 'DELETE'
+        });
+        if (!response.ok) {
+            throw new Error('Error deleting document');
+        }
+        const data = await response.json();
+        console.log(data.message);
+    } catch (error) {
+        console.error('Error deleting document:', error);
+    }
 }
+
+// Llama a la función deleteFromDatabase con el ID del documento que deseas eliminar
+const commentID = 'ID_del_documento_a_eliminar';
+deleteFromDatabase(commentID);
+
 
 async function deleteComment(commentID) {
     const cp = localStorage.getItem("currentPublication");

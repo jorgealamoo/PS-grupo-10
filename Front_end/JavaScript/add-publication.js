@@ -1,6 +1,5 @@
 import {uploadAllImagesToAPI} from './UploadImages.js';
 import {initializeMap} from './loadMap.js';
-import {addToList} from './cargarTodasLasPublicaciones.js'
 import {initCarousel, moveCarousel, getSlideNumber} from './carrusel.js'
 
 var Pointermap = {};

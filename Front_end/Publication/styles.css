@@ -166,6 +166,7 @@ main {
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
+    margin-right: 2em;
 }
 
 .header-comment{
@@ -426,10 +427,10 @@ main {
 }
 
 .deleteButton {
-    width: 5em;
-    height: 5em;
+    width: 6vh;
+    height: 6vh;
     cursor: pointer;
-    margin-left: 95%;
+    margin-left: 97%;
 }
 
 /* ------ RESPONSIVE HEADERS ------ */
