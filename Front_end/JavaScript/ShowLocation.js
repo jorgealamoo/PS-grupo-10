@@ -5,6 +5,13 @@ ratingControl.onAdd = function (map) {
     return document.getElementById('ratingControl');
 };
 ratingControl.addTo(map);
+
+const ubicacionControl = L.control({position: 'bottomright'});
+ubicacionControl.onAdd = function(map) {
+    return document.getElementById('currentLocationButton');
+};
+ubicacionControl.addTo(map);
+
 async function loadAllPublication() {
     try {
         const response = await fetch('http://localhost:3000/api/fetchData/publicacion/');
@@ -47,9 +54,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // Carga el mapa con la valoración mínima predeterminada (0)
     paintMap();
 
-    // Controlador de eventos para el desplegable de valoración
     document.getElementById('ratingFilter').addEventListener('change', function () {
-        // Limpia los marcadores existentes
         map.eachLayer(function (layer) {
             if (layer instanceof L.Marker) {
                 map.removeLayer(layer);
@@ -58,4 +63,21 @@ document.addEventListener('DOMContentLoaded', function () {
         // Pinta el mapa con la nueva valoración mínima
         paintMap(parseInt(this.value));
     });
+
+    document.getElementById('currentLocationButton').addEventListener('click',currentUbication);
 });
+
+function currentUbication() {
+    if ('geolocation' in navigator) {
+        navigator.geolocation.getCurrentPosition(function(position) {
+            const latitud = position.coords.latitude;
+            const longitud = position.coords.longitude;
+            map.setView([latitud, longitud], 15); // Ajusta el nivel de zoom según sea necesario
+        }, function(error) {
+            console.error(error);
+            alert('Error al obtener la ubicación: ' + error.message);
+        });
+    } else {
+        alert('La geolocalización no está disponible en tu navegador.');
+    }
+}
