@@ -1,4 +1,4 @@
-import {fetchImage} from '../JavaScript/loadPublication.js'
+
 
 async function searchPublications(keyword) {
     try {
@@ -11,14 +11,12 @@ async function searchPublications(keyword) {
         const publications = await response.json();
 
         // Filtrar las publicaciones que contienen el keyword en su título
-        const filteredPublications = Object.keys(publications).filter(publicationName => {
+        return Object.keys(publications).filter(publicationName => {
             return publicationName.toLowerCase().includes(keyword.toLowerCase());
         }).map(publicationName => ({
             title: publicationName,
             ids: publications[publicationName]
         }));
-
-        return filteredPublications;
     } catch (error) {
         console.error('Error al buscar publicaciones:', error);
         return []; // Devolver un array vacío en caso de error
@@ -32,6 +30,17 @@ function searchUsers(keyword) {
     return users;
 }
 
+async function fetchUser(userId) {
+    const user = await fetch('http://localhost:3000/api/getDocument/usuario/' + userId)
+        .then(async response => {
+            if (!response.ok) {
+                throw new Error("Fail to fetch document");
+            }
+            return await response.json()
+        });
+    return user.usuario;
+}
+
 async function displayResults(results, type) {
     const container = type === 'publications' ? document.getElementById('publications') : document.getElementById('users');
 
@@ -40,20 +49,31 @@ async function displayResults(results, type) {
         return;
     }
 
-    console.log(results);
     for (const result of results) {
         for (const publicationId of result.ids) {
             try {
                 const response = await fetch('http://localhost:3000/api/getDocument/publicacion/' + publicationId);
                 const publicationData = await response.json();
                 const resultElement = document.createElement('div');
+                resultElement.classList.add('publication');
 
                 const firstImage = await fetchImage(publicationData['lista_imagenes'][0]);
+                const username = await fetchUser(publicationData['user_id']);
                 resultElement.innerHTML = `
-                <img src="${firstImage}" alt="Imagen de la publicación">
-                <h2>${result.title}</h2>
-                <p>Rate: ${publicationData['valoracion']}</p>
+                <div class="publication-content">
+                    <img src="${firstImage}" alt="Imagen de la publicación">
+                    <div class="publication-info">
+                        <h2>${result.title}</h2>
+                        <h3>${username}</h3>
+                        <p>Rate: ${publicationData['valoracion']}</p>
+                    </div>
+                </div>
                 `;
+
+                resultElement.addEventListener('click', () => {
+                    localStorage.setItem("currentPublication", publicationId);
+                    window.location.href = '../Publication/publication.html';
+                });
 
                 container.appendChild(resultElement);
 
@@ -62,6 +82,20 @@ async function displayResults(results, type) {
                 break;
             }
         }
+    }
+}
+
+async function fetchImage(imageurl) {
+    try {
+        const response = await fetch('http://localhost:3000/api/getImage/' + imageurl);
+        if (!response.ok) {
+            throw new Error('Failed to fetch image');
+        }
+        const data = await response.json();
+        return data.imageUrl;
+    } catch (error) {
+        console.error('Error fetching image:', error.message);
+        return null;
     }
 }
 
@@ -87,7 +121,22 @@ function toggleSearch(){
     }
 }
 
+
 document.addEventListener('DOMContentLoaded', function() {
+    const searchInput = document.getElementById('searchInput');
+    searchInput.addEventListener('keypress', function(event) {
+        if (event.key === 'Enter') {
+            const pContainer = document.getElementById('publications');
+            pContainer.innerHTML = '';
+            const uContainer = document.getElementById('users');
+            uContainer.innerHTML = '';
+
+            const keyword = searchInput.value;
+            const type = document.getElementById('toggleSearch').src.endsWith('publication_seleccionada.png') ? 'publications' : 'users';
+            performSearch(keyword, type);
+        }
+    });
+
     document.querySelector('.search-icon').addEventListener('click', function() {
         const pContainer = document.getElementById('publications');
         pContainer.innerHTML = '';
@@ -99,5 +148,4 @@ document.addEventListener('DOMContentLoaded', function() {
         performSearch(keyword, type);
     });
 });
-
 

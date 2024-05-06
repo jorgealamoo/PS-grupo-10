@@ -75,6 +75,45 @@ main {
 #publications,
 #users {
     text-align: center;
+    font-family: 'Inter', sans-serif;
+}
+
+/* ------ PUBLICATIONS ------ */
+
+.publication-content {
+    display: flex;
+    align-items: center;
+    text-align: center;
+}
+
+.publication-info {
+    flex-grow: 1;
+}
+
+.publication {
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: center;
+}
+
+.publication:hover {
+    cursor: pointer;
+    background-color: #e0e0e0;
+}
+
+.publication img {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    margin-right: 20px;
+}
+
+.publication h3 {
+    color: #2e76dc;
+}
+
+.publication p {
+    color: #a88e01;
 }
 
 

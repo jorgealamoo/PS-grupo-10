@@ -414,5 +414,3 @@ function redirectGoogleMaps() {
     // Abrir la ubicación en Google Maps en una nueva ventana
     window.open(url);
 }
-
-export {fetchImage};
