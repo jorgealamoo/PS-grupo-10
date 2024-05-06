@@ -1,5 +1,12 @@
 function initializeMap() {
-    var map = L.map('map').setView([28.072876, -15.451502], 17);
+    var map = L.map('map',{
+            maxZoom: 20,
+            minZoom: 6,
+            zoomControl: false
+    }).setView([28.072876, -15.451502], 17);
+    L.control.zoom({
+        position: 'bottomright'
+    }).addTo(map);
 
     // Tile type: openstreetmap normal
     var openstreetmap = L.tileLayer(
@@ -57,8 +64,7 @@ function initializeMap() {
     } else {
         console.error('Geolocalización no es soportada por este navegador.');
     }
-    map.setMinZoom(5);
-    map.setMaxZoom(20);
+
     const southWest = L.latLng(-66.206333, -168.986456); // Esquina suroeste
     const northEast = L.latLng(78.829917, 179.876336); // Esquina noreste
     const bounds = L.latLngBounds(southWest, northEast);

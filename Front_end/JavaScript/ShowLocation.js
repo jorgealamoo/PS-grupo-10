@@ -1,5 +1,10 @@
 import {initializeMap} from './loadMap.js';
 const map = initializeMap();
+const ratingControl = L.control({position: 'topleft'});
+ratingControl.onAdd = function (map) {
+    return document.getElementById('ratingControl');
+};
+ratingControl.addTo(map);
 async function loadAllPublication() {
     try {
         const response = await fetch('http://localhost:3000/api/fetchData/publicacion/');
@@ -9,13 +14,14 @@ async function loadAllPublication() {
         return response.json();
     } catch (error) {
         console.error('Error fetching data:', error);
-        return []; // Devuelve una lista vacía en caso de error
+        return [];
     }
 }
 
-async function paintMap() {
+async function paintMap(minRating= 4) {
     const publications = await loadAllPublication();
-    for (const publication of publications) {
+    const filteredPublications = publications.filter(pub => pub.valoracion >= minRating);
+    for (const publication of filteredPublications) {
         const location = [publication.ubicacion.latitude, publication.ubicacion.longitude];
         const marker = L.marker(location, {
             id: publication.publication_id,
@@ -37,4 +43,19 @@ async function paintMap() {
     }
 }
 
-document.addEventListener('DOMContentLoaded', paintMap);
+document.addEventListener('DOMContentLoaded', function () {
+    // Carga el mapa con la valoración mínima predeterminada (0)
+    paintMap();
+
+    // Controlador de eventos para el desplegable de valoración
+    document.getElementById('ratingFilter').addEventListener('change', function () {
+        // Limpia los marcadores existentes
+        map.eachLayer(function (layer) {
+            if (layer instanceof L.Marker) {
+                map.removeLayer(layer);
+            }
+        });
+        // Pinta el mapa con la nueva valoración mínima
+        paintMap(parseInt(this.value));
+    });
+});
