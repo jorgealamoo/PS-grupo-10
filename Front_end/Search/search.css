@@ -116,6 +116,41 @@ main {
     color: #a88e01;
 }
 
+/* ------ USERS ------ */
+
+.user {
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: center;
+}
+
+.user:hover {
+    cursor: pointer;
+    background-color: #e0e0e0;
+}
+
+.user-content,
+.user-info {
+    display: inline-block;
+}
+
+.user-info {
+    vertical-align: top;
+    margin-top: 25px;
+}
+
+.user img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 40px;
+}
+
+.user-info h3 {
+    color: #656565;
+    font-weight: normal;
+}
 
 /* ------ RESPONSIVE HEADERS ------ */
 @media screen and (max-width: 490px) {
