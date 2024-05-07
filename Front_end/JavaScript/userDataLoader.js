@@ -204,9 +204,11 @@ async function isImage(imgName) {
 function toggleLogOut() {
     var logOutButton = document.getElementById("LogOut");
     if (logOutButton.style.opacity === "1") {
-        logOutButton.style.opacity = "0";
+        logOutButton.style.display = "0";
+        logOutButton.style.display = 'none';
     } else {
         logOutButton.style.opacity = "1";
+        logOutButton.style.display = 'block';
     }
 }
 
