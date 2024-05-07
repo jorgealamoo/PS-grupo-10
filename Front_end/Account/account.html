@@ -14,16 +14,19 @@
         <main>
             <div class="User">
                 <img id="profilePhotoAccount" alt="" src="">
-                <b><span id="username"></span></b>
+                <div id="personalInformation">
+                    <b><span id="username"></span></b>
+                    <b><span id="firstName"></span></b>
+                </div>
                 <div class="followers">
                 <div id="seguidos" onclick="toggleDisplay('followers')">
                     <a>Followers</a>
-                    <span class="seguidores" id="seguidores"><b></b></span>
+                    <div class="numberSeguidores"><span class="seguidores" id="seguidores"><b></b></span></div>
                     <div class="inactive" id="followersDisplay"></div>
                 </div>
                 <div id="siguiedo" onclick="toggleDisplay('following')">
                     <a>Following</a>
-                    <span class="siguiendo" id="siguiendo"><b></b></span>
+                    <div class="numberSeguidores"><span id="siguiendo"><b></b></span></div>
                     <div class="inactive" id="followingDisplay"></div>
                 </div>
             </div>
@@ -45,15 +48,24 @@
         <script>
             (async () => {
                 await loadProfilePhoto("profilePhotoAccount");
+                const name = await loadUserData("nombre");
+                const lastName = await loadUserData("apellido");
+                const cont = document.getElementById("firstName");
+                cont.textContent = name + " " + lastName;
                 await loadUserName("username");
                 await loadFollowers("seguidores");
                 await loadFollowing("siguiendo");
                 const publications = await loadUserData("lista_publicaciones");
                 for (let i=0; i<publications.length; i++) {
-                    const imagen = await loadPublicationData("lista_imagenes", publications[i]);
-                    const name = await loadPublicationData("nombre", publications[i]);
-                    const url = await getImgURL(imagen[0]);
-                    addImage(url, name, publications[i]);
+                    try {
+                        const imagen = await loadPublicationData("lista_imagenes", publications[i]);
+                        const name = await loadPublicationData("nombre", publications[i]);
+                        //const random = Math.floor(Math.random() * imagen.length);
+                        const url = await getImgURL(imagen[0]);
+                        addImage(url, name, publications[i]);
+                    } catch (error) {
+                        console.error('Error loading publication data:', error);
+                    }
                 }
             })();
             document.addEventListener('DOMContentLoaded', checkAuth);

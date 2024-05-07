@@ -22,6 +22,8 @@
             <img id="user_img" src="" alt="">
         </div>
         <b><span id="name"></span></b>
+        <b><span id="firstName"></span></b>
+
         <div id="information_user">
             <div class="followers">
                 <div id="seguidos">
@@ -62,6 +64,10 @@
     (async () => {
         await loadProfilePhoto("user_img", false);
         await loadUserName("name", false);
+        const name = await loadUserData("nombre", false);
+        const lastName = await loadUserData("apellido", false);
+        const cont = document.getElementById("firstName");
+        cont.textContent = name + " " + lastName;
         const publications = await loadUserData("lista_publicaciones", false);
         for (let i=0; i<publications.length; i++) {
             const imagen = await loadPublicationData("lista_imagenes", publications[i]);

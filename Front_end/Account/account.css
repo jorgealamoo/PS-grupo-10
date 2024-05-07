@@ -24,10 +24,10 @@ body {
     height: 8em;
     object-fit: cover;
     border-radius: 50%;
+    border: 2px solid black;
 }
 
 .User span {
-    margin-left: 1em;
     font-size: 40px;
     font-family: ABeeZee, serif;
 }
@@ -98,6 +98,16 @@ body {
     font-weight: bold;
 }
 
+#personalInformation b {
+    display: block;
+    margin-left: 1em;
+}
+
+#firstName {
+    font-weight: normal;
+    font-size: 20px;
+}
+
 /* ------ RESPONSIVE HEADERS ------ */
 
 /* Ocultar los headers por defecto */
@@ -121,11 +131,6 @@ header#desktopHeader {
     .contImagen {
         margin-left: 21%;
         grid-template-columns: repeat(1, 1fr);
-    }
-
-    .User span {
-        display: inline;
-        white-space: nowrap;
     }
 
     .options {
