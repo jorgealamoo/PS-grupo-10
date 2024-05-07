@@ -58,11 +58,38 @@
                 const publications = await loadUserData("lista_publicaciones");
                 for (let i=0; i<publications.length; i++) {
                     try {
-                        const imagen = await loadPublicationData("lista_imagenes", publications[i]);
+
+                        const imagenes = await loadPublicationData("lista_imagenes", publications[i]);
                         const name = await loadPublicationData("nombre", publications[i]);
-                        //const random = Math.floor(Math.random() * imagen.length);
-                        const url = await getImgURL(imagen[0]);
-                        addImage(url, name, publications[i]);
+
+                        try {
+                            const response = await fetch(`http://localhost:3000/api/getImage/${imagenes[0]}`);
+                            if (!response.ok) {
+                                throw new Error('Failed to fetch image URL');
+                            }
+                            const data = await response.json();
+
+                            // Check if imageType contains "/image"
+                            if (data.imageType.includes('image/')) {
+                                const url = await getImgURL(imagenes[0]);
+                                addImage(url, name, publications[i]);
+                            } else if (data.imageType.includes('video/')) {
+                                const videoUrl = await getImgURL(imagenes[0]);
+                                console.log('Es un Video: ' + videoUrl);
+                                addVideo(videoUrl, name, publications[i]);
+
+                            } else {
+                                throw new Error('Unknown media type');
+                            }
+                        } catch (error) {
+                            console.error('Error fetching image URL:', error);
+                            throw error;
+                        }
+
+
+
+
+
                     } catch (error) {
                         console.error('Error loading publication data:', error);
                     }
