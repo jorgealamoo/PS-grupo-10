@@ -202,15 +202,16 @@ async function isImage(imgName) {
 
 // Función para alternar el botón de logout
 function toggleLogOut() {
-    var logOutButton = document.getElementById("LogOut");
+    const logOutButton = document.getElementById("LogOut");
     if (logOutButton.style.opacity === "1") {
-        logOutButton.style.display = "0";
-        logOutButton.style.display = 'none';
+        logOutButton.style.opacity = "0"; // Cambiar la opacidad a 0 para hacerlo invisible
+        logOutButton.style.display = 'none'; // Ocultar el botón estableciendo la propiedad display a 'none'
     } else {
-        logOutButton.style.opacity = "1";
-        logOutButton.style.display = 'block';
+        logOutButton.style.opacity = "1"; // Cambiar la opacidad a 1 para hacerlo visible
+        logOutButton.style.display = 'block'; // Mostrar el botón estableciendo la propiedad display a 'block'
     }
 }
+
 
 // Función para cargar la foto de perfil
 async function loadProfilePhoto(imageContainer, selfUser = true) {
