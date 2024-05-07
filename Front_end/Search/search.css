@@ -116,6 +116,13 @@ main {
     color: #a88e01;
 }
 
+/* ------ USERS ------ */
+
+.user-content {
+    display: flex;
+    align-items: center;
+    text-align: center;
+}
 
 /* ------ RESPONSIVE HEADERS ------ */
 @media screen and (max-width: 490px) {

@@ -19,15 +19,37 @@ async function searchPublications(keyword) {
         }));
     } catch (error) {
         console.error('Error al buscar publicaciones:', error);
-        return []; // Devolver un array vacío en caso de error
+        return [];
     }
 }
 
-function searchUsers(keyword) {
-    // Aquí iría la lógica para buscar usuarios
-    // Supongamos que obtienes un array de usuarios encontrados
-    const users = [];
-    return users;
+async function searchUsers(keyword) {
+    if (keyword === "") {
+        return [];
+    }
+
+    try {
+        const response = await fetch('http://localhost:3000/api/getDocument/listas/usuarios');
+
+        if (!response.ok) {
+            throw new Error('No se pudo obtener la lista de usuarios');
+        }
+
+        const users = await response.json();
+
+        const results = Object.keys(users).filter(userName => {
+            return userName.toLowerCase().includes(keyword.toLowerCase());
+        }).map(userName => ({
+            title: userName,
+            ids: users[userName]
+        }));
+
+        console.log(results);
+        return results;
+    } catch (error) {
+        console.error('Error al buscar usuarios:', error);
+        return [];
+    }
 }
 
 async function fetchUser(userId) {
@@ -41,7 +63,7 @@ async function fetchUser(userId) {
     return user.usuario;
 }
 
-async function displayResults(results, type) {
+async function displayPublicationResults(results, type) {
     const container = type === 'publications' ? document.getElementById('publications') : document.getElementById('users');
 
     if (results.length === 0) {
@@ -85,6 +107,51 @@ async function displayResults(results, type) {
     }
 }
 
+async function displayUserResults(results, type) {
+    const container = type === 'publications' ? document.getElementById('publications') : document.getElementById('users');
+
+    if (results.length === 0) {
+        container.innerHTML = '<p>No se encontraron resultados.</p>';
+        return;
+    }
+    console.log(results);
+    for (const result of results) {
+        for (const userId of result.ids) {
+            try {
+                const response = await fetch('http://localhost:3000/api/getDocument/usuario/' + userId);
+                const userData = await response.json();
+                const resultElement = document.createElement('div');
+                resultElement.classList.add('user');
+
+                const userImage = await fetchImage(userData['photoPerfil']);
+                resultElement.innerHTML = `
+                <div class="user-content">
+                    <img src="${userImage}" alt="Imagen de la publicación">
+                    <div class="user-info">
+                        <h2>${result.title}</h2>
+                        <h3>${userData['nombre']}</h3>
+                    </div>
+                </div>
+                `;
+
+                /*
+                resultElement.addEventListener('click', () => {
+                    localStorage.setItem("currentPublication", publicationId);
+                    window.location.href = '../Publication/publication.html';
+                });
+                 */
+
+                container.appendChild(resultElement);
+
+            } catch (error) {
+                console.error('Error al encontrar publicacion:', error);
+                break;
+            }
+        }
+    }
+
+}
+
 async function fetchImage(imageurl) {
     try {
         const response = await fetch('http://localhost:3000/api/getImage/' + imageurl);
@@ -102,22 +169,31 @@ async function fetchImage(imageurl) {
 function performSearch(keyword, type) {
     if (type === 'publications') {
         searchPublications(keyword).then(results => {
-            displayResults(results, 'publications');
+            displayPublicationResults(results, 'publications');
         }).catch(error => {
             console.error('Error al buscar publicaciones:', error);
         });
     } else {
-        const results = searchUsers(keyword);
-        displayResults(results, 'users');
+        searchUsers(keyword).then(results => {
+            displayUserResults(results, 'users');
+        }).catch(error => {
+            console.error('Error al buscar usuarios:', error);
+        });
     }
 }
 
 function toggleSearch(){
     const toggleButton = document.getElementById("toggleSearch");
+    const searchInput = document.getElementById("searchInput");
+
     if (toggleButton.src.endsWith('publication_seleccionada.png')) {
         toggleButton.src = '/Front_end/Images/user_seleccionado.png';
+        toggleButton.title = "Toggle to search publication"
+        searchInput.placeholder = "Search user";
     } else {
         toggleButton.src = '/Front_end/Images/publication_seleccionada.png';
+        toggleButton.title = "Toggle to search users"
+        searchInput.placeholder = "Search publication";
     }
 }
 
