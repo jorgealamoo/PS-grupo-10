@@ -358,6 +358,7 @@ async function addDocument() {
         })
         .then(data => {
                 console.log('Datos agregados con éxito:', data);
+                window.location.href = "../Account/account.html";
                 return data;
             }
         ).catch(error => {
@@ -401,6 +402,5 @@ document.getElementById('saveBtn').addEventListener('click', async function () {
         alert('Debes rellenar todos los campos antes de crear la publicación');
     } else {
         await addDocument();
-        window.location.href = "../Account/account.html";
     }
 });
