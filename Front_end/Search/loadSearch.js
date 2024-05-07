@@ -126,20 +126,20 @@ async function displayUserResults(results, type) {
                 const userImage = await fetchImage(userData['photoPerfil']);
                 resultElement.innerHTML = `
                 <div class="user-content">
-                    <img src="${userImage}" alt="Imagen de la publicación">
-                    <div class="user-info">
-                        <h2>${result.title}</h2>
-                        <h3>${userData['nombre']}</h3>
-                    </div>
+                <img src="${userImage}" alt="Imagen de la publicación">
+                </div>
+                <div class="user-info">
+                    <h2>${result.title}</h2>
+                    <h3>${userData['nombre']}</h3>
                 </div>
                 `;
 
-                /*
+
                 resultElement.addEventListener('click', () => {
-                    localStorage.setItem("currentPublication", publicationId);
-                    window.location.href = '../Publication/publication.html';
+                    localStorage.setItem("viewAccountId", userId);
+                    window.location.href = '../ViewAccount/viewAccount.html';
                 });
-                 */
+
 
                 container.appendChild(resultElement);
 
