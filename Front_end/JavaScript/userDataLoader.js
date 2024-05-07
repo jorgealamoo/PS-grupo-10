@@ -42,6 +42,71 @@ function addImage(imagePath, text, publicationID) {
     document.getElementById("imagenContainer").appendChild(nuevoElemento);
 }
 
+function addVideo(videoPath, text, publicationID) {
+    const nuevoElemento = document.createElement('div');
+    nuevoElemento.className = 'imagewd';
+    nuevoElemento.style.cssText = `
+    width: 40vh;
+    height: 40vh;
+    position: relative;
+    cursor: pointer;
+    border: 2px solid black;
+    `;
+
+    // Create a video element
+    const videoElement = document.createElement('video');
+    videoElement.autoplay = true;
+    videoElement.loop = true;
+    videoElement.muted = true; // Mute the video to prevent audio playback
+
+    // Set the source of the video (replace 'videoPath' with your video URL)
+    videoElement.src = videoPath;
+
+    // Apply CSS styles to the video element
+    videoElement.style.cssText = `
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensure the video covers the entire div */
+    `;
+
+    // Append the video element to the nuevoElemento
+    nuevoElemento.appendChild(videoElement);
+
+
+
+
+    const textoElemento = document.createElement('div');
+    textoElemento.innerHTML = text;
+    textoElemento.style.cssText = `
+        position: absolute;
+        bottom: 0;
+        color: white;
+        background-color: rgba(0, 0, 0, 0.5);
+        padding: 5px;
+        display: none;
+        width: 96.5%;
+    `;
+
+    nuevoElemento.addEventListener('mouseover', () => {
+        textoElemento.style.display = 'block';
+    });
+
+    nuevoElemento.addEventListener('mouseout', () => {
+        textoElemento.style.display = 'none';
+    });
+
+    nuevoElemento.addEventListener('click', () => {
+        localStorage.setItem("currentPublication", publicationID);
+        window.location.href = '../Publication/publication.html';
+    });
+
+    nuevoElemento.appendChild(textoElemento);
+    document.getElementById("imagenContainer").appendChild(nuevoElemento);
+}
+
 // Función para cargar datos del usuario
  async function loadUserData(fieldName, selfUser = true) {
     try {
@@ -111,6 +176,29 @@ async function getImgURL(imgName) {
         throw error;
     }
 }
+
+async function isImage(imgName) {
+    try {
+        const response = await fetch(`http://localhost:3000/api/getImage/${imgName}`);
+        if (!response.ok) {
+            throw new Error('Failed to fetch image URL');
+        }
+        const data = await response.json();
+
+        // Check if imageType contains "/image"
+        if (data.imageType.includes('image/')) {
+            return true; // It's an image
+        } else if (data.imageType.includes('video/')) {
+            return false; // It's a video
+        } else {
+            throw new Error('Unknown media type');
+        }
+    } catch (error) {
+        console.error('Error fetching image URL:', error);
+        throw error;
+    }
+}
+
 
 // Función para alternar el botón de logout
 function toggleLogOut() {
@@ -342,3 +430,46 @@ async function toggleDisplay(text, selfUser= true) {
     }
 }
 
+async function downloadVideoAndExtractFirstFrame(videoUrl) {
+    return new Promise((resolve, reject) => {
+        // Create a video element
+        const video = document.createElement('video');
+        video.crossOrigin = 'anonymous'; // Enable CORS for downloading video
+        video.src = videoUrl;
+
+        // Once metadata is loaded, extract the first frame
+        video.onloadedmetadata = async () => {
+            try {
+                // Create a canvas to draw the first frame
+                const canvas = document.createElement('canvas');
+                const ctx = canvas.getContext('2d');
+                canvas.width = video.videoWidth;
+                canvas.height = video.videoHeight;
+
+                // Draw the first frame onto the canvas
+                ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+                // Convert canvas to a data URL representing the image
+                const imageUrl = canvas.toDataURL('image/jpeg');
+
+                // Resolve with the image URL
+                resolve(imageUrl);
+            } catch (error) {
+                reject(error);
+            } finally {
+                // Clean up
+                video.onloadedmetadata = null;
+                video.src = '';
+                video.remove();
+            }
+        };
+
+        // If an error occurs while loading the video
+        video.onerror = (error) => {
+            reject(error);
+        };
+
+        // Append the video element to the document body to start loading
+        document.body.appendChild(video);
+    });
+}

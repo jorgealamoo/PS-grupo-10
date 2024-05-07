@@ -28,13 +28,13 @@ async function updatePublicationList(collection,document,from) {
             publicationMap[nombre] = [id];
         }
     }
+    console.log(publicationMap);
     await loadMapInToList(document,publicationMap);
 }
 
 async function updateUsersList(collection,document,from) {
     const userMap = {};
     const users = await loadAllPublication(from);
-    console.log(users)
     for (const user of users) {
         const id = user.userID;
         const nombre = user.usuario;
@@ -43,6 +43,7 @@ async function updateUsersList(collection,document,from) {
         } else {
             userMap[nombre] = [id];
         }
+        console.log(userMap[nombre]);
     }
     await loadMapInToList(document,userMap);
 }
@@ -99,5 +100,5 @@ export async function deletePulicationFromList(document, name, id) {
 //await updatePublicationList("listas","publicaciones", "publicacion");
 //await addToList("publicaciones","Osorio","ejemplo");
 //await deletePulicationFromList("publicaciones","Osorio","ejemplo");
-await updateUsersList("listas","usuarios","usuario")
+//await updateUsersList("listas","usuarios","usuario")
 

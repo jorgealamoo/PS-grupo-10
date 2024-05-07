@@ -97,13 +97,13 @@ async function loadComment(comment_list) {
                 }
                 return await response.json()
             });
-        var userName = user.nombre;
-        var photoUser =  await fetchImage(user.photoPerfil);
-        var text = response.contenido;
-        var titulo = response.titulo;
-        var userID = response.user_id;
+        const userName = user.nombre;
+        const photoUser = await fetchImage(user.photoPerfil);
+        const text = response.contenido;
+        const titulo = response.titulo;
+        const userID = response.user_id;
 
-        var imageComment = null;
+        let imageComment = null;
         if (response.lista_imagenes.length > 0) {
              imageComment = await fetchImage(response.lista_imagenes[0]);
         }
