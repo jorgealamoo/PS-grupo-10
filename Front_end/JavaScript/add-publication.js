@@ -37,7 +37,8 @@ const datos = {
     ubicacion: Pointermap,
     user_id: user_id,
     valoracion:valoracion,
-    descripcion:comment
+    descripcion:comment,
+    rating_list: []
 };
 
 
@@ -338,6 +339,7 @@ function selectRate() {
 async function addDocument() {
     datos.valoracion = selectRate();
     console.log(datos.valoracion);
+    datos.rating_list[localStorage.getItem('userId')] = datos.valoracion;
     datos.descripcion = comment.value.trim();
     datos.nombre = titel.value.trim();
     //console.log(images);

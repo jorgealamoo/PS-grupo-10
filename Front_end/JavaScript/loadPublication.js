@@ -324,7 +324,7 @@ async function displayDocumentData() {
         console.log(dataJSON["ubicacion"].longitude)
 
         await loadComment(documentData["lista_comentarios"]);
-        createScore(calculateValoration(documentData["valoracion"]));
+        createScore(documentData["valoracion"]);
         await isSave();
     }
 }
@@ -350,8 +350,48 @@ async function modifyDoc(collection,document,data) {
         throw error;
     }
 }
-function calculateValoration(publicationValoration) {
-    return publicationValoration;
+async function updateRating(rating) {
+    const publicationID = localStorage.getItem('currentPublication');
+
+    try {
+        const response = await fetch('http://localhost:3000/api/getDocument/publicacion/' + publicationID);
+        if (!response.ok) {
+            throw new Error("Error al cargar la publicación");
+        }
+
+        const data = await response.json();
+
+        let ratingList = data.hasOwnProperty("rating_list") ? data.rating_list : {};
+
+        // Agrega el nuevo rating al ratingList
+        ratingList[localStorage.getItem('userId')] = rating;
+
+        // Calcula la media de las valoraciones en el ratingList
+        let totalRating = 0;
+        let numRatings = 0;
+        for (const userId in ratingList) {
+            if (ratingList.hasOwnProperty(userId)) {
+                totalRating += ratingList[userId];
+                numRatings++;
+            }
+        }
+        const averageRating = totalRating / numRatings;
+
+        // Actualiza la valoración global de la publicación
+        const updatedData = {
+            ...data,
+            rating_list: ratingList,
+            valoracion: averageRating
+        };
+
+        // Guarda los cambios en la base de datos
+        await modifyDoc('publicacion', publicationID, updatedData);
+
+        console.log("Valoración actualizada con éxito:", averageRating);
+    } catch (error) {
+        console.error('Error al actualizar la valoración:', error.message);
+    }
+
 }
 
 async function changeIcon() {
