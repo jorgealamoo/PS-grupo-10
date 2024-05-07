@@ -68,7 +68,7 @@
         const lastName = await loadUserData("apellido", false);
         const cont = document.getElementById("firstName");
         cont.textContent = name + " " + lastName;
-        const publications = await loadUserData("lista_publicaciones");
+        const publications = await loadUserData("lista_publicaciones", false);
         for (let i=0; i<publications.length; i++) {
             try {
 
