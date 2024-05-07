@@ -1,130 +1,99 @@
-
 main {
-    min-height: 80vh;
+    min-height: 82vh;
 }
 
 body {
     margin: 0;
+    min-width: 375px;
+    overflow-x: hidden;
+    background-color: white;
 }
 
-/* Estilos para el contenedor de usuario */
 .User {
-    display: flex; /* Establece un diseño de tipo flexbox */
-    align-items: center; /* Centra verticalmente los elementos */
-    width: 100%; /* Ocupa todo el ancho de la página */
-    font-size: 1.2em; /* Tamaño de la fuente */
+    width: 100%;
+    height: 15em;
     background-color: rgba(167, 225, 225, 0.37);
+    position: relative;
+    display: flex;
+    align-items: center;
 }
 
-/* Estilos para la imagen de usuario */
-#image {
-    height: 100%;
-    flex-shrink: 0; /* Evita que la imagen se encoja */
-    margin: 20px; /* Espacio entre la imagen y el bloque de información */
-}
-
-#user_img {
-    border-radius: 50%; /* Hace que la imagen sea redonda */
-    width: 100px; /* Tamaño de la imagen */
-    height: 100px;
+.User img {
+    margin-left: 20px;
+    width: 8em;
+    height: 8em;
+    object-fit: cover;
+    border-radius: 50%;
     border: 2px solid black;
 }
 
-/* Estilos para el contenedor de información del usuario */
-#information_user {
-    flex-grow: 1; /* Permite que el contenedor ocupe el espacio restante */
-}
-
-/* Estilos para el nombre de usuario */
-#name {
-    display: block; /* Hace que el nombre ocupe todo el ancho */
-    text-align: center; /* Centra el nombre */
-    margin-bottom: 10px; /* Espacio entre el nombre y los seguidores */
-    font-size: 40px; /* Tamaño de la fuente */
+.User span {
+    font-size: 40px;
     font-family: ABeeZee, serif;
 }
 
-/* Estilos para el bloque de seguidores */
 .followers {
-    display: flex; /* Establece un diseño de tipo flexbox */
-    justify-content: space-between; /* Distribuye los elementos horizontalmente */
-    margin-bottom: 10px; /* Espacio entre los seguidores y el botón */
+    margin-left: -20em;
 }
 
-/* Estilos para los bloques de seguidos y siguiendo */
-#seguidos, #siguiedo {
-    margin-top: 4%;
-    flex: 1; /* Hace que ambos bloques ocupen el mismo ancho */
-    text-align: center; /* Centra el contenido */
+.following {
+    margin-left: 12%;
 }
 
-#seguidos a, #siguiedo a {
-    font-family: ABeeZee, serif;
-    font-weight: bold;
-    font-size: 25px;
-    cursor: pointer;
-}
-
-/* Estilos para los números de seguidores y siguiendo */
-#seguidores, #siguiendo {
-    display: block; /* Hace que los números ocupen todo el ancho */
-    font-weight: bold;
-    font-family: ABeeZee, serif;
-}
-
-/* Estilos para el botón de seguir */
-#FollowButton {
-    display: block; /* Hace que el botón ocupe todo el ancho */
-    text-align: center; /* Centra el texto del botón */
-    font-size: 1em; /* Tamaño de la fuente */
-    margin-left: 43%;
-    margin-bottom: 2%;
-}
-
-/* Media queries para hacer que el texto sea más grande en pantallas más grandes */
-@media screen and (min-width: 768px) {
-    .User {
-        font-size: 1.5em;
-    }
-
-    #name {
-        font-size: 1.8em;
-    }
-}
-
-
-#FollowButton {
-    padding: 10px 20px; /* Increase padding to make the button bigger */
-    background-color: #007bff; /* Adjust color as needed */
-    color: #fff; /* Text color */
-    border: none;
-    border-radius: 5px; /* Adjust as needed */
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-#FollowButton:hover {
-    background-color: #0056b3; /* Adjust hover color as needed */
-}
-
-
-.UserContent {
+.options {
     width: 100%;
-    text-align: center; /* Center the text horizontally */
+    position: absolute;
+    margin-left: 10em;
+    font-size: 25px;
+    top: 80%;
+    white-space: nowrap;
 }
-.SectionTitle {
-    text-decoration: underline;
+
+.options a {
+    text-decoration: none;
+    color: black;
+    margin-right: 2em;
+}
+
+.options a:hover {
+    color: #18449b;
 }
 
 .contImagen {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(40vh, 1fr));
     column-gap: 7px;
-    row-gap: 60px;
+    row-gap: 1em;
     margin: 10px 5px;
+}
+
+.contImagen > div {
+    width: 100%;
+    height: 100%;
+}
+
+.contImagen img {
+    width: auto;
+    height: auto;
 }
 
 #footerContainer {
     margin-top: 26vh;
+}
+
+.follower-info span {
+    font-family: 'Inter', sans-serif;
+    font-weight: bold;
+}
+
+#personalInformation b {
+    display: block;
+    margin-left: 1em;
+}
+
+#firstName {
+    font-weight: normal;
+    font-size: 20px;
 }
 
 /* ------ RESPONSIVE HEADERS ------ */
@@ -146,12 +115,18 @@ header#desktopHeader {
     header#phoneHeader {
         display: block;
     }
-}
 
-@media screen and (max-width: 720px) {
     .contImagen {
         margin-left: 21%;
         grid-template-columns: repeat(1, 1fr);
+    }
+
+    .options {
+        margin-left: 4em;
+    }
+
+    .options a {
+        font-size: 18px;
     }
 }
 
@@ -164,11 +139,52 @@ header#desktopHeader {
     }
 }
 
+.followers {
+    display: flex;
+    margin-bottom: 10px;
+    margin-left: 1%;
+}
 
+#FollowButton {
+    padding: 10px 20px; /* Increase padding to make the button bigger */
+    background-color: #007bff; /* Adjust color as needed */
+    color: #fff; /* Text color */
+    border: none;
+    border-radius: 5px; /* Adjust as needed */
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-left: 5em;
+    width: 10em;
+    height: 20%;
+    font-size: 20px;
+    margin-top: -0.5em;
+}
+
+#FollowButton:hover {
+    background-color: #0056b3; /* Adjust hover color as needed */
+}
+
+#seguidos, #siguiedo {
+    width: 23em;
+    justify-content: center;
+    text-align: center;
+    cursor: pointer;
+}
+
+#seguidos a, #siguiedo a {
+    font-size: 30px;
+    margin-right: 15vh;
+    color: black;
+    font-family: ABeeZee, serif;
+    font-weight: bold;
+    text-decoration: none;
+    cursor: pointer;
+    margin-left: 15vh;
+}
 
 .follower {
     display: flex;
-    margin: 5%;
+    margin: 4%;
 }
 
 .follower p {
@@ -190,11 +206,10 @@ header#desktopHeader {
 
 #followersDisplay, #followingDisplay {
     background-color: whitesmoke;
-    max-height: 50%;
+    max-height: 55vh;
     overflow-y: auto;
-    border: 1px solid black;
+    border: 2px solid black;
     margin: 0;
-    width: 80em;
     padding: 0;
 }
 
@@ -206,21 +221,17 @@ header#desktopHeader {
 }
 
 #followersDisplay.active {
-    margin-left: 31%;
-    margin-top: 7%;
-    width: 25em;
+    width: 23em;
     display: block;
     position: absolute;
-    z-index: 9999; /* O cualquier valor mayor que los z-index de los otros elementos */
+    z-index: 9999;
 }
 
 #followingDisplay.active {
-    margin-left: 68%;
-    margin-top: 7%;
-    width: 25em;
+    width: 23em;
     display: block;
     position: absolute;
-    z-index: 9999; /* O cualquier valor mayor que los z-index de los otros elementos */
+    z-index: 9999;
 }
 
 .inactive {
@@ -230,3 +241,4 @@ header#desktopHeader {
 .active {
     display: block;
 }
+

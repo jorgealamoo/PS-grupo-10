@@ -250,9 +250,12 @@ async function showCreatorData(user_id) {
             }
             return await response.json()
         });
-    var userName = user.nombre;
-    var photoUser = await fetchImage(user.photoPerfil);
+    const userName = user.usuario;
+    const name = user.nombre;
+    const apellido = user.apellido;
+    const photoUser = await fetchImage(user.photoPerfil);
     document.getElementById("username").textContent = userName;
+    document.getElementById("fullName").textContent = name + " " + apellido;
     document.getElementById("photoUser").src = photoUser;
 }
 

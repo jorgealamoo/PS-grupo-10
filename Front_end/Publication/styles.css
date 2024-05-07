@@ -101,9 +101,16 @@ main {
     border-radius: 50%;
 }
 
-#username {
+#username, #fullName {
     margin-left: 20px;
     cursor: pointer;
+    font-family: ABeeZee, serif;
+}
+
+#fullName {
+    font-weight: normal;
+    font-size: 15px;
+    margin-top: -1em;
 }
 
 #name {
