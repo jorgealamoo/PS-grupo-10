@@ -38,7 +38,7 @@ const datos = {
     user_id: user_id,
     valoracion:valoracion,
     descripcion:comment,
-    rating_list: []
+    rating_list: {}
 };
 
 
