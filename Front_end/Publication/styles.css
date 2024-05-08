@@ -95,6 +95,13 @@ main {
     transform: scale(1.1);
     cursor: pointer;
 }
+
+#publicationData p {
+    margin-left: 15px;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+}
+
 #photoUser {
     width: 100px;
     height: 100px;
@@ -257,6 +264,12 @@ main {
     display: flex;
     flex-direction: column;
     margin-left: 2%;
+}
+
+.Comments h2 {
+    font-weight: bold;
+    font-family: 'Inter', sans-serif;
+    color: #0C6DFF;
 }
 
 .header-comment img, h3 {
@@ -439,6 +452,45 @@ main {
     cursor: pointer;
     margin-left: 97%;
 }
+
+/* ----- DYNAMIC RATE ----- */
+
+.rate {
+    vertical-align: bottom;
+    height: 46px;
+    padding: 0 10px;
+}
+.rate:not(:checked) > input {
+    position:absolute;
+    top:-9999px;
+}
+.rate:not(:checked) > label {
+    float:right;
+    width:1em;
+    overflow:hidden;
+    white-space:nowrap;
+    cursor:pointer;
+    font-size:30px;
+    color: #cecbcb;
+}
+.rate:not(:checked) > label:before {
+    content: '★ ';
+}
+.rate > input:checked ~ label {
+    color: #ffc700;
+}
+.rate:not(:checked) > label:hover,
+.rate:not(:checked) > label:hover ~ label {
+    color: #deb217;
+}
+.rate > input:checked + label:hover,
+.rate > input:checked + label:hover ~ label,
+.rate > input:checked ~ label:hover,
+.rate > input:checked ~ label:hover ~ label,
+.rate > label:hover ~ input:checked ~ label {
+    color: #c59b08;
+}
+
 
 /* ------ RESPONSIVE HEADERS ------ */
 
