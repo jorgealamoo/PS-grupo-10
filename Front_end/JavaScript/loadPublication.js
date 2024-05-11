@@ -1,5 +1,6 @@
 //import {initializeMap} from './loadMap.js';
 
+const newImages = [];
 var dataJSON = null
 function initializeMap(latitude, longitude) {
     // Crea el mapa y configura la vista inicial utilizando las coordenadas proporcionadas
@@ -88,16 +89,17 @@ async function loadComment(comment_list) {
         var text = response.contenido;
         var titulo = response.titulo;
         var userID = response.user_id;
+        var imagenEditar = await fetchImage("2024-04-29T11_43_27_805Z_image.png");
 
         var imageComment = null;
         if (response.lista_imagenes.length > 0) {
              imageComment = await fetchImage(response.lista_imagenes[0]);
         }
-        createComment(userName,photoUser,text,titulo, userID, imageComment);
+        createComment(userName,photoUser,text,titulo, userID, imageComment, imagenEditar, response.comment_id);
 
     }
 }
-function createComment(userName, photoUser, text, title, userID, imageComment) {
+function createComment(userName, photoUser, text, title, userID, imageComment, imagenEditar, commentID) {
     var comentariosDiv = document.getElementById('coments');
 
     // Create new comment element
@@ -129,6 +131,20 @@ function createComment(userName, photoUser, text, title, userID, imageComment) {
     });
     headerCommentDiv.appendChild(nombreH3);
 
+    if (userID == localStorage.getItem('userId')) {
+        var editComment = document.createElement('img');
+        editComment.src = imagenEditar;
+        editComment.style.width = 'auto';
+        editComment.style.height = '20px';
+        editComment.style.float = 'right'
+        editComment.style.border = 'none';
+        editComment.style.marginLeft = 'auto';
+        editComment.addEventListener('click', function() {
+            editarComentario(userID, commentID, text, title);
+        });
+        headerCommentDiv.appendChild(editComment);
+    }
+
     // Create title div
     var titleDiv = document.createElement('div');
     titleDiv.classList.add('title');
@@ -154,6 +170,7 @@ function createComment(userName, photoUser, text, title, userID, imageComment) {
     // Append the new comment to the comments div
     comentariosDiv.appendChild(nuevoComentario);
 }
+
 
 async function showCreatorData(user_id) {
     const user = await fetch('http://localhost:3000/api/getDocument/usuario/' + user_id)
@@ -289,4 +306,159 @@ function redirectToCreatorUser() {
 function redirectToUser(userID) {
     localStorage.setItem('viewAccountId', userID);
     window.location.href = "../ViewAccount/viewAccount.html";
+}
+function loaderImage(event) {
+    console.log('Se ha iniciado loaderImage');
+    const files = event.target.files;
+    console.log('Se esta cargando la imagen');
+    for (const file of files) {
+        if (file && file.type.startsWith('image/')) {
+            const reader = new FileReader();
+            reader.onload = function(event) {
+                const imageDataURL = event.target.result;
+                newImages.push(imageDataURL);
+            };
+            reader.readAsDataURL(file);
+        } else {
+            console.warn('El archivo seleccionado no es una imagen:', file ? file.name : 'No se seleccionó ningún archivo');
+        }
+    }
+    console.log(newImages);
+}
+async function addImageToDocument(documentID) {
+    try {
+        const documento = await fetch('http://localhost:3000/api/getDocument/comentario/'+documentID);
+        const documentoData = await documento.json();
+
+        if (!documento.ok) {
+            throw new Error('Error al obtener el documento');
+        }
+        console.log(newImages);
+        const currentImageList = documentoData.lista_imagenes;
+        const imagenNueva = await uploadAllImagesToAPI(newImages);
+        const updatedImageList = [...currentImageList, ...imagenNueva];
+
+        await modifyDoc('comentario', documentID, {lista_imagenes:updatedImageList});
+
+        console.log('Imagen añadida correctamente a la lista de imágenes del documento.');
+    } catch (error) {
+        console.error('Error al añadir la imagen al documento:', error);
+        throw error;
+    }
+}
+async function editarComentario(userID, commentID,  contenido, titulo) {
+    const modal = document.querySelector("#modal");
+    document.getElementById("editTitle").value = titulo;
+    document.getElementById("edit_contenido").value = contenido;
+    const inputElementImage = document.getElementById('imageUpload_Comment');
+    modal.showModal();
+    var vaciar = false;
+
+    inputElementImage.addEventListener('change', loaderImage);
+
+    document.getElementById('edit_submit').addEventListener('click',async (event) => {
+        event.preventDefault();
+
+        var texto_contenido = document.getElementById('edit_contenido').value;
+
+        await modifyDoc('comentario', commentID, {contenido: texto_contenido});
+
+        var titulo_contenido = document.getElementById('editTitle').value;
+
+        await modifyDoc('comentario', commentID, {titulo: titulo_contenido});
+
+        if (vaciar == true) {
+            await modifyDoc('comentario', commentID, {lista_imagenes: []});
+        }
+        if (newImages.length > 0) {
+            await addImageToDocument(commentID);
+        }
+        window.location.href = "../Publication/publication.html";
+    });
+    document.getElementById('delete_edit_imageUpload_Comment').addEventListener('click', async (event) => {
+        event.preventDefault();
+        const borrar = document.getElementById("confirmacion_borrar")
+            vaciar = true;
+            borrar.style.display = "block";
+
+    });
+
+    document.getElementById('salir_button').addEventListener('click',async (event) => {
+        event.preventDefault();
+        const cancelarEditar = document.querySelector("#cancelarEditar");
+        cancelarEditar.showModal();
+
+        document.getElementById('cancel_button').addEventListener('click',async () => {
+            modal.close();
+            cancelarEditar.close();
+            window.location.href = "../Publication/publication.html";
+        });
+        document.getElementById('confirmar_borrado').addEventListener('click',async () => {
+            cancelarEditar.close();
+        });
+    });
+}
+
+
+async function uploadAllImagesToAPI(imageList) {
+    const successfulUploads = [];
+
+    // Iterar sobre cada imagen en la lista
+    for (const imageDataURL of imageList) {
+        try {
+            // Cargar la imagen a la API
+            const uploadedImageName = await uploadImageToAPI(imageDataURL);
+            if (uploadedImageName !== null) {
+                successfulUploads.push(uploadedImageName);
+            }
+        } catch (error) {
+            console.error('Error al subir una imagen:', error.message);
+        }
+    }
+    return successfulUploads;
+}
+
+async function uploadImageToAPI(imageDataURL) {
+    const url = 'http://localhost:3000/api/uploadImage';
+    const formData = new FormData();
+
+    // Convertir el Data URL en un Blob
+    const blob = dataURLtoBlob(imageDataURL);
+
+    // Agregar la imagen al FormData
+    formData.append('file', blob, 'image.png'); // Puedes ajustar el nombre del archivo según tu preferencia
+
+    try {
+        const response = await fetch(url, {
+            method: 'POST',
+            body: formData
+        });
+
+        if (!response.ok) {
+            throw new Error('Error al subir la imagen: ' + response.statusText);
+        }
+
+        // Parsear la respuesta para obtener el nombre de la imagen
+        const responseData = await response.json();
+        const imageName = responseData.fileName;
+
+        return imageName;
+    } catch (error) {
+        // Manejar errores
+        console.error('Error al subir la imagen:', error.message);
+        return null;
+    }
+}
+
+// Función para convertir un Data URL en un Blob
+function dataURLtoBlob(dataURL) {
+    const arr = dataURL.split(',');
+    const mime = arr[0].match(/:(.*?);/)[1];
+    const bstr = atob(arr[1]);
+    let n = bstr.length;
+    const u8arr = new Uint8Array(n);
+    while (n--) {
+        u8arr[n] = bstr.charCodeAt(n);
+    }
+    return new Blob([u8arr], { type: mime });
 }

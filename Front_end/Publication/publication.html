@@ -40,6 +40,9 @@
                 <div id="save_image_button" class="save_image_button">
                     <button id="saveBtn">Save New Images</button>
                 </div>
+                <div id = "eliminar_publicacion" class = "bad_button">
+                    <button  id = "boton_eliminar_publicacion">Delete publication</button>
+                </div>
             </div>
 
             <div id="userData">
@@ -83,6 +86,57 @@
 </main>
 
 <footer></footer>
+<dialog id = 'modal'>
+    <form id="editComment" class="addComments">
+        <div class="infoComment">
+            <input type="text" id="editTitle" class="titleInput" placeholder="Comment Title" maxlength="100" required>
+
+            <div id="edit_images_section_Comment" class="add_images_section">
+                <label for="imageUpload_Comment" class="image-upload-label">
+                    <div class="select-images">Select images</div>
+                </label>
+                <input type="file" id="edit_imageUpload_Comment" class="imageUpload_Comment" name="imageUpload" multiple accept="image/*">
+            </div>
+            <div id="delete_images_section_Comment" class="bad_button">
+                <button id="delete_edit_imageUpload_Comment" class="bad_button">Delete image</button>
+            </div>
+            <a style="display: none" id="confirmacion_borrar">Delete image</a>
+            <div id = "salir" class = "bad_button">
+                <button id="salir_button" >X</button>
+            </div>
+
+            <textarea class="descriptionComment" id="edit_contenido" name="contenido" placeholder="Comment Description" maxlength="500" required></textarea>
+        </div>
+        <button id="edit_submit" class = "submit">Save changes</button>
+    </form>
+</dialog>
+
+<dialog id="cancelarEditar">
+    <label>¿Seguro que quieres salir?
+        No se guardarán los cambios.</label>
+    <div>
+        <div id = "confirmar_salida" class = "bad_button">
+            <button id="cancel_button" >Salir sin guardar</button>
+        </div>
+        <div id = "cancelar_salida" class = "neutral_button">
+            <button id="volver_button" >Volver a editar</button>
+        </div>
+    </div>
+</dialog>
+
+<dialog id="popUp_eliminar">
+    <label>¿Estás seguro de querer eliminar la publicación?</label>
+
+    <div>
+        <div id = "confirmar_borrado" class = "bad_button">
+            <button id="acabar_borrado" >Delete</button>
+        </div>
+        <div id = "cancelar_borrado" class = "neutral_button">
+            <button id="boton_cancelar_borrado" >Return</button>
+        </div>
+    </div>
+</dialog>
+
 <script>
     document.addEventListener('DOMContentLoaded',async function () {
         await displayDocumentData();

@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     inputElementImage.addEventListener('change', loaderImageComments);
     // Agregar evento de envío al formulario
-    form.addEventListener('submit', async function(event) {
+    document.getElementById('addComment').addEventListener('submit', async function(event) {
         event.preventDefault(); // Prevenir el comportamiento de envío predeterminado
 
         // Obtener valores de los campos de entrada

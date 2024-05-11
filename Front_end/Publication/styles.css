@@ -370,7 +370,24 @@ main {
 .save_image_button {
     display: inline-block;
 }
-
+.bad_button {
+    display: inline-block;
+    align_text: center;
+}
+#salir.bad_button {
+     float: right;
+     display: inline-block;
+     align_text: center;
+ }
+.neutral_button {
+    display: inline-block;
+    align_text: center;
+}
+#eliminar_publicacion{
+    float: right;
+    display: inline-block;
+    align_text: center;
+}
 .add_new_images_section {
 }
 
@@ -390,7 +407,52 @@ main {
 .save_image_button button:hover {
     background-color: #58a9fa;
 }
+/*-----------------EDITAR COMENTARIOS-----------------*/
+.bad_button button {
+    width: auto;
+    padding: 10px;
+    border-radius: 8px;
+    background-color: #DD3D3D;
+    color: white;
+    font-weight: bold;
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    cursor: pointer;
+    margin-left: 15px;
+}
 
+.bad_button button:hover {
+    background-color: #FE0000;
+}
+
+.neutral_button button {
+    width: auto;
+    padding: 10px;
+    border-radius: 8px;
+    background-color: #CBC6C6;
+    color: black;
+    font-weight: bold;
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    cursor: pointer;
+    margin-left: 15px;
+}
+
+.neutral_button button:hover {
+    background-color: #6E6A6A;
+    color: white;
+}
+
+.delete_image {
+    display: none; /* Esto oculta el input de tipo file */
+}
+.imageDelete_Comment {
+
+}
+
+.modal {
+
+}
 /* ------ RESPONSIVE HEADERS ------ */
 
 /* Ocultar los headers por defecto */
