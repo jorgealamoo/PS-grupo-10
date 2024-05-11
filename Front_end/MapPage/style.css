@@ -49,8 +49,25 @@ header#desktopHeader {
     display: none;
 }
 
+.map-control {
+    box-shadow: 0 1px 5px rgba(0,0,0,0.4);
+    padding: 10px;
+    border-radius: 5px;
+    background: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.map-control label,
+.map-control select {
+    font-size: 16px;
+    margin: 0 5px;
+}
+
+
 /* Mostrar el header correspondiente según el tamaño de la ventana */
-@media screen and (max-width: 720px) {
+@media screen and (max-width: 815px) {
     header#desktopHeader {
         display: none;
     }
@@ -59,7 +76,7 @@ header#desktopHeader {
     }
 }
 
-@media screen and (min-width: 721px) {
+@media screen and (min-width: 816px) {
     header#phoneHeader {
         display: none;
     }

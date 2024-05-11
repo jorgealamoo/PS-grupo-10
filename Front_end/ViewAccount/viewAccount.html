@@ -2,72 +2,96 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>View Account</title>
+    <title>View account</title>
     <link rel="icon" type="image/png" href="../Images/logo_ExploreSpots_sin_fondo.png">
-    <link rel="stylesheet" href="../ViewAccount/viewAccount.css">
-    <link rel="icon" type="image/png" href="../Images/logo_ExploreSpots_sin_fondo.png">
+    <link rel="stylesheet" href="/Front_end/ViewAccount/viewAccount.css">
+    <script src="/Front_end/JavaScript/userDataLoader.js"></script>
     <script src="/Front_end/JavaScript/authorisationCheck.js"></script>
-    <script src="../JavaScript/userDataLoader.js"></script>
 </head>
 <body>
-
 <header id="phoneHeader"></header>
 <header id="desktopHeader"></header>
 <main>
     <div class="User">
-        <div id="image">
-            <img id="user_img" src="" alt="">
+        <img id="profilePhotoAccount" alt="" src="">
+        <div id="personalInformation">
+            <b><span id="username"></span></b>
+            <b><span id="firstName"></span></b>
         </div>
-        <b><span id="name"></span></b>
-        <div id="information_user">
-            <div class="followers">
-                <div id="seguidos">
-                    <span>Followers</span>
-                    <span id="seguidores"><b></b></span>
-                </div>
-                <div id="siguiedo">
-                    <span>Following</span>
-                    <span id="siguiendo"><b></b></span>
-                </div>
+        <button id="FollowButton" ></button>
+        <div class="followers">
+            <div id="seguidos" onclick="toggleDisplay('followers', false)">
+                <a>Followers</a>
+                <div class="numberSeguidores"><span class="seguidores" id="seguidores"><b></b></span></div>
+                <div class="inactive" id="followersDisplay"></div>
             </div>
-            <button id="FollowButton">Follow</button>
+            <div id="siguiedo" onclick="toggleDisplay('following', false)">
+                <a>Following</a>
+                <div class="numberSeguidores"><span id="siguiendo"><b></b></span></div>
+                <div class="inactive" id="followingDisplay"></div>
+            </div>
         </div>
     </div>
-    
     <div class="contImagen" id="imagenContainer"></div>
-
 </main>
 <footer></footer>
 <script src='/Front_end/JavaScript/templateLoader.js'></script>
-<script src='/Front_end/JavaScript/imagenLoader.js'></script>
-<script src="viewAccount.js"></script>
-
 <script>
-    cargarTemplate('../PhoneHeader/phoneHeader.html', '#phoneHeader');
     cargarTemplate('../Header/header.html', '#desktopHeader');
+    cargarTemplate('../PhoneHeader/phoneHeader.html', '#phoneHeader');
     cargarTemplate('../Footer/footer.html', 'footer');
 </script>
 <script>
-    let userId = localStorage.getItem("userId");
-    let viewAccountId = localStorage.getItem("viewAccountId");
-    if (viewAccountId == userId) {
-        window.location.href = "../Account/account.html"
-    }
     checkIfFollowing();
     const b = document.getElementById("FollowButton");
     b.addEventListener("click", toggleFollow);
 
     (async () => {
-        await loadProfilePhoto("user_img", false);
-        await loadUserName("name", false);
+        await loadProfilePhoto("profilePhotoAccount", false);
+        const name = await loadUserData("nombre", false);
+        const lastName = await loadUserData("apellido", false);
+        const cont = document.getElementById("firstName");
+        cont.textContent = name + " " + lastName;
+        await loadUserName("username", false);
+        await loadFollowers("seguidores", false);
+        await loadFollowing("siguiendo", false);
         const publications = await loadUserData("lista_publicaciones", false);
         for (let i=0; i<publications.length; i++) {
-            const imagen = await loadPublicationData("lista_imagenes", publications[i]);
-            const name = await loadPublicationData("nombre", publications[i]);
-            const url = await getImgURL(imagen[0]);
-            addImage(url, name, publications[i]);
+            try {
+
+                const imagenes = await loadPublicationData("lista_imagenes", publications[i]);
+                const name = await loadPublicationData("nombre", publications[i]);
+
+                try {
+                    const response = await fetch(`http://localhost:3000/api/getImage/${imagenes[0]}`);
+                    if (!response.ok) {
+                        throw new Error('Failed to fetch image URL');
+                    }
+                    const data = await response.json();
+
+                    // Check if imageType contains "/image"
+                    if (data.imageType.includes('image/')) {
+                        const url = await getImgURL(imagenes[0]);
+                        addImage(url, name, publications[i]);
+                    } else if (data.imageType.includes('video/')) {
+                        const videoUrl = await getImgURL(imagenes[0]);
+                        console.log('Es un Video: ' + videoUrl);
+                        addVideo(videoUrl, name, publications[i]);
+
+                    } else {
+                        throw new Error('Unknown media type');
+                    }
+                } catch (error) {
+                    console.error('Error fetching image URL:', error);
+                    throw error;
+                }
+
+            } catch (error) {
+                console.error('Error loading publication data:', error);
+            }
         }
     })();
+    document.addEventListener('DOMContentLoaded', checkAuth);
 </script>
 </body>
 </html>

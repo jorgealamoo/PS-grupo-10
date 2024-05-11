@@ -42,10 +42,94 @@ function addImage(imagePath, text, publicationID) {
     document.getElementById("imagenContainer").appendChild(nuevoElemento);
 }
 
+function addVideo(videoPath, text, publicationID) {
+    const nuevoElemento = document.createElement('div');
+    nuevoElemento.className = 'imagewd';
+    nuevoElemento.style.cssText = `
+    width: 40vh;
+    height: 40vh;
+    position: relative;
+    cursor: pointer;
+    border: 2px solid black;
+    `;
+
+    // Create a video element
+    const videoElement = document.createElement('video');
+    videoElement.autoplay = true;
+    videoElement.loop = true;
+    videoElement.muted = true; // Mute the video to prevent audio playback
+
+    // Set the source of the video (replace 'videoPath' with your video URL)
+    videoElement.src = videoPath;
+
+    // Apply CSS styles to the video element
+    videoElement.style.cssText = `
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensure the video covers the entire div */
+    `;
+
+    // Append the video element to the nuevoElemento
+    nuevoElemento.appendChild(videoElement);
+
+
+
+
+    const textoElemento = document.createElement('div');
+    textoElemento.innerHTML = text;
+    textoElemento.style.cssText = `
+        position: absolute;
+        bottom: 0;
+        color: white;
+        background-color: rgba(0, 0, 0, 0.5);
+        padding: 5px;
+        display: none;
+        width: 96.5%;
+    `;
+
+    nuevoElemento.addEventListener('mouseover', () => {
+        textoElemento.style.display = 'block';
+    });
+
+    nuevoElemento.addEventListener('mouseout', () => {
+        textoElemento.style.display = 'none';
+    });
+
+    nuevoElemento.addEventListener('click', () => {
+        localStorage.setItem("currentPublication", publicationID);
+        window.location.href = '../Publication/publication.html';
+    });
+
+    nuevoElemento.appendChild(textoElemento);
+    document.getElementById("imagenContainer").appendChild(nuevoElemento);
+}
+
 // Función para cargar datos del usuario
-async function loadUserData(fieldName, selfUser = true) {
+ async function loadUserData(fieldName, selfUser = true) {
     try {
         let userID = localStorage.getItem(selfUser ? "userId" : "viewAccountId");
+        const response = await fetch(`http://localhost:3000/api/getDocument/usuario/${userID}`);
+        if (!response.ok) {
+            throw new Error('Failed to fetch user data');
+        }
+        const data = await response.json();
+        if (data.hasOwnProperty(fieldName)) {
+            return data[fieldName];
+        } else {
+            console.error('The field is not present in the document');
+            return null;
+        }
+    } catch (error) {
+        console.error('Error fetching user data:', error);
+        throw error;
+    }
+}
+
+async function loadAnotherUserData(fieldName, userID) {
+    try {
         const response = await fetch(`http://localhost:3000/api/getDocument/usuario/${userID}`);
         if (!response.ok) {
             throw new Error('Failed to fetch user data');
@@ -93,12 +177,47 @@ async function getImgURL(imgName) {
     }
 }
 
+async function isImage(imgName) {
+    try {
+        const response = await fetch(`http://localhost:3000/api/getImage/${imgName}`);
+        if (!response.ok) {
+            throw new Error('Failed to fetch image URL');
+        }
+        const data = await response.json();
+
+        // Check if imageType contains "/image"
+        if (data.imageType.includes('image/')) {
+            return true; // It's an image
+        } else if (data.imageType.includes('video/')) {
+            return false; // It's a video
+        } else {
+            throw new Error('Unknown media type');
+        }
+    } catch (error) {
+        console.error('Error fetching image URL:', error);
+        throw error;
+    }
+}
+
+
+// Función para alternar el botón de logout
+function toggleLogOut() {
+    const logOutButton = document.getElementById("LogOut");
+    if (logOutButton.style.opacity === "1") {
+        logOutButton.style.opacity = "0"; // Cambiar la opacidad a 0 para hacerlo invisible
+        logOutButton.style.display = 'none'; // Ocultar el botón estableciendo la propiedad display a 'none'
+    } else {
+        logOutButton.style.opacity = "1"; // Cambiar la opacidad a 1 para hacerlo visible
+        logOutButton.style.display = 'block'; // Mostrar el botón estableciendo la propiedad display a 'block'
+    }
+}
+
+
 // Función para cargar la foto de perfil
 async function loadProfilePhoto(imageContainer, selfUser = true) {
     try {
         const profilePhoto = await loadUserData("photoPerfil", selfUser);
-        const url = await getImgURL(profilePhoto);
-        document.getElementById(imageContainer).src = url;
+        document.getElementById(imageContainer).src = await getImgURL(profilePhoto);
     } catch (error) {
         console.error('Error loading profile photo:', error);
     }
@@ -107,8 +226,7 @@ async function loadProfilePhoto(imageContainer, selfUser = true) {
 // Función para cargar el nombre de usuario
 async function loadUserName(container, selfUser = true) {
     try {
-        const username = await loadUserData("usuario", selfUser);
-        document.getElementById(container).textContent = username;
+        document.getElementById(container).textContent = await loadUserData("usuario", selfUser);
     } catch (error) {
         console.error('Error loading username:', error);
     }
@@ -118,7 +236,7 @@ async function loadUserName(container, selfUser = true) {
 async function loadFollowers(container, selfUser = true) {
     try {
         const followers = await loadUserData("lista_seguidores", selfUser);
-        document.getElementById(container).textContent = "Followers: " + followers.length;
+        document.getElementById(container).textContent = followers.length;
     } catch (error) {
         console.error('Error loading followers:', error);
     }
@@ -128,7 +246,7 @@ async function loadFollowers(container, selfUser = true) {
 async function loadFollowing(container, selfUser = true) {
     try {
         const following = await loadUserData("lista_siguiendo", selfUser);
-        document.getElementById(container).textContent = "Following: " + following.length;
+        document.getElementById(container).textContent = following.length;
     } catch (error) {
         console.error('Error loading following:', error);
     }
@@ -239,4 +357,122 @@ async function updateListaSeguidos(lista_siguiendo) {
     } catch (error) {
         console.error('Error updating followed users:', error);
     }
+}
+
+function addToList(username, imageURL) {
+
+    const followerDiv = document.createElement('div');
+    followerDiv.classList.add('follower');
+
+    const img = document.createElement('img');
+    img.src = imageURL;
+    img.alt = 'Profile Picture';
+
+
+    const usernamePara = document.createElement('p');
+    usernamePara.textContent = username;
+
+    followerDiv.appendChild(img);
+    followerDiv.appendChild(usernamePara);
+
+    const followersDisplay = document.getElementById('followersDisplay');
+
+    followersDisplay.appendChild(followerDiv);
+}
+
+
+async function toggleDisplay(text, selfUser= true) {
+    let elemento;
+    let follow = [];
+    if (text === "followers") {
+        follow = await loadUserData("lista_seguidores", selfUser);
+        elemento = document.getElementById("followersDisplay");
+    } else {
+        follow = await loadUserData("lista_siguiendo", selfUser);
+        elemento = document.getElementById("followingDisplay");
+    }
+
+    // Vaciar el contenido del elemento
+    elemento.innerHTML = '';
+
+    // Verificar si tiene la clase "active"
+    if (elemento.classList.contains("active")) {
+        elemento.classList.remove("active");
+        elemento.classList.add("inactive");
+    } else {
+        // Si no tiene la clase "active", entonces asumimos que tiene "inactive"
+        elemento.classList.remove("inactive");
+        elemento.classList.add("active");
+
+        for (let i = 0; i < follow.length; i++) {
+            const fotoName = await loadAnotherUserData("photoPerfil", follow[i]);
+            const foto = await getImgURL(fotoName);
+            const name = await loadAnotherUserData("usuario", follow[i]);
+
+            const followerDiv = document.createElement("div");
+            followerDiv.style.cursor = 'pointer';
+            followerDiv.classList.add("follower");
+
+            followerDiv.addEventListener('click', () => {
+                localStorage.setItem("viewAccountId", follow[i]);
+                window.location.href = '../ViewAccount/viewAccount.html';
+            });
+
+            const fotoImg = document.createElement("img");
+            fotoImg.src = foto;
+            fotoImg.alt = "Foto de perfil de " + name;
+
+            const namePara = document.createElement("p");
+            namePara.textContent = name;
+
+            followerDiv.appendChild(fotoImg);
+            followerDiv.appendChild(namePara);
+
+            elemento.appendChild(followerDiv);
+        }
+    }
+}
+
+async function downloadVideoAndExtractFirstFrame(videoUrl) {
+    return new Promise((resolve, reject) => {
+        // Create a video element
+        const video = document.createElement('video');
+        video.crossOrigin = 'anonymous'; // Enable CORS for downloading video
+        video.src = videoUrl;
+
+        // Once metadata is loaded, extract the first frame
+        video.onloadedmetadata = async () => {
+            try {
+                // Create a canvas to draw the first frame
+                const canvas = document.createElement('canvas');
+                const ctx = canvas.getContext('2d');
+                canvas.width = video.videoWidth;
+                canvas.height = video.videoHeight;
+
+                // Draw the first frame onto the canvas
+                ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+                // Convert canvas to a data URL representing the image
+                const imageUrl = canvas.toDataURL('image/jpeg');
+
+                // Resolve with the image URL
+                resolve(imageUrl);
+            } catch (error) {
+                reject(error);
+            } finally {
+                // Clean up
+                video.onloadedmetadata = null;
+                video.src = '';
+                video.remove();
+            }
+        };
+
+        // If an error occurs while loading the video
+        video.onerror = (error) => {
+            reject(error);
+        };
+
+        // Append the video element to the document body to start loading
+        document.body.appendChild(video);
+    });
 }

@@ -113,6 +113,12 @@
             return;
         }
 
+        if (password.value.length < 6) {
+            errorMessage.textContent = "Passwords must have +6 characters";
+            errorMessage.style.display = "block";
+            return;
+        }
+
         if (!agreeTerms.checked) {
             errorMessage.textContent = "Must accept terms and contitions";
             errorMessage.style.display = "block";

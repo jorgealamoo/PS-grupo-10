@@ -22,11 +22,14 @@
     <div class="add_publication_container">
         <div class="top_side">
             <div class="add_publication_left_side">
+                <!-- File input -->
                 <div id="add_images_section" class="add_images_section">
-                    <input type="file" id="imageUpload" name="imageUpload" multiple accept="image/*">
-                    <label for="imageUpload" id="addImageLabel" class="add_images_symbol">+</label>
-                    <p class="add_images_text">ADD IMAGES</p>
+                    <input type="file" id="imageUpload" name="imageUpload" accept="image/*, video/*" title="Add Media">
+                    <label for="imageUpload" id="addImageLabel" class="add_images_symbol" title="Add Media">+</label>
+                    <p class="add_images_text" title="Add Media">ADD MEDIA</p>
                 </div>
+                <button id="carrouselBTN" title="View Selected Media">View Selected Media</button>
+                <div id="imagesContainer"></div>
                 <div class="publication_name_section">
                     <label for="publicationName"></label>
                     <input type="text" id="publicationName" placeholder="Publication name" value="">
@@ -65,11 +68,11 @@
 
         <div class="save_and_exit_buttons">
             <div class="save_button">
-                <button id="saveBtn">Save</button>
+                <button id="saveBtn" title="Save">Save</button>
             </div>
 
             <div class="exit_button">
-                <button id="exitBtn" onclick="location.href='../Account/account.html';">Exit</button>
+                <button id="exitBtn" onclick="location.href='../Account/account.html';" title="Exit">Exit</button>
             </div>
         </div>
 

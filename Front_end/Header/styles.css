@@ -2,26 +2,26 @@
     background: linear-gradient(180deg, #a7e1e1 10%, #d3f6f6 50%, #a7e1e1 90%);
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
     margin: 0;
+    position: relative;
 }
 
 #header button {
-    background-color: #0040ff;
+    background-color: #2e5cc7;
     color: #fff;
     border: none;
     padding: 10px 20px;
     cursor: pointer;
-    margin-left:auto;
     border-radius: 10px;
 }
 
 #header button:hover {
-    background-color: #3D94FA;
+    background-color: #061b4b;
 }
 
 /* ------ LOGO IMAGE ------ */
-#header img {
+#logoPhoto {
     width: 8vh;
     height: 8vh;
     margin-right: 2%;
@@ -31,15 +31,39 @@
     cursor: pointer;
 }
 
+#logoPhoto:hover {
+    transform: scale(1.1);
+}
+
 #ProfileImageHEADER {
     border-radius: 50%;
+    width: 8vh;
+    height: 8vh;
+    margin-right: 2%;
+    margin-left: 2%;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    cursor: pointer;
+}
+
+#ProfileImageHEADER:hover {
+    transform: scale(1.1);
+}
+
+#LogOut {
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 7%;
 }
 
 /* ------ NAV ------ */
 
 nav{
-    margin-top: 0;
     text-align: center;
+    margin: 0 auto;
 }
 nav ul {
     list-style: none;
@@ -56,14 +80,22 @@ nav a{
     color: #061b4b;
     font-weight: bold;
     text-decoration: none;
+    font-family: ABeeZee, serif;
+    font-size: 20px;
 }
 
 nav a:hover {
-    color: #18449b;
+    color: green;
 }
 
 @media screen and (max-width: 600px) {
     #header img {
         width: 80vh;
+    }
+}
+
+@media screen and (max-width: 980px) {
+    nav a {
+        font-size: 14px;
     }
 }

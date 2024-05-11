@@ -27,5 +27,3 @@ function initCarousel(componentID) {
 function getSlideNumber() {
     return slideIndex;
 }
-
-export { moveCarousel, initCarousel, getSlideNumber };

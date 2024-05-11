@@ -8,9 +8,9 @@ main {
 
 .contImagen {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(auto-fill, minmax(40vh, 1fr));
     column-gap: 7px;
-    row-gap: 60px;
+    row-gap: 1em;
     margin: 10px 5px;
 }
 
@@ -30,21 +30,23 @@ header#desktopHeader {
 }
 
 /* Mostrar el header correspondiente según el tamaño de la ventana */
-@media screen and (max-width: 720px) {
+@media screen and (max-width: 815px) {
     header#desktopHeader {
         display: none;
     }
     header#phoneHeader {
         display: block;
     }
+}
 
+@media screen and (max-width: 720px) {
     .contImagen {
         margin-left: 21%;
         grid-template-columns: repeat(1, 1fr);
     }
 }
 
-@media screen and (min-width: 721px) {
+@media screen and (min-width: 816px) {
     header#phoneHeader {
         display: none;
     }

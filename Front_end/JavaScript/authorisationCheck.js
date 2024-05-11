@@ -2,7 +2,7 @@ function checkAuth() {
     //npm install dotenv
     //require('dotenv').config();
 
-    var authenticate = true     //If "true" se prueba la autenticación
+    var authenticate = true;     //If "true" se prueba la autenticación
     const userId = localStorage.getItem('userId');
 
     if (authenticate) {

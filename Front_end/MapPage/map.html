@@ -17,15 +17,18 @@
     <header id="phoneHeader"></header>
     <header id="desktopHeader"></header>
 </div>
-<!---div id="searchAndFilter">
-    <label for="bar_search"></label><input type="text" id="bar_search" placeholder="Buscar...">
-    <label for="filterSelect"></label><select id="filterSelect">
-        <option value="">...</option>
-        <option value="example1">Restaurantes</option>
-        <option value="example2">Parques</option>
-        <option value="example3">Museos</option>
+<div id="ratingControl" class="map-control">
+    <label for="ratingFilter">Filtrar por valoración:</label>
+    <select id="ratingFilter" style="cursor: pointer;">
+        <option value="0">...</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4" selected>4</option>
+        <option value="5">5</option>
     </select>
-</div--->
+</div>
+<img id="currentLocationButton" src="../Images/current_ubication.png" alt="Ubicación Actual" style="width: 40px; height: 40px; cursor: pointer;" />
 <div id="map"></div>
 <footer></footer>
 <script src='../JavaScript/templateLoader.js'></script>

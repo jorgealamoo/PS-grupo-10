@@ -2,7 +2,7 @@
 
 const express = require('express');
 const { initializeApp } = require('firebase/app');
-const { getFirestore, collection, getDocs, getDoc, setDoc, addDoc, doc } = require('firebase/firestore');
+const { getFirestore, collection, getDocs, getDoc, setDoc, addDoc, doc, deleteDoc } = require('firebase/firestore');
 const { Storage } = require('@google-cloud/storage');
 const multer = require('multer');
 const path = require('path');
@@ -18,7 +18,7 @@ app.use(express.json());
 
 // Initialize Firebase app
 const firebaseConfig = {
-    //API CONFIG
+    //https://www.youtube.com/watch?v=UOuxOd3wGFE
 };
 const firebaseApp = initializeApp(firebaseConfig);
 const db = getFirestore(firebaseApp);
@@ -75,6 +75,30 @@ app.get('/api/getDocument/:collectionName/:documentId', async (req, res) => {
         res.status(500).json({ error: 'Internal Server Error' });
     }
 });
+
+// Define an API endpoint to delete a document from a specific collection
+app.delete('/api/deleteDocument/:collectionName/:documentId', async (req, res) => {
+    try {
+        const { collectionName, documentId } = req.params;
+
+        const specificCollection = collection(db, collectionName);
+        const specificDocument = doc(specificCollection, documentId);
+        const documentSnapshot = await getDoc(specificDocument);
+
+        if (!documentSnapshot.exists()) {
+            res.status(404).json({ error: 'Document not found' });
+            return;
+        }
+
+        await deleteDoc(specificDocument);
+
+        res.json({ message: 'Document deleted successfully' });
+    } catch (error) {
+        console.error('Error deleting document:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
+
 
 
 // Define an API endpoint to create a document in the "prueba" collection
@@ -172,11 +196,14 @@ app.get('/api/getImage/:imageName', async (req, res) => {
         const file = bucket.file(filePath);
 
         // Check if the file exists
-        const [exists] = await file.exists();
-        if (!exists) {
+        const [metadata] = await file.getMetadata();
+        if (!metadata) {
             res.status(404).json({ error: 'Image not found' });
             return;
         }
+
+        // Get the content type (mime type) of the file
+        const contentType = metadata.contentType;
 
         // Generate a signed URL for the file
         const [url] = await file.getSignedUrl({
@@ -184,12 +211,42 @@ app.get('/api/getImage/:imageName', async (req, res) => {
             expires: Date.now() + 60 * 1000, // Link expires in 1 minute
         });
 
-        res.json({ imageUrl: url });
+        res.json({ imageUrl: url, imageType: contentType });
     } catch (error) {
         console.error('Error fetching image:', error);
         res.status(500).json({ error: 'Internal Server Error' });
     }
 });
+
+
+// Define an API endpoint to delete an image from Firebase Storage
+app.delete('/api/deleteImage/:imageName', async (req, res) => {
+    try {
+        const { imageName } = req.params;
+
+        // Construct the file path in the Firebase Storage bucket
+        let filePath = `${imageName}`;
+
+        // Get a reference to the file
+        const file = bucket.file(filePath);
+
+        // Check if the file exists
+        const [exists] = await file.exists();
+        if (!exists) {
+            res.status(404).json({ error: 'Image not found' });
+            return;
+        }
+
+        // Delete the file
+        await file.delete();
+
+        res.json({ message: 'Image deleted successfully' });
+    } catch (error) {
+        console.error('Error deleting image:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
+
 
 
 
