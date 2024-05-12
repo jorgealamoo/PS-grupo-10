@@ -82,23 +82,44 @@
 
     <div class="Comments" id="elemento-oculto">
         <h2>Comments</h2>
-        <div id="coments"></div>
+
         <h3 class="addCommentsText">Add Comments</h3>
         <form id="addComment" class="addComments">
             <div class="infoComment">
-                <input type="text" id="title" class="titleInput" placeholder="Comment Title" maxlength="100" required>
+                <div>
+                    <input type="text" id="title" class="titleInput" placeholder="Comment Title" maxlength="100" required>
+                </div>
+
 
                 <div id="add_images_section_Comment" class="add_images_section">
                     <label for="imageUpload_Comment" class="image-upload-label">
-                        <div class="select-images">Select images</div>
+                        <div class="select-images">Select images (max. 5)</div>
                     </label>
-                    <input type="file" id="imageUpload_Comment" class="imageUpload_Comment" name="imageUpload" multiple accept="image/*">
+                    <input type="file" id="imageUpload_Comment" class="imageUpload_Comment" name="imageUpload" multiple accept="image/*, video/*" max="5">
                 </div>
+
+                <img id="previewImage" src="#" alt="Preview Image" style="display: none;">
+                <div id="imagePreviewContainer"></div>
+
 
                 <textarea class="descriptionComment" id="contenido" name="contenido" placeholder="Comment Description" maxlength="500" required></textarea>
             </div>
             <button id="submit" class="submit">Add comment</button>
         </form>
+
+        <div id="coments"></div>
+
+
+
+
+        <div id="myModal" class="modal">
+            <span class="close">&times;</span>
+            <img class="modal-content" id="modal-img">
+        </div>
+
+
+
+
     </div>
 </main>
 
@@ -107,6 +128,29 @@
     document.addEventListener('DOMContentLoaded', async function () {
         await displayDocumentData();
         initCarousel('.image-carousel-container img, .image-carousel-container video');
+
+        const commentImages = document.querySelectorAll('.additional-image');
+
+
+        commentImages.forEach(function(image) {
+            image.addEventListener('click', function() {
+                // Mostrar la ventana emergente al hacer clic en la imagen
+                const modal = document.getElementById('myModal');
+                const modalImg = document.getElementById('modal-img');
+                modal.style.display = "block";
+                modalImg.src = this.src;
+
+
+                const closeBtn = document.getElementsByClassName("close")[0];
+                closeBtn.addEventListener('click', function() {
+                    modal.style.display = "none";
+                });
+            });
+        });
+
+
+
+
     });
     cargarTemplate('../PhoneHeader/phoneHeader.html', '#phoneHeader');
     cargarTemplate('../Header/header.html', '#desktopHeader', () => {
