@@ -28,6 +28,30 @@ async function loadAllPublication() {
 async function paintMap(minRating= 4) {
     const publications = await loadAllPublication();
     const filteredPublications = publications.filter(pub => pub.valoracion >= minRating);
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function(position) {
+            var lat = position.coords.latitude;
+            var lng = position.coords.longitude;
+
+            // Crear marcador en la ubicación actual
+            var customIcon = L.icon({
+                iconUrl: '/Front_end/Images/selfubication.png',
+                iconSize: [32, 32], // Tamaño del icono en píxeles
+                iconAnchor: [16, 32], // Punto de anclaje del icono, se ajusta según el diseño del icono
+                popupAnchor: [0, -32] // Punto donde se abrirá el popup, ajustado según el diseño del icono
+            });
+
+            // Crear marcador con el icono personalizBado en la ubicación actual
+            var marker = L.marker([lat, lng], { icon: customIcon }).addTo(map)
+
+            // Centrar mapa en la ubicación actual
+            map.setView([lat, lng], 17);
+        }, function(error) {
+            console.error('Error al obtener la ubicación: ', error);
+        });
+    } else {
+        console.error('Geolocalización no es soportada por este navegador.');
+    }
     for (const publication of filteredPublications) {
         const location = [publication.ubicacion.latitude, publication.ubicacion.longitude];
         const marker = L.marker(location, {
