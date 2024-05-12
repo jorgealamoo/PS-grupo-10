@@ -1,6 +1,9 @@
 import {uploadAllImagesToAPI} from './UploadImages.js';
 import {initializeMap} from './loadMap.js';
+import {deleteDocument, addToList} from './cargarTodasLasPublicaciones.js';
 import {initCarousel, moveCarousel, getSlideNumber} from './carrusel.js'
+
+
 
 var Pointermap = {};
 var comment = document.getElementById('description');
@@ -360,7 +363,7 @@ async function addDocument() {
         })
         .then(data => {
                 console.log('Datos agregados con éxito:', data);
-                window.location.href = "../Account/account.html";
+                //window.location.href = "../Account/account.html";
                 return data;
             }
         ).catch(error => {

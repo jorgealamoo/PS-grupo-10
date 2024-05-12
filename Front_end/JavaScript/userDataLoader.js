@@ -359,7 +359,7 @@ async function updateListaSeguidos(lista_siguiendo) {
     }
 }
 
-function addToList(username, imageURL) {
+function addToListFollower(username, imageURL) {
 
     const followerDiv = document.createElement('div');
     followerDiv.classList.add('follower');
