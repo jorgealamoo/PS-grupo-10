@@ -32,15 +32,6 @@ body {
     font-family: ABeeZee, serif;
 }
 
-#Followers, #Following {
-    margin-left: 20em;
-    font-size: 30px;
-}
-
-#Following {
-    margin-left: 5em;
-}
-
 .following {
     margin-left: 12%;
 }
@@ -128,6 +119,10 @@ header#desktopHeader {
         grid-template-columns: repeat(1, 1fr);
     }
 
+    #username {
+        font-size: 18px;
+    }
+
     .options a {
         font-size: 18px;
     }
@@ -145,7 +140,9 @@ header#desktopHeader {
 .followers {
     display: flex;
     margin-bottom: 10px;
-    margin-left: 15%;
+    margin-left: 40%;
+    position: absolute;
+
 }
 
 #seguidos, #siguiedo {

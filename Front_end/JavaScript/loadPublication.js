@@ -66,9 +66,22 @@ async function fetchImage(imageurl) {
     }
 }
 
+async function fetchImageType(imageurl) {
+    try {
+        const response = await fetch('http://localhost:3000/api/getImage/' + imageurl);
+        if (!response.ok) {
+            throw new Error('Failed to fetch image');
+        }
+        const data = await response.json();
+        return data.imageType;
+    } catch (error) {
+        console.error('Error fetching image:', error.message);
+        return null;
+    }
+}
 
 async function loadComment(comment_list) {
-    for ( comment of comment_list){
+    for ( let comment of comment_list) {
         const response = await fetch('http://localhost:3000/api/getDocument/comentario/' + comment)
             .then(response =>{
                 if (!response.ok){
@@ -83,22 +96,28 @@ async function loadComment(comment_list) {
                 }
                 return await response.json()
             });
-        var userName = user.nombre;
-        var photoUser =  await fetchImage(user.photoPerfil);
-        var text = response.contenido;
-        var titulo = response.titulo;
-        var userID = response.user_id;
-        var imagenEditar = await fetchImage("2024-04-29T11_43_27_805Z_image.png");
+        const userName = user.nombre;
+        const photoUser = await fetchImage(user.photoPerfil);
+        const text = response.contenido;
+        const titulo = response.titulo;
+        const userID = response.user_id;
 
-        var imageComment = null;
+        let imageComment = null;
         if (response.lista_imagenes.length > 0) {
              imageComment = await fetchImage(response.lista_imagenes[0]);
         }
-        createComment(userName,photoUser,text,titulo, userID, imageComment);
-
+        if (userID === localStorage.getItem("userId")) createComment(userName,photoUser,text,titulo, userID, imageComment, true, response.id);
+        else createComment(userName,photoUser,text,titulo, userID, imageComment, false, response.id);
     }
 }
-function createComment(userName, photoUser, text, title, userID, imageComment) {
+
+function confirmationMessage(commentID) {
+    const confirmDelete = confirm("¿Estás seguro de que quieres borrar este comentario?");
+    if (confirmDelete) deleteComment(commentID);
+}
+
+
+function createComment(userName, photoUser, text, title, userID, imageComment, selfUser=false, commentID) {
     var comentariosDiv = document.getElementById('coments');
 
     // Create new comment element
@@ -152,8 +171,74 @@ function createComment(userName, photoUser, text, title, userID, imageComment) {
         imageAddComment.style.margin = '0 auto'
         nuevoComentario.appendChild(imageAddComment);
     }
+
+    if (selfUser) {
+        const deleteButton = document.createElement('img');
+        deleteButton.src = "../Images/borrar.png";
+        deleteButton.classList.add("deleteButton");
+        deleteButton.addEventListener('click', function () {
+            confirmationMessage(commentID);
+        });
+        nuevoComentario.appendChild(deleteButton);
+    }
+
     // Append the new comment to the comments div
     comentariosDiv.appendChild(nuevoComentario);
+}
+
+async function deleteFromDatabase(commentID) {
+    try {
+        const response = await fetch('http://localhost:3000/api/deleteDocument/comentario/' + commentID,{
+            method: 'DELETE'
+        });
+        if (!response.ok) {
+            throw new Error('Error deleting document');
+        }
+        const data = await response.json();
+        console.log(data.message);
+    } catch (error) {
+        console.error('Error deleting document:', error);
+    }
+}
+
+// Llama a la función deleteFromDatabase con el ID del documento que deseas eliminar
+const commentID = 'ID_del_documento_a_eliminar';
+deleteFromDatabase(commentID);
+
+
+async function deleteComment(commentID) {
+    const cp = localStorage.getItem("currentPublication");
+    const lista_comentarios = await loadPublicationData("lista_comentarios", cp);
+    const index = lista_comentarios.indexOf(commentID);
+    lista_comentarios.splice(index, 1);
+    const pubData = await fetch('http://localhost:3000/api/getDocument/publicacion/' + cp)
+        .then(async response => {
+            if (!response.ok) {
+                throw new Error("Fail to fetch document");
+            }
+            return await response.json()
+        });
+    pubData['lista_comentarios'] = lista_comentarios;
+    await modifyDoc("publicacion", cp, pubData);
+    await deleteCommentImages(commentID);
+    await deleteFromDatabase(commentID);
+    alert("Comentario borrado con éxito");
+    window.location.href = "../Publication/publication.html";
+}
+
+async function deleteCommentImages(commentID) {
+    const data = await fetch('http://localhost:3000/api/getDocument/comentario/' + commentID)
+        .then(async response => {
+            if (!response.ok) {
+                throw new Error("Fail to fetch document");
+            }
+            return await response.json();
+        });
+    const images = data['lista_imagenes'];
+    if (images.length === 0) return;
+    for (let i=0; i<images.length; i++) {
+        await fetch('http://localhost:3000/api/deleteImage' + images[i]);
+    }
 }
 
 async function showCreatorData(user_id) {
@@ -164,9 +249,12 @@ async function showCreatorData(user_id) {
             }
             return await response.json()
         });
-    var userName = user.nombre;
-    var photoUser = await fetchImage(user.photoPerfil);
+    const userName = user.usuario;
+    const name = user.nombre;
+    const apellido = user.apellido;
+    const photoUser = await fetchImage(user.photoPerfil);
     document.getElementById("username").textContent = userName;
+    document.getElementById("fullName").textContent = name + " " + apellido;
     document.getElementById("photoUser").src = photoUser;
 }
 
@@ -188,6 +276,18 @@ async function isSave() {
 
 }
 
+
+function getTypeFromMimeType(mimeType) {
+    if (mimeType.startsWith('image/')) {
+        return 'image';
+    } else if (mimeType.startsWith('video/')) {
+        return 'video';
+    } else {
+        return 'unknown';
+    }
+}
+
+
 async function displayDocumentData() {
     const documentData = await fetchDocument();
     if (documentData) {
@@ -200,16 +300,33 @@ async function displayDocumentData() {
         const longitude = location.longitude;
         const map = initializeMap(latitude, longitude);
         const listaImagenes = document.getElementById('ImageCarrusel');
+        console.log(documentData["lista_imagenes"]);
+
         for (const key in documentData["lista_imagenes"]) {
             if (Object.hasOwnProperty.call(documentData["lista_imagenes"], key)) {
-                const nuevaImagen = document.createElement('img');
-                const imageUrl = await fetchImage(documentData["lista_imagenes"][key]);
-                nuevaImagen.src = imageUrl;
-                listaImagenes.appendChild(nuevaImagen);
+                const url = await fetchImage(documentData["lista_imagenes"][key]);
+                const type = await fetchImageType(documentData["lista_imagenes"][key]);
+                const mediaType = await getTypeFromMimeType(type);
+                console.log(url + " || " + mediaType)
+
+                if (mediaType === 'image') {
+                    const nuevaImagen = document.createElement('img');
+                    nuevaImagen.src = url;
+                    listaImagenes.appendChild(nuevaImagen);
+                } else if (mediaType === 'video') {
+                    const nuevoVideo = document.createElement('video');
+                    nuevoVideo.src = url;
+                    nuevoVideo.controls = true; // Add controls to the video element
+                    listaImagenes.appendChild(nuevoVideo);
+                }
             }
         }
+        console.log(listaImagenes)
+        console.log(dataJSON["ubicacion"].latitude)
+        console.log(dataJSON["ubicacion"].longitude)
+
         await loadComment(documentData["lista_comentarios"]);
-        createScore(calculateValoration(documentData["valoracion"]));
+        createScore(documentData["valoracion"]);
         await isSave();
     }
 }
@@ -235,8 +352,48 @@ async function modifyDoc(collection,document,data) {
         throw error;
     }
 }
-function calculateValoration(publicationValoration) {
-    return publicationValoration;
+async function updateRating(rating) {
+    const publicationID = localStorage.getItem('currentPublication');
+
+    try {
+        const response = await fetch('http://localhost:3000/api/getDocument/publicacion/' + publicationID);
+        if (!response.ok) {
+            throw new Error("Error al cargar la publicación");
+        }
+
+        const data = await response.json();
+
+        let ratingList = data.hasOwnProperty("rating_list") ? data.rating_list : {};
+
+        // Agrega el nuevo rating al ratingList
+        ratingList[localStorage.getItem('userId')] = rating;
+
+        // Calcula la media de las valoraciones en el ratingList
+        let totalRating = 0;
+        let numRatings = 0;
+        for (const userId in ratingList) {
+            if (ratingList.hasOwnProperty(userId)) {
+                totalRating += ratingList[userId];
+                numRatings++;
+            }
+        }
+        const averageRating = totalRating / numRatings;
+
+        // Actualiza la valoración global de la publicación
+        const updatedData = {
+            ...data,
+            rating_list: ratingList,
+            valoracion: averageRating
+        };
+
+        // Guarda los cambios en la base de datos
+        await modifyDoc('publicacion', publicationID, updatedData);
+
+        console.log("Valoración actualizada con éxito:", averageRating);
+    } catch (error) {
+        console.error('Error al actualizar la valoración:', error.message);
+    }
+
 }
 
 async function changeIcon() {
@@ -267,6 +424,7 @@ document.addEventListener("DOMContentLoaded", function() {
     const userId = localStorage.getItem('userId');
     document.getElementById("photoUser").addEventListener("click", redirectToCreatorUser);
     document.getElementById("username").addEventListener("click", redirectToCreatorUser);
+    document.getElementById("mapButton").addEventListener("click", redirectGoogleMaps);
 
     function myFunction(event) {
         console.log(event.target.id + " was clicked.");
@@ -290,4 +448,11 @@ function redirectToCreatorUser() {
 function redirectToUser(userID) {
     localStorage.setItem('viewAccountId', userID);
     window.location.href = "../ViewAccount/viewAccount.html";
+}
+
+function redirectGoogleMaps() {
+    // Crear la URL de Google Maps con la latitud y longitud especificadas
+    var url = "https://www.google.com/maps?q=" + dataJSON["ubicacion"].latitude + "," + dataJSON["ubicacion"].longitude;
+    // Abrir la ubicación en Google Maps en una nueva ventana
+    window.open(url);
 }

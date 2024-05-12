@@ -136,6 +136,8 @@ async function displayUserResults(results, type) {
 
 
                 resultElement.addEventListener('click', () => {
+                    const self = localStorage.getItem("userId");
+                    if (userId === self) {window.location.href = "../Account/account.html"; return;}
                     localStorage.setItem("viewAccountId", userId);
                     window.location.href = '../ViewAccount/viewAccount.html';
                 });
