@@ -453,6 +453,10 @@ main {
     margin-left: 97%;
 }
 
+.deleteButton:hover {
+    transform: scale(1.1);
+}
+
 /* ----- DYNAMIC RATE ----- */
 
 .rate {
