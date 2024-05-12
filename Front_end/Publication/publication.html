@@ -81,22 +81,21 @@
     </div>
 
     <div class="Comments" id="elemento-oculto">
-        <h2>Comments</h2>
 
         <h3 class="addCommentsText">Add Comments</h3>
         <form id="addComment" class="addComments">
             <div class="infoComment">
                 <div>
                     <input type="text" id="title" class="titleInput" placeholder="Comment Title" maxlength="100" required>
+                    <div id="add_images_section_Comment" class="add_images_section">
+                        <label for="imageUpload_Comment" class="image-upload-label">
+                            <div class="select-images">Select images (max. 5)</div>
+                        </label>
+                        <input type="file" id="imageUpload_Comment" class="imageUpload_Comment" name="imageUpload" multiple accept="image/*, video/*" max="5">
+                    </div>
                 </div>
 
 
-                <div id="add_images_section_Comment" class="add_images_section">
-                    <label for="imageUpload_Comment" class="image-upload-label">
-                        <div class="select-images">Select images (max. 5)</div>
-                    </label>
-                    <input type="file" id="imageUpload_Comment" class="imageUpload_Comment" name="imageUpload" multiple accept="image/*, video/*" max="5">
-                </div>
 
                 <img id="previewImage" src="#" alt="Preview Image" style="display: none;">
                 <div id="imagePreviewContainer"></div>
@@ -106,6 +105,8 @@
             </div>
             <button id="submit" class="submit">Add comment</button>
         </form>
+
+        <h2>Comments</h2>
 
         <div id="coments"></div>
 
