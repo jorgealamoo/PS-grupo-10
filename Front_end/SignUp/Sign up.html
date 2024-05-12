@@ -143,8 +143,11 @@
                     usuario: username.value,
                     email: email.value,
                     photoPerfil: "2024-03-17T13_58_20_632Z_logo_ExploreSpots.jpg"
-                }).then((docRef) => {
-                    // Devolver el DocumentReference
+                }).then(async (docRef) => {
+                    const data = {};
+                    data[username.value] = [userUID];
+                    await modifyDoc("listas", "usuarios", data);
+
                     return docRef;
                 });
             })
@@ -163,6 +166,27 @@
                 alert("Error: " + error.message);
                 console.error("Error al cambiar el campo en Firestore:", error);
             });
+    }
+    async function modifyDoc(collection,document,data) {
+        try {
+            const response = await fetch(`http://localhost:3000/api/changeDoc/`+collection+'/'+document+'', {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            });
+
+            if (!response.ok) {
+                throw new Error('Error al añadir el documento');
+            }
+            const responseDoc = await response.json();
+            //console.log(data);
+            return data;
+        } catch (error) {
+            console.error('Error al añadir a la lista del documento:', error);
+            throw error;
+        }
     }
     document.getElementById('SignUpButton').addEventListener('click',RegisterUser);
 

@@ -5,7 +5,7 @@ var selectedImages   = [];
 var fileType   = [];    //true == image | false == video
 var imagesTrash   = [];
 
-
+var dataJSON = null;
 function loaderMedia(event) {
     const file = (event.target.files)[0];
 
@@ -242,7 +242,7 @@ document.addEventListener('DOMContentLoaded', async function() {
     await checkCreator(userId, data);
 
     inputElementImage.addEventListener('change', loaderMedia);
-    carrouselBTN.addEventListener('click', viewSelectedModal);
+    //carrouselBTN.addEventListener('click', viewSelectedModal);
     document.getElementById('saveBtn').addEventListener('click', async function () {
         await addImageToDocument(publicationID);
         window.location.href = "../Publication/publication.html";
@@ -253,7 +253,7 @@ document.addEventListener('DOMContentLoaded', async function() {
         modal.showModal();
         document.getElementById('confirmar_borrado').addEventListener('click',async () => {
             modal.close();
-            borrarPublicación(publicationID);
+            await borrarPublicacion(publicationID);
             window.location.href = "../MapPage/map.html";
         });
         document.getElementById('cancelar_borrado').addEventListener('click',async () => {
@@ -290,24 +290,33 @@ export async function addImageToDocument(documentID) {
     }
 }
 
-async function borrarPublicación(publicationID) {
-    const documento = await fetch('http://localhost:3000/api/getDocument/publicacion/'+publicationID);
+async function borrarPublicacion(publicationID) {
+        const documento = await fetch('http://localhost:3000/api/getDocument/publicacion/'+ publicationID);
     const documentoData = await documento.json();
-
-    for (var i = 0; i<documentoData.lista_comentarios.length; i++) {
-        const comentario = await fetch('http://localhost:3000/api/getDocument/publicacion/'+documentoData.lista_comentarios[i]);
+    for (let i = 0; i<documentoData.lista_comentarios.length; i++) {
+        const comentario = await fetch('http://localhost:3000/api/getDocument/comentario/'+documentoData.lista_comentarios[i]);
         const comentarioData = await comentario.json();
-        await deleteFromDatabase(comentarioData.comment_id);
+        let id = comentarioData.comment_id;
+        await deleteFromDatabase('comentario',id);
     }
 
-    const creador = fetch('http://localhost:3000/api/getDocument/usuario/'+documentoData.user_id);
-    //eliminar publicación de lista_publicacion
+    const creador = await fetch('http://localhost:3000/api/getDocument/usuario/'+ documentoData.user_id);
+    const creadorData = await creador.json();
+    let listaPublicacionesActualizada = [];
+    for (let j = 0; j<creadorData.lista_publicaciones.length;j++) {
+        if (creadorData.lista_publicaciones[j] == documentoData.publication_id) {}
+        else {
+            listaPublicacionesActualizada.push(creadorData.lista_publicaciones[j]);
+        }
+    }
+    await modifyDoc('usuario', creadorData.id, {lista_publicaciones:listaPublicacionesActualizada});
 
+    await deleteFromDatabase('publicacion', publicationID);
 }
 
-async function deleteFromDatabase(commentID) {
+async function deleteFromDatabase(coleccion, ID) {
     try {
-        const response = await fetch('http://localhost:3000/api/deleteDocument/comentario/' + commentID,{
+        const response = await fetch('http://localhost:3000/api/deleteDocument/'+coleccion +'/' + ID,{
             method: 'DELETE'
         });
         if (!response.ok) {
@@ -319,4 +328,7 @@ async function deleteFromDatabase(commentID) {
         console.error('Error deleting document:', error);
     }
 }
+
+
+
 
