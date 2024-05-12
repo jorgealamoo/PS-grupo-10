@@ -639,3 +639,152 @@ header#desktopHeader {
 #carrouselBTN:hover {
     background-color: #BFBFBF;
 }
+
+.images-container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.additional-image {
+    width: auto;
+    height: 100px;
+    display: block;
+    margin: 0 5px;
+}
+
+.additional-image {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    display: block;
+    margin: 0 5px;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    box-sizing: border-box;
+    padding: 5px;
+}
+
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    padding: 0;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: transparent;
+}
+
+
+.modal-content {
+    position: relative;
+    display: flex;
+    overflow: hidden;
+    justify-content: center;
+    align-items: center;
+    max-width: 100%;
+    max-height: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+
+.modal-content img {
+    max-width: 300px; /* Puedes ajustar el valor según lo que desees */
+    max-height: 200px; /* Puedes ajustar el valor según lo que desees */
+    object-fit: contain; /* Esto asegurará que la imagen se ajuste dentro del contenedor sin deformarla */
+}
+
+#previewImage {
+    max-width: 150px; /* Establecer un tamaño máximo para la imagen */
+    max-height: 150px; /* Establecer una altura máxima para la imagen */
+    float: left; /* Alinear la imagen a la izquierda */
+    margin-right: 10px; /* Agregar un margen a la derecha para separarla del texto */
+    margin-bottom: 10px;
+    border-radius: 8px;
+    border: 1px solid #ccc; /* Agregar un borde alrededor de la imagen */
+    padding: 3px; /* Añadir un poco de espacio alrededor de la imagen */
+    background-color: rgba(0, 0, 0, 0.1); /* Añadir un fondo ligeramente transparente */
+}
+
+#imagePreviewContainer {
+    margin-top: 10px; /* Espacio superior para separarlo del texto anterior */
+    overflow: auto; /* Agregar desbordamiento automático para manejar múltiples imágenes */
+}
+
+.imagePreview {
+    max-width: 200px; /* Establecer un tamaño máximo para cada imagen */
+    max-height: 200px; /* Establecer una altura máxima para cada imagen */
+    float: left; /* Alinear las imágenes a la izquierda */
+    margin-right: 10px; /* Agregar un margen a la derecha para separar las imágenes */
+    margin-bottom: 10px; /* Agregar un margen inferior para separar las filas de imágenes */
+    border: 1px solid #ccc; /* Agregar un borde alrededor de cada imagen */
+    border-radius: 8px;
+    padding: 3px; /* Añadir un poco de espacio alrededor de cada imagen */
+    background-color: rgba(0, 0, 0, 0.1); /* Añadir un fondo ligeramente transparente */
+
+}
+
+/* Estilos para el contenedor de cada imagen */
+.imageContainer {
+    position: relative; /* Asegura que los elementos hijos absolutos se posicionen relativos a este contenedor */
+    display: inline-block; /* Asegura que los contenedores de imagen se apilen horizontalmente */
+    margin-right: 5px; /* Agrega un margen derecho entre los contenedores de imagen */
+}
+
+/* Estilos para el botón de eliminación */
+.deleteButton {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    display: none; /* Inicialmente ocultar el botón de eliminación */
+}
+
+.deleteButton:hover {
+    background-color: rgb(255, 20, 20);
+    color: white;
+}
+
+/* Estilo cuando se pasa el cursor sobre el contenedor de la imagen */
+.imageContainer:hover .deleteButton {
+    display: block; /* Mostrar el botón de eliminación cuando se pasa el cursor sobre el contenedor de la imagen */
+}
+
+
+
+
+
+.modal-content img:hover {
+    transform: scale(0.7);
+}
+
+.close {
+    position: absolute;
+    top: 15px;
+    right: 35px;
+    color: #000000;
+    font-size: 40px;
+    font-weight: bold;
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+
+
+
+.close:hover,
+.close:focus {
+    color: #ff1414;
+    text-decoration: none;
+    cursor: pointer;
+}

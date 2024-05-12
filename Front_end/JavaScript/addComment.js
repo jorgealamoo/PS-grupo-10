@@ -76,21 +76,50 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function loaderImageComments(event) {
         const files = event.target.files;
-        showImage(files[0]);
         for (const file of files) {
-            if (file && file.type.startsWith('image/')) {
+            if (file && (file.type.startsWith('image/') || file.type.startsWith('video/'))) {
                 const reader = new FileReader();
                 reader.onload = function(event) {
-                    const imageDataURL = event.target.result;
-                    images.push(imageDataURL);
+                    const fileDataURL = event.target.result;
+                    images.push(fileDataURL);
+                    createImagePreview(fileDataURL);
                 };
                 reader.readAsDataURL(file);
             } else {
-                console.warn('El archivo seleccionado no es una imagen:', file ? file.name : 'No se seleccionó ningún archivo');
+                console.warn('El archivo seleccionado no es una imagen o video:', file ? file.name : 'No se seleccionó ningún archivo');
             }
         }
         console.log(images);
     }
+
+    function createImagePreview(fileDataURL) {
+        const imageContainer = document.createElement('div');
+        imageContainer.className = 'imageContainer';
+
+        const img = document.createElement('img');
+        img.src = fileDataURL;
+        img.className = 'imagePreview';
+
+        const deleteButton = document.createElement('button');
+        deleteButton.className = 'deleteButton';
+        deleteButton.textContent = 'x';
+
+        deleteButton.addEventListener('click', function() {
+            // Remove the image container when the delete button is clicked
+            imageContainer.remove();
+            // Remove the corresponding image from the images array
+            const index = images.indexOf(fileDataURL);
+            if (index !== -1) {
+                images.splice(index, 1);
+            }
+        });
+
+        imageContainer.appendChild(img);
+        imageContainer.appendChild(deleteButton);
+        imagePreviewContainer.appendChild(imageContainer);
+    }
+
+
 
     function takePublicationCommentsList(publication_id) {
         return fetch('http://localhost:3000/api/getDocument/publicacion/'+publication_id+'')

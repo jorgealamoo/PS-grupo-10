@@ -1,6 +1,7 @@
 //import {initializeMap} from './loadMap.js';
 
 var dataJSON = null
+
 function initializeMap(latitude, longitude) {
     // Crea el mapa y configura la vista inicial utilizando las coordenadas proporcionadas
     var map = L.map('map').setView([latitude, longitude], 13);
@@ -14,6 +15,14 @@ function initializeMap(latitude, longitude) {
     // Retorna el objeto de mapa
     return map;
 }
+
+
+// Agrega un evento de clic al botón de cerrar
+document.querySelector('.close').addEventListener('click', function () {
+    // Oculta el pop-up al hacer clic en el botón de cerrar
+    popup.style.display = 'none';
+});
+
 
 function createScore(valoration) {
     const valorationElement = document.getElementById("score");
@@ -82,10 +91,10 @@ async function fetchImageType(imageurl) {
 
 async function loadComment(comment_list) {
 
-    for ( let comment of comment_list) {
+    for (let comment of comment_list) {
         const response = await fetch('http://localhost:3000/api/getDocument/comentario/' + comment)
-            .then(response =>{
-                if (!response.ok){
+            .then(response => {
+                if (!response.ok) {
                     throw new Error("Can not load comment");
                 }
                 return response.json();
@@ -103,12 +112,16 @@ async function loadComment(comment_list) {
         const titulo = response.titulo;
         const userID = response.user_id;
 
-        let imageComment = null;
-        if (response.lista_imagenes.length > 0) {
-             imageComment = await fetchImage(response.lista_imagenes[0]);
+        let imageComment = [];
+        for (const imageUrl of response.lista_imagenes) {
+            const image = await fetchImage(imageUrl);
+            if (image) {
+                imageComment.push(image);
+            }
         }
-        if (userID === localStorage.getItem("userId")) createComment(userName,photoUser,text,titulo, userID, imageComment, true, response.id);
-        else createComment(userName,photoUser,text,titulo, userID, imageComment, false, response.id);
+
+        if (userID === localStorage.getItem("userId")) createComment(userName, photoUser, text, titulo, userID, imageComment, true, response.id);
+        else createComment(userName, photoUser, text, titulo, userID, imageComment, false, response.id);
     }
 }
 
@@ -118,7 +131,7 @@ function confirmationMessage(commentID) {
 }
 
 
-function createComment(userName, photoUser, text, title, userID, imageComment, selfUser=false, commentID) {
+function createComment(userName, photoUser, text, title, userID, imageComment, selfUser = false, commentID) {
     var comentariosDiv = document.getElementById('coments');
 
     // Create new comment element
@@ -135,17 +148,16 @@ function createComment(userName, photoUser, text, title, userID, imageComment, s
     var imagenComentarioImg = document.createElement('img');
     imagenComentarioImg.src = photoUser;
     imagenComentarioImg.classList.add('imagen-comentario');
-    imagenComentarioImg.addEventListener('click', function() {
+    imagenComentarioImg.addEventListener('click', function () {
         redirectToUser(userID);
     });
-
     headerCommentDiv.appendChild(imagenComentarioImg);
 
     // Create nombre h3 element
     var nombreH3 = document.createElement('h3');
     nombreH3.classList.add('nombre');
     nombreH3.textContent = userName;
-    nombreH3.addEventListener('click', function() {
+    nombreH3.addEventListener('click', function () {
         redirectToUser(userID);
     });
     headerCommentDiv.appendChild(nombreH3);
@@ -162,16 +174,24 @@ function createComment(userName, photoUser, text, title, userID, imageComment, s
     mensajeDiv.textContent = text;
     nuevoComentario.appendChild(mensajeDiv);
 
+    // Create container for additional images
+    var imagesContainer = document.createElement('div');
+    imagesContainer.classList.add('images-container');
+    nuevoComentario.appendChild(imagesContainer);
+
     //Crear imagen añadida por el usuario
+
     if (imageComment != null) {
-        var imageAddComment = document.createElement('img');
-        imageAddComment.src = imageComment;
-        imageAddComment.style.width = 'auto';
-        imageAddComment.style.height = '300px';
-        imageAddComment.style.display = 'block'; // Hacer que la imagen sea un bloque para centrarla horizontalmente
-        imageAddComment.style.margin = '0 auto'
-        nuevoComentario.appendChild(imageAddComment);
+        if (Array.isArray(imageComment)) {
+            imageComment.forEach(function (imageUrl) {
+                var imageAddComment = document.createElement('img');
+                imageAddComment.src = imageUrl;
+                imageAddComment.classList.add('additional-image');
+                imagesContainer.appendChild(imageAddComment);
+            });
+        }
     }
+
 
     if (selfUser) {
         const deleteButton = document.createElement('img');
@@ -187,9 +207,32 @@ function createComment(userName, photoUser, text, title, userID, imageComment, s
     comentariosDiv.appendChild(nuevoComentario);
 }
 
+document.addEventListener('DOMContentLoaded', function () {
+    // Obtener todas las imágenes de comentarios
+    const commentImages = document.querySelectorAll('.additional-image');
+
+    // Agregar evento de clic a cada imagen
+    commentImages.forEach(function (image) {
+        image.addEventListener('click', function () {
+            // Mostrar la ventana emergente al hacer clic en la imagen
+            const modal = document.getElementById('myModal');
+            const modalImg = document.getElementById('modal-img');
+            modal.style.display = "block";
+            modalImg.src = this.src;
+
+            // Agregar evento de clic al botón de cerrar la ventana emergente
+            const closeBtn = document.getElementsByClassName("close")[0];
+            closeBtn.addEventListener('click', function () {
+                modal.style.display = "none"; // Ocultar la ventana emergente al hacer clic en el botón de cerrar
+            });
+        });
+    });
+});
+
+
 async function deleteFromDatabase(commentID) {
     try {
-        const response = await fetch('http://localhost:3000/api/deleteDocument/comentario/' + commentID,{
+        const response = await fetch('http://localhost:3000/api/deleteDocument/comentario/' + commentID, {
             method: 'DELETE'
         });
         if (!response.ok) {
@@ -237,7 +280,7 @@ async function deleteCommentImages(commentID) {
         });
     const images = data['lista_imagenes'];
     if (images.length === 0) return;
-    for (let i=0; i<images.length; i++) {
+    for (let i = 0; i < images.length; i++) {
         await fetch('http://localhost:3000/api/deleteImage' + images[i]);
     }
 }
@@ -269,10 +312,10 @@ async function isSave() {
                 return await response.json();
             }
         });
-    console.log(user.lista_guardados);
-    if(user.lista_guardados && user.lista_guardados.some(item => item === localStorage.getItem('currentPublication'))){
+    //console.log(user.lista_guardados);
+    if (user.lista_guardados && user.lista_guardados.some(item => item === localStorage.getItem('currentPublication'))) {
         const saves = document.getElementById('saves');
-        saves.src='/Front_end/Images/guardar-activate.png';
+        saves.src = '/Front_end/Images/guardar-activate.png';
     }
 
 }
@@ -322,9 +365,9 @@ async function displayDocumentData() {
                 }
             }
         }
-        console.log(listaImagenes)
-        console.log(dataJSON["ubicacion"].latitude)
-        console.log(dataJSON["ubicacion"].longitude)
+        //console.log(listaImagenes)
+        //console.log(dataJSON["ubicacion"].latitude)
+        //console.log(dataJSON["ubicacion"].longitude)
 
         await loadComment(documentData["lista_comentarios"]);
         createScore(documentData["valoracion"]);
@@ -332,9 +375,9 @@ async function displayDocumentData() {
     }
 }
 
-async function modifyDoc(collection,document,data) {
+async function modifyDoc(collection, document, data) {
     try {
-        const response = await fetch(`http://localhost:3000/api/changeDoc/`+collection+'/'+document+'', {
+        const response = await fetch(`http://localhost:3000/api/changeDoc/` + collection + '/' + document + '', {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'
@@ -353,6 +396,7 @@ async function modifyDoc(collection,document,data) {
         throw error;
     }
 }
+
 async function updateRating(rating) {
     const publicationID = localStorage.getItem('currentPublication');
 
@@ -390,9 +434,9 @@ async function updateRating(rating) {
         // Guarda los cambios en la base de datos
         await modifyDoc('publicacion', publicationID, updatedData);
 
-        console.log("Valoración actualizada con éxito:", averageRating);
+        //console.log("Valoración actualizada con éxito:", averageRating);
     } catch (error) {
-        console.error('Error al actualizar la valoración:', error.message);
+        //console.error('Error al actualizar la valoración:', error.message);
     }
 
 }
@@ -410,18 +454,18 @@ async function changeIcon() {
     const button = document.getElementById('saves');
     if (button.src.endsWith('guardar-activate.png')) {
         button.src = '/Front_end/Images/guardar-instagram.png';
-        await modifyDoc('usuario',user_id,{lista_guardados: user.lista_guardados.filter(item => item !== localStorage.getItem('currentPublication'))})
+        await modifyDoc('usuario', user_id, {lista_guardados: user.lista_guardados.filter(item => item !== localStorage.getItem('currentPublication'))})
 
     } else {
         button.src = '/Front_end/Images/guardar-activate.png';
         saves = user.lista_guardados;
         saves.push(localStorage.getItem('currentPublication'))
-        await modifyDoc('usuario',user_id,{lista_guardados: saves})
+        await modifyDoc('usuario', user_id, {lista_guardados: saves})
 
     }
 }
 
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
     const userId = localStorage.getItem('userId');
     document.getElementById("photoUser").addEventListener("click", redirectToCreatorUser);
     document.getElementById("username").addEventListener("click", redirectToCreatorUser);
@@ -436,7 +480,7 @@ document.addEventListener("DOMContentLoaded", function() {
     console.log(prprDivs)
 
     // Add onclick event listener to each prpr div
-    Array.from(prprDivs).forEach(function(prprDiv) {
+    Array.from(prprDivs).forEach(function (prprDiv) {
         prprDiv.addEventListener('click', myFunction);
     });
 });
@@ -457,3 +501,14 @@ function redirectGoogleMaps() {
     // Abrir la ubicación en Google Maps en una nueva ventana
     window.open(url);
 }
+
+
+
+
+
+
+
+
+
+
+
