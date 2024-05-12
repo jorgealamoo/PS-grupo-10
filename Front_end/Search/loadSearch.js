@@ -81,16 +81,51 @@ async function displayPublicationResults(results, type) {
 
                 const firstImage = await fetchImage(publicationData['lista_imagenes'][0]);
                 const username = await fetchUser(publicationData['user_id']);
-                resultElement.innerHTML = `
-                <div class="publication-content">
-                    <img src="${firstImage}" alt="Imagen de la publicación">
-                    <div class="publication-info">
-                        <h2>${result.title}</h2>
-                        <h3>${username}</h3>
-                        <p>Rate: ${publicationData['valoracion']}</p>
-                    </div>
-                </div>
-                `;
+
+
+
+                try {
+                    const response = await fetch(`http://localhost:3000/api/getImage/${publicationData['lista_imagenes'][0]}`);
+                    if (!response.ok) {
+                        throw new Error('Failed to fetch image URL');
+                    }
+                    const data = await response.json();
+
+                    // Check if imageType contains "/image"
+                    if (data.imageType.includes('image/')) {
+                        const url = await getImgURL(publicationData['lista_imagenes'][0]);
+
+                        resultElement.innerHTML = `
+                        <div class="publication-content">
+                            <img src="${firstImage}" alt="Imagen de la publicación">
+                            <div class="publication-info">
+                                <h2>${result.title}</h2>
+                                <h3>${username}</h3>
+                                <p>Rate: ${publicationData['valoracion']}</p>
+                            </div>
+                        </div>
+                        `;
+
+                    } else if (data.imageType.includes('video/')) {
+                        const videoUrl = await getImgURL(publicationData['lista_imagenes'][0]);
+
+                        resultElement.innerHTML = `
+                        <div class="publication-content">
+                           <video src="${videoUrl}" style="height: 200px" autoplay loop muted></video>
+                            <div class="publication-info">
+                                <h2>${result.title}</h2>
+                                <h3>${username}</h3>
+                                <p>Rate: ${publicationData['valoracion']}</p>
+                            </div>
+                        </div>
+                        `;
+                    } else {
+                        throw new Error('Unknown media type');
+                    }
+                } catch (error) {
+                    console.error('Error fetching image URL:', error);
+                    throw error;
+                }
 
                 resultElement.addEventListener('click', () => {
                     localStorage.setItem("currentPublication", publicationId);
