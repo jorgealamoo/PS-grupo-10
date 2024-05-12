@@ -3,15 +3,28 @@
 var dataJSON = null
 function initializeMap(latitude, longitude) {
     // Crea el mapa y configura la vista inicial utilizando las coordenadas proporcionadas
-    var map = L.map('map').setView([latitude, longitude], 13);
-
+    var map = L.map('map',{
+        maxZoom: 20,
+        minZoom: 6,
+        zoomControl: false
+    }).setView([latitude, longitude], 17);
+    L.control.zoom({
+        position: 'bottomright'
+    }).addTo(map);
     // Añade una capa de mapa base (puedes elegir entre diferentes proveedores, como OpenStreetMap, Mapbox, etc.)
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
 
     // Añade un marcador en la posición especificada
     var marker = L.marker([latitude, longitude]).addTo(map);
+    const southWest = L.latLng(-66.206333, -168.986456); // Esquina suroeste
+    const northEast = L.latLng(78.829917, 179.876336); // Esquina noreste
+    const bounds = L.latLngBounds(southWest, northEast);
 
-    // Retorna el objeto de mapa
+// Aplica los límites al mapa
+    map.setMaxBounds(bounds);
+    map.on('drag', function () {
+        map.panInsideBounds(bounds, { animate: false });
+    });
     return map;
 }
 
