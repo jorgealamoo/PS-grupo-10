@@ -391,6 +391,8 @@ async function updateRating(rating) {
         await modifyDoc('publicacion', publicationID, updatedData);
 
         console.log("Valoración actualizada con éxito:", averageRating);
+
+        window.location.reload();
     } catch (error) {
         console.error('Error al actualizar la valoración:', error.message);
     }
