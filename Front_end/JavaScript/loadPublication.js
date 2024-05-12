@@ -372,9 +372,15 @@ async function updateRating(rating) {
         // Calcula la media de las valoraciones en el ratingList
         let totalRating = 0;
         let numRatings = 0;
+        console.log("HERE")
+        console.log(totalRating);
+        console.log("======")
         for (const userId in ratingList) {
             if (ratingList.hasOwnProperty(userId)) {
-                totalRating += ratingList[userId];
+                totalRating += parseInt(ratingList[userId], 10);
+                console.log("HERE")
+                console.log(totalRating);
+                console.log("======")
                 numRatings++;
             }
         }
