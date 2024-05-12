@@ -104,43 +104,39 @@ async function fetchImageType(imageurl) {
 }
 
 async function loadComment(comment_list) {
-    for ( let comment of comment_list) {
-
     for (let comment of comment_list) {
-        const response = await fetch('http://localhost:3000/api/getDocument/comentario/' + comment)
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error("Can not load comment");
-                }
-                return response.json();
-            });
-        const user = await fetch('http://localhost:3000/api/getDocument/usuario/' + response.user_id)
-            .then(async response => {
-                if (!response.ok) {
-                    throw new Error("Fail to fetch document");
-                }
-                return await response.json()
-            });
-        const userName = user.nombre;
-        const photoUser = await fetchImage(user.photoPerfil);
-        const text = response.contenido;
-        const titulo = response.titulo;
-        const userID = response.user_id;
-        var imagenEditar = await fetchImage("2024-04-29T11_43_27_805Z_image.png");
 
-        let imageComment = [];
-        for (const imageUrl of response.lista_imagenes) {
-            const image = await fetchImage(imageUrl);
-            if (image) {
-                imageComment.push(image);
+        for (let comment of comment_list) {
+            const response = await fetch('http://localhost:3000/api/getDocument/comentario/' + comment)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error("Can not load comment");
+                    }
+                    return response.json();
+                });
+            const user = await fetch('http://localhost:3000/api/getDocument/usuario/' + response.user_id)
+                .then(async response => {
+                    if (!response.ok) {
+                        throw new Error("Fail to fetch document");
+                    }
+                    return await response.json()
+                });
+            const userName = user.nombre;
+            const photoUser = await fetchImage(user.photoPerfil);
+            const text = response.contenido;
+            const titulo = response.titulo;
+            const userID = response.user_id;
+            const imagenEditar = await fetchImage("2024-04-29T11_43_27_805Z_image.png");
+
+            let imageComment = [];
+            for (const imageUrl of response.lista_imagenes) {
+                const image = await fetchImage(imageUrl);
+                if (image) {
+                    imageComment.push(image);
+                }
             }
+            createComment(userName, photoUser, text, titulo, userID, imageComment, imagenEditar, response.comment_id);
         }
-        if (userID === localStorage.getItem("userId")) createComment(userName,photoUser,text,titulo, userID, imageComment, true, response.id);
-        else   createComment(userName,photoUser,text,titulo, userID, imageComment, imagenEditar, response.comment_id);
-
-
-        if (userID === localStorage.getItem("userId")) createComment(userName, photoUser, text, titulo, userID, imageComment, true, response.id);
-        else createComment(userName, photoUser, text, titulo, userID, imageComment, false, response.id);
     }
 }
 
@@ -151,7 +147,6 @@ function confirmationMessage(commentID) {
 
 
 function createComment(userName, photoUser, text, title, userID, imageComment, imagenEditar, commentID) {
-function createComment(userName, photoUser, text, title, userID, imageComment, selfUser = false, commentID) {
     var comentariosDiv = document.getElementById('coments');
 
     // Create new comment element
@@ -183,7 +178,7 @@ function createComment(userName, photoUser, text, title, userID, imageComment, s
     headerCommentDiv.appendChild(nombreH3);
 
     if (userID == localStorage.getItem('userId')) {
-        var editComment = document.createElement('img');
+        const editComment = document.createElement('img');
         editComment.src = imagenEditar;
         editComment.style.width = 'auto';
         editComment.style.height = '20px';
@@ -230,15 +225,22 @@ function createComment(userName, photoUser, text, title, userID, imageComment, s
         const deleteButton = document.createElement('img');
         deleteButton.src = "../Images/borrar.png";
         deleteButton.classList.add("deleteButton");
+        deleteButton.style.width = 'auto';
+        deleteButton.style.height = '30px';
+        deleteButton.style.float = 'right'
+        deleteButton.style.border = 'none';
+        deleteButton.style.marginLeft = '10px';
         deleteButton.addEventListener('click', function () {
             confirmationMessage(commentID);
         });
-        nuevoComentario.appendChild(deleteButton);
+        headerCommentDiv.appendChild(deleteButton);
     }
 
     // Append the new comment to the comments div
     comentariosDiv.appendChild(nuevoComentario);
 }
+
+
 
 document.addEventListener('DOMContentLoaded', function () {
     // Obtener todas las imágenes de comentarios
@@ -530,13 +532,6 @@ function redirectGoogleMaps() {
     // Abrir la ubicación en Google Maps en una nueva ventana
     window.open(url);
 }
-
-
-
-
-
-
-
 
 
 
