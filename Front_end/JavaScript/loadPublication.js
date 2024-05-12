@@ -365,9 +365,9 @@ async function displayDocumentData() {
                 }
             }
         }
-        //console.log(listaImagenes)
-        //console.log(dataJSON["ubicacion"].latitude)
-        //console.log(dataJSON["ubicacion"].longitude)
+        console.log(listaImagenes)
+        console.log(dataJSON["ubicacion"].latitude)
+        console.log(dataJSON["ubicacion"].longitude)
 
         await loadComment(documentData["lista_comentarios"]);
         createScore(documentData["valoracion"]);
@@ -434,9 +434,9 @@ async function updateRating(rating) {
         // Guarda los cambios en la base de datos
         await modifyDoc('publicacion', publicationID, updatedData);
 
-        //console.log("Valoración actualizada con éxito:", averageRating);
+        console.log("Valoración actualizada con éxito:", averageRating);
     } catch (error) {
-        //console.error('Error al actualizar la valoración:', error.message);
+        console.error('Error al actualizar la valoración:', error.message);
     }
 
 }

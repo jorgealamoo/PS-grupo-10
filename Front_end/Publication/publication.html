@@ -131,7 +131,7 @@
 
         const commentImages = document.querySelectorAll('.additional-image');
 
-        // Agregar evento de clic a cada imagen
+
         commentImages.forEach(function(image) {
             image.addEventListener('click', function() {
                 // Mostrar la ventana emergente al hacer clic en la imagen
@@ -140,10 +140,10 @@
                 modal.style.display = "block";
                 modalImg.src = this.src;
 
-                // Agregar evento de clic al botón de cerrar la ventana emergente
+
                 const closeBtn = document.getElementsByClassName("close")[0];
                 closeBtn.addEventListener('click', function() {
-                    modal.style.display = "none"; // Ocultar la ventana emergente al hacer clic en el botón de cerrar
+                    modal.style.display = "none";
                 });
             });
         });
