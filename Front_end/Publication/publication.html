@@ -6,7 +6,6 @@
     <script src='../JavaScript/templateLoader.js'></script>
     <script src='../JavaScript/userDataLoader.js'></script>
     <script src='../JavaScript/carruselHTML.js'></script>
-    <script src='../JavaScript/UploadComments.js'></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
@@ -27,7 +26,7 @@
             <div id="publicationData">
                 <h1 id='name'></h1>
                 <h1 id='score' class="score"></h1>
-                <img id="saves" src="../Images/guardar-instagram.png" title="Save publication" onclick="changeIcon()">
+                <img id="saves" src="../Images/guardar-instagram.png" title="Save publication" onclick="changeIcon()" alt="">
                 <p>Your rate:</p>
                 <div class="rate">
                     <input type="radio" id="star5" name="rate" value="5" onclick="updateRating(this.value)"/>
@@ -69,7 +68,7 @@
                 </div>
             </div>
         </div>
-        <img/>
+        <img alt="" src=""/>
         <div  id="ImageCarrusel" class="image-carousel-container">
             <!-- Botones de navegación -->
             <div class="carousel-button left" onclick="moveCarousel(-1)">❮</div>
@@ -105,7 +104,7 @@
                 <div id="imagePreviewContainer"></div>
 
 
-                <textarea class="descriptionComment" id="contenido" name="contenido" placeholder="Comment Description" maxlength="500" required></textarea>
+                <label for="contenido"></label><textarea class="descriptionComment" id="contenido" name="contenido" placeholder="Comment Description" maxlength="500" required></textarea>
             </div>
             <button id="submit" class="submit">Add comment</button>
         </form>
@@ -119,7 +118,7 @@
 
         <div id="myModal" class="modal">
             <span class="close">&times;</span>
-            <img class="modal-content" id="modal-img">
+            <img class="modal-content" id="modal-img" alt="" src="">
         </div>
 
 
@@ -131,7 +130,7 @@
 <dialog id = 'modal'>
     <form id="editComment" class="addComments">
         <div class="infoComment">
-            <input type="text" id="editTitle" class="titleInput" placeholder="Comment Title" maxlength="100" required>
+            <label for="editTitle"></label><input type="text" id="editTitle" class="titleInput" placeholder="Comment Title" maxlength="100" required>
 
             <div id="edit_images_section_Comment" class="add_images_section">
                 <label for="imageUpload_Comment" class="image-upload-label">
@@ -146,7 +145,7 @@
                 <button id="salir_button" >X</button>
             </div>
 
-            <textarea class="descriptionComment" id="edit_contenido" name="contenido" placeholder="Comment Description" maxlength="500" required></textarea>
+            <label for="edit_contenido"></label><textarea class="descriptionComment" id="edit_contenido" name="contenido" placeholder="Comment Description" maxlength="500" required></textarea>
         </div>
         <a style="display: none; color: red; font-weight: bold;" id="confirmacion_borrar">ALL IMAGES WILL BE REMOVED</a>
 
@@ -203,10 +202,6 @@
                 });
             });
         });
-
-
-
-
     });
     cargarTemplate('../PhoneHeader/phoneHeader.html', '#phoneHeader');
     cargarTemplate('../Header/header.html', '#desktopHeader', () => {
