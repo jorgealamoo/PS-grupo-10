@@ -498,11 +498,6 @@ async function changeIcon() {
 }
 
 document.addEventListener("DOMContentLoaded", function () {
-    const userId = localStorage.getItem('userId');
-    document.getElementById("photoUser").addEventListener("click", redirectToCreatorUser);
-    document.getElementById("username").addEventListener("click", redirectToCreatorUser);
-    document.getElementById("mapButton").addEventListener("click", redirectGoogleMaps);
-
     function myFunction(event) {
         console.log(event.target.id + " was clicked.");
     }
