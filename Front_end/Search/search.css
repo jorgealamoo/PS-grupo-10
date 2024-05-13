@@ -121,7 +121,7 @@ main {
 .user {
     border: 1px solid #ccc;
     padding: 10px;
-    text-align: center;
+    text-align: left;
 }
 
 .user:hover {
@@ -132,11 +132,13 @@ main {
 .user-content,
 .user-info {
     display: inline-block;
+    margin-left: 35%;
 }
 
 .user-info {
     vertical-align: top;
     margin-top: 25px;
+    margin-left: 0;
 }
 
 .user img {
@@ -145,6 +147,7 @@ main {
     border-radius: 50%;
     object-fit: cover;
     margin-right: 40px;
+    border: 1px solid black;
 }
 
 .user-info h3 {
