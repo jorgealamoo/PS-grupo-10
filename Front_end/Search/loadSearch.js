@@ -1,4 +1,5 @@
-
+// Call checkAuth function when the dashboard page is loaded
+document.addEventListener('DOMContentLoaded', checkAuth);
 
 async function searchPublications(keyword) {
     try {
