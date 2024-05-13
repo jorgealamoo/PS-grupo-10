@@ -48,10 +48,13 @@
                     <label for="imageUpload" class="image-upload-label">
                         <div class="select-images">Add New Images</div>
                     </label>
-                    <input type="file" id="imageUpload" class="imageUpload" name="imageUpload" multiple accept="image/*">
+                    <input type="file" id="imageUpload" class="imageUpload" name="imageUpload" multiple accept="image/*, video/*">
                 </div>
                 <div id="save_image_button" class="save_image_button">
                     <button id="saveBtn">Save New Images</button>
+                </div>
+                <div id="show_images_section" class="show_new_images_section">
+                    <button id="carrouselBTN">View Selected Media</button>
                 </div>
                 <div id = "eliminar_publicacion" class = "bad_button">
                     <button  id = "boton_eliminar_publicacion">Delete publication</button>
@@ -180,7 +183,7 @@
 </dialog>
 
 <script>
-    document.addEventListener('DOMContentLoaded',async function () {
+    document.addEventListener('DOMContentLoaded', async function () {
         await displayDocumentData();
         initCarousel('.image-carousel-container img, .image-carousel-container video');
 
@@ -206,7 +209,6 @@
 
 
 
-        initCarousel('.image-carousel-container img')
     });
     cargarTemplate('../PhoneHeader/phoneHeader.html', '#phoneHeader');
     cargarTemplate('../Header/header.html', '#desktopHeader', () => {

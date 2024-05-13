@@ -242,7 +242,7 @@ document.addEventListener('DOMContentLoaded', async function() {
     await checkCreator(userId, data);
 
     inputElementImage.addEventListener('change', loaderMedia);
-    //carrouselBTN.addEventListener('click', viewSelectedModal);
+    carrouselBTN.addEventListener('click', viewSelectedModal);
     document.getElementById('saveBtn').addEventListener('click', async function () {
         await addImageToDocument(publicationID);
         window.location.href = "../Publication/publication.html";
