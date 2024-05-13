@@ -105,38 +105,35 @@ async function fetchImageType(imageurl) {
 
 async function loadComment(comment_list) {
     for (let comment of comment_list) {
-
-        for (let comment of comment_list) {
-            const response = await fetch('http://localhost:3000/api/getDocument/comentario/' + comment)
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error("Can not load comment");
-                    }
-                    return response.json();
-                });
-            const user = await fetch('http://localhost:3000/api/getDocument/usuario/' + response.user_id)
-                .then(async response => {
-                    if (!response.ok) {
-                        throw new Error("Fail to fetch document");
-                    }
-                    return await response.json()
-                });
-            const userName = user.nombre;
-            const photoUser = await fetchImage(user.photoPerfil);
-            const text = response.contenido;
-            const titulo = response.titulo;
-            const userID = response.user_id;
-            const imagenEditar = await fetchImage("2024-04-29T11_43_27_805Z_image.png");
-
-            let imageComment = [];
-            for (const imageUrl of response.lista_imagenes) {
-                const image = await fetchImage(imageUrl);
-                if (image) {
-                    imageComment.push(image);
+        const response = await fetch('http://localhost:3000/api/getDocument/comentario/' + comment)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error("Can not load comment");
                 }
+                return response.json();
+            });
+        const user = await fetch('http://localhost:3000/api/getDocument/usuario/' + response.user_id)
+            .then(async response => {
+                if (!response.ok) {
+                    throw new Error("Fail to fetch document");
+                }
+                return await response.json()
+            });
+        const userName = user.nombre;
+        const photoUser = await fetchImage(user.photoPerfil);
+        const text = response.contenido;
+        const titulo = response.titulo;
+        const userID = response.user_id;
+        const imagenEditar = await fetchImage("2024-04-29T11_43_27_805Z_image.png");
+
+        let imageComment = [];
+        for (const imageUrl of response.lista_imagenes) {
+            const image = await fetchImage(imageUrl);
+            if (image) {
+                imageComment.push(image);
             }
-            createComment(userName, photoUser, text, titulo, userID, imageComment, imagenEditar, response.comment_id);
         }
+        createComment(userName, photoUser, text, titulo, userID, imageComment, imagenEditar, response.comment_id);
     }
 }
 
