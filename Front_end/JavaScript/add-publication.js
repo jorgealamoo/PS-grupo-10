@@ -276,9 +276,6 @@ const carrouselView = document.getElementById('carrouselBTN');
 fileInput.addEventListener('change', loaderMedia);
 carrouselView.addEventListener('click', viewSelectedModal);
 
-
-
-
 function takeUserPublicationList(userID) {
     return fetch('http://localhost:3000/api/getDocument/usuario/'+userID+'')
         .then(response => {
@@ -382,7 +379,7 @@ async function addDocument() {
        lista_publicaciones: publicationList
    }
    modifyDoc("usuario",user_id,newJson);
-
+   window.location.href = "../Account/account.html";
 }
 
 function checkVariables() {

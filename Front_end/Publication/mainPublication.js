@@ -254,7 +254,7 @@ document.addEventListener('DOMContentLoaded', async function() {
         document.getElementById('confirmar_borrado').addEventListener('click',async () => {
             modal.close();
             await borrarPublicacion(publicationID);
-            window.location.href = "../MapPage/map.html";
+            window.location.href = "../Account/account.html";
         });
         document.getElementById('cancelar_borrado').addEventListener('click',async () => {
             modal.close();

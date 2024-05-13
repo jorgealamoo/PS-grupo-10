@@ -359,28 +359,6 @@ async function updateListaSeguidos(lista_siguiendo) {
     }
 }
 
-function addToListFollower(username, imageURL) {
-
-    const followerDiv = document.createElement('div');
-    followerDiv.classList.add('follower');
-
-    const img = document.createElement('img');
-    img.src = imageURL;
-    img.alt = 'Profile Picture';
-
-
-    const usernamePara = document.createElement('p');
-    usernamePara.textContent = username;
-
-    followerDiv.appendChild(img);
-    followerDiv.appendChild(usernamePara);
-
-    const followersDisplay = document.getElementById('followersDisplay');
-
-    followersDisplay.appendChild(followerDiv);
-}
-
-
 async function toggleDisplay(text, selfUser= true) {
     let elemento;
     let follow = [];

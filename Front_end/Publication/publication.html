@@ -28,6 +28,19 @@
                 <h1 id='name'></h1>
                 <h1 id='score' class="score"></h1>
                 <img id="saves" src="../Images/guardar-instagram.png" onclick="changeIcon()">
+                <p>Your rate:</p>
+                <div class="rate">
+                    <input type="radio" id="star5" name="rate" value="5" onclick="updateRating(this.value)"/>
+                    <label for="star5" title="Your rate">5 stars</label>
+                    <input type="radio" id="star4" name="rate" value="4" onclick="updateRating(this.value)"/>
+                    <label for="star4" title="Your rate">4 stars</label>
+                    <input type="radio" id="star3" name="rate" value="3" onclick="updateRating(this.value)"/>
+                    <label for="star3" title="Your rate">3 stars</label>
+                    <input type="radio" id="star2" name="rate" value="2" onclick="updateRating(this.value)"/>
+                    <label for="star2" title="Your rate">2 stars</label>
+                    <input type="radio" id="star1" name="rate" value="1" onclick="updateRating(this.value)"/>
+                    <label for="star1" title="Your rate">1 star</label>
+                </div>
             </div>
 
             <div id="botonAñadir">
@@ -41,7 +54,7 @@
                     <button id="saveBtn">Save New Images</button>
                 </div>
                 <div id = "eliminar_publicacion" class = "bad_button">
-                    <button  id = "boton_eliminar_publicacion">Borrar publicacion</button>
+                    <button  id = "boton_eliminar_publicacion">Delete publication</button>
                 </div>
             </div>
 
@@ -74,7 +87,7 @@
         <form id="addComment" class="addComments">
             <div class="infoComment">
                 <div>
-                    <input type="text" id="title" class="titleInput" placeholder="Comment Title" maxlength="100" required>
+                    <label for="title"></label><input type="text" id="title" class="titleInput" placeholder="Comment Title" maxlength="100" required>
                     <div id="add_images_section_Comment" class="add_images_section">
                         <label for="imageUpload_Comment" class="image-upload-label">
                             <div class="select-images">Select images (max. 5)</div>
@@ -126,7 +139,7 @@
                     <input type="file" id="edit_imageUpload_Comment" class="imageUpload_Comment" name="imageUpload" multiple accept="image/* video/*">
             </div>
             <div id="delete_images_section_Comment" class="bad_button">
-                <button id="delete_edit_imageUpload_Comment" class="bad_button">Quitar imágenes</button>
+                <button id="delete_edit_imageUpload_Comment" class="bad_button">Remove images</button>
             </div>
             <div id = "salir" class = "bad_button">
                 <button id="salir_button" >X</button>
@@ -134,27 +147,27 @@
 
             <textarea class="descriptionComment" id="edit_contenido" name="contenido" placeholder="Comment Description" maxlength="500" required></textarea>
         </div>
-        <a style="display: none; color: red; font-weight: bold;" id="confirmacion_borrar">SE QUITARÁ LA IMAGEN</a>
+        <a style="display: none; color: red; font-weight: bold;" id="confirmacion_borrar">ALL IMAGES WILL BE REMOVED</a>
 
         <button id="edit_submit" class = "submit">Save changes</button>
     </form>
 </dialog>
 
 <dialog id="cancelarEditar">
-    <label>¿Seguro que quieres salir?
-        No se guardarán los cambios.</label>
+    <label>Do you want to exit?
+        Changes will be lost.</label>
     <div>
         <div id = "confirmar_salida" class = "bad_button">
-            <button id="cancel_button" >Salir sin guardar</button>
+            <button id="cancel_button" >Exit without saving</button>
         </div>
         <div id = "cancelar_salida" class = "neutral_button">
-            <button id="volver_button" >Volver a editar</button>
+            <button id="volver_button" >Return</button>
         </div>
     </div>
 </dialog>
 
 <dialog id="popUp_eliminar">
-    <label>¿Estás seguro de querer eliminar la publicación?</label>
+    <h4>Are you sure you want to delete this publication?</h4>
 
     <div>
         <div id = "confirmar_borrado" class = "bad_button">

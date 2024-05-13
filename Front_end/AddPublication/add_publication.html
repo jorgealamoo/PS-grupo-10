@@ -72,7 +72,10 @@
             </div>
 
             <div class="exit_button">
-                <button id="exitBtn" onclick="location.href='../Account/account.html';" title="Exit">Exit</button>
+                <button id="exitBtn" onclick="const exitAddPublication = () =>  {
+                    if(confirm('Do you want to exit?')) window.location.href = '../AddPublication/add_publication.html';
+                };
+                exitAddPublication()" title="Exit">Exit</button>
             </div>
         </div>
 

@@ -449,11 +449,11 @@ async function updateRating(rating) {
         let numRatings = 0;
         for (const userId in ratingList) {
             if (ratingList.hasOwnProperty(userId)) {
-                totalRating += ratingList[userId];
+                totalRating += parseInt(ratingList[userId]);
                 numRatings++;
             }
         }
-        const averageRating = totalRating / numRatings;
+        const averageRating = (totalRating / numRatings).toFixed(2);
 
         // Actualiza la valoración global de la publicación
         const updatedData = {
@@ -464,6 +464,7 @@ async function updateRating(rating) {
 
         // Guarda los cambios en la base de datos
         await modifyDoc('publicacion', publicationID, updatedData);
+        window.location.href = "../Publication/publication.html";
 
         console.log("Valoración actualizada con éxito:", averageRating);
     } catch (error) {
