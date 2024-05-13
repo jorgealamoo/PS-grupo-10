@@ -1,5 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
+<script>
+    const view = localStorage.getItem("viewAccountId");
+    const self = localStorage.getItem("userId");
+    if (self === view) window.location.href = "../Account/account.html";
+</script>
+
 <head>
     <meta charset="UTF-8">
     <title>View account</title>
@@ -37,11 +43,6 @@
 <footer></footer>
 <script src='/Front_end/JavaScript/templateLoader.js'></script>
 <script>
-    const view = localStorage.getItem("viewAccountId");
-    const self = localStorage.getItem("userId");
-
-    if (self === view) window.location.href = "../Account/account.html";
-
     cargarTemplate('../Header/header.html', '#desktopHeader');
     cargarTemplate('../PhoneHeader/phoneHeader.html', '#phoneHeader');
     cargarTemplate('../Footer/footer.html', 'footer');
